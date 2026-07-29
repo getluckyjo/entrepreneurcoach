@@ -13,7 +13,7 @@ export const site = {
   tagline: "Coaching for founders, by a founder.",
   description:
     "Entrepreneur coaching from a Cape Town founder who's built six brands across SA, Europe, and the US — all at multi-million-dollar, international scale. Pitch decks, fundraising, and scaling out of South Africa.",
-  defaultOgImage: "/img/og-default.svg",
+  defaultOgImage: "/img/og/home.png", // PNG: social crawlers reject SVG
   locale: "en-ZA",
   email: "leroux.johannes@gmail.com", // canonical contact per Johannes — Gmail-of-record
   whatsapp: "+27000000000", // replace with real number
