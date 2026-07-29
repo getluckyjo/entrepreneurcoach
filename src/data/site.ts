@@ -536,6 +536,69 @@ export const workshop = {
   ],
 } as const;
 
+/**
+ * What people actually build. Deliberately split into two tiers.
+ *
+ * `inRoom` is what one person can realistically finish, or get materially
+ * working, inside the 3 hours. `after` is the ceiling — started on the day,
+ * built out across the 30 days. Keeping them apart is the difference between
+ * a workshop that over-delivers and one that owes everyone a CRM by lunchtime.
+ *
+ * Grouped by business function rather than by Claude feature, because that's
+ * how an owner reads it.
+ */
+export const buildIt = {
+  inRoom: [
+    {
+      group: "Money",
+      items: [
+        "A 5-year cashflow model with real COS, channel margins and sensitivity — the one I charge R15,000 to build",
+        "Your month-end pack, rebuilt from the source spreadsheets instead of by hand",
+        "Margin analysis by product, channel or customer",
+      ],
+    },
+    {
+      group: "Selling",
+      items: [
+        "An investor deck — narrative first, then slides you can defend in the room",
+        "Proposals and quotes on your template, in your language",
+        "Every lead in your inbox triaged and researched before you read it",
+      ],
+    },
+    {
+      group: "Running the place",
+      items: [
+        "A Monday 07:00 business brief that writes itself",
+        "Performance reviews built on your competency framework, not a template off the internet",
+        "The SOPs you've never written down, captured from how you actually do it",
+      ],
+    },
+    {
+      group: "Tools",
+      items: [
+        "An internal dashboard you can send someone a link to",
+        "A quoting or pricing calculator your team can use without you",
+        "A one-page site for a deck, a campaign or a launch",
+      ],
+    },
+  ],
+
+  /** The honest note about what a shareable Claude-built tool actually is. */
+  inRoomNote:
+    "All of it comes out as a real file or a live link — spreadsheets, decks, documents, and web tools you share with a URL. No developers, no app store, nothing to install.",
+
+  after: [
+    "A sales pipeline that researches, triages and drafts the follow-up — you approve, it sends",
+    "Customer relationships run by exception, so you only see the ones that need you",
+    "Recruitment screening and first-round questions scored against your actual scorecard",
+    "Resource and roster optimisation across sites, people and stock",
+    "A review cycle that runs itself and lands on your desk already summarised",
+  ],
+
+  afterNote:
+    "Started on the day, built out over the 30 days. I'm not going to pretend anyone finishes these in an afternoon — mine took longer than that. But this is where it goes once the foundation is in.",
+} as const;
+
 /** Workshop FAQ. Separate from `faqs` so the coaching FAQPage schema stays clean. */
 export const workshopFaqs = [
   {

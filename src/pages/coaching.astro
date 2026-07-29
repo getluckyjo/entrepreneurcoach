@@ -2,7 +2,7 @@
 import BaseLayout from "~/components/layout/BaseLayout.astro";
 import OfferIllustration from "~/components/ui/OfferIllustration.astro";
 import BigCTA from "~/components/home/BigCTA.astro";
-import { offers, faqs, site } from "~/data/site";
+import { offers, faqs, site, workshop } from "~/data/site";
 import { serviceSchemas, faqSchema, breadcrumbSchema } from "~/lib/seo";
 ---
 
@@ -84,6 +84,39 @@ import { serviceSchemas, faqSchema, breadcrumbSchema } from "~/lib/seo";
         </li>
       ))}
     </ul>
+  </section>
+
+  <!-- Cross-sell to the workshop. The deliverables above (pitch deck, cashflow
+       model) are the same artefacts people build on the day, so this is the
+       honest cheaper door rather than a competing product. -->
+  <section class="container-page pb-20">
+    <div class="card !bg-[var(--color-night)] !border-[var(--color-night)] text-[var(--color-paper)] !p-9 md:!p-12 reveal grid gap-8 md:grid-cols-12 md:items-center">
+      <div class="md:col-span-8">
+        <p class="eyebrow !text-[var(--color-paper)]/55 mb-5 flex items-center gap-3">
+          <span class="pill pill-lime">New</span>
+          Workshop
+        </p>
+        <h2 class="display-l !text-[clamp(1.7rem,2.6vw,2.4rem)]" style="color: var(--color-paper);">
+          Or build the deliverable<br />
+          <span class="display-italic" style="color: var(--color-red);">yourself.</span>
+        </h2>
+        <p class="mt-5 text-[15px] leading-relaxed text-[var(--color-paper)]/75 max-w-xl">
+          The 5-year model and the investor deck above are two of the things
+          people build in the room at {workshop.name} — {workshop.duration},
+          {" "}{workshop.seats} seats, {workshop.venue.name} in {workshop.venue.area}.
+          If you'd rather learn to make them than have me make them, start there.
+        </p>
+      </div>
+      <div class="md:col-span-4 md:text-right">
+        <p class="font-display font-bold tabular-nums text-[2.2rem] leading-none" style="color: var(--color-red);">
+          {workshop.founding.active ? workshop.founding.display : workshop.price.display}
+        </p>
+        <p class="text-[13px] text-[var(--color-paper)]/50 mt-2 mb-6">
+          {workshop.price.unit} · {workshop.price.vatNote}
+        </p>
+        <a href="/workshop" class="btn btn-light w-full md:w-auto">See the workshop</a>
+      </div>
+    </div>
   </section>
 
   <!-- FAQ -->

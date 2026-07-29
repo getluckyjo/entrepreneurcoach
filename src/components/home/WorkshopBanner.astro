@@ -23,6 +23,18 @@ const facts = [
   { k: "Where", v: `${workshop.venue.name}, ${workshop.venue.area}` },
   { k: "Per seat", v: priceNow },
 ];
+
+/* Shortened for the home page — the full grid lives on /workshop#build.
+   These are trimmed by hand rather than sliced, because the page-level copy
+   carries context ("the one I charge R15,000 to build") that reads as a
+   non-sequitur out here. */
+const buildStrip = [
+  "A 5-year cashflow model with real COS and channel margins",
+  "Your month-end pack, rebuilt from the source spreadsheets",
+  "An investor deck you can defend in the room",
+  "A Monday 07:00 business brief that writes itself",
+  "An internal dashboard you can send someone a link to",
+];
 ---
 
 <section class="bg-[var(--color-night)] text-[var(--color-paper)] relative overflow-hidden">
@@ -81,8 +93,11 @@ const facts = [
         ))}
       </dl>
 
-      <ul class="mt-7 space-y-3">
-        {workshop.outcomes.slice(0, 3).map((o) => (
+      <!-- Outputs, not features. An owner scanning the home page needs to see
+           what they'd walk out holding, not which parts of Claude we cover. -->
+      <p class="eyebrow !text-[var(--color-paper)]/50 mt-8 mb-4">Things you could make</p>
+      <ul class="space-y-3">
+        {buildStrip.map((o) => (
           <li class="flex gap-3 text-[14.5px] leading-relaxed text-[var(--color-paper)]/75">
             <svg width="14" height="14" viewBox="0 0 14 14" class="mt-1.5 flex-shrink-0 text-[var(--color-red)]" aria-hidden="true">
               <path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>

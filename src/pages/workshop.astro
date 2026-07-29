@@ -2,7 +2,7 @@
 import BaseLayout from "~/components/layout/BaseLayout.astro";
 import BigCTA from "~/components/home/BigCTA.astro";
 import SectionHeader from "~/components/ui/SectionHeader.astro";
-import { site, workshop, workshopFaqs, cohorts } from "~/data/site";
+import { site, workshop, workshopFaqs, cohorts, buildIt } from "~/data/site";
 import {
   workshopCourseSchema,
   workshopEventSchemas,
@@ -131,6 +131,55 @@ const seatsTotal = workshop.seats;
           </li>
         ))}
       </ul>
+    </div>
+  </section>
+
+  <!-- ─────────────────── What people actually build ─────────────────── -->
+  <section id="build" class="container-page py-24 md:py-32">
+    <SectionHeader
+      eyebrow="What you'll build"
+      title="Things you could make"
+      italic="before lunch."
+      lede="Everyone brings a different business, so nobody builds the same thing. These are the jobs that come up most — pick one and we'll get it running."
+    />
+
+    <div class="mt-16 grid gap-px bg-[var(--color-rule)] border border-[var(--color-rule)] rounded-[var(--radius-lg)] overflow-hidden md:grid-cols-2">
+      {buildIt.inRoom.map((col) => (
+        <div class="bg-[var(--color-paper)] p-7 md:p-9 reveal">
+          <p class="eyebrow eyebrow-red mb-6">{col.group}</p>
+          <ul class="space-y-4">
+            {col.items.map((item) => (
+              <li class="flex gap-3 text-[15px] leading-relaxed">
+                <svg width="14" height="14" viewBox="0 0 14 14" class="mt-1.5 flex-shrink-0 text-[var(--color-red)]" aria-hidden="true">
+                  <path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <p class="mt-7 text-[14px] text-[var(--color-muted)] max-w-2xl leading-relaxed reveal">
+      {buildIt.inRoomNote}
+    </p>
+
+    <!-- Tier two. Kept visibly separate so nobody arrives expecting a finished
+         CRM by midday — the ceiling is the sell, the room is the promise. -->
+    <div class="mt-14 card card-bone reveal">
+      <p class="eyebrow mb-5 !text-[var(--color-muted)]">And once you can do that</p>
+      <ul class="grid gap-x-10 gap-y-3.5 md:grid-cols-2">
+        {buildIt.after.map((item) => (
+          <li class="flex gap-3 text-[15px] leading-relaxed text-[var(--color-ink-soft)]">
+            <span aria-hidden="true" class="text-[var(--color-red)] flex-shrink-0">→</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-7 pt-6 border-t border-[var(--color-rule-strong)] text-[14px] text-[var(--color-muted)] leading-relaxed max-w-2xl">
+        {buildIt.afterNote}
+      </p>
     </div>
   </section>
 
