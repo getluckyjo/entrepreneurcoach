@@ -1,0 +1,100 @@
+---
+import { workshop, cohorts } from "~/data/site";
+
+/*
+ * Home page announcement for the Claude workshop.
+ *
+ * Sits between <Offers /> and <Process /> — paper → night → bone, so it reads
+ * as a rhythm break rather than a seventh package. Night is sanctioned for
+ * "occasional editorial breakers" (DESIGN.md §2); lime appears exactly once
+ * here, on the New pill, which is its whole job.
+ *
+ * All copy comes from `workshop` in src/data/site.ts.
+ */
+
+const hasDates = cohorts.length > 0;
+const priceNow = workshop.founding.active
+  ? workshop.founding.display
+  : workshop.price.display;
+
+const facts = [
+  { k: "Duration", v: workshop.duration },
+  { k: "Seats", v: String(workshop.seats) },
+  { k: "Where", v: `${workshop.venue.name}, ${workshop.venue.area}` },
+  { k: "Per seat", v: priceNow },
+];
+---
+
+<section class="bg-[var(--color-night)] text-[var(--color-paper)] relative overflow-hidden">
+  <div class="container-page py-24 md:py-32 grid gap-x-14 gap-y-12 md:grid-cols-12 relative">
+    <!-- Pitch -->
+    <div class="md:col-span-7 reveal">
+      <p class="eyebrow !text-[var(--color-paper)]/60 mb-6 flex items-center gap-3">
+        <span class="pill pill-lime">New</span>
+        {workshop.eyebrow}
+      </p>
+
+      <!-- global.css sets h1–h4 { color: ink }, which beats inherited colour —
+           so night sections need the explicit override, same as Metrics.astro. -->
+      <h2 class="display-l" style="color: var(--color-paper);">
+        Claude for<br />
+        <span class="display-italic" style="color: var(--color-red);">entrepreneurs.</span>
+      </h2>
+
+      <p class="lead !text-[var(--color-paper)]/85 mt-7 max-w-xl">
+        {workshop.promise}
+      </p>
+
+      <p class="mt-6 text-[15px] leading-relaxed text-[var(--color-paper)]/65 max-w-xl">
+        Three hours, in person in Claremont, for business owners and executives
+        who are tired of hearing about AI and would rather just use it. Eight
+        seats, because everyone brings a real job from their own business and we
+        get it running before you leave.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center gap-3">
+        <a href="/workshop" class="btn btn-light text-[15px] !px-7 !py-4">
+          {hasDates ? "See dates and book" : "See the run sheet"}
+          <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <a
+          href="/workshop#signup"
+          class="btn btn-ghost !border-[var(--color-paper)]/35 !text-[var(--color-paper)] hover:!bg-[var(--color-paper)] hover:!text-[var(--color-ink)] text-[15px] !px-7 !py-4"
+        >
+          {hasDates ? "Book a seat" : "Join the waitlist"}
+        </a>
+      </div>
+    </div>
+
+    <!-- Facts -->
+    <div class="md:col-span-5 reveal">
+      <dl class="grid grid-cols-2 gap-px bg-[var(--color-paper)]/15 border border-[var(--color-paper)]/15 rounded-[var(--radius-lg)] overflow-hidden">
+        {facts.map((f) => (
+          <div class="bg-[var(--color-night)] p-6">
+            <dt class="eyebrow !text-[var(--color-paper)]/50 mb-3">{f.k}</dt>
+            <dd class="font-display font-bold tabular-nums text-[clamp(1.35rem,2.2vw,1.75rem)] leading-tight">
+              {f.v}
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      <ul class="mt-7 space-y-3">
+        {workshop.outcomes.slice(0, 3).map((o) => (
+          <li class="flex gap-3 text-[14.5px] leading-relaxed text-[var(--color-paper)]/75">
+            <svg width="14" height="14" viewBox="0 0 14 14" class="mt-1.5 flex-shrink-0 text-[var(--color-red)]" aria-hidden="true">
+              <path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>{o}</span>
+          </li>
+        ))}
+      </ul>
+
+      <p class="mt-5 text-[13px] text-[var(--color-paper)]/50">
+        Plus a 14-day group call and a 30-day review — both included.
+      </p>
+    </div>
+  </div>
+</section>

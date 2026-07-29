@@ -1,0 +1,537 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import SectionHeader from "~/components/ui/SectionHeader.astro";
+import { site, workshop, workshopFaqs, cohorts } from "~/data/site";
+import {
+  workshopCourseSchema,
+  workshopEventSchemas,
+  workshopFaqSchema,
+  breadcrumbSchema,
+} from "~/lib/seo";
+
+/*
+ * Workshop: Claude for Entrepreneurs.
+ *
+ * Sign-up posts to formsubmit.co exactly like /contact — same pattern, same
+ * inbox, no backend. The extra billing fields exist so a signup can be turned
+ * into a Xero invoice without a follow-up email; the seat is only confirmed
+ * once that invoice is settled.
+ *
+ * The page has two modes, driven entirely by `cohorts` in src/data/site.ts:
+ *   cohorts empty  → waitlist mode ("dates announced to the waitlist first")
+ *   cohorts filled → dated mode (cohort cards + a date dropdown on the form)
+ * Add dates there and everything below follows.
+ */
+
+const formAction = `https://formsubmit.co/${site.email}`;
+const hasDates = cohorts.length > 0;
+const founding = workshop.founding.active;
+const priceNow = founding ? workshop.founding.display : workshop.price.display;
+const seatsTotal = workshop.seats;
+---
+
+<BaseLayout
+  title={`Workshop: ${workshop.name} — Cape Town | Johannes le Roux`}
+  rawTitle
+  description={`A 3-hour, hands-on Claude workshop for business owners and executives. ${seatsTotal} seats, in person at ${workshop.venue.name}, ${workshop.venue.area}, Cape Town. ${priceNow} per seat.`}
+  jsonLd={[
+    workshopCourseSchema,
+    ...workshopEventSchemas,
+    workshopFaqSchema,
+    breadcrumbSchema([
+      { name: "Home", url: site.domain },
+      { name: "Workshop", url: `${site.domain}/workshop` },
+    ]),
+  ]}
+>
+  <!-- ───────────────────────── Hero ───────────────────────── -->
+  <section class="container-page pt-20 md:pt-24 pb-16">
+    <p class="eyebrow eyebrow-red mb-6 reveal">
+      {workshop.eyebrow} · {workshop.venue.name}, {workshop.venue.area}
+    </p>
+
+    <!-- display-mega floors at 4.5rem, which pushes "entrepreneurs." (14 chars)
+         past the viewport on a 390px phone. Lower the floor and keep the upper
+         end where the class has it — same inline-override pattern as Metrics.astro. -->
+    <h1
+      class="display-mega max-w-[14ch] reveal"
+      style="font-size: clamp(2.6rem, 10.5vw, 12rem);"
+    >
+      Claude for<br />
+      <span class="display-italic display-red">entrepreneurs.</span>
+    </h1>
+
+    <p class="lead mt-10 reveal">
+      You've heard what AI can do. You've probably tried it, found it
+      underwhelming, and gone back to doing the work yourself. This is three
+      hours to fix that — your laptop, your real files, and the job you actually
+      hate doing. You leave with it running.
+    </p>
+
+    <!-- Stat strip -->
+    <dl class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-rule)] border border-[var(--color-rule)] rounded-[var(--radius-lg)] overflow-hidden reveal">
+      {[
+        { k: "Duration", v: "3 hrs" },
+        { k: "Seats", v: String(seatsTotal) },
+        { k: "Where", v: workshop.venue.area },
+        { k: "Per seat", v: priceNow },
+      ].map((s) => (
+        <div class="bg-[var(--color-paper)] p-6">
+          <dt class="eyebrow !text-[var(--color-muted)] mb-3">{s.k}</dt>
+          <dd class="font-display font-bold tabular-nums text-[clamp(1.8rem,3vw,2.4rem)] leading-none">
+            {s.v}
+          </dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="mt-10 flex flex-wrap items-center gap-3 reveal">
+      <a href="#signup" class="btn btn-primary text-[15px] !px-7 !py-4">
+        {hasDates ? "Book a seat" : "Join the waitlist"}
+        <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a href="#runsheet" class="btn btn-ghost text-[15px] !px-7 !py-4">See the 3 hours</a>
+    </div>
+
+    {founding && (
+      <p class="mt-6 text-[14px] text-[var(--color-ink-soft)] reveal">
+        <span class="pill pill-lime mr-2">{workshop.founding.label}</span>
+        {workshop.founding.display} instead of {workshop.price.display}.
+        {" "}{workshop.founding.note}
+      </p>
+    )}
+  </section>
+
+  <!-- ───────────────────── What you walk out with ───────────────────── -->
+  <section class="bg-[var(--color-night)] text-[var(--color-paper)]">
+    <div class="container-page py-24 md:py-32">
+      <header class="max-w-3xl reveal">
+        <p class="eyebrow !text-[var(--color-paper)]/60 mb-5">The deliverable</p>
+        <!-- global.css sets h1–h4 { color: ink }, which beats inherited colour —
+             so night sections need the explicit override, same as Metrics.astro. -->
+        <h2 class="display-l" style="color: var(--color-paper);">
+          What you walk<br /><span class="display-italic" style="color: var(--color-red);">out with.</span>
+        </h2>
+        <p class="lead !text-[var(--color-paper)]/80 mt-6">
+          Not a folder of notes about AI. Six things, running, on your own
+          machine, built on your own business.
+        </p>
+      </header>
+
+      <ul class="mt-16 grid gap-x-10 gap-y-8 md:grid-cols-2">
+        {workshop.outcomes.map((o, i) => (
+          <li class="flex gap-5 reveal">
+            <span class="num-badge !text-[var(--color-red)] !text-[1.6rem] flex-shrink-0 tabular-nums">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span class="text-[15.5px] leading-relaxed text-[var(--color-paper)]/85 pt-1.5">{o}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── Run sheet ───────────────────────── -->
+  <section id="runsheet" class="container-page py-24 md:py-32">
+    <SectionHeader
+      eyebrow="The run sheet"
+      title="Three hours,"
+      italic="published in full."
+      lede="Most of the value in a workshop is whether it was planned properly. Here is the whole thing — roughly a quarter teaching, the rest you, doing it."
+    />
+
+    <ol class="mt-16 border-t border-[var(--color-rule-strong)]">
+      {workshop.runsheet.map((b) => (
+        <li
+          class:list={[
+            "grid md:grid-cols-12 gap-x-8 gap-y-2 py-7 border-b border-[var(--color-rule)] reveal",
+            b.title === "Break" && "bg-[var(--color-bone)]",
+          ]}
+        >
+          <div class="md:col-span-2 flex items-baseline gap-3">
+            <span class="font-display font-bold tabular-nums text-[1.15rem]">{b.at}</span>
+            <span class="text-[12px] text-[var(--color-muted)] tabular-nums">{b.mins}′</span>
+          </div>
+          <h3 class="md:col-span-4 font-display text-[1.15rem] font-semibold leading-snug">
+            {b.title}
+          </h3>
+          <p class="md:col-span-6 text-[15px] leading-relaxed text-[var(--color-ink-soft)]">
+            {b.body}
+          </p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- ─────────────────── Before & after (the 40/20/40) ─────────────────── -->
+  <section class="bg-[var(--color-bone)] border-y border-[var(--color-rule)]">
+    <div class="container-page py-24 md:py-32">
+      <SectionHeader
+        eyebrow="Before and after"
+        title="The room is only"
+        italic="a third of it."
+        lede="Training that stops when everyone walks out doesn't stick — most of it evaporates inside a fortnight. So the week before and the month after are part of the seat price, not an upsell."
+      />
+
+      <div class="mt-16 grid gap-10 md:grid-cols-2">
+        <div class="reveal">
+          <p class="eyebrow eyebrow-red mb-6">Before · the week ahead of it</p>
+          <ol class="space-y-6">
+            {workshop.prework.map((p) => (
+              <li class="border-l-2 border-[var(--color-rule-strong)] pl-5">
+                <p class="font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
+                  {p.when}
+                </p>
+                <p class="mt-2 text-[15px] leading-relaxed text-[var(--color-ink-soft)]">{p.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="reveal">
+          <p class="eyebrow eyebrow-red mb-6">After · included, not extra</p>
+          <ol class="space-y-6">
+            {workshop.followUp.map((p) => (
+              <li class="border-l-2 border-[var(--color-red)] pl-5">
+                <p class="font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
+                  {p.when}
+                </p>
+                <p class="mt-2 text-[15px] leading-relaxed text-[var(--color-ink-soft)]">{p.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── Who it's for / not for ───────────────────── -->
+  <section class="container-page py-24 md:py-32 grid gap-10 md:grid-cols-2">
+    <div class="card reveal">
+      <p class="eyebrow eyebrow-red mb-6">Who it's for</p>
+      <ul class="space-y-4">
+        {workshop.forWhom.map((f) => (
+          <li class="flex gap-3 text-[15px] leading-relaxed">
+            <svg width="14" height="14" viewBox="0 0 14 14" class="mt-1.5 flex-shrink-0 text-[var(--color-red)]" aria-hidden="true">
+              <path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="card card-bone reveal">
+      <p class="eyebrow mb-6 !text-[var(--color-muted)]">Who it's not for</p>
+      <ul class="space-y-4">
+        {workshop.notFor.map((f) => (
+          <li class="flex gap-3 text-[15px] leading-relaxed text-[var(--color-ink-soft)]">
+            <span aria-hidden="true" class="mt-0.5 flex-shrink-0 text-[var(--color-muted)] text-[1.1rem] leading-none">—</span>
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── Dates ───────────────────────── -->
+  {hasDates && (
+    <section class="container-page pb-24 md:pb-32">
+      <SectionHeader eyebrow="Dates" title="Next" italic="cohorts." />
+      <ul class="mt-12 grid gap-6 md:grid-cols-2">
+        {cohorts.map((c) => (
+          <li class="card reveal flex flex-col">
+            <div class="flex items-start justify-between gap-4 mb-4">
+              <span class="pill pill-ghost">{c.time}</span>
+              <span class:list={["pill", c.seatsLeft > 0 ? "pill-lime" : "pill-ink"]}>
+                {c.seatsLeft > 0 ? `${c.seatsLeft} of ${seatsTotal} left` : "Sold out"}
+              </span>
+            </div>
+            <h3 class="display-l !text-[clamp(1.5rem,2.4vw,2rem)]">{c.display}</h3>
+            <p class="mt-3 font-display text-[1.4rem] font-bold tabular-nums text-[var(--color-red)]">
+              {c.founding ? workshop.founding.display : workshop.price.display}
+            </p>
+            <p class="mt-2 text-[13px] text-[var(--color-muted)]">
+              {workshop.venue.name}, {workshop.venue.area} · {workshop.price.vatNote}
+            </p>
+            <div class="mt-6 pt-6 border-t border-[var(--color-rule)] mt-auto">
+              <a
+                href={`#signup`}
+                class:list={["btn w-full", c.seatsLeft > 0 ? "btn-ink" : "btn-ghost"]}
+              >
+                {c.seatsLeft > 0 ? "Book this cohort" : "Join the waitlist"}
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <!-- ───────────────────────── Sign-up ───────────────────────── -->
+  <section id="signup" class="bg-[var(--color-bone)] border-y border-[var(--color-rule)]">
+    <div class="container-page py-24 md:py-32 grid gap-8 md:grid-cols-12">
+      <!-- Form -->
+      <form
+        class="md:col-span-7 card !bg-[var(--color-paper)] !p-7 space-y-5 reveal"
+        method="post"
+        action={formAction}
+        novalidate
+      >
+        <div>
+          <p class="font-display text-[1.05rem] font-semibold">
+            {hasDates ? "Book your seat" : "Join the waitlist"}
+          </p>
+          <p class="mt-1.5 text-[13px] text-[var(--color-muted)]">
+            {hasDates
+              ? `${priceNow} per seat. ${workshop.price.vatNote} Invoice within one business day, seat held for 5 days.`
+              : `${priceNow} per seat. ${workshop.price.vatNote} Dates go to the waitlist first — no payment now.`}
+          </p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <label class="block text-[13px] font-display font-semibold">
+            Name
+            <input
+              name="name" required type="text" autocomplete="name"
+              class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+            />
+          </label>
+
+          <label class="block text-[13px] font-display font-semibold">
+            Email
+            <input
+              name="email" required type="email" autocomplete="email"
+              class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+            />
+          </label>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <label class="block text-[13px] font-display font-semibold">
+            Business
+            <input
+              name="business" required type="text" autocomplete="organization"
+              class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+            />
+          </label>
+
+          <label class="block text-[13px] font-display font-semibold">
+            Your role
+            <input
+              name="role" required type="text" placeholder="Founder, MD, CFO…" autocomplete="organization-title"
+              class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+            />
+          </label>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          {hasDates && (
+            <label class="block text-[13px] font-display font-semibold">
+              Cohort
+              <select
+                name="cohort" required
+                class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+              >
+                <option value="">Select…</option>
+                {cohorts.map((c) => (
+                  <option value={c.date} disabled={c.seatsLeft === 0}>
+                    {c.display}{c.seatsLeft === 0 ? " — sold out" : ""}
+                  </option>
+                ))}
+                <option value="waitlist">Neither — put me on the waitlist</option>
+              </select>
+            </label>
+          )}
+
+          <label class="block text-[13px] font-display font-semibold">
+            Seats
+            <select
+              name="seats" required
+              class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+            >
+              <option value="1">Just me</option>
+              <option value="2">2 seats</option>
+              <option value="3">3 seats</option>
+              <option value="4+">4 or more — ask me about an in-house session</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="block text-[13px] font-display font-semibold">
+          How much AI are you using today?
+          <select
+            name="ai-usage" required
+            class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+          >
+            <option value="">Select…</option>
+            <option value="none">None — haven't really started</option>
+            <option value="tried">Tried it a few times, didn't stick</option>
+            <option value="weekly">Use it now and then</option>
+            <option value="daily">Use it most days</option>
+            <option value="team">My team is already using it</option>
+          </select>
+        </label>
+
+        <label class="block text-[13px] font-display font-semibold">
+          Which recurring task eats the most time and creates the least value?
+          <span class="block font-sans font-normal text-[12px] text-[var(--color-muted)] mt-1">
+            This is the pre-work question. I read all eight answers and build the session around them — so answer it properly.
+          </span>
+          <textarea
+            name="the-job" rows="4" required
+            placeholder="e.g. Rebuilding the same monthly management pack from six spreadsheets. Two days, every month, and nobody reads half of it."
+            class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+          ></textarea>
+        </label>
+
+        {/* Billing — collected up front so the invoice goes out same-day rather than
+            after a round of email tennis. Only asked once there's a date to invoice
+            against; on the waitlist there's nothing to bill, so don't add the friction. */}
+        {hasDates && (
+          <fieldset class="border-t border-[var(--color-rule)] pt-5">
+            <legend class="text-[13px] font-display font-semibold mb-1">Invoice details</legend>
+            <p class="text-[12px] text-[var(--color-muted)] mb-4">
+              So I can raise the invoice straight away. {workshop.price.vatNote}
+            </p>
+
+            <div class="grid gap-5 md:grid-cols-2">
+              <label class="block text-[13px] font-display font-semibold">
+                Invoice to
+                <input
+                  name="billing-name" required type="text" placeholder="Registered business or your full name"
+                  class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+                />
+              </label>
+
+              <label class="block text-[13px] font-display font-semibold">
+                Billing email
+                <input
+                  name="billing-email" type="email" placeholder="If different from above"
+                  class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+                />
+              </label>
+            </div>
+
+            <label class="block text-[13px] font-display font-semibold mt-5">
+              Company registration / VAT number
+              <span class="font-sans font-normal text-[var(--color-muted)]"> — optional</span>
+              <input
+                name="billing-reg" type="text"
+                class="mt-1.5 w-full px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans font-normal text-[15px]"
+              />
+            </label>
+          </fieldset>
+        )}
+
+        <!-- FormSubmit control fields — same pattern as /contact -->
+        <input type="hidden" name="_subject" value="New WORKSHOP signup — Claude for Entrepreneurs" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value={`${site.domain}/workshop/thanks`} />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+        <p class="text-[12px] text-[var(--color-muted)] leading-relaxed">
+          Submitting this form means you agree to my{" "}
+          <a class="underline-slide text-[var(--color-red)]" href="/privacy">privacy policy</a>.
+          Your details are used to invoice you and run the workshop — nothing else.
+        </p>
+
+        <button type="submit" class="btn btn-primary w-full">
+          {hasDates ? "Request my seat →" : "Join the waitlist →"}
+        </button>
+      </form>
+
+      <!-- Sidebar -->
+      <aside class="md:col-span-5 reveal space-y-6">
+        <div class="card !bg-[var(--color-paper)]">
+          <p class="eyebrow eyebrow-red mb-4">What happens next</p>
+          <ol class="space-y-4 text-[14.5px] leading-relaxed text-[var(--color-ink-soft)]">
+            <li class="flex gap-3">
+              <span class="num-badge !text-[1rem] !text-[var(--color-ink)] flex-shrink-0">01</span>
+              <span>I read every signup myself and reply within one business day.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="num-badge !text-[1rem] !text-[var(--color-ink)] flex-shrink-0">02</span>
+              <span>
+                {hasDates
+                  ? "An invoice follows. Your seat is held for 5 days and confirmed once it's settled — at 8 seats I can't hold them open longer."
+                  : "You'll hear first when dates are set, before the page goes public. No payment until you've picked a date."}
+              </span>
+            </li>
+            <li class="flex gap-3">
+              <span class="num-badge !text-[1rem] !text-[var(--color-ink)] flex-shrink-0">03</span>
+              <span>The pre-work lands the week before — about an hour, spread over four days.</span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="card !bg-[var(--color-paper)]">
+          <p class="eyebrow eyebrow-red mb-4">The detail</p>
+          <ul class="space-y-3 text-[14.5px]">
+            <li>
+              <span class="block text-[12px] uppercase tracking-[0.12em] text-[var(--color-muted)]">Where</span>
+              <span>{workshop.venue.name}, {workshop.venue.area}<br />{site.address.city}, {site.address.region} {site.address.postalCode}</span>
+            </li>
+            <li>
+              <span class="block text-[12px] uppercase tracking-[0.12em] text-[var(--color-muted)]">Price</span>
+              <span class="font-display font-bold text-[var(--color-red)]">{priceNow}</span>
+              {founding && (
+                <span class="text-[var(--color-muted)] line-through ml-2">{workshop.price.display}</span>
+              )}
+              <span class="block text-[12px] text-[var(--color-muted)] mt-0.5">
+                {workshop.price.unit} · {workshop.price.vatNote}
+              </span>
+            </li>
+            <li>
+              <span class="block text-[12px] uppercase tracking-[0.12em] text-[var(--color-muted)]">Bring</span>
+              <span>A laptop, a charger, and one real, messy file.</span>
+            </li>
+            <li>
+              <span class="block text-[12px] uppercase tracking-[0.12em] text-[var(--color-muted)]">In-house instead?</span>
+              <a href={`mailto:${site.email}?subject=In-house Claude workshop`} class="underline-slide text-[var(--color-red)] font-semibold">
+                {site.email}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── FAQ ───────────────────────── -->
+  <section class="container-page py-24 md:py-32 grid gap-14 md:grid-cols-12">
+    <div class="md:col-span-4">
+      <p class="eyebrow eyebrow-red mb-5 reveal">FAQ</p>
+      <h2 class="display-l reveal">Fair<br /><span class="display-italic">questions.</span></h2>
+      <p class="mt-6 text-[15px] text-[var(--color-ink-soft)] reveal">
+        Anything not answered here, mail{" "}
+        <a class="underline-slide text-[var(--color-red)] font-semibold" href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+    </div>
+    <ul class="md:col-span-8 divide-y divide-[var(--color-rule-strong)] border-y border-[var(--color-rule-strong)]">
+      {workshopFaqs.map((f) => (
+        <li class="py-7 reveal">
+          <details class="group">
+            <summary class="flex items-start justify-between gap-6 cursor-pointer list-none">
+              <h3 class="font-display text-[1.15rem] font-semibold leading-snug">{f.q}</h3>
+              <span aria-hidden="true" class="mt-1 text-[var(--color-red)] transition-transform group-open:rotate-45 text-[1.6rem] leading-none flex-shrink-0">+</span>
+            </summary>
+            <p class="mt-4 text-[15px] leading-relaxed text-[var(--color-ink-soft)]">{f.a}</p>
+          </details>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <BigCTA
+    eyebrow={`3 hours · ${seatsTotal} seats · ${workshop.venue.area}`}
+    title={["Eight seats.", "That's it."]}
+    body="Every person in the room brings one real job from their own business, and we get it running before you leave. At twenty people that's a lecture. At eight it stays a workshop — which is the whole point, and the reason it isn't cheap."
+    ctaLabel={hasDates ? "Book a seat" : "Join the waitlist"}
+    ctaHref="/workshop#signup"
+  />
+</BaseLayout>

@@ -1,4 +1,4 @@
-import { site, offers, faqs } from "~/data/site";
+import { site, offers, faqs, workshop, workshopFaqs, cohorts } from "~/data/site";
 
 /**
  * Title helpers.
@@ -129,6 +129,116 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+/* ───────────── Workshop: Claude for Entrepreneurs ───────────── */
+
+/**
+ * The workshop as a Course. Always emitted.
+ *
+ * Google wants a `Course` for a repeatable programme and an `EducationEvent`
+ * for each dated run — `hasCourseInstance` below links the two. While
+ * `cohorts` is empty we emit the Course alone, because an Event without a
+ * startDate is invalid and gets dropped.
+ */
+export const workshopCourseSchema = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "@id": `${site.domain}/workshop#course`,
+  name: `Workshop: ${workshop.name}`,
+  description: workshop.promise,
+  url: `${site.domain}/workshop`,
+  inLanguage: "en-ZA",
+  teaches: [
+    "Using Claude for business administration",
+    "Prompt and brief writing for executives",
+    "Connecting AI to business data",
+    "Automating recurring business tasks",
+  ],
+  provider: {
+    "@type": "Person",
+    "@id": `${site.domain}/about#person`,
+    name: "Johannes le Roux",
+    url: site.domain,
+  },
+  audience: {
+    "@type": "Audience",
+    audienceType: "Business owners, founders and executives",
+  },
+  offers: {
+    "@type": "Offer",
+    price: workshop.founding.active ? workshop.founding.amount : workshop.price.amount,
+    priceCurrency: "ZAR",
+    availability: "https://schema.org/InStock",
+    url: `${site.domain}/workshop`,
+    category: "Professional development",
+  },
+  // Omitted entirely while there are no dates — an empty array is noise to crawlers.
+  ...(cohorts.length > 0 && {
+    hasCourseInstance: cohorts.map((c) => ({
+      "@type": "CourseInstance",
+      courseMode: "Onsite",
+      courseWorkload: workshop.durationISO,
+      startDate: c.date,
+      location: {
+        "@type": "Place",
+        name: `${workshop.venue.name}, ${workshop.venue.area}`,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: site.address.street,
+          addressLocality: site.address.city,
+          addressRegion: site.address.region,
+          postalCode: site.address.postalCode,
+          addressCountry: site.address.country,
+        },
+      },
+    })),
+  }),
+};
+
+/** One EducationEvent per scheduled cohort. Empty until dates are set. */
+export const workshopEventSchemas = cohorts.map((c) => ({
+  "@context": "https://schema.org",
+  "@type": "EducationEvent",
+  "@id": `${site.domain}/workshop#${c.date}`,
+  name: `Workshop: ${workshop.name} — ${c.display}`,
+  description: workshop.promise,
+  startDate: c.date,
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  maximumAttendeeCapacity: workshop.seats,
+  inLanguage: "en-ZA",
+  organizer: { "@type": "Person", name: "Johannes le Roux", url: site.domain },
+  location: {
+    "@type": "Place",
+    name: `${workshop.venue.name}, ${workshop.venue.area}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
+      addressCountry: site.address.country,
+    },
+  },
+  offers: {
+    "@type": "Offer",
+    price: c.founding ? workshop.founding.amount : workshop.price.amount,
+    priceCurrency: "ZAR",
+    url: `${site.domain}/workshop`,
+    availability:
+      c.seatsLeft > 0 ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
+  },
+}));
+
+export const workshopFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: workshopFaqs.map((f) => ({
     "@type": "Question",
     name: f.q,
     acceptedAnswer: { "@type": "Answer", text: f.a },

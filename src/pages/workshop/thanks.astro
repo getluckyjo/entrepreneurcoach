@@ -1,0 +1,47 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import { workshop, cohorts } from "~/data/site";
+
+/* Post-signup confirmation. Separate from /thanks because the next step is
+   different: an invoice, not a reply. Sits alongside workshop.astro —
+   /workshop and /workshop/thanks both route fine in Astro. */
+
+const hasDates = cohorts.length > 0;
+---
+
+<BaseLayout title="Thanks — seat requested" noindex>
+  <section class="container-page py-24 md:py-32 text-center">
+    <p class="eyebrow eyebrow-red mb-4">Received</p>
+    <h1 class="display-mega max-w-[16ch] mx-auto">
+      Got it.<br />
+      <span class="display-italic display-red">
+        {hasDates ? "Invoice incoming." : "You're on the list."}
+      </span>
+    </h1>
+
+    <p class="lead mt-10 mx-auto max-w-2xl">
+      {hasDates
+        ? "I read every signup myself. An invoice lands within one business day — your seat is held for 5 days and confirmed once it's settled. The pre-work follows straight after."
+        : "I read every signup myself. You'll hear from me first when dates are set, before this page goes public. Nothing to pay until you've picked a date."}
+    </p>
+
+    <div class="mt-14 max-w-xl mx-auto text-left card">
+      <p class="eyebrow eyebrow-red mb-5">While you wait</p>
+      <p class="text-[15px] leading-relaxed text-[var(--color-ink-soft)]">
+        Set up your Claude account on the web — not through the app store, the
+        pricing and options differ — and install the desktop app. The full
+        pre-work brief, including the South African card settings that trip most
+        people up, comes with your confirmation.
+      </p>
+      <p class="mt-4 text-[15px] leading-relaxed text-[var(--color-ink-soft)]">
+        Then have a think about the messy file you're bringing. {workshop.seats} people,
+        {" "}{workshop.duration}, one real job each.
+      </p>
+    </div>
+
+    <div class="mt-12 flex justify-center gap-3">
+      <a href="/journal" class="btn btn-primary">Read the journal</a>
+      <a href="/workshop" class="btn btn-ghost">Back to the workshop</a>
+    </div>
+  </section>
+</BaseLayout>

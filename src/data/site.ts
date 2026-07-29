@@ -352,6 +352,226 @@ export const faqs = [
   },
 ] as const;
 
+/* ─────────────────────── Workshop: Claude for Entrepreneurs ───────────────────────
+ *
+ * A 3-hour, in-person, 8-seat workshop at Ideas Cartel Claremont. Deliberately
+ * kept OUT of `offers` — that array drives the /coaching grid, the coaching
+ * FAQPage schema, and the /contact package dropdown, and the workshop is a
+ * different product with its own page, its own form, and its own schema.
+ *
+ * Structure follows the 40/20/40 rule (Brinkerhoff): the room is only ~20% of
+ * the result, so the pre-work and the two follow-ups are priced in, not bolted on.
+ */
+
+/** A scheduled run of the workshop. Empty array ⇒ the page runs in waitlist mode. */
+export type Cohort = {
+  /** ISO date, e.g. "2026-09-11". Used for schema.org and sorting. */
+  date: string;
+  /** Human display, e.g. "Thursday 11 September 2026". */
+  display: string;
+  /** e.g. "09:00 – 12:00". */
+  time: string;
+  /** Seats still available. Set to 0 to render as sold out. */
+  seatsLeft: number;
+  /** Charge the founding rate for this run. */
+  founding?: boolean;
+};
+
+/**
+ * Scheduled cohorts. ADD DATES HERE and the whole page updates —
+ * hero, cohort list, form dropdown, and schema.org EducationEvent nodes.
+ * While this is empty the page shows a waitlist CTA instead of dates.
+ */
+export const cohorts: readonly Cohort[] = [];
+
+export const workshop = {
+  slug: "workshop",
+  /** Used in nav, page title, and schema. */
+  name: "Claude for Entrepreneurs",
+  eyebrow: "Workshop",
+  duration: "3 hours",
+  durationISO: "PT3H",
+  seats: 8,
+  venue: {
+    name: "Ideas Cartel",
+    area: "Claremont",
+    city: "Cape Town",
+  },
+
+  /** Standard seat price. Johannes is a sole proprietor and not VAT registered. */
+  price: {
+    amount: 4950,
+    display: "R4,950",
+    unit: "per seat",
+    vatNote: "No VAT applicable.",
+  },
+  /** Intro rate for the first runs. Set `active: false` once the cohort fills. */
+  founding: {
+    active: true,
+    amount: 3500,
+    display: "R3,500",
+    label: "Founding cohort",
+    note: "The first two runs go out at the founding rate. In exchange I ask for honest feedback and, if it earned it, a testimonial.",
+  },
+
+  /** One-line positioning used on the home page section and meta description. */
+  promise:
+    "Three hours, eight people, your own laptop. You walk out with Claude actually running one job in your business — not a folder of notes about it.",
+
+  /** What lands in their hands. Deliverable-first, per DESIGN.md §1. */
+  outcomes: [
+    "A Claude Project loaded with your business context, so you stop re-explaining yourself every time",
+    "At least one connector live against your real data — Google Workspace, Xero, or Microsoft 365",
+    "One finished artefact built in the room from a real task: a model, a deck, a document",
+    "One Skill that encodes a process you repeat, written in your words, not code",
+    "One recurring task scheduled and running before you leave",
+    "A 14-day group call and a 30-day review — both included in the seat price",
+  ],
+
+  /** The run sheet. Published in full on the page: the planning is the pitch. */
+  runsheet: [
+    {
+      at: "00:00",
+      mins: 12,
+      title: "Setup and triage",
+      body: "Coffee, laptops open, everyone logged in and on the desktop app. Card declines and setup problems get solved now, not at minute 90.",
+    },
+    {
+      at: "00:12",
+      mins: 13,
+      title: "Name the job",
+      body: "Each person says out loud which task they want gone by midday. All eight go on the whiteboard. That list is the spine of the session.",
+    },
+    {
+      at: "00:25",
+      mins: 20,
+      title: "Briefing, not prompting",
+      body: "Why most people get thin answers: they ask instead of brief. You rewrite your worst prompt as a proper brief and watch what changes.",
+    },
+    {
+      at: "00:45",
+      mins: 30,
+      title: "Build your business brain",
+      body: "Everyone builds a real Project — your documents, your numbers, your tone of voice, your standing instructions. Context beats clever prompting every time.",
+    },
+    {
+      at: "01:15",
+      mins: 15,
+      title: "Break",
+      body: "Fifteen minutes, properly. The café is downstairs.",
+    },
+    {
+      at: "01:30",
+      mins: 30,
+      title: "Point it at real data",
+      body: "Connect Google Workspace, Microsoft 365, or Xero and ask a question about your own business. This is the part nobody believes until they see it on their own numbers.",
+    },
+    {
+      at: "02:00",
+      mins: 35,
+      title: "Delegate the job",
+      body: "The main event. You hand over the task you named at 00:12 and get back real work — a spreadsheet, a deck, a document. Nothing sends, posts, or pays without your say-so.",
+    },
+    {
+      at: "02:35",
+      mins: 15,
+      title: "Make it repeat",
+      body: "Turn what just worked into a Skill, then schedule it. A Monday 07:00 business brief that writes itself is a fair place to start.",
+    },
+    {
+      at: "02:50",
+      mins: 10,
+      title: "Commit and close",
+      body: "One thing you will do by Friday, written down. We book the 14-day call in the room, before the momentum leaks.",
+    },
+  ],
+
+  /** Pre-work. Sold as part of the product because it is part of the product. */
+  prework: [
+    {
+      when: "7 days before",
+      body: "Set up your Claude account on the web and install the desktop app. I send exact instructions, including the South African card gotchas that trip most people up.",
+    },
+    {
+      when: "5 days before",
+      body: "Claude 101 — Anthropic's own free course, about an hour. This is what buys us the right to skip the basics on the day.",
+    },
+    {
+      when: "3 days before",
+      body: "Answer one question: which recurring task eats the most time and creates the least value in your business? I read all eight answers and build the session around them.",
+    },
+    {
+      when: "The day before",
+      body: "Bring a laptop, a charger, and one real, messy file. Not a tidy example. The messy one.",
+    },
+  ],
+
+  /** The other 40%. */
+  followUp: [
+    {
+      when: "Day 1",
+      body: "Your asset pack: the Project template, the Skill you built, my prompt library, and the two follow-on courses worth your time.",
+    },
+    {
+      when: "Day 14",
+      body: "A 60-minute group call. One win and one blocker each. This is the call that decides whether any of it sticks.",
+    },
+    {
+      when: "Day 30",
+      body: "A written review — what's working, what isn't, what's next — plus one new use case to take on.",
+    },
+  ],
+
+  forWhom: [
+    "Business owners running 5–50 person teams who are still doing work a system should do",
+    "Executives who keep hearing about AI in board meetings and want to actually use it",
+    "Founders drowning in admin, reporting, and follow-up rather than building",
+    "Anyone who has tried ChatGPT a few times, found it underwhelming, and quietly stopped",
+  ],
+
+  notFor: [
+    "Developers — this is the non-technical half of Claude. No terminal, no code, no API.",
+    "Anyone wanting a lecture on what AI means for the economy. This is three hours of doing.",
+    "People who won't do the pre-work. Eight seats is too few to spend the first hour on setup.",
+  ],
+} as const;
+
+/** Workshop FAQ. Separate from `faqs` so the coaching FAQPage schema stays clean. */
+export const workshopFaqs = [
+  {
+    q: "Do I need to know anything about AI beforehand?",
+    a: "No. You need to be able to use a laptop and you need to have done the pre-work — about an hour of it, spread over the week before. That's the whole entry requirement. This is the non-technical half of Claude: no code, no terminal, no API.",
+  },
+  {
+    q: "Do I need to pay for Claude on top of the workshop fee?",
+    a: "Yes. A paid Claude plan starts at USD 20 per month, which lands around R380–R420 depending on the exchange rate and your bank's forex margin. That's billed by Anthropic in dollars, not by me. You'll need it active before you arrive — the pre-work email walks you through setting it up, including the South African card settings that catch most people out.",
+  },
+  {
+    q: "Why only 8 people?",
+    a: "Because everyone brings a real problem from their own business and I work through it with them. At 20 people that becomes a lecture. At 8 it stays a workshop. It's also why it isn't cheap.",
+  },
+  {
+    q: "Is this a sales pitch for coaching?",
+    a: "No. It's a standalone product with its own deliverable. If we end up working together afterwards, good — but you're paying for three hours and two follow-ups, and that's what you'll get.",
+  },
+  {
+    q: "Can you run this in-house for my team?",
+    a: "Yes, and it's usually the better option above 8 people. Same three hours, your offices or Ideas Cartel, built around your business rather than eight different ones. Mail me and I'll quote.",
+  },
+  {
+    q: "What happens after I sign up?",
+    a: "You'll get an invoice within one business day. Your seat is held for 5 days and confirmed once the invoice is settled — with only 8 seats I can't hold them open indefinitely. The pre-work lands as soon as payment clears.",
+  },
+  {
+    q: "Can I get a refund?",
+    a: "Full refund up to 7 days before the workshop. Inside 7 days I'll move you to the next cohort at no charge, but I can't refund the seat — at 8 people a late drop-out is a seat nobody else could book.",
+  },
+  {
+    q: "Will my business data be safe?",
+    a: "You'll be connecting your own accounts on your own laptop, and you disconnect anything you like at the end. Anthropic doesn't train its models on business-plan data by default. I don't ask for logins and I don't touch your accounts — I'm reading over your shoulder at most, and only if you want me to.",
+  },
+] as const;
+
 /**
  * Extension points (places to plug in new ideas without touching layout):
  *
@@ -361,4 +581,6 @@ export const faqs = [
  *   • New offer / package → push to `offers`. Set `featured: true` to highlight.
  *   • Press → push to `press`.
  *   • New FAQ → push to `faqs`. Schema is auto-generated.
+ *   • Workshop dates → push to `cohorts`. Hero, cohort list, form dropdown
+ *     and EducationEvent schema all follow automatically.
  */

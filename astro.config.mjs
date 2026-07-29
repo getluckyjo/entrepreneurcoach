@@ -17,6 +17,7 @@ export default defineConfig({
         !page.includes("/thanks") &&
         !page.includes("/404") &&
         !page.includes("/og/"),
+      // note: the /thanks exclusion also catches /workshop/thanks
       serialize(item) {
         const url = item.url;
         if (/\/$/.test(url) && !/journal\/$/.test(url)) {
@@ -24,6 +25,7 @@ export default defineConfig({
           if (url === "https://www.entrepreneurcoach.co.za/") return { ...item, priority: 1.0, changefreq: "weekly" };
         }
         if (/\/coaching$/.test(url)) return { ...item, priority: 0.95, changefreq: "monthly" };
+        if (/\/workshop$/.test(url)) return { ...item, priority: 0.95, changefreq: "weekly" };
         if (/\/about$/.test(url)) return { ...item, priority: 0.85, changefreq: "monthly" };
         if (/\/talks$/.test(url)) return { ...item, priority: 0.8, changefreq: "monthly" };
         if (/\/contact$/.test(url)) return { ...item, priority: 0.7, changefreq: "monthly" };
