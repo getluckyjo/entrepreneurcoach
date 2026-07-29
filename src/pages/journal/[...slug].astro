@@ -3,7 +3,7 @@ import BaseLayout from "~/components/layout/BaseLayout.astro";
 import BigCTA from "~/components/home/BigCTA.astro";
 import { getCollection, render } from "astro:content";
 import { articleSchema, breadcrumbSchema } from "~/lib/seo";
-import { site } from "~/data/site";
+import { site, workshop, cohorts } from "~/data/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("journal", ({ data }) => !data.draft);
@@ -22,6 +22,37 @@ const categoryClass = (c: string) =>
   c === "Field Notes" ? "pill-blue" :
   c === "Lecture"     ? "pill-ink" :
                         "pill-ghost";
+
+/*
+ * Closing CTAs. A post that argues for the workshop shouldn't end by selling
+ * coaching, so `cta: "workshop"` in the frontmatter swaps both the footer
+ * button and the full-bleed band. Copy lives here rather than in frontmatter
+ * so it stays in one place across however many workshop posts get written.
+ */
+const bookLabel = cohorts.length > 0 ? "Book a seat" : "Join the waitlist";
+
+const CTAS = {
+  clinic: {
+    footerLabel: "Book a Founder Clinic",
+    footerHref: "/contact",
+    band: undefined, // BigCTA's own defaults are the clinic close
+  },
+  workshop: {
+    footerLabel: bookLabel,
+    footerHref: "/workshop#signup",
+    band: {
+      eyebrow: `${workshop.duration} · ${workshop.seats} seats · ${workshop.venue.area}`,
+      title: ["Eight seats.", "That's it."],
+      body: "Everyone brings one real job from their own business, and we get it running before you leave. At twenty people that's a lecture. At eight it stays a workshop — which is the whole point, and the reason it isn't cheap.",
+      ctaLabel: bookLabel,
+      ctaHref: "/workshop#signup",
+    },
+  },
+  // No `as const` — it would make `title` a readonly tuple, and BigCTA's Props
+  // declares a mutable string[].
+};
+
+const cta = CTAS[post.data.cta];
 ---
 
 <BaseLayout
@@ -59,9 +90,9 @@ const categoryClass = (c: string) =>
 
     <footer class="container-prose mt-20 pt-10 border-t border-[var(--color-rule)] flex flex-wrap gap-4 justify-between items-center">
       <a href="/journal" class="btn-link text-[13px]">← All posts</a>
-      <a href="/contact" class="btn btn-primary">Book a Founder Clinic</a>
+      <a href={cta.footerHref} class="btn btn-primary">{cta.footerLabel}</a>
     </footer>
   </article>
 
-  <BigCTA />
+  <BigCTA {...(cta.band ?? {})} />
 </BaseLayout>

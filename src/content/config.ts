@@ -13,6 +13,13 @@ const journal = defineCollection({
       heroAlt: z.string().optional(),
       featured: z.boolean().default(false),
       draft: z.boolean().default(false),
+      /**
+       * Which product the post's closing CTAs push — the footer button and the
+       * full-bleed band. Defaults to the Founder Clinic; set "workshop" on posts
+       * that argue for the workshop, so the page doesn't end by selling coaching.
+       * Copy lives in the template, not here, so it stays in one place.
+       */
+      cta: z.enum(["clinic", "workshop"]).default("clinic"),
     }),
 });
 
