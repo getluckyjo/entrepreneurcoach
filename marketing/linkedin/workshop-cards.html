@@ -87,6 +87,8 @@
   #card1 .ticks svg { flex: none; margin-top: 8px; }
   #card1 .accent { color: var(--red); }
   #card1 .stats { border-color: rgba(255,255,255,0.22); }
+  /* 52px so the full "10:00–13:00" fits its third of the row; 62px clipped it. */
+  #card1 .stat dd { font-size: 52px; }
   /* Oversized arrow watermark, same device as the site's closing CTA. */
   #card1 .mark {
     position: absolute; right: -70px; top: 150px; width: 520px; opacity: 0.07;
@@ -165,8 +167,8 @@
 
   <div>
     <dl class="stats">
-      <div class="stat"><dt>Duration</dt><dd>3 hrs</dd></div>
-      <div class="stat"><dt>Seats</dt><dd>8</dd></div>
+      <div class="stat"><dt>Date</dt><dd>Sat 22 Aug</dd></div>
+      <div class="stat"><dt>Time</dt><dd>10:00&#8211;13:00</dd></div>
       <div class="stat"><dt>Per seat</dt><dd>R3,500</dd></div>
     </dl>
     <div class="footer" style="margin-top: 56px;">
@@ -194,7 +196,7 @@
       running on the work you'd otherwise do at 11pm.
     </p>
     <div class="footer" style="margin-top: 52px; border-top: 1px solid var(--rule); padding-top: 34px;">
-      <span style="color: var(--muted);">3 hrs · 8 seats · Claremont</span>
+      <span style="color: var(--muted);">Sat 22 Aug · 10:00–13:00 · Claremont</span>
       <span class="pill" style="background: var(--ink); color: var(--paper);">Claude for Entrepreneurs</span>
     </div>
   </div>
@@ -220,7 +222,7 @@
 
   <div class="footer" style="border-top: 1px solid rgba(14,14,16,0.28); padding-top: 34px;">
     <span style="opacity: 0.75;">entrepreneurcoach.co.za/workshop</span>
-    <span class="pill" style="background: var(--ink); color: var(--paper);">8 seats</span>
+    <span class="pill" style="background: var(--ink); color: var(--paper);">Sat 22 Aug · 8 seats</span>
   </div>
 </section>
 
@@ -244,7 +246,7 @@
 
   <div class="footer" style="border-top: 1px solid var(--rule); padding-top: 32px;">
     <span style="color: var(--muted);">entrepreneurcoach.co.za/workshop</span>
-    <span class="pill" style="background: var(--ink); color: var(--paper);">8 seats · R3,500</span>
+    <span class="pill" style="background: var(--ink); color: var(--paper);">Sat 22 Aug · R3,500</span>
   </div>
 </section>
 

@@ -365,8 +365,14 @@ export const faqs = [
 
 /** A scheduled run of the workshop. Empty array ⇒ the page runs in waitlist mode. */
 export type Cohort = {
-  /** ISO date, e.g. "2026-09-11". Used for schema.org and sorting. */
+  /** ISO date, e.g. "2026-09-11". Used as the option value and schema @id. */
   date: string;
+  /**
+   * Full ISO 8601 start/end with the SAST offset (+02:00). Google needs a time,
+   * not just a date, to show event rich results — keep these in step with `time`.
+   */
+  startISO: string;
+  endISO: string;
   /** Human display, e.g. "Thursday 11 September 2026". */
   display: string;
   /** e.g. "09:00 – 12:00". */
@@ -382,7 +388,17 @@ export type Cohort = {
  * hero, cohort list, form dropdown, and schema.org EducationEvent nodes.
  * While this is empty the page shows a waitlist CTA instead of dates.
  */
-export const cohorts: readonly Cohort[] = [];
+export const cohorts: readonly Cohort[] = [
+  {
+    date: "2026-08-22",
+    startISO: "2026-08-22T10:00:00+02:00",
+    endISO: "2026-08-22T13:00:00+02:00",
+    display: "Saturday 22 August 2026",
+    time: "10:00 – 13:00",
+    seatsLeft: 8,
+    founding: true,
+  },
+];
 
 export const workshop = {
   slug: "workshop",
@@ -440,7 +456,7 @@ export const workshop = {
       at: "00:12",
       mins: 13,
       title: "Name the job",
-      body: "Each person says out loud which task they want gone by midday. All eight go on the whiteboard. That list is the spine of the session.",
+      body: "Each person says out loud which task they want gone before they leave. All eight go on the whiteboard. That list is the spine of the session.",
     },
     {
       at: "00:25",
