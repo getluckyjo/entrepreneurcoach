@@ -2,6 +2,7 @@
 import BaseLayout from "~/components/layout/BaseLayout.astro";
 import BigCTA from "~/components/home/BigCTA.astro";
 import SectionHeader from "~/components/ui/SectionHeader.astro";
+import Icon from "~/components/ui/Icon.astro";
 import { site, workshop, workshopFaqs, cohorts, buildIt } from "~/data/site";
 import {
   workshopCourseSchema,
@@ -46,7 +47,7 @@ const seatsTotal = workshop.seats;
   ]}
 >
   <!-- ───────────────────────── Hero ───────────────────────── -->
-  <section class="container-page pt-20 md:pt-24 pb-16">
+  <section class="container-page pt-16 md:pt-20 pb-12">
     <p class="eyebrow eyebrow-red mb-6 reveal">
       {workshop.eyebrow} · {workshop.venue.name}, {workshop.venue.area}
     </p>
@@ -62,15 +63,14 @@ const seatsTotal = workshop.seats;
       <span class="display-italic display-red">entrepreneurs.</span>
     </h1>
 
-    <p class="lead mt-10 reveal">
-      You've heard what AI can do. You've probably tried it, found it
-      underwhelming, and gone back to doing the work yourself. This is three
-      hours to fix that — your laptop, your real files, and the job you actually
-      hate doing. You leave with it running.
+    <p class="lead mt-8 reveal max-w-2xl">
+      You've tried AI. It was underwhelming. You went back to doing the work
+      yourself. Three hours, your laptop, one job you actually hate — you leave
+      with it running.
     </p>
 
     <!-- Stat strip -->
-    <dl class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-rule)] border border-[var(--color-rule)] rounded-[var(--radius-lg)] overflow-hidden reveal">
+    <dl class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-rule)] border border-[var(--color-rule)] rounded-[var(--radius-lg)] overflow-hidden reveal">
       {[
         { k: "Duration", v: "3 hrs" },
         { k: "Seats", v: String(seatsTotal) },
@@ -86,7 +86,7 @@ const seatsTotal = workshop.seats;
       ))}
     </dl>
 
-    <div class="mt-10 flex flex-wrap items-center gap-3 reveal">
+    <div class="mt-8 flex flex-wrap items-center gap-3 reveal">
       <a href="#signup" class="btn btn-primary text-[15px] !px-7 !py-4">
         {hasDates ? "Book a seat" : "Join the waitlist"}
         <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -107,7 +107,7 @@ const seatsTotal = workshop.seats;
 
   <!-- ───────────────────── What you walk out with ───────────────────── -->
   <section class="bg-[var(--color-night)] text-[var(--color-paper)]">
-    <div class="container-page py-24 md:py-32">
+    <div class="container-page py-16 md:py-24">
       <header class="max-w-3xl reveal">
         <p class="eyebrow !text-[var(--color-paper)]/60 mb-5">The deliverable</p>
         <!-- global.css sets h1–h4 { color: ink }, which beats inherited colour —
@@ -116,18 +116,15 @@ const seatsTotal = workshop.seats;
           What you walk<br /><span class="display-italic" style="color: var(--color-red);">out with.</span>
         </h2>
         <p class="lead !text-[var(--color-paper)]/80 mt-6">
-          Not a folder of notes about AI. Six things, running, on your own
-          machine, built on your own business.
+          Six things, running, on your own machine.
         </p>
       </header>
 
-      <ul class="mt-16 grid gap-x-10 gap-y-8 md:grid-cols-2">
-        {workshop.outcomes.map((o, i) => (
-          <li class="flex gap-5 reveal">
-            <span class="num-badge !text-[var(--color-red)] !text-[1.6rem] flex-shrink-0 tabular-nums">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <span class="text-[15.5px] leading-relaxed text-[var(--color-paper)]/85 pt-1.5">{o}</span>
+      <ul class="mt-12 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+        {workshop.outcomes.map((o) => (
+          <li class="flex items-start gap-4 reveal">
+            <Icon name={o.icon} size={24} class="flex-shrink-0 mt-0.5 text-[var(--color-red)]" />
+            <span class="text-[16px] leading-snug text-[var(--color-paper)]/85">{o.text}</span>
           </li>
         ))}
       </ul>
@@ -135,18 +132,21 @@ const seatsTotal = workshop.seats;
   </section>
 
   <!-- ─────────────────── What people actually build ─────────────────── -->
-  <section id="build" class="container-page py-24 md:py-32">
+  <section id="build" class="container-page py-16 md:py-24">
     <SectionHeader
       eyebrow="What you'll build"
       title="Things you could make"
       italic="before lunch."
-      lede="Everyone brings a different business, so nobody builds the same thing. These are the jobs that come up most — pick one and we'll get it running."
+      lede="Nobody builds the same thing. These are the jobs that come up most — pick one and we'll get it running."
     />
 
-    <div class="mt-16 grid gap-px bg-[var(--color-rule)] border border-[var(--color-rule)] rounded-[var(--radius-lg)] overflow-hidden md:grid-cols-2">
+    <div class="mt-12 grid gap-px bg-[var(--color-rule)] border border-[var(--color-rule)] rounded-[var(--radius-lg)] overflow-hidden md:grid-cols-2">
       {buildIt.inRoom.map((col) => (
         <div class="bg-[var(--color-paper)] p-7 md:p-9 reveal">
-          <p class="eyebrow eyebrow-red mb-6">{col.group}</p>
+          <p class="eyebrow eyebrow-red mb-6 flex items-center gap-2.5">
+            <Icon name={col.icon} size={19} />
+            {col.group}
+          </p>
           <ul class="space-y-4">
             {col.items.map((item) => (
               <li class="flex gap-3 text-[15px] leading-relaxed">
@@ -167,12 +167,12 @@ const seatsTotal = workshop.seats;
 
     <!-- Tier two. Kept visibly separate so nobody arrives expecting a finished
          CRM by midday — the ceiling is the sell, the room is the promise. -->
-    <div class="mt-14 card card-bone reveal">
+    <div class="mt-10 card card-bone reveal">
       <p class="eyebrow mb-5 !text-[var(--color-muted)]">And once you can do that</p>
       <ul class="grid gap-x-10 gap-y-3.5 md:grid-cols-2">
         {buildIt.after.map((item) => (
           <li class="flex gap-3 text-[15px] leading-relaxed text-[var(--color-ink-soft)]">
-            <span aria-hidden="true" class="text-[var(--color-red)] flex-shrink-0">→</span>
+            <Icon name="arrow" size={16} class="mt-1 flex-shrink-0 text-[var(--color-red)]" />
             <span>{item}</span>
           </li>
         ))}
@@ -184,7 +184,7 @@ const seatsTotal = workshop.seats;
   </section>
 
   <!-- ───────────────────────── Run sheet ───────────────────────── -->
-  <section id="runsheet" class="container-page py-24 md:py-32">
+  <section id="runsheet" class="container-page py-16 md:py-24">
     <SectionHeader
       eyebrow="The run sheet"
       title="Three hours,"
@@ -192,11 +192,11 @@ const seatsTotal = workshop.seats;
       lede="Most of the value in a workshop is whether it was planned properly. Here is the whole thing — roughly a quarter teaching, the rest you, doing it."
     />
 
-    <ol class="mt-16 border-t border-[var(--color-rule-strong)]">
+    <ol class="mt-12 border-t border-[var(--color-rule-strong)]">
       {workshop.runsheet.map((b) => (
         <li
           class:list={[
-            "grid md:grid-cols-12 gap-x-8 gap-y-2 py-7 border-b border-[var(--color-rule)] reveal",
+            "grid md:grid-cols-12 gap-x-8 gap-y-1.5 py-5 border-b border-[var(--color-rule)] reveal",
             b.title === "Break" && "bg-[var(--color-bone)]",
           ]}
         >
@@ -217,18 +217,18 @@ const seatsTotal = workshop.seats;
 
   <!-- ─────────────────── Before & after (the 40/20/40) ─────────────────── -->
   <section class="bg-[var(--color-bone)] border-y border-[var(--color-rule)]">
-    <div class="container-page py-24 md:py-32">
+    <div class="container-page py-16 md:py-24">
       <SectionHeader
         eyebrow="Before and after"
         title="The room is only"
         italic="a third of it."
-        lede="Training that stops when everyone walks out doesn't stick — most of it evaporates inside a fortnight. So the week before and the month after are part of the seat price, not an upsell."
+        lede="Most training evaporates inside a fortnight. So the week before and the month after are in the seat price, not an upsell."
       />
 
-      <div class="mt-16 grid gap-10 md:grid-cols-2">
+      <div class="mt-12 grid gap-10 md:grid-cols-2">
         <div class="reveal">
           <p class="eyebrow eyebrow-red mb-6">Before · the week ahead of it</p>
-          <ol class="space-y-6">
+          <ol class="space-y-5">
             {workshop.prework.map((p) => (
               <li class="border-l-2 border-[var(--color-rule-strong)] pl-5">
                 <p class="font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
@@ -242,7 +242,7 @@ const seatsTotal = workshop.seats;
 
         <div class="reveal">
           <p class="eyebrow eyebrow-red mb-6">After · included, not extra</p>
-          <ol class="space-y-6">
+          <ol class="space-y-5">
             {workshop.followUp.map((p) => (
               <li class="border-l-2 border-[var(--color-red)] pl-5">
                 <p class="font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
@@ -258,15 +258,13 @@ const seatsTotal = workshop.seats;
   </section>
 
   <!-- ───────────────────── Who it's for / not for ───────────────────── -->
-  <section class="container-page py-24 md:py-32 grid gap-10 md:grid-cols-2">
+  <section class="container-page py-16 md:py-24 grid gap-10 md:grid-cols-2">
     <div class="card reveal">
       <p class="eyebrow eyebrow-red mb-6">Who it's for</p>
       <ul class="space-y-4">
         {workshop.forWhom.map((f) => (
           <li class="flex gap-3 text-[15px] leading-relaxed">
-            <svg width="14" height="14" viewBox="0 0 14 14" class="mt-1.5 flex-shrink-0 text-[var(--color-red)]" aria-hidden="true">
-              <path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <Icon name="check" size={15} class="mt-1 flex-shrink-0 text-[var(--color-red)]" />
             <span>{f}</span>
           </li>
         ))}
@@ -278,7 +276,7 @@ const seatsTotal = workshop.seats;
       <ul class="space-y-4">
         {workshop.notFor.map((f) => (
           <li class="flex gap-3 text-[15px] leading-relaxed text-[var(--color-ink-soft)]">
-            <span aria-hidden="true" class="mt-0.5 flex-shrink-0 text-[var(--color-muted)] text-[1.1rem] leading-none">—</span>
+            <Icon name="cross" size={15} class="mt-1 flex-shrink-0 text-[var(--color-muted)]" />
             <span>{f}</span>
           </li>
         ))}
@@ -287,39 +285,44 @@ const seatsTotal = workshop.seats;
   </section>
 
   <!-- ───────────────────────── Dates ───────────────────────── -->
+  {/* Horizontal band, not a card grid. One cohort in a two-column grid burned
+      630px to say one line; this says the same in a scannable row. */}
   {hasDates && (
-    <section class="container-page pb-24 md:pb-32">
-      <SectionHeader eyebrow="Dates" title="Next" italic="cohorts." />
-      <ul class="mt-12 grid gap-6 md:grid-cols-2">
+    <section class="container-page pb-16 md:pb-20">
+      <p class="eyebrow eyebrow-red mb-5 reveal">Dates</p>
+      <ul class="space-y-4">
         {cohorts.map((c) => (
-          <li class="card reveal flex flex-col">
-            <div class="flex items-start justify-between gap-4 mb-4">
-              <span class="pill pill-ghost">{c.time}</span>
-              {/* "8 of 8 left" is true but it announces that nothing has sold.
-                  Only count down once a seat has actually gone. */}
-              <span class:list={["pill", c.seatsLeft > 0 ? "pill-lime" : "pill-ink"]}>
-                {c.seatsLeft === 0
-                  ? "Sold out"
-                  : c.seatsLeft === seatsTotal
-                    ? `${seatsTotal} seats`
-                    : `${c.seatsLeft} of ${seatsTotal} left`}
-              </span>
+          <li class="card reveal !py-6 flex flex-wrap items-center gap-x-8 gap-y-5">
+            <div class="flex-1 min-w-[15rem]">
+              <h3 class="font-display text-[1.35rem] font-bold leading-tight">{c.display}</h3>
+              <p class="mt-1 text-[13.5px] text-[var(--color-muted)]">
+                {c.time} · {workshop.venue.name}, {workshop.venue.area}
+              </p>
             </div>
-            <h3 class="display-l !text-[clamp(1.5rem,2.4vw,2rem)]">{c.display}</h3>
-            <p class="mt-3 font-display text-[1.4rem] font-bold tabular-nums text-[var(--color-red)]">
+
+            <p class="font-display text-[1.5rem] font-bold tabular-nums text-[var(--color-red)]">
               {c.founding ? workshop.founding.display : workshop.price.display}
+              <span class="block text-[12px] font-sans font-normal text-[var(--color-muted)] mt-0.5">
+                {workshop.price.vatNote}
+              </span>
             </p>
-            <p class="mt-2 text-[13px] text-[var(--color-muted)]">
-              {workshop.venue.name}, {workshop.venue.area} · {workshop.price.vatNote}
-            </p>
-            <div class="mt-6 pt-6 border-t border-[var(--color-rule)] mt-auto">
-              <a
-                href={`#signup`}
-                class:list={["btn w-full", c.seatsLeft > 0 ? "btn-ink" : "btn-ghost"]}
-              >
-                {c.seatsLeft > 0 ? "Book this cohort" : "Join the waitlist"}
-              </a>
-            </div>
+
+            {/* "8 of 8 left" is true but it announces that nothing has sold.
+                Only count down once a seat has actually gone. */}
+            <span class:list={["pill", c.seatsLeft > 0 ? "pill-lime" : "pill-ink"]}>
+              {c.seatsLeft === 0
+                ? "Sold out"
+                : c.seatsLeft === seatsTotal
+                  ? `${seatsTotal} seats`
+                  : `${c.seatsLeft} of ${seatsTotal} left`}
+            </span>
+
+            <a
+              href="#signup"
+              class:list={["btn", c.seatsLeft > 0 ? "btn-ink" : "btn-ghost"]}
+            >
+              {c.seatsLeft > 0 ? "Book this cohort" : "Join the waitlist"}
+            </a>
           </li>
         ))}
       </ul>
@@ -328,7 +331,7 @@ const seatsTotal = workshop.seats;
 
   <!-- ───────────────────────── Sign-up ───────────────────────── -->
   <section id="signup" class="bg-[var(--color-bone)] border-y border-[var(--color-rule)]">
-    <div class="container-page py-24 md:py-32 grid gap-8 md:grid-cols-12">
+    <div class="container-page py-16 md:py-24 grid gap-8 md:grid-cols-12">
       <!-- Form -->
       <form
         class="md:col-span-7 card !bg-[var(--color-paper)] !p-7 space-y-5 reveal"
@@ -564,7 +567,7 @@ const seatsTotal = workshop.seats;
   </section>
 
   <!-- ───────────────────────── FAQ ───────────────────────── -->
-  <section class="container-page py-24 md:py-32 grid gap-14 md:grid-cols-12">
+  <section class="container-page py-16 md:py-24 grid gap-10 md:grid-cols-12">
     <div class="md:col-span-4">
       <p class="eyebrow eyebrow-red mb-5 reveal">FAQ</p>
       <h2 class="display-l reveal">Fair<br /><span class="display-italic">questions.</span></h2>
@@ -575,7 +578,7 @@ const seatsTotal = workshop.seats;
     </div>
     <ul class="md:col-span-8 divide-y divide-[var(--color-rule-strong)] border-y border-[var(--color-rule-strong)]">
       {workshopFaqs.map((f) => (
-        <li class="py-7 reveal">
+        <li class="py-5 reveal">
           <details class="group">
             <summary class="flex items-start justify-between gap-6 cursor-pointer list-none">
               <h3 class="font-display text-[1.15rem] font-semibold leading-snug">{f.q}</h3>

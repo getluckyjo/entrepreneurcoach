@@ -432,123 +432,57 @@ export const workshop = {
 
   /** One-line positioning used on the home page section and meta description. */
   promise:
-    "Three hours, eight people, your own laptop. You walk out with Claude actually running one job in your business — not a folder of notes about it.",
+    "Three hours, eight people, your own laptop. You leave with Claude running one job in your business — not a folder of notes about it.",
 
-  /** What lands in their hands. Deliverable-first, per DESIGN.md §1. */
+  /** What lands in their hands. Short by design — the build section carries detail. */
   outcomes: [
-    "A Claude Project loaded with your business context, so you stop re-explaining yourself every time",
-    "At least one connector live against your real data — Google Workspace, Xero, or Microsoft 365",
-    "One finished artefact built in the room from a real task: a model, a deck, a document",
-    "One Skill that encodes a process you repeat, written in your words, not code",
-    "One recurring task scheduled and running before you leave",
-    "A 14-day group call and a 30-day review — both included in the seat price",
+    { icon: "layers",   text: "A Project that knows your business" },
+    { icon: "plug",     text: "Live data — Workspace, Xero or M365" },
+    { icon: "file",     text: "One real artefact, built in the room" },
+    { icon: "repeat",   text: "A Skill that repeats your process" },
+    { icon: "clock",    text: "One job running on a schedule" },
+    { icon: "calendar", text: "14-day call and 30-day review" },
   ],
 
   /** The run sheet. Published in full on the page: the planning is the pitch. */
   runsheet: [
-    {
-      at: "00:00",
-      mins: 12,
-      title: "Setup and triage",
-      body: "Coffee, laptops open, everyone logged in and on the desktop app. Card declines and setup problems get solved now, not at minute 90.",
-    },
-    {
-      at: "00:12",
-      mins: 13,
-      title: "Name the job",
-      body: "Each person says out loud which task they want gone before they leave. All eight go on the whiteboard. That list is the spine of the session.",
-    },
-    {
-      at: "00:25",
-      mins: 20,
-      title: "Briefing, not prompting",
-      body: "Why most people get thin answers: they ask instead of brief. You rewrite your worst prompt as a proper brief and watch what changes.",
-    },
-    {
-      at: "00:45",
-      mins: 30,
-      title: "Build your business brain",
-      body: "Everyone builds a real Project — your documents, your numbers, your tone of voice, your standing instructions. Context beats clever prompting every time.",
-    },
-    {
-      at: "01:15",
-      mins: 15,
-      title: "Break",
-      body: "Fifteen minutes, properly. The café is downstairs.",
-    },
-    {
-      at: "01:30",
-      mins: 30,
-      title: "Point it at real data",
-      body: "Connect Google Workspace, Microsoft 365, or Xero and ask a question about your own business. This is the part nobody believes until they see it on their own numbers.",
-    },
-    {
-      at: "02:00",
-      mins: 35,
-      title: "Delegate the job",
-      body: "The main event. You hand over the task you named at 00:12 and get back real work — a spreadsheet, a deck, a document. Nothing sends, posts, or pays without your say-so.",
-    },
-    {
-      at: "02:35",
-      mins: 15,
-      title: "Make it repeat",
-      body: "Turn what just worked into a Skill, then schedule it. A Monday 07:00 business brief that writes itself is a fair place to start.",
-    },
-    {
-      at: "02:50",
-      mins: 10,
-      title: "Commit and close",
-      body: "One thing you will do by Friday, written down. We book the 14-day call in the room, before the momentum leaks.",
-    },
+    { at: "00:00", mins: 12, title: "Setup and triage",        body: "Logged in, on the desktop app. Problems solved now, not at minute 90." },
+    { at: "00:12", mins: 13, title: "Name the job",            body: "Eight jobs on the whiteboard. That list is the spine of the session." },
+    { at: "00:25", mins: 20, title: "Briefing, not prompting", body: "Rewrite your worst prompt as a proper brief. Watch what changes." },
+    { at: "00:45", mins: 30, title: "Build the business brain", body: "A real Project — your documents, your numbers, your standards." },
+    { at: "01:15", mins: 15, title: "Break",                   body: "Fifteen minutes. The café is downstairs." },
+    { at: "01:30", mins: 30, title: "Point it at real data",   body: "Connect Workspace, M365 or Xero. Ask about your own numbers." },
+    { at: "02:00", mins: 35, title: "Delegate the job",        body: "Hand over the job you named. Get back a spreadsheet, a deck, a document." },
+    { at: "02:35", mins: 15, title: "Make it repeat",          body: "Turn what worked into a Skill. Put it on a schedule." },
+    { at: "02:50", mins: 10, title: "Commit and close",        body: "One thing you'll do by Friday. We book the 14-day call in the room." },
   ],
 
   /** Pre-work. Sold as part of the product because it is part of the product. */
   prework: [
-    {
-      when: "7 days before",
-      body: "Set up your Claude account on the web and install the desktop app. I send exact instructions, including the South African card gotchas that trip most people up.",
-    },
-    {
-      when: "5 days before",
-      body: "Claude 101 — Anthropic's own free course, about an hour. This is what buys us the right to skip the basics on the day.",
-    },
-    {
-      when: "3 days before",
-      body: "Answer one question: which recurring task eats the most time and creates the least value in your business? I read all eight answers and build the session around them.",
-    },
-    {
-      when: "The day before",
-      body: "Bring a laptop, a charger, and one real, messy file. Not a tidy example. The messy one.",
-    },
+    { when: "7 days before",   body: "Set up Claude on the web and install the desktop app. I send exact instructions, including the South African card gotchas." },
+    { when: "5 days before",   body: "Claude 101 — Anthropic's own free course, about an hour. This is what buys us the right to skip the basics." },
+    { when: "3 days before",   body: "One question: which recurring task eats the most time? I read all eight answers and build the session around them." },
+    { when: "The day before",  body: "Bring a laptop, a charger, and one real, messy file. Not a tidy example." },
   ],
 
   /** The other 40%. */
   followUp: [
-    {
-      when: "Day 1",
-      body: "Your asset pack: the Project template, the Skill you built, my prompt library, and the two follow-on courses worth your time.",
-    },
-    {
-      when: "Day 14",
-      body: "A 60-minute group call. One win and one blocker each. This is the call that decides whether any of it sticks.",
-    },
-    {
-      when: "Day 30",
-      body: "A written review — what's working, what isn't, what's next — plus one new use case to take on.",
-    },
+    { when: "Day 1",  body: "Asset pack — your Project template, the Skill you built, my prompt library." },
+    { when: "Day 14", body: "A 60-minute group call. One win and one blocker each. This is the call that decides whether it sticks." },
+    { when: "Day 30", body: "A written review — what's working, what isn't, what's next." },
   ],
 
   forWhom: [
-    "Business owners running 5–50 person teams who are still doing work a system should do",
-    "Executives who keep hearing about AI in board meetings and want to actually use it",
-    "Founders drowning in admin, reporting, and follow-up rather than building",
-    "Anyone who has tried ChatGPT a few times, found it underwhelming, and quietly stopped",
+    "Owners running 5–50 person teams, still doing work a system should do",
+    "Executives who keep hearing about AI in board meetings and want to use it",
+    "Founders drowning in admin instead of building",
+    "Anyone who tried ChatGPT, found it underwhelming, and quietly stopped",
   ],
 
   notFor: [
-    "Developers — this is the non-technical half of Claude. No terminal, no code, no API.",
-    "Anyone wanting a lecture on what AI means for the economy. This is three hours of doing.",
-    "People who won't do the pre-work. Eight seats is too few to spend the first hour on setup.",
+    "Developers. No terminal, no code, no API.",
+    "Anyone wanting a lecture on what AI means for the economy.",
+    "People who won't do the pre-work. Eight seats is too few.",
   ],
 } as const;
 
@@ -567,52 +501,55 @@ export const buildIt = {
   inRoom: [
     {
       group: "Money",
+      icon: "chart",
       items: [
-        "A 5-year cashflow model with real COS, channel margins and sensitivity — the one I charge R15,000 to build",
-        "Your month-end pack, rebuilt from the source spreadsheets instead of by hand",
+        "A 5-year cashflow model — the one I charge R15,000 to build",
+        "Your month-end pack, rebuilt from source",
         "Margin analysis by product, channel or customer",
       ],
     },
     {
       group: "Selling",
+      icon: "target",
       items: [
-        "An investor deck — narrative first, then slides you can defend in the room",
-        "Proposals and quotes on your template, in your language",
-        "Every lead in your inbox triaged and researched before you read it",
+        "An investor deck you can defend in the room",
+        "Quotes and proposals on your template",
+        "Inbox leads triaged and researched before you read them",
       ],
     },
     {
       group: "Running the place",
+      icon: "gear",
       items: [
-        "A Monday 07:00 business brief that writes itself",
-        "Performance reviews built on your competency framework, not a template off the internet",
-        "The SOPs you've never written down, captured from how you actually do it",
+        "A Monday 07:00 brief that writes itself",
+        "Reviews built on your competency framework",
+        "The SOPs you've never written down",
       ],
     },
     {
       group: "Tools",
+      icon: "wrench",
       items: [
-        "An internal dashboard you can send someone a link to",
-        "A quoting or pricing calculator your team can use without you",
-        "A one-page site for a deck, a campaign or a launch",
+        "A dashboard you share with a link",
+        "A pricing calculator your team can use without you",
+        "A one-page site for a deck or a campaign",
       ],
     },
   ],
 
-  /** The honest note about what a shareable Claude-built tool actually is. */
   inRoomNote:
-    "All of it comes out as a real file or a live link — spreadsheets, decks, documents, and web tools you share with a URL. No developers, no app store, nothing to install.",
+    "Real files and live links — spreadsheets, decks, documents. No developers, nothing to install.",
 
   after: [
-    "A sales pipeline that researches, triages and drafts the follow-up — you approve, it sends",
-    "Customer relationships run by exception, so you only see the ones that need you",
-    "Recruitment screening and first-round questions scored against your actual scorecard",
-    "Resource and roster optimisation across sites, people and stock",
-    "A review cycle that runs itself and lands on your desk already summarised",
+    "A sales pipeline that researches and drafts the follow-up",
+    "Customer relationships run by exception",
+    "Recruitment screened against your actual scorecard",
+    "Resource and roster optimisation",
+    "A review cycle that summarises itself",
   ],
 
   afterNote:
-    "Started on the day, built out over the 30 days. I'm not going to pretend anyone finishes these in an afternoon — mine took longer than that. But this is where it goes once the foundation is in.",
+    "Started on the day, built out over the 30. Nobody finishes these in an afternoon — mine took a lot longer.",
 } as const;
 
 /** Workshop FAQ. Separate from `faqs` so the coaching FAQPage schema stays clean. */
