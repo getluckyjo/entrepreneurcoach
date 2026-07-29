@@ -312,6 +312,14 @@
     transition: color 200ms ease;
   }
   .prose a:hover { color: var(--color-ink); }
+  /* Buttons inside prose. `.prose a` paints a red underline gradient on every
+     link, which turns a CTA into a struck-through button — cancel it so any
+     journal post can drop in a real button. */
+  .prose .btn { background-image: none; text-decoration: none; }
+  .prose .btn-primary, .prose .btn-primary:hover { color: var(--color-paper); }
+  .prose .btn-ink, .prose .btn-ink:hover { color: var(--color-paper); }
+  .prose .btn-ghost { color: var(--color-ink); }
+  .prose .btn-ghost:hover { color: var(--color-paper); }
   .prose strong { color: var(--color-ink); font-weight: 700; }
   .prose code {
     font-family: var(--font-mono); font-size: 0.9em;

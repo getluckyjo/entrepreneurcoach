@@ -1,0 +1,84 @@
+---
+title: "Not a developer. 17 things shipped since March."
+description: "What I actually use Claude for as an operator — dashboards, subscription flows, compliance-locked emailers, and the day it rebuilt this website from a deployment after iCloud deleted the source."
+pubDate: 2026-07-29
+category: "Field Notes"
+featured: true
+---
+
+On 10 March I created my first repository. Today is 29 July. There are 17.
+
+I'm not a developer. I've never been a developer. I didn't learn to code this year, and if you put me in front of a blank file and asked me to write a React component I'd still be sitting there tomorrow.
+
+What changed is that I stopped needing to.
+
+## The list
+
+Not a portfolio. Just what's actually there, in the order I built it.
+
+A promotions dashboard for Get Lucky that reads live data out of Google Sheets, because the alternative was me rebuilding the same summary every Monday. A certificate product called Fairways to Heaven. Golf Day Pro. Subscription landing pages with a PayFast webhook wired into them, which is the first time I've ever owned the payment plumbing in one of my own businesses instead of paying someone to own it for me. The Get Lucky marketing site. A site for Epic Golf, the indoor Trackman simulator in Cape Town. A microsite for the Indwe partnership. Ever After Returns. Sell Direct. REKRD, then a coaching layer on top of REKRD. And this website, which I'll come back to.
+
+There's also one called claudefit, which is a small game that tells you to get up and stretch while the AI is working. I built it in an evening. It is not a business. I mention it because the ability to build something silly in an evening is the same ability that lets you build something serious in a weekend, and I don't think people take the second one seriously until they've done the first.
+
+Four and a half months. Seventeen repositories. One person who can't code.
+
+## The one that actually changed how I think
+
+Everything above is a website or an app. That's the obvious use, and it's the least interesting one.
+
+Here's the one that matters.
+
+Get Lucky runs campaigns with Indwe Risk Services, and every mailer that goes out has compliance wording in it that Indwe's compliance team signed off. Quote-only mechanics. Specific phrasing that cannot drift, because if it drifts we're making a claim we're not licensed to make.
+
+Historically that lived in my head and in a Word doc nobody opened. Every new campaign was a chance to get it wrong.
+
+So I wrote it down as a rule the machine follows. Now when I say "make me a mailer for the Wild Coast Classic," it starts from the approved structure, keeps the compliance wording exactly as the broker signed it off, and asks me only the things that actually change — venue, dates, the offer line, which photos.
+
+That's not automation. It's institutional memory. The rule can't be forgotten by the person doing the work at 11pm, because the person doing the work at 11pm is following a rule it can't skip.
+
+Every business I've built has had five or six of these. Rules that live in the founder's head and leak out the moment anyone else touches the job. I've started writing them down.
+
+The unglamorous version of the same thing: I've got one that fills in PDF forms from my details. Bank forms, applications, the endless South African admin. It keeps its own record of my details and updates itself when something changes. It has saved me nothing impressive — an hour here, forty minutes there. It's just that I no longer lose an afternoon to a scanned PDF, and I used to lose several a year.
+
+## The day it saved this website
+
+I'll give you the honest disaster story, because it happened today and it makes the point better than the wins do.
+
+This site lives in an iCloud folder. iCloud decided the folder wasn't being used and evicted the contents. No source code. No git history. No backup. Twenty-five empty directories where a website used to be.
+
+The live site was still up, but a built website is not source code — it's the flattened output. You can't edit it.
+
+What I'd forgotten is that when you deploy from the command line, the deployment keeps the files you uploaded. Not just the built output — the actual source. So the whole thing came back: every page, every component, the design document, eleven journal posts, ninety-odd images.
+
+Then it went into git and up to GitHub, which is where it should have been in the first place.
+
+Two lessons, and only one of them is about AI. The first is that I got lucky, and luck is not a backup strategy. The second is that the recovery took twenty minutes, and five years ago it would have taken a developer, a day, and an invoice — assuming I could find one free that afternoon.
+
+## Where it falls over
+
+I'd be selling you something if I stopped there.
+
+It is confidently wrong sometimes. Not often, but often enough that you can't switch off. If you don't know enough to smell when something's off, you'll ship the mistake. That's not a reason to avoid it — it's a reason to stay in the room.
+
+It won't tell you what to build. It has no opinion about whether your business should exist. Every one of those 17 repos started with me deciding the thing was worth making, and that part hasn't been automated and won't be.
+
+The first two weeks were bad. I was asking questions and getting thin answers, and I nearly wrote the whole thing off. What fixed it wasn't a trick. It was realising I was asking when I should have been briefing — the same skill I've used for 15 years on designers, distributors and investors, pointed somewhere new. Nobody told me that. I wish they had.
+
+And it's a tool. My businesses still live or die on whether the product is good and whether anyone wants it. Nothing here has changed that.
+
+## What it actually means
+
+I keep hearing that the first one-person billion dollar company is coming. Maybe. I don't know.
+
+What I do know is more boring and more useful: the gap between having an idea and having the thing has collapsed. Not to zero. But from months and a budget, to a weekend and no budget.
+
+For an operator, that's the whole game. Most of my last decade was spent choosing which ideas to kill because I only had the resources to chase one. That constraint is materially different now, and I don't think most business owners have noticed yet.
+
+Seventeen things since March. None of them by a developer.
+
+I run a 3-hour workshop teaching exactly this to business owners and executives. Eight seats, in person at Ideas Cartel in Claremont. You bring a laptop and one real job from your business, and you leave with it running — not a folder of notes about AI.
+
+<div class="not-prose flex flex-wrap gap-3 mt-10">
+  <a href="/workshop" class="btn btn-primary">See the workshop</a>
+  <a href="/workshop#signup" class="btn btn-ghost">Book a seat</a>
+</div>
