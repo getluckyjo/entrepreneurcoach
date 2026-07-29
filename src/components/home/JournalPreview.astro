@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import SectionHeader from "~/components/ui/SectionHeader.astro";
+
+const posts = (await getCollection("journal", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
+
+const categoryClass = (c: string) =>
+  c === "Playbook"  ? "pill-red" :
+  c === "Field Notes" ? "pill-blue" :
+  c === "Lecture"   ? "pill-ink" :
+  c === "Interview" ? "pill-ghost" :
+  c === "Article"   ? "pill-ghost" :
+                      "pill-ghost";
+---
+
+<section class="container-page py-24 md:py-32">
+  <div class="flex items-end justify-between gap-8 flex-wrap">
+    <SectionHeader
+      eyebrow="Journal"
+      title="Field notes"
+      italic="from the road."
+      lede="Long-form when the topic deserves it. Pitch decks, fundraising, scaling, the things nobody warns you about."
+    />
+    <a href="/journal" class="btn-link text-[14px]">All posts →</a>
+  </div>
+
+  <ul class="mt-16 grid gap-px bg-[var(--color-rule)] md:grid-cols-2 rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-rule)]">
+    {posts.map((p, i) => (
+      <li class:list={[
+        "bg-[var(--color-paper)] p-8 md:p-10 group reveal flex flex-col",
+        i === 0 && "md:row-span-2 md:bg-[var(--color-bone)]"
+      ]}>
+        <div class="flex items-center gap-3 mb-5">
+          <span class:list={["pill", categoryClass(p.data.category)]}>{p.data.category}</span>
+          <span class="text-[12px] text-[var(--color-muted)] uppercase tracking-[0.1em]">
+            {p.data.pubDate.toLocaleDateString("en-ZA", { year: "numeric", month: "short", day: "numeric" })}
+          </span>
+        </div>
+        <h3 class:list={[
+          "display-l group-hover:text-[var(--color-red)] transition-colors",
+          i === 0 ? "!text-[clamp(2rem,3.5vw,3.2rem)]" : "!text-[clamp(1.5rem,2vw,2rem)]",
+        ]}>
+          <a href={`/journal/${p.slug}`}>{p.data.title}</a>
+        </h3>
+        <p class:list={[
+          "mt-5 text-[var(--color-ink-soft)] leading-relaxed flex-1",
+          i === 0 ? "text-[16.5px]" : "text-[15px]",
+        ]}>{p.data.description}</p>
+        <a href={`/journal/${p.slug}`} class="btn-link mt-7 self-start text-[13px]">Read post →</a>
+      </li>
+    ))}
+  </ul>
+</section>

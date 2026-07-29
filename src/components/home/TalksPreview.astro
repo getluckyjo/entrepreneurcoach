@@ -1,0 +1,36 @@
+---
+import { talks } from "~/data/site";
+import SectionHeader from "~/components/ui/SectionHeader.astro";
+---
+
+<section class="bg-[var(--color-bone)] border-y border-[var(--color-rule)]">
+  <div class="container-page py-24 md:py-32 grid gap-12 md:grid-cols-12">
+    <div class="md:col-span-5">
+      <SectionHeader
+        eyebrow="Talks & keynotes"
+        title="Honest learnings"
+        italic="from real ventures."
+        lede="Three signature talks based on lived operator experience. Conferences, accelerators, corporate offsites — South Africa and abroad."
+      />
+      <a href="/talks" class="btn btn-ink mt-8">Book me for a talk →</a>
+    </div>
+    <ul class="md:col-span-7 space-y-px">
+      {talks.map((t, i) => (
+        <li class="border-t last:border-b border-[var(--color-rule)] py-8 group reveal grid grid-cols-[auto_1fr] gap-x-8 items-baseline">
+          <span class="num-badge !text-[var(--color-ink)] !text-[clamp(2.6rem,3.5vw,3.5rem)]">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <div>
+            <div class="flex items-baseline gap-3 mb-2">
+              <span class="pill pill-ghost">{t.duration}</span>
+            </div>
+            <h3 class="display-l !text-[clamp(1.5rem,2.4vw,2.2rem)] group-hover:text-[var(--color-red)] transition-colors">
+              <a href={`/talks#${t.slug}`}>{t.title}</a>
+            </h3>
+            <p class="mt-4 text-[15px] leading-relaxed text-[var(--color-ink-soft)] max-w-2xl">{t.summary}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

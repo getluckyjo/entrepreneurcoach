@@ -1,0 +1,91 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import { getCollection } from "astro:content";
+import { site } from "~/data/site";
+import { breadcrumbSchema } from "~/lib/seo";
+
+const posts = (await getCollection("journal", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const featured = posts.find((p) => p.data.featured) ?? posts[0];
+const rest = posts.filter((p) => p.slug !== featured?.slug);
+
+const categoryClass = (c: string) =>
+  c === "Playbook"    ? "pill-red" :
+  c === "Field Notes" ? "pill-blue" :
+  c === "Lecture"     ? "pill-ink" :
+                        "pill-ghost";
+---
+
+<BaseLayout
+  title="Field Notes for Founders — Pitch Decks, Fundraising, Scaling | Johannes le Roux"
+  rawTitle
+  description="Long-form field notes on pitch decks, fundraising, founder fatigue, and scaling South African brands abroad. Written by Johannes le Roux between coaching sessions."
+  jsonLd={[
+    breadcrumbSchema([
+      { name: "Home",    url: site.domain },
+      { name: "Journal", url: `${site.domain}/journal` },
+    ]),
+  ]}
+>
+  <section class="container-page pt-20 md:pt-24 pb-16">
+    <p class="eyebrow eyebrow-red mb-6 reveal">Journal</p>
+    <h1 class="display-mega reveal">
+      Field notes<br/>
+      <span class="display-italic display-red">from the road.</span>
+    </h1>
+    <p class="lead mt-10 reveal">
+      Mostly long-form, occasionally short. Pitch decks, fundraising, scaling, and the things nobody warns you about. Written between coaching sessions and across airports.
+    </p>
+  </section>
+
+  {featured && (
+    <section class="container-page pb-12">
+      <a href={`/journal/${featured.slug}`} class="block group reveal">
+        <article class="rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-rule)] grid md:grid-cols-2 bg-[var(--color-night)] text-[var(--color-paper)]">
+          <div class="bg-[var(--color-red)] aspect-[4/3] md:aspect-auto md:min-h-[420px] flex items-end p-10 md:p-12 relative">
+            <svg class="absolute right-6 top-6 w-12 h-12 opacity-50" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M6 26L26 6 M26 6H10 M26 6V22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <span class="pill !bg-[var(--color-paper)] !text-[var(--color-red)] mb-4">Featured · {featured.data.category}</span>
+              <h2 class="display-xl mt-3 group-hover:opacity-90 transition-opacity" style="color: var(--color-paper);">
+                {featured.data.title}
+              </h2>
+            </div>
+          </div>
+          <div class="p-10 md:p-12 flex flex-col justify-center">
+            <p class="text-[12px] uppercase tracking-[0.18em] text-[var(--color-paper)]/50 mb-4">
+              {featured.data.pubDate.toLocaleDateString("en-ZA", { year: "numeric", month: "long", day: "numeric" })}
+            </p>
+            <p class="text-[17px] leading-relaxed text-[var(--color-paper)]/85">{featured.data.description}</p>
+            <span class="btn-link self-start mt-8 text-[13px] !text-[var(--color-red)]">Read the post →</span>
+          </div>
+        </article>
+      </a>
+    </section>
+  )}
+
+  <section class="container-page pb-24">
+    <ul class="grid gap-px bg-[var(--color-rule)] md:grid-cols-2 lg:grid-cols-3 rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-rule)]">
+      {rest.map((p) => (
+        <li class="bg-[var(--color-paper)] p-8 flex flex-col group reveal">
+          <div class="flex items-center gap-3 mb-5">
+            <span class:list={["pill", categoryClass(p.data.category)]}>{p.data.category}</span>
+            <span class="text-[12px] text-[var(--color-muted)] uppercase tracking-[0.1em]">
+              {p.data.pubDate.toLocaleDateString("en-ZA", { year: "numeric", month: "short" })}
+            </span>
+          </div>
+          <h3 class="display-l !text-[clamp(1.4rem,1.9vw,1.8rem)] group-hover:text-[var(--color-red)] transition-colors">
+            <a href={`/journal/${p.slug}`}>{p.data.title}</a>
+          </h3>
+          <p class="mt-4 text-[14.5px] text-[var(--color-ink-soft)] leading-relaxed flex-1">{p.data.description}</p>
+          <a href={`/journal/${p.slug}`} class="btn-link mt-6 self-start text-[13px]">Read →</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <BigCTA />
+</BaseLayout>

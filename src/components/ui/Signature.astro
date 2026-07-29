@@ -1,0 +1,18 @@
+---
+/* Caveat handwritten signature anchor — used at most twice on the site
+   per DESIGN.md §6 (about page portrait + featured offer card). */
+interface Props {
+  text?: string;
+  size?: number;
+  rotate?: number;
+  class?: string;
+}
+const { text = "Johannes le Roux", size = 56, rotate = -3, class: cls } = Astro.props;
+---
+
+<span
+  class:list={["signature inline-block", cls]}
+  style={`font-size:${size}px; transform: rotate(${rotate}deg);`}
+>
+  {text}
+</span>

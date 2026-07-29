@@ -1,0 +1,351 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import { articleSchema, breadcrumbSchema } from "~/lib/seo";
+import { site } from "~/data/site";
+
+const url = `${site.domain}/the-dope-deck`;
+const formAction = `https://formsubmit.co/${site.email}`;
+const pubDate = new Date("2026-05-13");
+
+type Slide = {
+  n: number;
+  title: string;
+  image: string;
+  works: string;
+  off: string;
+  fix: string;
+};
+
+const slides: Slide[] = [
+  {
+    n: 1,
+    title: "Cover — DRINK DOPE FEEL DOPE",
+    image: "/img/dope/slide-01.jpg",
+    works: "Image is brand. Lime on glass is distinctive — you'd recognise this in a forwarded inbox.",
+    off: "No company name, no one-liner of what it is, no raise, no contact. Decks always get forwarded blind — give the second-degree reader a 5-second answer.",
+    fix: "Bottom strip: \"DOPE — Cannabis Spring Water · Born in Africa, Made in America · Raising $1M Seed at $5M cap · johannes@drinkdope.com\". Brand stays, recipient lands.",
+  },
+  {
+    n: 2,
+    title: "Join the Revolution — market chart",
+    image: "/img/dope/slide-02.jpg",
+    works: "$5B by 2028 is a real number. CAGR 27.5% is real growth.",
+    off: "This is a market slide pretending to be a why-now slide. The Y-axis labels all say \"1B\" — a print error that shouldn't have made it into a real raise deck. And the line \"the future of drinking is beyond alcohol\" sat on the desk of every Cannabev pitch in 2025.",
+    fix: "Headline = the actual wedge: \"Aug 2023, Minnesota legalised commercial sale of hemp-derived THC beverages. 19 states followed. Category went $1B → $5B in 36 months.\" Then the chart, with corrected Y-axis.",
+  },
+  {
+    n: 3,
+    title: "Born in Africa, Made in America",
+    image: "/img/dope/slide-03.jpg",
+    works: "Strongest single slide. CPT→LAX, 1M cans, 700 listings, multi-state. Photography is fire.",
+    off: "\"Africa's no. 1 cannabis beverage\" needs a source — by whom, vs. whom? \"1M cans\" needs a denominator — over what period? The ratio between the numerator and the time/spend it took is the whole pitch. And the $1M / $5M ask is on slide 3, slide 13, *and* slide 17 — say it once on the cover and once at the close.",
+    fix: "Lead with the ratio: \"1M cans + 700 listings in 18 months on $90K of marketing spend.\" Move the dollar ask to one terminal slide. Source the \"no. 1\" claim or drop it.",
+  },
+  {
+    n: 4,
+    title: "Cannabis Spring Water — product",
+    image: "/img/dope/slide-04.jpg",
+    works: "White-on-white photography reads premium. Six clear product attributes.",
+    off: "Product before problem. We've shown a market and a stat, but never said *who's drinking this and what they were drinking before*. \"Pure hydration with a gentle, happy buzz\" is poetry, not positioning.",
+    fix: "Insert one slide before this called *Who's in the can*. Name the customer. \"The 28-y/o in Brooklyn who's done with hangovers but hates seltzer. The mom in Austin who wants 1.5 glasses of wine without the wine.\" Without that, the product slide is shopping for buyers it hasn't named.",
+  },
+  {
+    n: 5,
+    title: "Flavored Cannabis Spring Water",
+    image: "/img/dope/slide-05.jpg",
+    works: "Three-flavour lineup looks like Sprouts shelf-set.",
+    off: "Same six icons as slide 4, just \"20 cal\" swapped for \"0 cal\". Reader absorbed the spec on slide 4. Two product slides in a row is brochure pacing.",
+    fix: "Merge slides 4+5 into one product slide. Use the second slot for **velocity** — rate of sale per door at BevMo, repeat-purchase rate, anything that proves the can moves once it's on shelf. Velocity is the slide every CPG investor wants and rarely sees.",
+  },
+  {
+    n: 6,
+    title: "Vision / Purpose",
+    image: "/img/dope/slide-06.jpg",
+    works: "$50M / $250M by 2028 is a clean moonshot. The 1% student-debt commitment is sticky and ownable in a category drowning in performative sustainability.",
+    off: "Two ideas on one slide muddies both. And \"naturally become an acquisition target for larger beverage players\" — true, but stating it baldly reads \"we're built to flip\" and discounts founder commitment. (Carlos Brito at SAB doesn't need to be told the exit logic.)",
+    fix: "Split. **Vision** = the 2028 numbers + photo. **Purpose** = 1% pledge with a named partner org (RIP Medical Debt? a college fund?). Drop explicit acquisition language; the financials telegraph it.",
+  },
+  {
+    n: 7,
+    title: "5-Year Pro Forma Cashflow",
+    image: "/img/dope/slide-07.jpg",
+    works: "Built-out. Honest about burning $540K + $708K in years 1–2. Net profit by year 4.",
+    off: "No unit-economic anchor. Years 4→5 jumps cases 3.5× (292K → 1M) — what's the assumption driving it? Doors? Velocity? Both? The curve is a wish without an assumption table.",
+    fix: "Inset strip: cases per door per month, avg trade price per case, gross margin per case. Three numbers. That's the difference between a forecast and fan-fic.",
+  },
+  {
+    n: 8,
+    title: "Sales & Distribution — 3 channels",
+    image: "/img/dope/slide-08.jpg",
+    works: "Multi-channel hedge — Dispensary + Retail + DTC = sound regulatory diversification.",
+    off: "Three channels, but no implied mix. Where does the $50M-by-2028 actually sit? 80% of it comes from one — name it. Otherwise reads \"we'll do all the things\", which is a YC red flag.",
+    fix: "Stacked bar showing % of 2028 revenue by channel. Split *proven* (Retail, 700 listings live) from *hypothesis* (Dispensary, DTC). Hypothesis channels need a milestone, not a brand mark.",
+  },
+  {
+    n: 9,
+    title: "Key Accounts — Current Penetration (retail map)",
+    image: "/img/dope/slide-09.jpg",
+    works: "Concrete proof. BevMo 141/141, GoPuff CA + PA + TX, Total Wine 42/42 in CA. This is real shelf.",
+    off: "141/141 is a beautiful ratio buried as small text under a logo. Ratios sell.",
+    fix: "Banner above the map: \"100% door coverage at BevMo CA · 100% Total Wine CA · 100% Top Ten MN.\" Then the map. Reward the top-down scan.",
+  },
+  {
+    n: 10,
+    title: "Key Accounts — Distributor map",
+    image: "/img/dope/slide-10.jpg",
+    works: "Distributor coverage is the single hardest thing to build in beverage. Showing *distributed* + *pending* is honest.",
+    off: "Slide 10 of 19 and we're still in proof-of-current-state. Investors need *velocity* by now — case-per-door-per-week, not just door count. Distributor logos prove access; they don't prove pull.",
+    fix: "Either merge 9+10 into one \"we have shelf and the trucks to refill it\" slide, or split: 9 = retail w/ velocity numbers, 10 = distributor w/ the *forecasted* growth those distributors unlock.",
+  },
+  {
+    n: 11,
+    title: "Key Accounts — Hit List (Sprouts, Spec's, Cub)",
+    image: "/img/dope/slide-11.jpg",
+    works: "Names that make CPG investors sit up — Sprouts 400 doors, Spec's $15–20M forecast.",
+    off: "Timelines say \"Q3 2024\" / \"Q4 2024\" — past tense in a 2025 deck. If these landed, move them to current penetration. If they slipped, say what's blocking and the new ETA. Stale projections in a current deck reads as \"founder didn't refresh the deck before sending.\"",
+    fix: "Update the timeline. Investors trust founders who update; they discount founders who copy-paste.",
+  },
+  {
+    n: 12,
+    title: "Competitive Pricing & Margins",
+    image: "/img/dope/slide-12.jpg",
+    works: "Visual ladder ($2 to $10) is intuitive. 69% gross margin is strong for beverage.",
+    off: "DOPE is 16oz, Cann is 8oz, Wunder is 8oz — not apples-to-apples. The honest axis is **cost-per-mg-THC** (or cost-per-oz). And the slide doesn't say *why* DOPE wins on price — COGS advantage? Margin sacrifice? SA-sourced ingredients?",
+    fix: "Add cost-per-mg-THC alongside cost-per-can. One line under the slide: \"We win on price because [the actual reason].\" If we're sacrificing margin to win shelf, say so — investors prefer honest strategy to fake superiority.",
+  },
+  {
+    n: 13,
+    title: "Commercial Journey — use of funds",
+    image: "/img/dope/slide-13.jpg",
+    works: "Clean breakdown of $1M. \"Returns\" column is concrete.",
+    off: "$5M → $250M in 4 years is a 50× ask. Numbers aren't tied to milestones-per-tranche. What does the *first* $250K unlock? What's the next round and what milestones open it?",
+    fix: "Split $1M into two tranches with milestones: \"First $500K = Sprouts launch + 1M cans Q4 2025. Second $500K = unlocked when we hit X. Series A ($5M) opens when we hit Y.\" Investors want milestone-gated capital, not lump sums.",
+  },
+  {
+    n: 14,
+    title: "DOPE Venture Studio — THC Free / Dose / Treats",
+    image: "/img/dope/slide-14.jpg",
+    works: "Brand-extension thinking. Edibles is $2.7B — call-out is correct.",
+    off: "This is a *separate pitch* hiding inside a seed deck. Told the investor I was already mentally on round 2 before delivering on round 1. Brutal investor read: \"they can't focus.\" At slide 14 of 19, it felt like founder shiny-objects.",
+    fix: "Cut from the main deck. Move to an appendix titled *\"Where this brand goes after the seed milestone.\"* Or position as the closing slide post-team/post-ask: *\"If we do this well, here's the next chapter.\"* Order matters: deliver the wedge before painting the empire.",
+  },
+  {
+    n: 15,
+    title: "Team DOPE",
+    image: "/img/dope/slide-15.jpg",
+    works: "Five people, including Hardy and Jamie as advisor multipliers.",
+    off: "Each name carries a one-liner (\"Celebrated beverage entrepreneur\"). For *founders*, that's criminally thin. Investors invest in operators. I'm literally the best case study on this slide and the line says \"celebrated\" — that's what investors get on LinkedIn.",
+    fix: "Two lines per founder: *prior outcome + relevant scar*. Mine: \"Built The Duchess (15 countries, AB InBev partnership, exited 2023). Learned the hard way that distribution is the moat — applying that here.\" That's founder-market fit. Sebastian's, Andrew's — same template. Investors don't care that you've been celebrated; they care what you've shipped and what hurt.",
+  },
+  {
+    n: 16,
+    title: "Navigating the Regulatory Landscape",
+    image: "/img/dope/slide-16.jpg",
+    works: "Critical for cannabis, and most decks duck it. Including it shows operator maturity.",
+    off: "Right-side bullets aren't anchored to action. \"70% of Americans believe THC should be Federally legal\" is consumer-sentiment, not regulatory exposure. The actual question — *what happens to $50M-by-2028 if MN reverses or DEA reschedules?* — isn't answered.",
+    fix: "2×2 risk matrix. *Federal legalise / restrict* on one axis, *State expand / contract* on the other. Show DOPE's playbook in each quadrant. *\"We win in 3 of 4 quadrants\"* converts a regulatory-shy LP.",
+  },
+  {
+    n: 17,
+    title: "Corporate Structure & Ask",
+    image: "/img/dope/slide-17.jpg",
+    works: "Hub-and-spoke licensing is sophisticated. Delaware C-Corp holding global IP is the right structure.",
+    off: "$1M / $5M / 20% is now appearing for the third time. Ask should appear *twice*: cover + final.",
+    fix: "Drop dollar figures from earlier slides; let this be the moment. Add cap-table snapshot: \"Of existing 80% — founders X%, prior investors Y%, ESOP Z%.\" Cap-table transparency builds trust.",
+  },
+  {
+    n: 18,
+    title: "Why DOPE Wins",
+    image: "/img/dope/slide-18.jpg",
+    works: "Six-tile summary, decent recap visual.",
+    off: "\"Perfect Timing\" / \"Track Record\" / \"Future Facing Brand\" — these are deck-deck words. Compare with slide 3 (\"1M cans, 700 listings\") which is *defensible*. Recap should compound the specifics, not retreat to platitudes.",
+    fix: "Each tile = one specific number/fact. *Track Record* → \"Previously built The Duchess (50K AB InBev SKU-active accounts) and exited 2023.\" *Scalable Model* → \"69% gross margin, 700 doors live, 400 in Q1 pipeline.\" *Perfect Timing* → \"MN floodgate Aug '23, 19 states followed in 24 months.\"",
+  },
+  {
+    n: 19,
+    title: "Contact / Have a DOPE Day",
+    image: "/img/dope/slide-19.jpg",
+    works: "Brand-y close. Three contact emails.",
+    off: "No CTA, no deadline, no next step. In 2026 every deck closes with a forcing function.",
+    fix: "\"Closing this round by [date]. Lead investor slot at $250K+ with board observer rights. Book a 30-min call: [Calendly link]. Data room access on signed NDA.\" Silence is the founder's enemy after a pitch — make it impossible for them to say nothing.",
+  },
+];
+---
+
+<BaseLayout
+  title="The deck I used to raise in America — DOPE Drinks, slide by slide"
+  description="The deck I used to raise our US round for DOPE Drinks. Cannabis-infused beverages, born in Africa, made in America. Slide by slide, with what worked, what was off, and what I'd cut today."
+  jsonLd={[
+    articleSchema({
+      title: "The deck I used to raise in America — DOPE Drinks, slide by slide",
+      description: "Slide-by-slide breakdown of the DOPE Drinks deck I used to raise in America — what worked, what was off, what I'd cut today.",
+      pubDate,
+      category: "Playbook",
+      url,
+    }),
+    breadcrumbSchema([
+      { name: "Home", url: site.domain },
+      { name: "The DOPE Deck", url },
+    ]),
+  ]}
+>
+  <article class="pt-20 md:pt-24 pb-20">
+    <header class="container-prose">
+      <div class="flex items-center gap-3 mb-8 reveal">
+        <span class="pill pill-red">Annotated Deck</span>
+        <span class="text-[12px] text-[var(--color-muted)] uppercase tracking-[0.1em]">May 2026 · ~15 min read</span>
+      </div>
+      <h1 class="display-l !text-[clamp(2.4rem,5vw,4rem)] reveal">
+        The deck I used to raise in America.
+      </h1>
+      <p class="lead mt-8 reveal">
+        This is the DOPE Drinks deck I used to raise our US round — cannabis-infused beverages, born in Africa, made in America. Slide by slide, with what worked, what was off, and what I'd cut if I were sending it again today.
+      </p>
+    </header>
+
+    <div class="container-prose mt-14 prose reveal">
+      <h2>How I'm reading this</h2>
+      <ul>
+        <li><strong>Problem before product.</strong> Investors absorb the pain first, then accept the cure. Looking back, this deck showed the cure on slide 4 with no patient named.</li>
+        <li><strong>Why-now is non-negotiable.</strong> Cannabev in 2025 has a real regulatory wedge (Farm Bill hemp + MN floodgate). Use it. "The future is beyond alcohol" is wallpaper.</li>
+        <li><strong>Milestone-gated capital, not lump sums.</strong> $1M tied to one outcome is weaker than 2 × $500K tied to two. Investors want to see what their dollar buys.</li>
+        <li><strong>Substitution market beats TAM.</strong> "Who do we beat for the dollar" outperforms "$5B by 2028" every time.</li>
+        <li><strong>Specifics close.</strong> Every recap-tile slide that uses words like "perfect timing" or "track record" is a missed slot.</li>
+      </ul>
+    </div>
+
+    <!-- Soft email gate, top -->
+    <section class="container-prose mt-14 reveal" data-print-hide>
+      <div class="card !p-7 bg-[var(--color-paper-soft)] border border-[var(--color-rule)]">
+        <p class="eyebrow eyebrow-red mb-3">Want the original PDF?</p>
+        <h3 class="font-display text-[1.35rem] font-semibold leading-tight mb-2">
+          Drop your email and I'll send you the unannotated deck.
+        </h3>
+        <p class="text-[14px] text-[var(--color-ink-soft)] mb-5">
+          Same 19 slides as below, in the original Keynote layout — useful as a structural reference for your own raise.
+        </p>
+
+        <form
+          class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]"
+          method="post"
+          action={formAction}
+          novalidate
+        >
+          <input
+            name="name" type="text" autocomplete="name" placeholder="Your name (optional)"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input
+            name="email" required type="email" autocomplete="email" placeholder="you@company.com"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input type="hidden" name="_subject" value="DOPE deck download — new lead" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={`${site.domain}/the-dope-deck/download`} />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Send me the PDF</button>
+        </form>
+
+        <p class="text-[12px] text-[var(--color-muted)] mt-3">
+          One email, no list, no follow-up unless you ask. <a class="underline-slide text-[var(--color-red)]" href="/privacy">Privacy</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Slides -->
+    <div class="container-prose mt-16 space-y-20">
+      {slides.map((s) => (
+        <section class="reveal" id={`slide-${s.n}`}>
+          <figure class="mb-6">
+            <img
+              src={s.image}
+              alt={`DOPE Drinks pitch deck — slide ${s.n}: ${s.title}`}
+              class="w-full rounded-[var(--radius-md)] border border-[var(--color-rule)] shadow-[0_10px_40px_-12px_rgba(14,14,16,0.18)]"
+              loading="lazy"
+            />
+          </figure>
+          <div class="prose">
+            <p class="text-[12px] uppercase tracking-[0.14em] text-[var(--color-muted)] !mb-2 !mt-0">Slide {s.n} of {slides.length}</p>
+            <h3 class="!mt-0 !mb-5 !text-[1.6rem] !leading-tight">{s.title}</h3>
+            <p><strong class="text-[var(--color-ink)]">Worked.</strong> {s.works}</p>
+            <p><strong class="text-[var(--color-red)]">Off (in hindsight).</strong> {s.off}</p>
+            <p><strong class="text-[var(--color-blue)]">Today's fix.</strong> {s.fix}</p>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Patterns -->
+    <div class="container-prose mt-24 prose reveal">
+      <h2>Patterns I keep seeing</h2>
+      <ol>
+        <li><strong>The ask is repeated, the wedge isn't.</strong> $1M/$5M shows three times; the actual "why now" (MN '23) shows once weakly.</li>
+        <li><strong>Two product slides, zero customer slides.</strong> Spec sheet is over-served; ICP is invisible.</li>
+        <li><strong>The empire is shown before the wedge is won.</strong> DOPE Venture Studio at slide 14 — cart before horse.</li>
+        <li><strong>Words like "celebrated" and "perfect" doing work that numbers should be doing.</strong> Tile-recaps are full of these.</li>
+        <li><strong>Stale dates left in a current deck.</strong> Q3/Q4 2024 hit-list in a 2025 raise. Fix on every refresh, not just at major versions.</li>
+      </ol>
+
+      <h2>If I had to cut this deck to 12 slides</h2>
+      <ol>
+        <li>Cover (with raise + contact)</li>
+        <li>Why Now (regulatory wedge)</li>
+        <li>Customer + use-occasion (NEW)</li>
+        <li>Product (one slide, merged)</li>
+        <li>Traction (the 1M-cans-+-700-listings ratio + velocity)</li>
+        <li>Distribution map (retail + distro merged)</li>
+        <li>Pipeline / hit list (refreshed)</li>
+        <li>Pricing / margin (fixed axes)</li>
+        <li>Financials (with assumption strip)</li>
+        <li>Team (rewritten as founder-market fit)</li>
+        <li>Regulatory matrix</li>
+        <li>Ask + use of funds + milestone gates</li>
+      </ol>
+      <p class="!mt-2 text-[var(--color-ink-soft)]"><em>Appendix:</em> Venture Studio, hub-and-spoke structure, full cap table.</p>
+    </div>
+
+    <!-- Soft email gate, bottom -->
+    <section class="container-prose mt-20 reveal" data-print-hide>
+      <div class="card !p-7 bg-[var(--color-paper-soft)] border border-[var(--color-rule)]">
+        <p class="eyebrow eyebrow-red mb-3">One more time</p>
+        <h3 class="font-display text-[1.35rem] font-semibold leading-tight mb-2">
+          Want the original PDF in your inbox?
+        </h3>
+        <p class="text-[14px] text-[var(--color-ink-soft)] mb-5">
+          Drop your email below. I'll send you the unannotated deck and nothing else unless you ask.
+        </p>
+
+        <form
+          class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]"
+          method="post"
+          action={formAction}
+          novalidate
+        >
+          <input
+            name="name" type="text" autocomplete="name" placeholder="Your name (optional)"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input
+            name="email" required type="email" autocomplete="email" placeholder="you@company.com"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input type="hidden" name="_subject" value="DOPE deck download — new lead" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={`${site.domain}/the-dope-deck/download`} />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Send me the PDF</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="container-prose mt-20 pt-10 border-t border-[var(--color-rule)] flex flex-wrap gap-4 justify-between items-center">
+      <a href="/journal" class="btn-link text-[13px]">← All journal posts</a>
+      <a href="/coaching#pitch-deck-sprint" class="btn btn-primary">Same review, on your deck →</a>
+    </footer>
+  </article>
+
+  <BigCTA />
+</BaseLayout>

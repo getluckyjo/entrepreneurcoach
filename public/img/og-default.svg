@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1200" height="14" fill="#F25C2A"/>
+  <text x="80" y="120" font-family="-apple-system, 'Helvetica Neue', sans-serif" font-weight="600" font-size="22" letter-spacing="6" fill="#6F6F73">JOHANNES LE ROUX</text>
+  <text x="80" y="290" font-family="-apple-system, 'Helvetica Neue', sans-serif" font-weight="800" font-size="106" fill="#0E0E10" letter-spacing="-3">Not a coach.</text>
+  <text x="80" y="400" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="106" fill="#F25C2A" letter-spacing="-3">An operator</text>
+  <text x="80" y="495" font-family="-apple-system, 'Helvetica Neue', sans-serif" font-weight="800" font-size="106" fill="#0E0E10" letter-spacing="-3">who coaches.</text>
+  <text x="80" y="560" font-family="-apple-system, 'Helvetica Neue', sans-serif" font-weight="500" font-size="22" fill="#6F6F73">Pitch decks · Fundraising · Scaling out of South Africa</text>
+</svg>

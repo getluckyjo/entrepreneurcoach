@@ -1,0 +1,33 @@
+---
+interface Props {
+  items: readonly string[];
+  variant?: "light" | "dark" | "red";
+}
+const { items, variant = "light" } = Astro.props;
+const tripled = [...items, ...items, ...items];
+const bg = variant === "dark" ? "bg-[var(--color-night)] text-[var(--color-paper)]"
+        : variant === "red"  ? "bg-[var(--color-red)] text-[var(--color-paper)]"
+                             : "bg-[var(--color-paper)] text-[var(--color-ink)]";
+---
+
+<div
+  class:list={["marquee py-7 border-y border-[var(--color-rule)] relative", bg]}
+  role="presentation" aria-hidden="true"
+>
+  <div class="marquee-track">
+    {tripled.map((it, i) => (
+      <span
+        class:list={[
+          "font-display whitespace-nowrap inline-flex items-center",
+          "text-[clamp(2.4rem,5vw,4rem)] font-bold tracking-[-0.025em] leading-none",
+          i % 2 === 1 && "italic font-light",
+        ]}
+      >
+        <span class="px-8">{it}</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+          <circle cx="7" cy="7" r="3.5" fill={variant === "red" ? "var(--color-paper)" : "var(--color-red)"}/>
+        </svg>
+      </span>
+    ))}
+  </div>
+</div>

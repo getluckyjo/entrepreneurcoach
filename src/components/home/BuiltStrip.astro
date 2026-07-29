@@ -1,0 +1,47 @@
+---
+import { ventures } from "~/data/site";
+import VentureImage from "~/components/ui/VentureImage.astro";
+---
+
+<section class="bg-[var(--color-bone)] border-y border-[var(--color-rule)]">
+  <div class="container-page py-20 md:py-28">
+    <div class="grid gap-10 md:grid-cols-12 mb-14">
+      <div class="md:col-span-5 reveal">
+        <p class="eyebrow eyebrow-red mb-5">What I've built</p>
+        <h2 class="display-l">
+          My Ventures.
+        </h2>
+      </div>
+      <p class="md:col-span-6 md:col-start-7 lead reveal">
+        What I offer is lived operator experience — the same hands that built and shipped the brands below. The path hasn't been linear, and most of what I've learned came the hard way.
+      </p>
+    </div>
+
+    <ul class="grid gap-px bg-[var(--color-rule)] md:grid-cols-3 rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-rule)]">
+      {ventures.map((v, i) => (
+        <li class="bg-[var(--color-paper)] p-6 md:p-8 flex flex-col reveal group">
+          <VentureImage
+            name={v.name}
+            image={v.image}
+            tone={v.tone}
+            alt={v.imageAlt}
+            class="mb-6"
+          />
+          <div class="flex items-baseline justify-between mb-4">
+            <span class="num-badge text-[var(--color-red)] !text-[clamp(2rem,3vw,2.6rem)]">{String(i + 1).padStart(2, "0")}</span>
+            <span class="pill pill-ghost">{v.kind}</span>
+          </div>
+          <h3 class="display-l !text-[clamp(1.6rem,2.4vw,2rem)]">{v.name}</h3>
+          <p class="mt-2 eyebrow !text-[var(--color-muted)]">{v.role} · {v.years}</p>
+          <p class="mt-5 text-[14.5px] text-[var(--color-ink-soft)] leading-relaxed flex-1">{v.note}</p>
+          {v.journalLink && (
+            <a
+              href={`/journal/${v.journalLink.slug}`}
+              class="btn-link mt-5 self-start text-[13px]"
+            >{v.journalLink.label} →</a>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

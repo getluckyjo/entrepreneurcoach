@@ -1,0 +1,154 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import Signature from "~/components/ui/Signature.astro";
+import VentureImage from "~/components/ui/VentureImage.astro";
+import { ventures, press, site } from "~/data/site";
+import { personSchema, breadcrumbSchema } from "~/lib/seo";
+---
+
+<BaseLayout
+  title="About Johannes le Roux — Operator Behind The Duchess, DOPE Drinks, Get Lucky Golf"
+  rawTitle
+  description="Founder of six brands across SA, Europe, and the US — The Duchess, DOPE Drinks, Get Lucky Golf. Cambridge Judge alumnus coaching founders out of Cape Town."
+  jsonLd={[
+    personSchema,
+    breadcrumbSchema([
+      { name: "Home",  url: site.domain },
+      { name: "About", url: `${site.domain}/about` },
+    ]),
+  ]}
+>
+  <!-- Hero -->
+  <section class="container-page pt-20 md:pt-24 pb-16 md:pb-24 grid gap-14 md:grid-cols-12">
+    <div class="md:col-span-7 reveal">
+      <p class="eyebrow eyebrow-red mb-6">About</p>
+      <h1 class="display-mega">
+        <span class="block">Operator</span>
+        <span class="block display-italic">first.</span>
+        <span class="block display-red">Coach</span>
+        <span class="block">second.</span>
+      </h1>
+    </div>
+
+    <aside class="md:col-span-5 relative reveal">
+      <img
+        src="/img/johannes-portrait.jpg"
+        alt="Johannes le Roux, entrepreneur coach and founder, photographed in Cape Town"
+        width="900" height="1200"
+        class="w-full aspect-[3/4] object-cover rounded-[var(--radius-lg)] border border-[var(--color-ink)]"
+        loading="eager" fetchpriority="high"
+      />
+      <!-- Caveat handwritten signature -->
+      <div class="mt-6 flex items-center gap-4">
+        <Signature size={48} rotate={-4} />
+        <span class="text-[12px] text-[var(--color-muted)] uppercase tracking-[0.18em]">— signed</span>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Bio -->
+  <section class="container-prose pb-24 reveal">
+    <div class="prose">
+      <p>
+        Over the past decade, I've been involved in building multiple beverage brands — mostly by learning the hard way. The path hasn't been linear. Behind the highlights were missteps, uncertainty, and decisions that shaped me as much as the businesses themselves.
+      </p>
+      <p>
+        I'm the founder of <strong>The Duchess</strong>, one of the world's first alcohol-free gin & tonics. What began as a small experiment grew into a global brand, selling over 20 million units across 10+ countries and partnering with major industry players. That journey taught me powerful lessons about timing, scaling, capital pressure, and what it really means to build a category from scratch.
+      </p>
+      <p>
+        I later co-created <strong>Cape Spritz</strong>, a low-alcohol sparkling rosé rooted in mindful drinking. It pushed me to rethink positioning, pace, and how difficult it is to create traction in a crowded market.
+      </p>
+      <p>
+        Separately, I founded <strong>DOPE Drinks</strong>, Africa's first cannabis beverage brand. From day one, the work involved navigating regulatory complexity, shaping a new category, and aligning innovation with evolving investor and market realities. I led the brand through early product development, positioning, and its initial entry into the U.S. market, and today serve as a board member as it scales internationally.
+      </p>
+      <p>
+        Earlier in my journey, I founded <strong>Brannas Draught</strong>, the original draught brandy & cola — my first exit, and a foundational education in distribution and deal-making.
+      </p>
+      <p>
+        Most recently, I'm co-founding <strong>Get Lucky Golf</strong>, a golf-tech business scaling globally from a South African base. A reminder that category creation looks roughly the same whether the product is alcohol-free gin or a hole-in-one challenge.
+      </p>
+      <p>
+        I've been fortunate to help sell over 20 million drinks globally, open thousands of retail accounts, and raise capital from partners who believed in the vision — sometimes before the proof was there. My strength isn't certainty; it's selling ideas, building momentum, and continuing to move through ambiguity.
+      </p>
+      <p>
+        I'm still learning, and still ambitious. Alongside my own ventures, I now work as an Entrepreneur Coach, supporting founders as they navigate the same complexity, doubt, and possibility that continue to shape my own journey.
+      </p>
+      <p>
+        I did <strong>Executive Education at Cambridge Judge Business School</strong> — Funding from Seed to Exit. Based at <strong>Ideas Cartel, Claremont</strong>, Cape Town. I work with founders here and over Zoom in the US, UK, Europe, and Australia.
+      </p>
+    </div>
+  </section>
+
+  <!-- Currently strip -->
+  <section class="bg-[var(--color-night)] text-[var(--color-paper)] border-y border-[var(--color-rule)]">
+    <div class="container-page py-16 md:py-20">
+      <p class="eyebrow !text-[var(--color-paper)]/60 mb-6 reveal">Currently</p>
+      <ul class="grid gap-10 md:grid-cols-3">
+        <li class="reveal">
+          <p class="display-l !text-[clamp(1.4rem,2vw,1.8rem)]" style="color: var(--color-paper);">Building <span class="display-italic" style="color: var(--color-red);">Get Lucky Golf</span></p>
+          <p class="mt-3 text-[14.5px] text-[var(--color-paper)]/70 leading-relaxed">A golf tech business scaling globally from a South African base.</p>
+        </li>
+        <li class="reveal">
+          <p class="display-l !text-[clamp(1.4rem,2vw,1.8rem)]" style="color: var(--color-paper);">Speaking on <span class="display-italic" style="color: var(--color-red);">pitch decks & failure</span></p>
+          <p class="mt-3 text-[14.5px] text-[var(--color-paper)]/70 leading-relaxed">Conferences, accelerators, corporate offsites — South Africa and abroad. What I've actually built, including what broke.</p>
+        </li>
+        <li class="reveal">
+          <p class="display-l !text-[clamp(1.4rem,2vw,1.8rem)]" style="color: var(--color-paper);">Coaching <span class="display-italic" style="color: var(--color-red);">founders</span></p>
+          <p class="mt-3 text-[14.5px] text-[var(--color-paper)]/70 leading-relaxed">Out of Ideas Cartel, Claremont — and over Zoom for the rest of the world.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Ventures -->
+  <section class="bg-[var(--color-bone)] border-y border-[var(--color-rule)]">
+    <div class="container-page py-20 md:py-24">
+      <div class="grid gap-10 md:grid-cols-12 mb-14">
+        <div class="md:col-span-6 reveal">
+          <p class="eyebrow eyebrow-red mb-5">Ventures</p>
+          <h2 class="display-l">Built from scratch.</h2>
+        </div>
+      </div>
+      <ul class="grid gap-px bg-[var(--color-rule)] md:grid-cols-3 rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-rule)]">
+        {ventures.map((v, i) => (
+          <li class="bg-[var(--color-paper)] p-6 md:p-8 reveal flex flex-col">
+            <VentureImage
+              name={v.name}
+              image={v.image}
+              tone={v.tone}
+              alt={v.imageAlt}
+              class="mb-6"
+            />
+            <div class="flex items-baseline justify-between mb-4">
+              <span class="num-badge text-[var(--color-red)] !text-[clamp(2rem,3vw,2.6rem)]">{String(i + 1).padStart(2, "0")}</span>
+              <span class="pill pill-ghost">{v.kind}</span>
+            </div>
+            <h3 class="display-l !text-[clamp(1.5rem,2.4vw,2rem)]">{v.name}</h3>
+            <p class="mt-2 eyebrow !text-[var(--color-muted)]">{v.years}</p>
+            <p class="mt-5 text-[14.5px] text-[var(--color-ink-soft)] leading-relaxed flex-1">{v.note}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Press -->
+  <section class="container-page py-24 md:py-32">
+    <p class="eyebrow eyebrow-red mb-5 reveal">Featured in</p>
+    <h2 class="display-l reveal">On the record.</h2>
+    <ul class="mt-12 divide-y divide-[var(--color-rule)] border-y border-[var(--color-rule)]">
+      {press.map((p) => (
+        <li class="py-7 grid gap-3 md:grid-cols-12 items-baseline reveal">
+          <p class="md:col-span-2 num-badge !text-[var(--color-ink)] !text-[1.4rem]">{p.year}</p>
+          <p class="md:col-span-3 font-display text-[1.05rem] font-semibold">{p.outlet}</p>
+          <p class="md:col-span-7">
+            <a href={p.url} class="underline-slide text-[16px]" target="_blank" rel="noopener">{p.title} →</a>
+          </p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <BigCTA />
+</BaseLayout>

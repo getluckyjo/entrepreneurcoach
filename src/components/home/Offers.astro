@@ -1,0 +1,70 @@
+---
+import { offers } from "~/data/site";
+import SectionHeader from "~/components/ui/SectionHeader.astro";
+import OfferIllustration from "~/components/ui/OfferIllustration.astro";
+---
+
+<section id="coaching" class="container-page pt-24 md:pt-32 pb-20">
+  <SectionHeader
+    eyebrow="Coaching"
+    title="Ways to"
+    italic="work together."
+    lede="I keep engagements simple — three to five sessions with a clear deliverable, so you know what you're getting and what you walk out with."
+  />
+
+  <ul class="mt-16 grid gap-6 md:grid-cols-2">
+    {offers.map((o, i) => (
+      <li
+        class:list={[
+          "card reveal flex flex-col relative overflow-hidden group",
+          o.featured && "!border-[var(--color-ink)]",
+          o.wide && "md:col-span-2 !bg-[var(--color-bone)]",
+        ]}
+        id={o.slug}
+      >
+        <!-- Number + cadence row -->
+        <div class="flex items-start justify-between mb-2">
+          <span class="num-badge !text-[var(--color-ink)] !text-[clamp(2rem,3vw,2.6rem)]">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <span class="pill pill-ghost">{o.cadence}</span>
+        </div>
+
+        <!-- Watermark illustration in corner -->
+        <OfferIllustration
+          slug={o.slug}
+          class="absolute right-4 bottom-32 w-32 opacity-[0.08] text-[var(--color-ink)] pointer-events-none transition-opacity group-hover:opacity-15"
+        />
+
+        <h3 class="display-l !text-[clamp(2rem,3.2vw,2.8rem)] mt-2">
+          {o.name}
+        </h3>
+        <p class="mt-3 font-display text-[1.5rem] font-bold tabular-nums text-[var(--color-red)]">
+          {o.price}
+        </p>
+
+        <p class="mt-5 text-[15px] text-[var(--color-ink-soft)] leading-relaxed relative">{o.summary}</p>
+
+        <ul class="mt-6 space-y-2.5 text-[14px] relative">
+          {o.deliverables.map((d) => (
+            <li class="flex gap-3">
+              <svg width="14" height="14" viewBox="0 0 14 14" class="mt-1.5 flex-shrink-0 text-[var(--color-red)]" aria-hidden="true">
+                <path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>{d}</span>
+            </li>
+          ))}
+        </ul>
+
+        <p class="mt-7 text-[13px] text-[var(--color-muted)] italic relative">
+          For: {o.bestFor}
+        </p>
+
+        <div class="mt-7 pt-7 border-t border-[var(--color-rule)] flex items-center justify-between relative">
+          <a href={`/coaching#${o.slug}`} class="btn-link text-[13px]">Read the detail →</a>
+          <a href={`/contact?offer=${o.slug}`} class="btn btn-ink">{o.cta}</a>
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>

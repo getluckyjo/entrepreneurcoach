@@ -1,0 +1,61 @@
+---
+import { ventures } from "~/data/site";
+const ventureRow = ventures.slice(0, 3);
+---
+
+<section class="relative overflow-hidden border-b border-[var(--color-rule)]">
+  <div class="container-page pt-16 md:pt-24 pb-20 md:pb-28 grid gap-12 md:grid-cols-12">
+    <!-- Stacked declarative headline (Flight Story DNA) -->
+    <div class="md:col-span-7 lg:col-span-7 relative z-10">
+      <div class="hero-rule reveal" aria-hidden="true"></div>
+      <p class="eyebrow mt-6 reveal">Johannes le Roux</p>
+
+      <h1 class="display-xl mt-8 reveal">
+        <span class="block">Not a coach.</span>
+        <span class="block display-italic display-red">An operator</span>
+        <span class="block">who coaches.</span>
+      </h1>
+
+      <h2 class="sr-only">Entrepreneur Coach in Cape Town — Pitch Decks, Fundraising &amp; Scaling</h2>
+
+      <p class="hero-topics mt-8 reveal">
+        Pitch decks · Fundraising · Scaling out of South Africa
+      </p>
+
+      <p class="lead mt-8 max-w-xl reveal">
+        I've been involved in building six brands over the past decade — mostly by learning the hard way. Now coaching founders walking through the same.
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-3 reveal">
+        <a href="/contact" class="btn btn-primary text-[15px] !py-4 !px-6">
+          Book a free 30-min clinic
+          <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <a href="/coaching" class="btn btn-ghost text-[15px] !py-4 !px-6">See packages</a>
+      </div>
+
+      <ul class="mt-12 flex flex-wrap items-center gap-x-7 gap-y-3 text-[13px] reveal">
+        {ventureRow.map((v) => (
+          <li class="inline-flex items-center gap-2 font-display font-semibold">
+            <span class="inline-block w-2 h-2 rounded-full bg-[var(--color-red)]"></span>
+            <span>{v.name}</span>
+            <span class="text-[var(--color-muted)] font-normal">· {v.years.split(" — ")[0]}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Portrait -->
+    <aside class="md:col-span-5 lg:col-span-5 relative reveal">
+      <img
+        src="/img/johannes-portrait.jpg"
+        alt="Johannes le Roux, entrepreneur coach, Cape Town"
+        width="900" height="1200"
+        class="w-full aspect-[3/4] object-cover rounded-[var(--radius-lg)] border border-[var(--color-ink)]"
+        loading="eager" fetchpriority="high"
+      />
+    </aside>
+  </div>
+</section>

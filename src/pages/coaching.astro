@@ -1,0 +1,117 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import OfferIllustration from "~/components/ui/OfferIllustration.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import { offers, faqs, site } from "~/data/site";
+import { serviceSchemas, faqSchema, breadcrumbSchema } from "~/lib/seo";
+---
+
+<BaseLayout
+  title="Coaching Packages — Pitch Decks, Fundraising, Founder OS | Johannes le Roux"
+  rawTitle
+  description="Productised coaching for founders. Pitch Deck Sprint, 5-Year Cashflow, Founder OS, International Launch. Transparent pricing from R2,500. Cape Town & remote."
+  jsonLd={[
+    ...serviceSchemas, faqSchema,
+    breadcrumbSchema([
+      { name: "Home",     url: site.domain },
+      { name: "Coaching", url: `${site.domain}/coaching` },
+    ]),
+  ]}
+>
+  <!-- Hero -->
+  <section class="container-page pt-20 md:pt-24 pb-16">
+    <p class="eyebrow eyebrow-red mb-6 reveal">Coaching</p>
+    <h1 class="display-mega max-w-[16ch] reveal">
+      Pick the package.<br/>
+      <span class="display-italic display-red">Get the deliverable.</span>
+    </h1>
+    <p class="lead mt-10 reveal">
+      I coach in productised engagements — three to five sessions with a clear deliverable. You walk in knowing what you'll walk out with: a finished pitch deck, a 90-day operating cadence, a market entry plan. No open-ended retainers.
+    </p>
+  </section>
+
+  <!-- Offer cards -->
+  <section class="container-page pb-20">
+    <ul class="grid gap-6 md:grid-cols-2">
+      {offers.map((o, i) => (
+        <li
+          id={o.slug}
+          class:list={[
+            "card reveal flex flex-col relative overflow-hidden group",
+            o.featured && "!border-[var(--color-ink)]",
+            o.wide && "md:col-span-2 !bg-[var(--color-bone)]",
+          ]}
+        >
+          <div class="flex items-start justify-between mb-2">
+            <span class="num-badge !text-[var(--color-ink)] !text-[clamp(2rem,3vw,2.6rem)]">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span class="pill pill-ghost">{o.cadence}</span>
+          </div>
+
+          <OfferIllustration
+            slug={o.slug}
+            class="absolute right-4 bottom-32 w-32 opacity-[0.08] text-[var(--color-ink)] pointer-events-none transition-opacity group-hover:opacity-15"
+          />
+
+          <h2 class="display-l !text-[clamp(2rem,3.2vw,2.8rem)] mt-2">{o.name}</h2>
+          <p class="mt-3 font-display text-[1.5rem] font-bold tabular-nums text-[var(--color-red)]">{o.price}</p>
+          <p class="mt-5 text-[15px] text-[var(--color-ink-soft)] leading-relaxed relative">{o.summary}</p>
+
+          <ul class="mt-6 space-y-2.5 text-[14px] relative">
+            {o.deliverables.map((d) => (
+              <li class="flex gap-3">
+                <svg width="14" height="14" viewBox="0 0 14 14" class="mt-1.5 flex-shrink-0 text-[var(--color-red)]" aria-hidden="true">
+                  <path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>{d}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p class="mt-7 text-[13px] text-[var(--color-muted)] italic relative">For: {o.bestFor}</p>
+
+          {o.journalLink && (
+            <p class="mt-4 text-[13px] relative">
+              <a href={`/journal/${o.journalLink.slug}`} class="btn-link">{o.journalLink.label} →</a>
+            </p>
+          )}
+
+          <div class="mt-7 pt-7 border-t border-[var(--color-rule)] relative">
+            <a href={`/contact?offer=${o.slug}`} class="btn btn-ink w-full">{o.cta}</a>
+          </div>
+
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-[var(--color-bone)] border-y border-[var(--color-rule)]">
+    <div class="container-page py-20 md:py-28 grid gap-14 md:grid-cols-12">
+      <div class="md:col-span-4">
+        <p class="eyebrow eyebrow-red mb-5 reveal">FAQ</p>
+        <h2 class="display-l reveal">Common<br/><span class="display-italic">questions.</span></h2>
+        <p class="mt-6 text-[15px] text-[var(--color-ink-soft)] reveal">
+          Anything not answered here, mail{" "}
+          <a class="underline-slide text-[var(--color-red)] font-semibold" href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
+      </div>
+      <ul class="md:col-span-8 divide-y divide-[var(--color-rule-strong)] border-y border-[var(--color-rule-strong)]">
+        {faqs.map((f) => (
+          <li class="py-7 reveal">
+            <details class="group">
+              <summary class="flex items-start justify-between gap-6 cursor-pointer list-none">
+                <h3 class="font-display text-[1.15rem] font-semibold leading-snug">{f.q}</h3>
+                <span aria-hidden="true" class="mt-1 text-[var(--color-red)] transition-transform group-open:rotate-45 text-[1.6rem] leading-none flex-shrink-0">+</span>
+              </summary>
+              <p class="mt-4 text-[15px] leading-relaxed text-[var(--color-ink-soft)]">{f.a}</p>
+            </details>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <BigCTA />
+</BaseLayout>

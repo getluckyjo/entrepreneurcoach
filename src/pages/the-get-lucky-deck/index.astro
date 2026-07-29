@@ -1,0 +1,317 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import { articleSchema, breadcrumbSchema } from "~/lib/seo";
+import { site } from "~/data/site";
+
+const url = `${site.domain}/the-get-lucky-deck`;
+const formAction = `https://formsubmit.co/${site.email}`;
+const pubDate = new Date("2026-05-20");
+
+type Slide = {
+  n: number;
+  title: string;
+  image: string;
+  works: string;
+  off: string;
+  fix: string;
+};
+
+const slides: Slide[] = [
+  {
+    n: 1,
+    title: "Cover — Get Lucky Hole-In 1 Challenge",
+    image: "/img/get-lucky/slide-01.jpg",
+    works: "Strong logo, sunrise-on-fairway photography, one-line tagline. Already better than the DOPE cover.",
+    off: "No raise, no round, no contact, no date. Same forwarding problem. \"Future of golf gamification\" is a category some investors will read as a stretch — anchor it with a number.",
+    fix: "Bottom strip: \"Series Seed · Raising R4M at R36M pre-money · Cape Town, May 2025 · johannes@getluckygolfclub.com\". The reader who finds this in their forwarded inbox at 11pm has their answer.",
+  },
+  {
+    n: 2,
+    title: "Rewarding hole-in-ones globally",
+    image: "/img/get-lucky/slide-02.jpg",
+    works: "Single sentence, big air. Clean.",
+    off: "Empty. Beautiful but the slot is wasted. Investors flip past poster slides.",
+    fix: "Either kill the slide, or earn the white space with one piece of evidence. Example: \"R3.4M in entry revenue across 20 courses since launch.\" One number under the headline turns a poster into proof.",
+  },
+  {
+    n: 3,
+    title: "The Dream / The Solution / The Tech",
+    image: "/img/get-lucky/slide-03.jpg",
+    works: "Three-tier structure (problem → solution → tech) is the right narrative spine. 1-in-12,500 odds is a great trojan-horse stat.",
+    off: "Six concepts on one slide. The 5-step user flow (scan/pay/swing/verify/win) deserves its own slide. The tech stack (cameras + AI tracer + WhatsApp API) deserves its own.",
+    fix: "Split into two. Slide 3a: *The Dream + The Pain* — every golfer dreams of it, 1-in-12,500 odds, current verification is a cocktail napkin + insurance dispute. Slide 3b: *The Solution + The Tech* — 5-step UX, 3-stack tech.",
+  },
+  {
+    n: 4,
+    title: "Golf is Big Business — and untapped for digital gamification",
+    image: "/img/get-lucky/slide-04.jpg",
+    works: "Clear market frame. Local→global story.",
+    off: "TAM-soup. \"$20B + 60M people\" is the *whole* golf industry, not GLG's addressable. Investors auto-discount this slide because everyone does it. \"First-mover advantage\" — by what evidence? Has anyone tried this and failed? (Hole19, GolfNow Challenge, TopGolf Toptracer at-course?)",
+    fix: "Replace TAM with substitution math: \"500M par-3 rounds played globally per year. If 5% take a R200 swing, that's R5B in entry revenue. We need 0.4% of that to hit our 2028 plan.\" Stress-testable. And drop \"first-mover\" or back it with one sentence on who's tried and why GLG's stack is different.",
+  },
+  {
+    n: 5,
+    title: "How It Works — 4-step user flow",
+    image: "/img/get-lucky/slide-05.jpg",
+    works: "4-step icon flow.",
+    off: "Adjacent to slide 3's 5-step flow. Same content, slightly different framing. Reader gets déjà vu.",
+    fix: "Pick one. If 5 is the user journey, *show* it — screenshots of the WhatsApp message, the QR scan, the win-video that gets shared. Show, don't list. If 3 is the conceptual flow, cut the redundant flow on slide 5.",
+  },
+  {
+    n: 6,
+    title: "20+ Partner Courses",
+    image: "/img/get-lucky/slide-06.jpg",
+    works: "Real logos. 15,000 members. Strong proof of supply-side.",
+    off: "Screenshot waiting to happen — no actual member behaviour data. \"15K members\" — what % activated? What's the conversion from member-to-attempt? That's the metric that proves the model.",
+    fix: "Add three metrics under the logos: \"15K members → X% activated → Y attempts per active member per year → R{} ARPM.\" That's the cohort math investors want to see.",
+  },
+  {
+    n: 7,
+    title: "High-Margin, Scalable Business Model",
+    image: "/img/get-lucky/slide-07.jpg",
+    works: "78%/10%/12% split is clear. R200 entry is intuitive.",
+    off: "78% gross margin is incredible — and unbelievable without unit substantiation. What's the *insurance underwriting cost* per round? If our AI raises true verification rate, the insurance premium goes UP — that's how event-frequency-priced insurance works.",
+    fix: "One sentence anchors it: \"Insurance cost is locked at 12% via 3-year underwriting agreement with Indwe/Santam (R9M).\" Removes the ambiguity. Add expected attempts/member/year so investors can sanity-check the volume against the prize-pool math.",
+  },
+  {
+    n: 8,
+    title: "Leading Partnerships Secured — Indwe / Santam",
+    image: "/img/get-lucky/slide-08.jpg",
+    works: "Indwe deal is real money (R9M / 3 years) and a meaningful trust signal.",
+    off: "The Indwe deal is the single most important business artefact in this deck and it's tile #1 of 4. Should be its own slide.",
+    fix: "Slide 8a: Indwe deal + what it unlocks (R9M cash + insurance backstop + Santam distribution + 3-yr exclusive sponsorship). Slide 8b: Course expansion + Marketing firepower + Tech roadmap. Don't bury the cheque.",
+  },
+  {
+    n: 9,
+    title: "Financial Growth Forecast",
+    image: "/img/get-lucky/slide-09.jpg",
+    works: "3-year revenue + EBITDA margin per year. R10M → R30M is a clean 3×.",
+    off: "**Year 1 isn't shown.** Where are we *today* — TTM revenue, TTM EBITDA? \"Path to profitability by 2026\" — what's the burn between now and then? Without 2025 actuals, 2026–2028 are forecasts on top of forecasts.",
+    fix: "Add a 2025 actuals (or YTD-annualised) column. \"TTM revenue R3M, growing 50% q-o-q\" would be the kill-shot. If the number is small, say so — small + growing fast > medium + flat.",
+  },
+  {
+    n: 10,
+    title: "Get Lucky Founders",
+    image: "/img/get-lucky/slide-10.jpg",
+    works: "Three founders, real bios, named ventures (Duchess, DOPE, AKING band, Suncamino, Plato Coffee). This is the strongest team page across the three decks. Honest \"fractional\" label for Inus.",
+    off: "\"Fractional Creative Director\" is a flag, not a brag. For a B2C product where brand IS the moat, a non-vested creative co-founder telegraphs vulnerability. And every founder bio is a CV — not a *founder-market fit* statement.",
+    fix: "Either lock Inus into a vested co-founder package and update the title, or add a 4th tile: \"Hiring full-time Head of Product to own WhatsApp + AI stack — Q3 2025.\" Turn the gap into a roadmap. And rewrite each bio around the GLG-specific skill: \"Built two beverage brands across 15+ countries — applying the same trade-distribution playbook to golf-course rollout.\" Pattern-match each bio to the company being pitched.",
+  },
+  {
+    n: 11,
+    title: "Get Lucky Sports Innovation — Sport Fishing",
+    image: "/img/get-lucky/slide-11.jpg",
+    works: "Plausible expansion logic — same WhatsApp + AI stack, adjacent verticals.",
+    off: "First of two slides on a vertical that doesn't exist yet. DOPE deck does the same with Venture Studio. Build belief in the wedge before painting the empire.",
+    fix: "Compress slides 11 + 12 into one called *\"Same engine, next vertical.\"* One row of icons: Golf (proven) → Fishing (Q3 2026) → Padel (2027) → ... One sentence per. Then onwards.",
+  },
+  {
+    n: 12,
+    title: "Sports Innovation continued — opportunity + why it matters",
+    image: "/img/get-lucky/slide-12.jpg",
+    works: "\"200M recreational anglers worldwide\" is a real number.",
+    off: "See slide 11. We're using two slides to say \"we can extend.\" One is enough.",
+    fix: "Cut and merge into 11.",
+  },
+  {
+    n: 13,
+    title: "Invest in Get Lucky — deal terms",
+    image: "/img/get-lucky/slide-13.jpg",
+    works: "Deal terms, valuation triangulation (DCF R57–78M vs ask R36M), 2.4× return / ~30% IRR / R500M exit by 2032.",
+    off: "\"Independent DCF values Get Lucky at R57–78M today\" — by whom? Unnamed source = credibility-destroyer. The IRR math is fine (2.4× in 3 yrs ≈ 33% IRR) but the *exit path* (R500M by 2032) is on the same slide, computed from a totally different base. Compress and source.",
+    fix: "Name the DCF analyst (or remove the line). Tiny timeline visual: \"Today (R36M) → 2028 milestone (R96.8M) → 2032 exit (R500M).\" Specify the exit assumption: trade sale to whom (Topgolf? Indwe? Santam? An OEM?) at what revenue multiple? Investors test these.",
+  },
+  {
+    n: 14,
+    title: "Why Get Lucky Wins",
+    image: "/img/get-lucky/slide-14.jpg",
+    works: "Six-tile recap, clean.",
+    off: "Same critique as DOPE slide 18. \"Proven Engagement Model\", \"Scalable Business Model\" — generic. Where's the *specific* thing only GLG has?",
+    fix: "Each tile = one specific defensible asset. *Proven Engagement* → \"57K attempts at 20 courses in 2024.\" *WhatsApp-native* → \"0% app-install friction; SA WhatsApp penetration 95%.\" *Trusted Brand* → \"Indwe 3-yr deal locked.\" *Cross-sport* → \"Same API stack ready to ship to fishing Q3 '26.\" Replace verbs with nouns.",
+  },
+  {
+    n: 15,
+    title: "Contact",
+    image: "/img/get-lucky/slide-15.jpg",
+    works: "Clean. Logo + email + phone.",
+    off: "Same critique as DOPE — no CTA, no deadline, no \"what happens next.\"",
+    fix: "\"Closing R4M by [date]. Lead investor slot still open at R1M+ with board observer rights. Book a call: [Calendly link]. Data room on signed NDA.\" Forcing function.",
+  },
+];
+---
+
+<BaseLayout
+  title="The deck I just raised on — Get Lucky Golf, slide by slide"
+  description="The deck I just used to close our R4M seed for Get Lucky Golf Club at a R36M pre-money. Golf-tech, AI-verified hole-in-one challenges. Slide by slide, with what worked, what was off, and what I'd cut today."
+  jsonLd={[
+    articleSchema({
+      title: "The deck I just raised on — Get Lucky Golf, slide by slide",
+      description: "Slide-by-slide breakdown of the Get Lucky Golf seed raise deck — what worked, what was off, what I'd cut today.",
+      pubDate,
+      category: "Playbook",
+      url,
+    }),
+    breadcrumbSchema([
+      { name: "Home", url: site.domain },
+      { name: "The Get Lucky Deck", url },
+    ]),
+  ]}
+>
+  <article class="pt-20 md:pt-24 pb-20">
+    <header class="container-prose">
+      <div class="flex items-center gap-3 mb-8 reveal">
+        <span class="pill pill-red">Annotated Deck</span>
+        <span class="text-[12px] text-[var(--color-muted)] uppercase tracking-[0.1em]">May 2026 · ~12 min read</span>
+      </div>
+      <h1 class="display-l !text-[clamp(2.4rem,5vw,4rem)] reveal">
+        The deck I just raised on — Get Lucky Golf.
+      </h1>
+      <p class="lead mt-8 reveal">
+        This is the Get Lucky Golf deck I just used to close our R4M seed at a R36M pre-money — golf-tech, AI-verified hole-in-one challenges. Slide by slide, with what worked, what was off, and what I'd cut if I were sending it again today.
+      </p>
+    </header>
+
+    <div class="container-prose mt-14 prose reveal">
+      <h2>How I'm reading this</h2>
+      <ul>
+        <li><strong>One idea per slide.</strong> Vercel/Linear-style. Looking back, this deck stuffed 3 ideas onto slide 3.</li>
+        <li><strong>Substitution market beats TAM.</strong> "$20B golf industry" is wallpaper. "500M par-3 rounds × R200 entry × 0.4% capture" is investable.</li>
+        <li><strong>Distribution as the moat.</strong> Indwe is the most important business artefact in this deck and it's tile #1 of 4 on slide 8. That deal deserves its own slide.</li>
+        <li><strong>Velocity over coverage.</strong> 20 courses + 15K members is good. Attempts-per-active-member-per-year is what proves the model.</li>
+        <li><strong>Founder-market fit, not founder bios.</strong> Each founder bio should answer *"why this team for this specific war"* — not list past jobs.</li>
+      </ul>
+    </div>
+
+    <!-- Soft email gate, top -->
+    <section class="container-prose mt-14 reveal" data-print-hide>
+      <div class="card !p-7 bg-[var(--color-paper-soft)] border border-[var(--color-rule)]">
+        <p class="eyebrow eyebrow-red mb-3">Want the original PDF?</p>
+        <h3 class="font-display text-[1.35rem] font-semibold leading-tight mb-2">
+          Drop your email and I'll send you the unannotated deck.
+        </h3>
+        <p class="text-[14px] text-[var(--color-ink-soft)] mb-5">
+          Same 15 slides as below, in the original layout — useful as a structural reference for your own raise.
+        </p>
+
+        <form
+          class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]"
+          method="post"
+          action={formAction}
+          novalidate
+        >
+          <input
+            name="name" type="text" autocomplete="name" placeholder="Your name (optional)"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input
+            name="email" required type="email" autocomplete="email" placeholder="you@company.com"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input type="hidden" name="_subject" value="Get Lucky deck download — new lead" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={`${site.domain}/the-get-lucky-deck/download`} />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Send me the PDF</button>
+        </form>
+
+        <p class="text-[12px] text-[var(--color-muted)] mt-3">
+          One email, no list, no follow-up unless you ask. <a class="underline-slide text-[var(--color-red)]" href="/privacy">Privacy</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Slides -->
+    <div class="container-prose mt-16 space-y-20">
+      {slides.map((s) => (
+        <section class="reveal" id={`slide-${s.n}`}>
+          <figure class="mb-6">
+            <img
+              src={s.image}
+              alt={`Get Lucky Golf pitch deck — slide ${s.n}: ${s.title}`}
+              class="w-full rounded-[var(--radius-md)] border border-[var(--color-rule)] shadow-[0_10px_40px_-12px_rgba(14,14,16,0.18)]"
+              loading="lazy"
+            />
+          </figure>
+          <div class="prose">
+            <p class="text-[12px] uppercase tracking-[0.14em] text-[var(--color-muted)] !mb-2 !mt-0">Slide {s.n} of {slides.length}</p>
+            <h3 class="!mt-0 !mb-5 !text-[1.6rem] !leading-tight">{s.title}</h3>
+            <p><strong class="text-[var(--color-ink)]">Worked.</strong> {s.works}</p>
+            <p><strong class="text-[var(--color-red)]">Off (in hindsight).</strong> {s.off}</p>
+            <p><strong class="text-[var(--color-blue)]">Today's fix.</strong> {s.fix}</p>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Patterns -->
+    <div class="container-prose mt-24 prose reveal">
+      <h2>Patterns I keep seeing</h2>
+      <ol>
+        <li><strong>Two slides doing one slide's job.</strong> Slides 3 + 5 (flow), 11 + 12 (expansion). Compress.</li>
+        <li><strong>The Indwe deal is undersold.</strong> R9M of locked sponsor cash + insurance backstop = the single most defensible thing in this deck. Currently a quarter of slide 8.</li>
+        <li><strong>No present-tense traction.</strong> 2026–2028 forecasts without 2025 actuals = forecasts on forecasts.</li>
+        <li><strong>Founder bios are CVs, not FMF statements.</strong> Same disease as Duchess and DOPE. Rewrite around the *GLG-specific* skill, not LinkedIn copy.</li>
+        <li><strong>The "Why we win" recap is the weakest slide of every deck.</strong> It should be the strongest — it's the slide that closes them. Replace platitudes with the specific numbers we already proved earlier.</li>
+      </ol>
+
+      <h2>If I had to cut this deck to 10 slides</h2>
+      <ol>
+        <li>Cover (raise + contact + date)</li>
+        <li>Why now (par-3 substitution math + AI verification timing)</li>
+        <li>Problem + Pain (1-in-12,500, the cocktail-napkin verification problem)</li>
+        <li>Solution + Tech (UX flow + AI/WhatsApp/cameras)</li>
+        <li>Traction (15K members + activation + ARPM + R3.4M revenue)</li>
+        <li>Indwe + partnerships (whole slide)</li>
+        <li>Financials (with 2025 actuals column + assumption strip)</li>
+        <li>Team (rewritten as founder-market fit; flag the Head-of-Product hire)</li>
+        <li>Same engine, next vertical (fishing + roadmap, one slide)</li>
+        <li>Ask (R4M for 10%, milestone-gated, exit assumption named) + Contact + CTA</li>
+      </ol>
+      <p class="!mt-2 text-[var(--color-ink-soft)]"><em>Appendix:</em> Full cap table, DCF detail, course pipeline, regulatory framework.</p>
+    </div>
+
+    <!-- Soft email gate, bottom -->
+    <section class="container-prose mt-20 reveal" data-print-hide>
+      <div class="card !p-7 bg-[var(--color-paper-soft)] border border-[var(--color-rule)]">
+        <p class="eyebrow eyebrow-red mb-3">One more time</p>
+        <h3 class="font-display text-[1.35rem] font-semibold leading-tight mb-2">
+          Want the original PDF in your inbox?
+        </h3>
+        <p class="text-[14px] text-[var(--color-ink-soft)] mb-5">
+          Drop your email below. I'll send you the unannotated deck and nothing else unless you ask.
+        </p>
+
+        <form
+          class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]"
+          method="post"
+          action={formAction}
+          novalidate
+        >
+          <input
+            name="name" type="text" autocomplete="name" placeholder="Your name (optional)"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input
+            name="email" required type="email" autocomplete="email" placeholder="you@company.com"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input type="hidden" name="_subject" value="Get Lucky deck download — new lead" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={`${site.domain}/the-get-lucky-deck/download`} />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Send me the PDF</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="container-prose mt-20 pt-10 border-t border-[var(--color-rule)] flex flex-wrap gap-4 justify-between items-center">
+      <a href="/journal" class="btn-link text-[13px]">← All journal posts</a>
+      <a href="/coaching#pitch-deck-sprint" class="btn btn-primary">Same review, on your deck →</a>
+    </footer>
+  </article>
+
+  <BigCTA />
+</BaseLayout>

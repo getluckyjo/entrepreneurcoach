@@ -1,0 +1,94 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import { site } from "~/data/site";
+const updated = "30 April 2026";
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="How Johannes le Roux Coaching collects, uses, and protects your personal information under POPIA. Lawful basis, retention, and your data rights."
+>
+  <section class="container-prose py-24">
+    <p class="eyebrow eyebrow-red">Legal</p>
+    <h1 class="mt-4 display-l">Privacy policy</h1>
+    <p class="mt-3 text-[14px] text-[var(--color-muted)]">Last updated: {updated}.</p>
+
+    <div class="prose mt-12">
+      <p>
+        This policy explains how <strong>{site.legal.operator}</strong>, trading as
+        <em>Johannes le Roux Coaching</em>, collects, uses, stores, and protects personal information
+        under South Africa's <strong>Protection of Personal Information Act, 2013 (POPIA)</strong>.
+      </p>
+
+      <h2>1. Who we are</h2>
+      <p>
+        Responsible party: {site.legal.operator}, {site.address.street}, {site.address.city},
+        {site.address.region} {site.address.postalCode}, South Africa.
+        Contact: <a href={`mailto:${site.email}`}>{site.email}</a>.
+        Information Officer: {site.legal.informationOfficer}.
+      </p>
+
+      <h2>2. What we collect</h2>
+      <ul>
+        <li><strong>Enquiry data</strong> — name, email address, the content of your message, and the venture details you choose to share.</li>
+        <li><strong>Technical data</strong> — IP address, browser type, pages viewed, and timestamps. Used in aggregate to improve the site.</li>
+        <li><strong>Cookies</strong> — essential cookies always; analytics cookies only after you accept the cookie banner.</li>
+      </ul>
+
+      <h2>3. Why we collect it</h2>
+      <ul>
+        <li>To respond to your coaching enquiry.</li>
+        <li>To provide the coaching services you've engaged us for.</li>
+        <li>To comply with legal and tax obligations.</li>
+        <li>To improve the site (analytics, only with your consent).</li>
+      </ul>
+
+      <h2>4. Lawful basis</h2>
+      <p>
+        We process personal information with your consent (s.11(1)(a) POPIA) and where it is
+        necessary to perform a contract you've requested (s.11(1)(b)). You can withdraw consent at any time.
+      </p>
+
+      <h2>5. Sharing</h2>
+      <p>
+        We do not sell personal information. We share only with operators that help us run the
+        practice — currently a website host (Vercel/Netlify), a form-handling provider (Formspree),
+        a scheduling provider (Cal.com), and email infrastructure (Google Workspace) — each of
+        which is bound by data-processing terms.
+      </p>
+
+      <h2>6. Cross-border transfers</h2>
+      <p>
+        Some of our processors are based outside South Africa. Personal information is transferred
+        only to jurisdictions that provide an adequate level of protection or under equivalent
+        contractual safeguards.
+      </p>
+
+      <h2>7. Retention</h2>
+      <p>
+        Enquiry data is retained for 24 months after last contact unless you ask us to delete it
+        sooner. Coaching records are retained for the duration of the engagement plus seven years
+        for tax and contractual compliance.
+      </p>
+
+      <h2>8. Your rights</h2>
+      <ul>
+        <li>Request access to your personal information.</li>
+        <li>Correct or delete your personal information.</li>
+        <li>Object to processing or withdraw consent.</li>
+        <li>Lodge a complaint with the <a href="https://inforegulator.org.za">Information Regulator of South Africa</a>.</li>
+      </ul>
+      <p>To exercise any of these, email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>9. Security</h2>
+      <p>
+        Reasonable technical and organisational measures are in place to protect personal information,
+        including HTTPS-only transport, access controls, and encrypted storage where supported by our
+        operators.
+      </p>
+
+      <h2>10. Changes</h2>
+      <p>If this policy changes materially, we'll update the date above and notify active clients by email.</p>
+    </div>
+  </section>
+</BaseLayout>

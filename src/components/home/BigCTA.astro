@@ -1,0 +1,55 @@
+---
+/* Full-bleed vermilion closer. Used at the bottom of most pages.
+   Defaults to the Founder Clinic close. Pass props to vary on a per-page basis
+   (e.g. /talks needs a "book a talk" close instead of a coaching close). */
+
+interface Props {
+  eyebrow?: string;
+  /** Two-line title — split on newline for the display-mega rendering. */
+  title?: string[];
+  body?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  eyebrow = "Free · 30 minutes · No upsell",
+  title = ["Book the", "clinic."],
+  body = "30 minutes. No fee, no sales pitch. Bring the venture — early-stage or scaling, polished or messy. If it makes sense to keep going together, we'll figure that out as we go. If not, you'll still walk out with a clearer next step than when you walked in.",
+  ctaLabel = "Book a Founder Clinic",
+  ctaHref = "/contact",
+} = Astro.props;
+---
+
+<section class="bg-[var(--color-red)] text-[var(--color-paper)] relative overflow-hidden" data-print-hide>
+  <div class="container-page py-28 md:py-40 relative">
+    <p class="eyebrow !text-[var(--color-paper)]/75">{eyebrow}</p>
+
+    <h2 class="display-mega mt-6 max-w-[14ch]">
+      {title.map((line, i) => (
+        <>
+          {line}{i < title.length - 1 && <br/>}
+        </>
+      ))}
+    </h2>
+
+    <p class="lead !text-[var(--color-paper)]/90 mt-8 max-w-xl">{body}</p>
+
+    <div class="mt-10">
+      <a href={ctaHref} class="btn btn-light text-[15px] !px-7 !py-4">
+        {ctaLabel}
+        <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Decorative arrow watermark -->
+    <svg
+      class="hidden md:block absolute right-0 bottom-0 w-[40%] max-w-[480px] opacity-15 pointer-events-none"
+      viewBox="0 0 200 200" aria-hidden="true"
+    >
+      <path d="M30 170 L170 30 M170 30 L70 30 M170 30 L170 130" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="square"/>
+    </svg>
+  </div>
+</section>

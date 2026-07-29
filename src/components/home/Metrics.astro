@@ -1,0 +1,42 @@
+---
+import AnimatedNumber from "~/components/ui/AnimatedNumber.astro";
+
+const stats = [
+  { label: "Multi-million-dollar brands built",  prefix: "",  value: 6,  suffix: "" },
+  { label: "Countries we've launched in",        prefix: "",  value: 10, suffix: "+" },
+  { label: "Units sold globally",                prefix: "",  value: 20, suffix: "M" },
+  { label: "Raised across the brands",           prefix: "$", value: 5,  suffix: "M" },
+] as const;
+---
+
+<section class="bg-[var(--color-night)] text-[var(--color-paper)] relative overflow-hidden">
+  <!-- top accent stripe -->
+  <div class="absolute inset-x-0 top-0 h-1 bg-[var(--color-red)]"></div>
+
+  <div class="container-page py-24 md:py-32">
+    <div class="grid gap-12 md:grid-cols-12 mb-16">
+      <header class="md:col-span-7">
+        <p class="eyebrow !text-[var(--color-paper)]/60 mb-6 reveal">By the numbers</p>
+        <h2 class="display-xl reveal" style="color: var(--color-paper);">
+          Results,<br/>
+          <span class="display-italic" style="color: var(--color-red);">not slogans.</span>
+        </h2>
+      </header>
+      <p class="md:col-span-4 md:col-start-9 lead !text-[var(--color-paper)]/75 self-end reveal">
+        Coaching is downstream of operating. These are the brands the coaching draws on.
+      </p>
+    </div>
+
+    <ul class="grid gap-12 md:grid-cols-4 md:gap-8 lg:gap-12">
+      {stats.map((s) => (
+        <li class="reveal">
+          <p class="display-mega leading-none tabular-nums" style="font-size: clamp(4rem, 8vw, 7rem); color: var(--color-paper);">
+            <AnimatedNumber value={s.value} prefix={s.prefix} suffix={s.suffix} format="comma" />
+          </p>
+          <div class="mt-5 h-px bg-white/20"></div>
+          <p class="mt-5 text-[14px] text-[var(--color-paper)]/65 max-w-[14em] leading-snug">{s.label}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

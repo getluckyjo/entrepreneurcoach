@@ -1,0 +1,341 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import { articleSchema, breadcrumbSchema } from "~/lib/seo";
+import { site } from "~/data/site";
+
+const url = `${site.domain}/the-suncamino-deck`;
+const formAction = `https://formsubmit.co/${site.email}`;
+const pubDate = new Date("2026-05-13");
+
+type Slide = {
+  n: number;
+  title: string;
+  image: string;
+  works: string;
+  push: string;
+  sharper: string;
+};
+
+const slides: Slide[] = [
+  {
+    n: 1,
+    title: "Cover — Suncamino Floral Rum × [Distribution Partner]",
+    image: "/img/suncamino/slide-01.jpg",
+    works: "Co-branded cover. The \"×\" framing telegraphs intent in the first two seconds — this is a partnership deck, not a capital raise. The reader knows what room they're walking into before slide 2.",
+    push: "A partnership deck still benefits from a one-line hook on the cover. When the partner forwards this to a buying team, the second-degree reader at 11pm in their inbox needs the answer fast.",
+    sharper: "Small footer strip: \"Premium South African floral rum. Multi-SKU lineup ready for [market]. Seeking on-trade + retail distribution.\" Keep the artwork; give the recipient a 5-second landing.",
+  },
+  {
+    n: 2,
+    title: "We're on an epic adventure — #JoinTheJourney",
+    image: "/img/suncamino/slide-02.jpg",
+    works: "Identity-first opening. The partner sees the lifestyle they're being invited to sell before they see the product. This is how Patron, Casamigos and Aperol entered every market they did — feeling first, spec second.",
+    push: "The headline is brand voice. For a distributor, \"why would I take this on?\" wants an answer slightly faster than this. The hook can be commercial *and* poetic — it doesn't have to choose.",
+    sharper: "Keep the photo, swap the copy for the commercial line: \"A premium category-creator. Founders co-investing 50% of the launch. Looking for the right partner to take it global.\" One sentence the distributor's MD can repeat in their head walking back to their desk.",
+  },
+  {
+    n: 3,
+    title: "Scan to play the Suncamino brand video",
+    image: "/img/suncamino/slide-03.jpg",
+    works: "Brilliant use of a slide. The distributor sees the lifestyle in motion — sound, colour, pace. QR codes inside physical decks beat URL paste-jobs in every meeting I've ever sat in.",
+    push: "QR codes assume the reader has the deck on a screen and a phone in the other hand. Half the time it's open on a laptop in a partner's office and the phone is on the desk charging.",
+    sharper: "Pair the QR with a short, memorable URL fallback — \"suncaminorum.com/film\" — so the laptop-reader has a one-click path. Bonus points if the film auto-plays without a YouTube/Vimeo wrapper around it.",
+  },
+  {
+    n: 4,
+    title: "Born from the refusal to be boring",
+    image: "/img/suncamino/slide-04.jpg",
+    works: "Ten photos of the brand in the wild. Aquarium tasting, ski-resort chalet, fire-pit with surfboards, festival bar, oceanarium. The exact venues a Dutch on-trade buyer instantly recognises — \"this brand already plays in my world.\" Social proof at a glance.",
+    push: "A grid says \"we're everywhere\" without saying \"where.\" Distributors count rooms, not vibes. One number under this grid would convert it from mood-board to evidence.",
+    sharper: "Caption strip: \"Activated in [X] countries · [Y] trade events · [Z] brand partnerships since launch in 2021.\" The grid then earns its space twice — once on feeling, once on receipts.",
+  },
+  {
+    n: 5,
+    title: "The world's first Floral Rum",
+    image: "/img/suncamino/slide-05.jpg",
+    works: "The strongest single slide in the deck. Bottle photography is genuinely beautiful. Three awards in three years (Michelangelo Silver 2020, IWSC Bronze 2022, MCC). Hibiscus + honeybush + orange blossom is differentiated — \"world's first\" is a fact, not a tagline. 8-year aged Barbadian rum finished with South African botanicals = a story that pours itself.",
+    push: "The award medals are small. For a partner showing this to a buyer, the medals are the most cite-able artefact on the slide and they barely register at deck-zoom.",
+    sharper: "Enlarge the medal cluster 2× and add a one-line source: \"2020, 2022 — judged blind.\" The fact that a Barbadian-aged rum won a *South African* spirits award the year it launched is exactly the detail that closes a sceptical buyer.",
+  },
+  {
+    n: 6,
+    title: "The Light & Sunny — signature serve",
+    image: "/img/suncamino/slide-06.jpg",
+    works: "Signature-serve slides are the most-skipped slide in spirits decks and the most important one for a distributor — bartenders need to know what to pour from day one. Rum + ginger ale + lime is trade-friendly: no bespoke garnish, no obscure mixer. That scales behind a bar.",
+    push: "Two secondary serves sit as small circles below the hero. The on-trade buyer wants to know which one is the *volume* serve and which one is the *menu* serve — they're different jobs and different channels.",
+    sharper: "Pair each serve with the channel it wins. Light & Sunny → high-volume terraces & beach bars. Suncamino & Tonic → premium gastro on-trade. Old Fashioned → cocktail bars. Three serves, three rooms, one slide.",
+  },
+  {
+    n: 7,
+    title: "The Real Prize — NL white rum market",
+    image: "/img/suncamino/slide-07.jpg",
+    works: "A properly built market slide. Specific market (Netherlands), specific category (white rum), specific incumbent (Bacardi at 626.9K cases), specific source (IWSR 2023). The closing line — \"barely drinkable neat\" — is genuinely good copy because it's a line consumers actually say, not a brand line.",
+    push: "Showing Bacardi at 627K vs the rest at 120–195K mostly tells the buyer \"Bacardi is a monster.\" That's true but unhelpful. What the partner really wants to know is whether the rum sub-category itself is *growing* relative to gin and vodka.",
+    sharper: "Add one trend number — \"NL white rum +X% volume in 2024 (IWSR)\" — alongside the share table. If rum is moving while the brown-spirits shelves are flat, that's the trade buyer's reason to make space on the back-bar.",
+  },
+  {
+    n: 8,
+    title: "Rum leads where it counts",
+    image: "/img/suncamino/slide-08.jpg",
+    works: "Three pillars (Rum & Coke = NL's top mixer; market hungry for lifestyle, not legacy; rum in 3 of the world's top 10 cocktails). The closing line — \"Suncamino is set to rewrite the narrative\" — is a partnership pitch, not a brag.",
+    push: "The \"pirates & outdated tropes\" line is true and well-said, but it's been the opening line of every modern rum brand since Equiano launched. The buyer's read it three times this quarter.",
+    sharper: "Replace that paragraph with one piece of evidence only Suncamino can claim. The Floral Rum is literally the world's first — that's already on slide 5. Cross-reference it: \"The category needs reinvention. We already did it (slide 5).\" Now the deck rewards the buyer who's reading it twice.",
+  },
+  {
+    n: 9,
+    title: "Introducing the challenger — Suncamino Blanco",
+    image: "/img/suncamino/slide-09.jpg",
+    works: "Premium white rum, copper-enhanced multi-column still — a verifiable product spec, not marketing fog. \"Premium without the ego\" is a sharp positioning line. The bottle design carries the same DNA as the Floral Rum, which is *very* hard to do across two SKUs.",
+    push: "This is the slide that turns the partnership from \"boutique Floral Rum\" into \"real volume play with a Bacardi-class shelf-anchor.\" That commercial weight isn't quite landing yet.",
+    sharper: "Add one strip under the bottle: \"Blanco is the engine. Floral Rum is the halo. Together = premium positioning at volume price points.\" That sentence reframes the whole deck for the trade-buyer.",
+  },
+  {
+    n: 10,
+    title: "We don't compete. We redefine.",
+    image: "/img/suncamino/slide-10.jpg",
+    works: "Side-by-side glassware comparison is a clever visual — same drink, branded glass, instantly elevated. Serves / Garnish / Glassware is a real on-trade lever and most spirits brands forget to articulate it.",
+    push: "The visual is strong; \"redefine\" is doing the heavy lifting on copy. A skeptical distributor reads \"branded glassware\" as \"they want us to fund the glassware.\" Pre-empt the procurement question before it gets asked.",
+    sharper: "One line below the glasses: \"Glassware funded by Suncamino in the launch phase — included in the €500K co-investment (slide 16).\" Now the slide doesn't generate an objection, it answers one.",
+  },
+  {
+    n: 11,
+    title: "A multi-SKU play",
+    image: "/img/suncamino/slide-11.jpg",
+    works: "Three SKUs on one slide gives the partner the full commercial picture — premium Floral Rum (margin), Blanco (volume), Schweppes RTD partnership (third shelf). That's a CPG strategy, not a one-product hope. The Schweppes co-brand is a serious commercial signal — multinational mixer + young spirits brand is rare.",
+    push: "The Schweppes story is currently presented as visual furniture next to the other two bottles. It deserves its own headline — that's the kind of deal that opens doors on its own.",
+    sharper: "Pull Schweppes out: \"Co-launching RTD with Schweppes Q[X] 2026. Three SKUs, [country] retail, joint trade marketing.\" That's a partnership-deck-within-a-partnership-deck and it earns the slot.",
+  },
+  {
+    n: 12,
+    title: "Rum Culture ZA testimonial",
+    image: "/img/suncamino/slide-12.jpg",
+    works: "Third-party credibility from a category-specific publication, grounded in a lifestyle photo so the quote feels lived-in. \"Pushing long-standing boundaries that have restrained the rum category\" is the line a distributor will repeat to their buyer.",
+    push: "One quote does the job; two would compound it. For a partnership deck, what's missing alongside the consumer-press voice is a *trade* voice — a bartender or buyer who's actually moved the product.",
+    sharper: "Add a second tile: \"Suncamino moves off our terrace faster than any new spirit we listed this season — [Venue], Cape Town.\" Trade voice + press voice = full triangulation, and the partner reads it as both proof and a playbook.",
+  },
+  {
+    n: 13,
+    title: "Tastemakers of the Terrace — partner credentials",
+    image: "/img/suncamino/slide-13.jpg",
+    works: "Three pillars (Entrepreneurial DNA, Culture-led Activation, Building Brand Love). The deck *bends toward the partner* — treating them as a co-conspirator, not a vendor. Most decks I read forget to acknowledge what the other side brings. Suncamino doesn't, and partners feel that within 90 seconds.",
+    push: "The icons do generic work. The partner is reading this looking for themselves in it.",
+    sharper: "In any localised version of the deck, swap the icons for a logo-strip of the brands the partner has previously launched. Show the partner their own track record. Vanity is leverage — use it.",
+  },
+  {
+    n: 14,
+    title: "Plug & Play — where Suncamino thrives",
+    image: "/img/suncamino/slide-14.jpg",
+    works: "Three concrete platforms, each with a clear job. Party = high-volume occasions for Blanco. Red Carpet = trade-first bartender discovery. Next Gen Whisky → aged Floral Rum is genuinely smart — the next-gen whisky drinker is the most natural Suncamino Floral Rum customer in the building.",
+    push: "Three platforms × three jobs is a lot for one slide. The aged-whisky-to-aged-rum thesis is the smartest insight in the deck and it's currently sharing airtime with two other ideas.",
+    sharper: "Either split into two slides, or compress to two platforms + a footer line: \"Next Gen Whisky is the conversion funnel for the 8-year Floral Rum — today's whisky drinker is tomorrow's aged-rum drinker.\" Don't let the best idea share a slot.",
+  },
+  {
+    n: 15,
+    title: "How Suncamino wins",
+    image: "/img/suncamino/slide-15.jpg",
+    works: "Four-tile recap (Built to Move Fast, Liquid with Character, Designed for Modern Rituals, Founder-led Expertise). The closing line — \"All we need is the right distribution partner\" — is the perfect transition into the deal slide. Sequencing matters; this one's right.",
+    push: "Each tile carries a sentence. Sentences are softer than facts.",
+    sharper: "One specific number per tile. *Built to Move Fast* → \"SKU brief to live in market in 90 days.\" *Liquid with Character* → \"3 international awards.\" *Designed for Modern Rituals* → \"4 signature serves built around 4 venue types.\" *Founder-led* → \"11M+ drinks shipped across the founders' previous ventures.\" Same tile structure, 4× more defensible.",
+  },
+  {
+    n: 16,
+    title: "We're all in — deal structure",
+    image: "/img/suncamino/slide-16.jpg",
+    works: "The slide that separates a serious brand from a hopeful one. Founders putting €500K of their own capital into the launch alongside a 20% equity offer for €500K of services. *Symmetric skin-in-the-game.* Most spirits brands ask distributors to fund the launch unilaterally; this one matches the bet.",
+    push: "20% equity for services is a meaningful give. What's not on the slide yet is what €500K of \"sales, marketing & distribution services\" *actually buys* — doors, volume, marketing reach.",
+    sharper: "Small KPI strip: \"€500K services unlock [X] doors yr 1, [Y] cases shipped, [Z] trade activations. €500K Suncamino co-invest goes into inventory + glassware + founder secondment to [market].\" Now the equity is anchored to a measurable outcome, not a promise — and the partner can run their own ROI math.",
+  },
+  {
+    n: 17,
+    title: "Who will pull this off — team",
+    image: "/img/suncamino/slide-17.jpg",
+    works: "Four founders + operators with real CVs. Inus = creative lead + Duchess co-founder (11M drinks shipped). Stewy = on-trade operator + blend creator. Mark Barnard = ex-Diageo CCO — distributors recognise Diageo alumni instantly and weight them accordingly. (Including me on this slide is awkward, but for transparency: I'm a co-founder and brand-growth advisor on Suncamino.)",
+    push: "Like most team slides, the bios read as CVs (\"experienced\", \"demonstrated history\"). The partnership question is *what has this team shipped together*.",
+    sharper: "One founder-line each, anchored to what's been done *in service of Suncamino specifically*. Inus: \"Designed Suncamino's IP and led the brand build since 2021.\" Stewy: \"Sourced the Barbados base rum and built the on-trade launch playbook.\" Mark: \"Joined the EXCO post-Diageo to take Suncamino international.\" That's the team a partner is buying.",
+  },
+  {
+    n: 18,
+    title: "Are you joining us? — contact",
+    image: "/img/suncamino/slide-18.jpg",
+    works: "Clean lifestyle photo, two founder emails. The aspirational image leaves the deck on a feeling, not a finance question. That's right for this brand — the close should feel like the opening did.",
+    push: "Same critique I'd give any deck — no explicit next step beyond two emails. What does the partner do in the next 7 days?",
+    sharper: "Bottom strip: \"Next step: 30-min intro call. Book a slot: [Calendly link]. Or reply with three preferred times. Tasting kit ships within 5 working days of first call.\" Forcing function + frictionless follow-up. Tasting kits in particular convert at a wildly higher rate than \"thanks for the deck\" emails.",
+  },
+];
+---
+
+<BaseLayout
+  title="The Suncamino partnership deck — annotated, slide by slide"
+  description="The Suncamino Rum partnership deck — used to sign distribution partners in key markets globally. I'm an advisor on Suncamino and helped Stewy & Inus build this one. Slide by slide: what works, where it could push harder, and what would make each slide even sharper."
+  jsonLd={[
+    articleSchema({
+      title: "The Suncamino partnership deck — annotated, slide by slide",
+      description: "Slide-by-slide breakdown of the Suncamino Rum partnership deck — built to sign on-trade and retail distribution in key markets globally.",
+      pubDate,
+      category: "Playbook",
+      url,
+    }),
+    breadcrumbSchema([
+      { name: "Home", url: site.domain },
+      { name: "The Suncamino Deck", url },
+    ]),
+  ]}
+>
+  <article class="pt-20 md:pt-24 pb-20">
+    <header class="container-prose">
+      <div class="flex items-center gap-3 mb-8 reveal">
+        <span class="pill pill-red">Annotated Deck</span>
+        <span class="text-[12px] text-[var(--color-muted)] uppercase tracking-[0.1em]">May 2026 · ~14 min read</span>
+      </div>
+      <h1 class="display-l !text-[clamp(2.4rem,5vw,4rem)] reveal">
+        The Suncamino partnership deck.
+      </h1>
+      <p class="lead mt-8 reveal">
+        Not every deck is built to raise capital. This is one I helped <strong>Stewy &amp; Inus</strong> build at <a class="underline-slide text-[var(--color-red)]" href="https://suncaminorum.com" rel="noopener" target="_blank">Suncamino Rum</a> as their brand-growth advisor — used to sign distribution partnerships in key markets globally. Slide by slide, with what works, where it could push harder, and what would make each slide even sharper.
+      </p>
+      <p class="lead mt-6 reveal">
+        Distributor names have been redacted so the deck reads as a template — Suncamino still uses the live version in active market conversations.
+      </p>
+      <p class="lead mt-6 reveal text-[var(--color-ink-soft)] !text-[1rem]">
+        <em>If you operate in the global spirits trade and want to talk about partnering with Suncamino — on-trade, retail, RTD, or all three — reach out to Stewy &amp; Inus directly at <a class="underline-slide text-[var(--color-red)]" href="mailto:stewy@suncaminorum.com">stewy@suncaminorum.com</a> or <a class="underline-slide text-[var(--color-red)]" href="mailto:inus@suncaminorum.com">inus@suncaminorum.com</a>.</em>
+      </p>
+    </header>
+
+    <div class="container-prose mt-14 prose reveal">
+      <h2>How I'm reading this</h2>
+      <ul>
+        <li><strong>Different deck, different job.</strong> A partnership deck has to convert a different reader — the distributor's MD, not an investor. The currency is volume, doors, on-trade execution and shared risk, not equity returns.</li>
+        <li><strong>Symmetry sells the partnership.</strong> The slide where Suncamino commits €500K alongside the partner's €500K of services is the slide most decks don't have. Skin-in-the-game from both sides changes the whole conversation.</li>
+        <li><strong>Lifestyle first, spec second.</strong> Spirits buy on feeling. The deck opens with a surf shot, not a market chart, and that's right.</li>
+        <li><strong>Trade voice &gt; consumer voice.</strong> A bartender or buyer quote beats a press quote in a partnership deck, because the partner is one of those people.</li>
+        <li><strong>Forcing functions close.</strong> Every \"are you joining us?\" slide I review benefits from a Calendly link and a tasting kit on the road within a week.</li>
+      </ul>
+    </div>
+
+    <!-- Soft email gate, top -->
+    <section class="container-prose mt-14 reveal" data-print-hide>
+      <div class="card !p-7 bg-[var(--color-paper-soft)] border border-[var(--color-rule)]">
+        <p class="eyebrow eyebrow-red mb-3">Want the redacted PDF?</p>
+        <h3 class="font-display text-[1.35rem] font-semibold leading-tight mb-2">
+          Drop your email and I'll send you the redacted partnership deck.
+        </h3>
+        <p class="text-[14px] text-[var(--color-ink-soft)] mb-5">
+          Same 18 slides as below, in the original Suncamino layout — useful as a structural reference if you're building a partnership or distribution deck of your own.
+        </p>
+
+        <form
+          class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]"
+          method="post"
+          action={formAction}
+          novalidate
+        >
+          <input
+            name="name" type="text" autocomplete="name" placeholder="Your name (optional)"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input
+            name="email" required type="email" autocomplete="email" placeholder="you@company.com"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input type="hidden" name="_subject" value="Suncamino deck download — new lead" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={`${site.domain}/the-suncamino-deck/download`} />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Send me the PDF</button>
+        </form>
+
+        <p class="text-[12px] text-[var(--color-muted)] mt-3">
+          One email, no list, no follow-up unless you ask. <a class="underline-slide text-[var(--color-red)]" href="/privacy">Privacy</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Slides -->
+    <div class="container-prose mt-16 space-y-20">
+      {slides.map((s) => (
+        <section class="reveal" id={`slide-${s.n}`}>
+          <figure class="mb-6">
+            <img
+              src={s.image}
+              alt={`Suncamino Rum partnership deck — slide ${s.n}: ${s.title}`}
+              class="w-full rounded-[var(--radius-md)] border border-[var(--color-rule)] shadow-[0_10px_40px_-12px_rgba(14,14,16,0.18)]"
+              loading="lazy"
+            />
+          </figure>
+          <div class="prose">
+            <p class="text-[12px] uppercase tracking-[0.14em] text-[var(--color-muted)] !mb-2 !mt-0">Slide {s.n} of {slides.length}</p>
+            <h3 class="!mt-0 !mb-5 !text-[1.6rem] !leading-tight">{s.title}</h3>
+            <p><strong class="text-[var(--color-ink)]">Worked.</strong> {s.works}</p>
+            <p><strong class="text-[var(--color-red)]">One thing to push.</strong> {s.push}</p>
+            <p><strong class="text-[var(--color-blue)]">Even sharper.</strong> {s.sharper}</p>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Patterns -->
+    <div class="container-prose mt-24 prose reveal">
+      <h2>Patterns I keep seeing across partnership decks</h2>
+      <ol>
+        <li><strong>Skin-in-the-game beats slide design.</strong> Slide 16 is the slide most spirits brands don't have. €500K from the founders alongside €500K of partner services is the line that separates serious from hopeful.</li>
+        <li><strong>The signature serve is undersold everywhere.</strong> Distributors don't sell spirits — bartenders pour serves. Suncamino does it right by leading with a low-friction high-volume drink; most decks I review hide the serve behind product specs.</li>
+        <li><strong>Trade testimonials are rarer and more powerful than press testimonials.</strong> A bartender quote moves a buyer; a press quote moves a press release.</li>
+        <li><strong>Multi-SKU strategy beats single-SKU romance.</strong> Floral Rum (margin) + Blanco (volume) + Schweppes RTD (third shelf) is a real CPG strategy. A partnership ask resting on a single hero SKU is harder to close.</li>
+        <li><strong>The smartest insight is usually buried.</strong> Aged whisky → aged rum is the most defensible commercial thesis in this deck and it's tile #3 of 3 on slide 14. Best idea = own slide.</li>
+      </ol>
+
+      <h2>The biggest thing this deck gets right</h2>
+      <p>
+        It treats the distributor as a partner, not a vendor. Most spirits brands send distribution decks that read \"please carry our product.\" Suncamino's reads \"let's build a market together — here's our share, here's yours, here's the bet we're both making.\" That tonal shift is the difference between getting onto a back-bar and onto a roadmap.
+      </p>
+
+      <p class="!mt-2 text-[var(--color-ink-soft)]"><em>
+        I work on Suncamino as a brand-growth advisor, not the operator on the ground — Stewy &amp; Inus deserve the credit for the brand, the liquid and the trade execution. My job has mostly been to push the narrative and the structure of decks like this one.
+      </em></p>
+    </div>
+
+    <!-- Soft email gate, bottom -->
+    <section class="container-prose mt-20 reveal" data-print-hide>
+      <div class="card !p-7 bg-[var(--color-paper-soft)] border border-[var(--color-rule)]">
+        <p class="eyebrow eyebrow-red mb-3">One more time</p>
+        <h3 class="font-display text-[1.35rem] font-semibold leading-tight mb-2">
+          Want the redacted PDF in your inbox?
+        </h3>
+        <p class="text-[14px] text-[var(--color-ink-soft)] mb-5">
+          Drop your email below. I'll send you the redacted deck and nothing else unless you ask.
+        </p>
+
+        <form
+          class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]"
+          method="post"
+          action={formAction}
+          novalidate
+        >
+          <input
+            name="name" type="text" autocomplete="name" placeholder="Your name (optional)"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input
+            name="email" required type="email" autocomplete="email" placeholder="you@company.com"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input type="hidden" name="_subject" value="Suncamino deck download — new lead" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={`${site.domain}/the-suncamino-deck/download`} />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Send me the PDF</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="container-prose mt-20 pt-10 border-t border-[var(--color-rule)] flex flex-wrap gap-4 justify-between items-center">
+      <a href="/journal" class="btn-link text-[13px]">← All journal posts</a>
+      <a href="/coaching#pitch-deck-sprint" class="btn btn-primary">Same review, on your deck →</a>
+    </footer>
+  </article>
+
+  <BigCTA />
+</BaseLayout>

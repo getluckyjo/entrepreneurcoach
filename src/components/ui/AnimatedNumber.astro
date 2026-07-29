@@ -1,0 +1,62 @@
+---
+/* Counter that tweens from 0 to its target when it enters the viewport.
+   Use display="hours" to format big numbers; pass `prefix`/`suffix` for "$" / "+" / "M" etc. */
+interface Props {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  duration?: number;
+  format?: "compact" | "comma" | "plain";
+  class?: string;
+}
+const { value, prefix = "", suffix = "", duration = 1400, format = "comma", class: cls } = Astro.props;
+---
+
+<span
+  class:list={["counter tabular-nums", cls]}
+  data-target={value}
+  data-prefix={prefix}
+  data-suffix={suffix}
+  data-duration={duration}
+  data-format={format}
+>{prefix}0{suffix}</span>
+
+<script>
+  const formatters = {
+    compact: new Intl.NumberFormat("en-ZA", { notation: "compact", maximumFractionDigits: 1 }),
+    comma:   new Intl.NumberFormat("en-ZA"),
+    plain:   { format: (n: number) => String(Math.round(n)) },
+  } as const;
+
+  const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+
+  const tween = (el: HTMLElement) => {
+    const target = Number(el.dataset.target ?? 0);
+    const dur = Number(el.dataset.duration ?? 1400);
+    const fmt = formatters[el.dataset.format as keyof typeof formatters] ?? formatters.comma;
+    const prefix = el.dataset.prefix ?? "";
+    const suffix = el.dataset.suffix ?? "";
+    const start = performance.now();
+    const step = (now: number) => {
+      const t = Math.min(1, (now - start) / dur);
+      const v = target * ease(t);
+      el.textContent = `${prefix}${fmt.format(v)}${suffix}`;
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const armed = new WeakSet<Element>();
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => {
+      if (e.isIntersecting && !armed.has(e.target)) {
+        armed.add(e.target);
+        tween(e.target as HTMLElement);
+      }
+    }),
+    { threshold: 0.6 },
+  );
+  const init = () => document.querySelectorAll<HTMLElement>(".counter").forEach((el) => io.observe(el));
+  init();
+  document.addEventListener("astro:after-swap", init);
+</script>

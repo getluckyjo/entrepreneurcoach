@@ -1,0 +1,54 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+interface Props {
+  name: string;
+  image?: string;
+  tone: "ink" | "vermilion" | "bone" | "blue" | "lime" | "night";
+  alt?: string;
+  class?: string;
+}
+const { name, image, tone, alt, class: cls } = Astro.props;
+
+/* Build-time existence check. If the file isn't dropped at the expected path,
+   we render a tone-coloured typographic placeholder instead of a broken img. */
+const publicDir = path.resolve("public");
+const fileExists = image ? fs.existsSync(path.join(publicDir, image.replace(/^\//, ""))) : false;
+
+const toneStyles = {
+  ink:       { bg: "var(--color-ink)",       fg: "var(--color-paper)", accent: "var(--color-red)" },
+  vermilion: { bg: "var(--color-red)",       fg: "var(--color-paper)", accent: "var(--color-paper)" },
+  bone:      { bg: "var(--color-bone)",      fg: "var(--color-ink)",   accent: "var(--color-red)" },
+  blue:      { bg: "var(--color-blue)",      fg: "var(--color-paper)", accent: "var(--color-paper)" },
+  lime:      { bg: "var(--color-lime)",      fg: "var(--color-ink)",   accent: "var(--color-ink)" },
+  night:     { bg: "var(--color-night)",     fg: "var(--color-paper)", accent: "var(--color-red)" },
+}[tone];
+---
+
+<figure class:list={["aspect-square overflow-hidden rounded-[var(--radius-md)] relative", cls]}>
+  {fileExists ? (
+    <img
+      src={image}
+      alt={alt ?? `${name} brand image`}
+      width="1200" height="900"
+      class="w-full h-full object-cover"
+      loading="lazy" decoding="async"
+    />
+  ) : (
+    <div
+      class="w-full h-full flex items-center justify-center p-6 relative"
+      style={`background-color: ${toneStyles.bg}; color: ${toneStyles.fg};`}
+      data-placeholder
+      aria-label={`${name} — image placeholder`}
+    >
+      <span
+        style={`font-family: var(--font-script); font-weight: 700; font-size: clamp(1.6rem, 4.5vw, 3.4rem); line-height: 0.9; transform: rotate(-2deg); text-align: center;`}
+      >{name}</span>
+      <span
+        class="absolute bottom-3 left-4 text-[10px] uppercase tracking-[0.18em] font-semibold opacity-80"
+        style={`color: ${toneStyles.accent};`}
+      >Image coming</span>
+    </div>
+  )}
+</figure>

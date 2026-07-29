@@ -1,0 +1,53 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import { talks, site } from "~/data/site";
+import { breadcrumbSchema } from "~/lib/seo";
+---
+
+<BaseLayout
+  title="Keynote Speaker · Pitch Decks, Founder Failure, Scaling Globally | Johannes le Roux"
+  rawTitle
+  description="Three signature talks from a South African founder of six brands. Pitch decks, founder failure, scaling globally. Conferences, accelerators, offsites."
+  jsonLd={[
+    breadcrumbSchema([
+      { name: "Home",  url: site.domain },
+      { name: "Talks", url: `${site.domain}/talks` },
+    ]),
+  ]}
+>
+  <section class="container-page pt-20 md:pt-24 pb-12">
+    <p class="eyebrow eyebrow-red mb-6 reveal">Talks</p>
+    <h1 class="display-mega reveal">
+      Honest learnings<br/>
+      <span class="display-italic display-red">from real ventures.</span>
+    </h1>
+    <p class="lead mt-10 reveal">
+      Three signature talks based on what I've actually built — and broken. Conferences, accelerators, corporate offsites — South Africa and abroad.
+    </p>
+    <a href="/contact?offer=talk" class="btn btn-primary mt-10 reveal">Book me for a talk →</a>
+  </section>
+
+  <section class="container-page pb-24">
+    <ul class="divide-y divide-[var(--color-rule-strong)] border-y border-[var(--color-rule-strong)]">
+      {talks.map((t, i) => (
+        <li id={t.slug} class="py-12 grid gap-6 md:grid-cols-12 items-baseline reveal">
+          <p class="md:col-span-2 num-badge">{String(i + 1).padStart(2, "0")}</p>
+          <div class="md:col-span-4">
+            <span class="pill pill-ghost mb-3">{t.duration}</span>
+            <h2 class="display-l !text-[clamp(1.6rem,2.4vw,2.4rem)] mt-3">{t.title}</h2>
+          </div>
+          <p class="md:col-span-6 text-[16px] leading-relaxed text-[var(--color-ink-soft)]">{t.summary}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <BigCTA
+    eyebrow="Conferences · Accelerators · Corporate offsites"
+    title={["Got a stage", "to fill?"]}
+    body="Three signature talks drawn from what I've actually built — including the parts that broke. Tell me about the audience and the date, and I'll come back with a fee, format, and bio package within one business day."
+    ctaLabel="Book me for a talk"
+    ctaHref="/contact?offer=talk"
+  />
+</BaseLayout>

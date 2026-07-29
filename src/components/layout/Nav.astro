@@ -1,0 +1,44 @@
+---
+import BrandMark from "~/components/ui/BrandMark.astro";
+
+const items = [
+  { href: "/coaching", label: "Coaching" },
+  { href: "/about",    label: "About" },
+  { href: "/talks",    label: "Talks" },
+  { href: "/journal",  label: "Journal" },
+];
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const active = (href: string) => href === path || (href !== "/" && path.startsWith(href));
+---
+
+<header class="sticky top-0 z-40 backdrop-blur-md bg-[color:var(--color-paper)]/85 border-b border-[var(--color-rule)]">
+  <nav class="container-page flex items-center justify-between h-[68px]" aria-label="Primary">
+    <BrandMark size={26} />
+
+    <ul class="hidden md:flex items-center gap-8 text-[14px] font-medium font-display">
+      {items.map((it) => (
+        <li>
+          <a
+            href={it.href}
+            class:list={[
+              "relative inline-flex items-center gap-2 transition-colors hover:text-[var(--color-red)]",
+              active(it.href) && "text-[var(--color-red)]",
+            ]}
+          >
+            {active(it.href) && (
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-red)]"></span>
+            )}
+            {it.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a href="/contact" class="btn btn-primary text-[13px] !py-2.5 !px-4">
+      Contact
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </nav>
+</header>

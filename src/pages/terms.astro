@@ -1,0 +1,80 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import { site } from "~/data/site";
+const updated = "30 April 2026";
+---
+
+<BaseLayout
+  title="Terms of Engagement"
+  description="The terms under which Johannes le Roux Coaching delivers coaching services — scope, fees, refunds, confidentiality, and POPIA-aligned data handling."
+>
+  <section class="container-prose py-24">
+    <p class="eyebrow eyebrow-red">Legal</p>
+    <h1 class="mt-4 display-l">Terms of engagement</h1>
+    <p class="mt-3 text-[14px] text-[var(--color-muted)]">Last updated: {updated}.</p>
+
+    <div class="prose mt-12">
+      <p>
+        These terms apply to coaching engagements with {site.legal.operator}, trading as
+        <em>Johannes le Roux Coaching</em> (referred to here as "we" or "the Coach"). They are
+        intended to be plain-English; if anything is unclear, ask before booking.
+      </p>
+
+      <h2>1. Scope</h2>
+      <p>
+        Coaching is delivered as one of the productised packages listed on our coaching page, or as
+        otherwise agreed in writing. The deliverables for each package are listed against the
+        package and form part of these terms.
+      </p>
+
+      <h2>2. Fees and payment</h2>
+      <p>
+        Fees are stated in South African Rand on the coaching page. Paid packages are payable in
+        advance via the checkout / invoice provided. The Founder Clinic introductory call is free.
+      </p>
+
+      <h2>3. Sessions, rescheduling and cancellation</h2>
+      <ul>
+        <li>Reschedule any session up to 24 hours before its start time at no charge.</li>
+        <li>Inside 24 hours, the session is forfeited unless we mutually agree otherwise.</li>
+        <li>Multi-session packages must be completed within six (6) months of purchase.</li>
+      </ul>
+
+      <h2>4. Refunds</h2>
+      <p>
+        Full refund on the unused balance of any package up to 14 days after purchase. After that,
+        refunds are case-by-case — contact <a href={`mailto:${site.email}`}>{site.email}</a> and we'll
+        find a fair outcome.
+      </p>
+
+      <h2>5. Confidentiality and IP</h2>
+      <p>
+        We will treat all venture, financial, and strategic information shared during coaching as
+        confidential. We are happy to sign a mutual NDA on request. You retain all intellectual
+        property in your venture; any frameworks, templates, or written materials we provide remain
+        ours but may be used freely inside your business.
+      </p>
+
+      <h2>6. No professional advice</h2>
+      <p>
+        Coaching is not legal, financial, tax, or investment advice and should not be relied on as
+        such. For regulated advice, consult an appropriately licensed professional.
+      </p>
+
+      <h2>7. Limitation of liability</h2>
+      <p>
+        To the maximum extent permitted by law, our liability arising out of or related to a coaching
+        engagement is limited to the fees paid for that engagement.
+      </p>
+
+      <h2>8. Privacy</h2>
+      <p>Personal information is processed in line with our <a href="/privacy">privacy policy</a>.</p>
+
+      <h2>9. Governing law</h2>
+      <p>
+        These terms are governed by the laws of the Republic of South Africa. Any disputes will be
+        resolved in the courts of the Western Cape, unless we mutually agree to mediation first.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

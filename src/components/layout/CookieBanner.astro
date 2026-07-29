@@ -1,0 +1,54 @@
+---
+/**
+ * POPIA-conscious cookie banner. Strictly opt-in for non-essential cookies.
+ * Stores choice in localStorage. No third-party tag fires until user accepts.
+ *
+ * To wire: read `localStorage.getItem('ec-consent')` from any analytics
+ * loader and only initialise on `accept`.
+ */
+---
+
+<div
+  id="cookie-banner"
+  hidden
+  class="fixed bottom-4 left-4 right-4 md:left-6 md:right-auto md:max-w-md z-50
+         bg-[var(--color-ink)] text-[var(--color-paper)]
+         rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]
+         p-5 text-[14px] leading-relaxed"
+  role="dialog" aria-live="polite" aria-label="Cookie preferences"
+>
+  <p>
+    This site uses essential cookies to function and, with your permission, analytics
+    cookies that help us understand which content is useful. Read the
+    <a href="/privacy" class="underline">privacy policy</a>.
+  </p>
+  <div class="mt-4 flex flex-wrap gap-2">
+    <button id="cookie-accept" class="btn btn-primary !bg-[var(--color-accent)] !text-[var(--color-paper)]">
+      Accept all
+    </button>
+    <button id="cookie-essential" class="btn btn-ghost !text-[var(--color-paper)] !border-[var(--color-paper)]">
+      Essential only
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const KEY = "ec-consent";
+    const banner = document.getElementById("cookie-banner");
+    if (!banner) return;
+    const choice = localStorage.getItem(KEY);
+    if (!choice) banner.hidden = false;
+
+    const setChoice = (value) => {
+      localStorage.setItem(KEY, value);
+      banner.hidden = true;
+      if (value === "accept") {
+        document.dispatchEvent(new CustomEvent("ec:consent-granted"));
+      }
+    };
+
+    document.getElementById("cookie-accept")?.addEventListener("click", () => setChoice("accept"));
+    document.getElementById("cookie-essential")?.addEventListener("click", () => setChoice("essential"));
+  })();
+</script>

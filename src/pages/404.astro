@@ -1,0 +1,20 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+---
+
+<BaseLayout title="Page not found" noindex>
+  <section class="container-page py-24 md:py-32 text-center">
+    <p class="eyebrow eyebrow-red mb-4">Error · 404</p>
+    <h1 class="display-mega max-w-[14ch] mx-auto">
+      Nothing here.<br/>
+      <span class="display-italic display-red">Yet.</span>
+    </h1>
+    <p class="lead mt-10 mx-auto">
+      The page you were looking for doesn't exist or has moved.
+    </p>
+    <div class="mt-12 flex justify-center gap-3">
+      <a href="/" class="btn btn-primary">Back to home</a>
+      <a href="/journal" class="btn btn-ghost">Read the journal</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import BoldHero from "~/components/home/BoldHero.astro";
+import Marquee from "~/components/ui/Marquee.astro";
+import BuiltStrip from "~/components/home/BuiltStrip.astro";
+import Metrics from "~/components/home/Metrics.astro";
+import Offers from "~/components/home/Offers.astro";
+import Process from "~/components/home/Process.astro";
+import JournalPreview from "~/components/home/JournalPreview.astro";
+import TalksPreview from "~/components/home/TalksPreview.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import { personSchema, localBusinessSchema, serviceSchemas, websiteSchema } from "~/lib/seo";
+
+/*
+ * Homepage. Section rhythm follows DESIGN.md §4 (loud → quiet → loud → quiet).
+ *
+ * To insert new ideas (e.g. Sept 2026 Network waitlist):
+ *   - drop a component in src/components/home/
+ *   - data goes in src/data/site.ts
+ *   - place between Process and JournalPreview, or before BigCTA
+ */
+---
+
+<BaseLayout
+  title="Entrepreneur Coach Cape Town | Pitch Decks & Fundraising — Johannes le Roux"
+  rawTitle
+  description="Entrepreneur coaching in Cape Town from a founder of six brands. Pitch decks, fundraising, founder OS, international expansion. Free 30-min Founder Clinic."
+  jsonLd={[websiteSchema, personSchema, localBusinessSchema, ...serviceSchemas]}
+>
+  <BoldHero />
+  <Marquee items={["Pitch decks", "Fundraising", "Founder OS", "International expansion", "Brand-led FMCG", "Founder fatigue", "Strategy"]} variant="light" />
+  <BuiltStrip />
+  <Metrics />
+  <Offers />
+  <Process />
+  <JournalPreview />
+  <TalksPreview />
+  <BigCTA />
+</BaseLayout>

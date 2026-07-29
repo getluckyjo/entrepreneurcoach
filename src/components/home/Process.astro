@@ -1,0 +1,56 @@
+---
+import SectionHeader from "~/components/ui/SectionHeader.astro";
+
+const steps = [
+  {
+    n: "01",
+    title: "Discovery",
+    body: "Free 30-min Founder Clinic. We test fit and figure out whether coaching is even the right move for you right now.",
+  },
+  {
+    n: "02",
+    title: "Scope",
+    body: "Calendar invite + a short pre-work brief land within one business day. The first paid session locks scope and deliverables.",
+  },
+  {
+    n: "03",
+    title: "Sessions",
+    body: "Weekly cadence by default. Zoom or in-person Cape Town. WhatsApp access between sessions on Founder OS and the Launch Playbook.",
+  },
+  {
+    n: "04",
+    title: "Deliverable",
+    body: "A finished pitch deck. A 90-day operating cadence. A market entry plan. Whatever the package promises — done, in your hands.",
+  },
+] as const;
+---
+
+<section class="bg-[var(--color-bone)] border-y border-[var(--color-rule)]">
+  <div class="container-page py-24 md:py-32">
+    <SectionHeader
+      eyebrow="How it runs"
+      title="Four steps,"
+      italic="start to deliverable."
+      lede="Productised engagements remove the guesswork. You always know what's next."
+    />
+
+    <ol class="mt-16 grid gap-px bg-[var(--color-rule)] md:grid-cols-2 lg:grid-cols-4 rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-rule)]">
+      {steps.map((s, i) => (
+        <li class="bg-[var(--color-paper)] p-7 md:p-8 flex flex-col reveal relative">
+          <div class="flex items-baseline gap-3 mb-2">
+            <span class="num-badge">{s.n}</span>
+            {i < steps.length - 1 && (
+              <svg class="hidden lg:block ml-auto -mr-3" width="40" height="14" viewBox="0 0 40 14" aria-hidden="true">
+                <path d="M2 7H36 M30 2L36 7L30 12" stroke="var(--color-ink)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+          </div>
+          <h3 class="display-l !text-[clamp(1.4rem,2vw,1.7rem)] mt-4">
+            {s.title}
+          </h3>
+          <p class="mt-4 text-[14.5px] text-[var(--color-ink-soft)] leading-relaxed">{s.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

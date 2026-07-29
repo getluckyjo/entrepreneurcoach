@@ -1,0 +1,320 @@
+/* Caveat (handwritten signature accent). Geist is self-hosted via @fontsource-variable/geist (imported in BaseLayout).
+   Both @import rules must come BEFORE the Tailwind @import per CSS spec. */
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap");
+@import "tailwindcss";
+
+/*
+  Single source of truth for the visual system.
+  Everything maps to DESIGN.md — edit DESIGN.md first, then this file.
+*/
+
+@theme {
+  /* —— Surfaces —— */
+  --color-paper:        #FFFFFF;
+  --color-bone:         #F4F4F1;
+  --color-soft:         #ECEAE3;
+  --color-night:        #0A0A0C;
+
+  /* —— Ink —— */
+  --color-ink:          #0E0E10;
+  --color-ink-soft:     #2A2A2D;
+  --color-muted:        #6F6F73;
+  --color-rule:         #E0DED7;
+  --color-rule-strong:  #C8C5BB;
+
+  /* —— Primary accent (vermilion) ——
+     Variable is named --color-red for historical reasons; the value is vermilion.
+     If you change the hue again, change here only — every component reads from this token. */
+  --color-red:          #F25C2A;
+  --color-red-deep:     #C8421A;
+  --color-red-soft:     #FCE6DC;
+
+  /* —— Editorial secondary (blue) —— */
+  --color-blue:         #2D55FF;
+  --color-blue-soft:    #DDE3FF;
+
+  /* —— Flair tertiary (lime) —— */
+  --color-lime:         #C6F03A;
+
+  /* —— Type families —— */
+  --font-display: "Geist", "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans:    "Geist", "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-script:  "Caveat", "Brush Script MT", cursive;
+  --font-mono:    ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* —— Tracking —— */
+  --tracking-mega:    -0.045em;
+  --tracking-display: -0.035em;
+  --tracking-tight:   -0.02em;
+  --tracking-normal:  -0.01em;
+  --tracking-wide:    0.04em;
+  --tracking-eyebrow: 0.18em;
+
+  /* —— Radius —— */
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+
+  /* —— Shadow (used sparingly) —— */
+  --shadow-card-hover: 0 1px 0 var(--color-rule), 0 24px 60px -36px rgb(0 0 0 / 0.18);
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  body { font-size: 17px; line-height: 1.55; letter-spacing: var(--tracking-normal); }
+
+  ::selection { background: var(--color-red); color: var(--color-paper); }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-ink);
+  }
+
+  /* Default heading scale (used inside prose, etc).
+     For composed sections use the .display-* utilities below. */
+  h1 { font-size: clamp(2.6rem, 6vw + 0.5rem, 5.4rem); line-height: 1.0; letter-spacing: var(--tracking-display); }
+  h2 { font-size: clamp(2rem, 3.5vw + 0.5rem, 3.4rem); line-height: 1.05; }
+  h3 { font-size: clamp(1.4rem, 1.8vw + 0.5rem, 1.9rem); line-height: 1.15; }
+
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--color-red); outline-offset: 3px; border-radius: 2px; }
+
+  hr { border: 0; border-top: 1px solid var(--color-rule); }
+
+  ::-moz-selection { background: var(--color-red); color: var(--color-paper); }
+}
+
+@layer components {
+
+  /* —— Container —— */
+  .container-page {
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+  @media (min-width: 768px)  { .container-page { padding-inline: 40px; } }
+  @media (min-width: 1280px) { .container-page { padding-inline: 64px; } }
+
+  .container-prose { max-width: 720px; margin-inline: auto; padding-inline: 24px; }
+
+  /* —— Display scale —— */
+  .display-mega {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 11vw, 12rem);
+    font-weight: 800;
+    line-height: 0.86;
+    letter-spacing: var(--tracking-mega);
+  }
+  .display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 7rem);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: var(--tracking-display);
+  }
+  .display-l {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4.5vw, 4.4rem);
+    font-weight: 700;
+    line-height: 0.96;
+    letter-spacing: var(--tracking-display);
+  }
+  .display-italic { font-style: italic; }
+  .display-red    { color: var(--color-red); }
+  .display-stroke {
+    -webkit-text-stroke: 1.5px var(--color-ink);
+    color: transparent;
+  }
+
+  .lead {
+    font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+    line-height: 1.45;
+    color: var(--color-ink-soft);
+    max-width: 56ch;
+  }
+
+  /* —— Eyebrow / caption —— */
+  .eyebrow {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .eyebrow-red { color: var(--color-red); }
+
+  /* —— Hero accents —— */
+  .hero-rule {
+    width: 88px;
+    height: 6px;
+    background: var(--color-red);
+    border-radius: 2px;
+  }
+  .hero-topics {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+  }
+
+  /* —— Signature —— */
+  .signature {
+    font-family: var(--font-script);
+    color: var(--color-red);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  /* —— Buttons —— */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 16px 22px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, transform 120ms ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--color-red); color: var(--color-paper); }
+  .btn-primary:hover { background: var(--color-red-deep); }
+  .btn-ink { background: var(--color-ink); color: var(--color-paper); }
+  .btn-ink:hover { background: var(--color-red); }
+  .btn-ghost { background: transparent; color: var(--color-ink); border-color: var(--color-ink); }
+  .btn-ghost:hover { background: var(--color-ink); color: var(--color-paper); }
+  .btn-light { background: var(--color-paper); color: var(--color-ink); }
+  .btn-light:hover { background: var(--color-red); color: var(--color-paper); }
+
+  .btn-link {
+    padding: 0; background: transparent; color: var(--color-red);
+    border-bottom: 1px solid currentColor; border-radius: 0;
+    font-weight: 600; gap: 4px;
+  }
+  .btn-link:hover { color: var(--color-ink); }
+
+  /* —— Pill / Tag —— */
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 11px; letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase; font-weight: 600;
+    background: var(--color-bone); color: var(--color-ink);
+  }
+  .pill-red   { background: var(--color-red); color: var(--color-paper); }
+  .pill-blue  { background: var(--color-blue); color: var(--color-paper); }
+  .pill-lime  { background: var(--color-lime); color: var(--color-ink); }
+  .pill-ink   { background: var(--color-ink); color: var(--color-paper); }
+  .pill-ghost { background: transparent; border: 1px solid var(--color-rule-strong); color: var(--color-ink); }
+
+  /* —— Card —— */
+  .card {
+    background: var(--color-paper);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    transition: border-color 200ms ease;
+    position: relative;
+  }
+  .card:hover { border-color: var(--color-ink); }
+  .card-bone { background: var(--color-bone); }
+
+  /* —— Marquee —— */
+  .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); }
+  .marquee-track {
+    display: flex; gap: 0; width: max-content;
+    animation: marquee 40s linear infinite;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+  @keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-33.333%, 0, 0); }
+  }
+
+  /* —— Reveal —— */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 600ms ease, transform 600ms ease; }
+  .reveal.is-visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+  @media print {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    body > header,
+    body > footer,
+    #cookie-banner,
+    [data-print-hide] { display: none !important; }
+    body { background: #ffffff !important; }
+    article > footer { display: none !important; }
+    section[id^="slide-"] { break-inside: avoid; page-break-inside: avoid; }
+    img { max-width: 100% !important; }
+  }
+
+  /* —— Inline link in body / prose —— */
+  .underline-slide {
+    position: relative;
+    display: inline;
+    background-image: linear-gradient(var(--color-red), var(--color-red));
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 250ms ease;
+  }
+  .underline-slide:hover { background-size: 100% 1px; }
+
+  /* —— Number badges —— */
+  .num-badge {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 4vw, 3.6rem);
+    line-height: 1;
+    color: var(--color-red);
+  }
+
+  /* —— Prose for journal posts —— */
+  .prose {
+    font-size: 18px; line-height: 1.7; color: var(--color-ink-soft);
+  }
+  .prose h2 { margin-top: 2.4em; margin-bottom: 0.5em; font-size: clamp(1.6rem, 2vw, 2.1rem); }
+  .prose h3 { margin-top: 1.8em; margin-bottom: 0.4em; font-size: clamp(1.2rem, 1.5vw, 1.4rem); }
+  .prose p, .prose ul, .prose ol { margin-bottom: 1.1em; }
+  .prose ul, .prose ol { padding-left: 1.4em; }
+  .prose ul { list-style: disc; }
+  .prose ol { list-style: decimal; }
+  .prose blockquote {
+    margin: 1.6em 0; padding: 4px 0 4px 24px;
+    border-left: 3px solid var(--color-red);
+    font-family: var(--font-display); font-weight: 600; font-size: clamp(1.3rem, 1.6vw, 1.6rem);
+    line-height: 1.35; color: var(--color-ink); font-style: normal;
+  }
+  .prose a {
+    color: var(--color-red);
+    background-image: linear-gradient(var(--color-red), var(--color-red));
+    background-size: 100% 1px; background-repeat: no-repeat; background-position: 0 100%;
+    transition: color 200ms ease;
+  }
+  .prose a:hover { color: var(--color-ink); }
+  .prose strong { color: var(--color-ink); font-weight: 700; }
+  .prose code {
+    font-family: var(--font-mono); font-size: 0.9em;
+    background: var(--color-bone); padding: 2px 6px; border-radius: 4px;
+  }
+}

@@ -1,0 +1,348 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import { articleSchema, breadcrumbSchema } from "~/lib/seo";
+import { site } from "~/data/site";
+
+const url = `${site.domain}/the-duchess-deck`;
+const formAction = `https://formsubmit.co/${site.email}`;
+const pubDate = new Date("2026-05-06");
+
+type Slide = {
+  n: number;
+  title: string;
+  image: string;
+  worked: string;
+  off: string;
+  fix: string;
+};
+
+const slides: Slide[] = [
+  {
+    n: 1,
+    title: "Cover — The Duchess Alcohol-Free Drinks · Investment Proposal",
+    image: "/img/duchess/slide-01.jpg",
+    worked: "Quiet luxury. Reads like a Champagne house's pitch. That alone telegraphed positioning to AB InBev — premium, design-led, sober adult drinks.",
+    off: "No raise size, no ask, no investor on the cover. Worked because every recipient came via warm intro. In 2026 even warm intros benefit from a cover-line — saves the recipient one slide of figuring out the basics.",
+    fix: "Sub-line on the cover: \"Series Seed Extension · Raising $1.5M · Cape Town, July 2021 · johannes@theduchess.co.za\". Clean.",
+  },
+  {
+    n: 2,
+    title: "Opportunity to invest alongside ZX & AB InBev",
+    image: "/img/duchess/slide-02.jpg",
+    worked: "Strongest slide in the deck. \"ZX Ventures invested $1.5M in 2019 → 110% revenue growth → SAB platform unlocking\" is the entire story in three lines.",
+    off: "110% growth needs a base. 110% of what? $200K → $420K is a different story than $5M → $10.5M.",
+    fix: "One sentence. \"From $X in FY2020 to $Y in FY2021.\" No reader should have to do the math.",
+  },
+  {
+    n: 3,
+    title: "Refresh Your Mind",
+    image: "/img/duchess/slide-03.jpg",
+    worked: "Aspirational mood imagery on a single line. Brand on a page.",
+    off: "Beautiful but empty. A 2026 read: this is a brand-book slide, not a deck slide. A deck is a sales tool, not a lookbook.",
+    fix: "Earn the white space with one stat. \"1.6M bottles of Refresh Your Mind sold in 2020.\" Make the mood pay rent.",
+  },
+  {
+    n: 4,
+    title: "The Duchess aims to be the go-to non-alcoholic adult drink for female consumers",
+    image: "/img/duchess/slide-04.jpg",
+    worked: "Clear ICP (74% female, 18–34). Three trust signals — #sobercurious explosion, female grocery-purchase power, Mintel data behind it.",
+    off: "Talita Calitz quoted as \"Global Marketing Manager.\" Internal voice doesn't count as social proof. Worse: an internal quote about who our customer is implies we declared the customer; we didn't earn it externally.",
+    fix: "Replace the internal quote with a Pick n Pay buyer quote, or a category manager from Albert Heijn or Dan Murphy's. Internal proves you believe; external proves they believe. Investors weight the latter 10×.",
+  },
+  {
+    n: 5,
+    title: "Product range — five SKUs",
+    image: "/img/duchess/slide-05.jpg",
+    worked: "Beautiful product photography. Five SKUs telegraphed \"we're not a one-trick pony.\"",
+    off: "No spec, no occasion, no price. And — bigger — two of the five are Spritzers at 6% ABV, which contradicts the \"Alcohol-Free Drinks\" line on the cover. The 0% promise breaks at slide 5. A buyer who reads carefully will pause here.",
+    fix: "Either reframe the cover as \"alcohol-free + low-ABV adult drinks\" (which is what AB InBev cared about anyway), or pull the spritzers from this deck and pitch them as a separate range. Inconsistency between cover-promise and product-page costs trust mid-meeting.",
+  },
+  {
+    n: 6,
+    title: "The Duchess growth trajectory & successes (2016–2021)",
+    image: "/img/duchess/slide-06.jpg",
+    worked: "Best timeline I've ever drawn. Five years of evidence in ten seconds — \"World's First 0% G&T launched in CT\" through to \"490 JUMBO + 205 Plus + 60 Coop stores + ZX Ventures investment.\" Awards, retailer logos, year-by-year SKU launches. This is the slide that closed the partnership.",
+    off: "Nothing. This is a working slide.",
+    fix: "Lesson for self: timelines work because they make traction physical. The reader walks five years of evidence in ten seconds. Reuse this pattern in every deck I build going forward.",
+  },
+  {
+    n: 7,
+    title: "The Duchess utilises a lean & scalable operations structure",
+    image: "/img/duchess/slide-07.jpg",
+    worked: "Lean ops shown clearly. AB InBev managing distribution = the value-prop visualised.",
+    off: "Shows the plumbing but not the economics. AB InBev managing distribution at trade price compresses margin — should have shown deal terms.",
+    fix: "One-line economics summary: \"Co-pack at R{} per bottle, AB InBev distributes at trade price + {}% rebate, net margin to Duchess R{} per bottle.\" Without that, investors model conservatively or skip.",
+  },
+  {
+    n: 8,
+    title: "ZX Ventures is The Duchess' anchor shareholder with 25%",
+    image: "/img/duchess/slide-08.jpg",
+    worked: "Anchor investor + four named advisors with credible roles. ZX/AB InBev brand is the credibility multiplier.",
+    off: "Two paragraphs of corporate prose. Reader needs one thing — \"ZX owns 25%, AB InBev distributes us nationally, here are the four humans who help.\"",
+    fix: "One-sentence summary at the top, then the photos. Save reader bandwidth.",
+  },
+  {
+    n: 9,
+    title: "AB InBev is a formidable trade partner offering unrivalled route to market",
+    image: "/img/duchess/slide-09.jpg",
+    worked: "The moat slide. 450 sales reps, 5,000 merchandisers, 55,000 active accounts, AB InBev's 20% non-alc target. That's the slide that tells the investor \"you're buying access to the largest beverage distribution machine in SA on day one.\"",
+    off: "Slide 9 is too late for this. Second-most-important slide in the deck (after slide 6), hidden behind a generic mood slide and a product slide.",
+    fix: "Reorder. Cover → ZX/AB InBev partnership punchline (current slide 2) → AB InBev moat (current slide 9) → Timeline (current slide 6) → Market → Product → Team → Financials → Ask. Lead with what they're buying access to.",
+  },
+  {
+    n: 10,
+    title: "The Duchess will continue its expansion into key alcohol-free markets",
+    image: "/img/duchess/slide-10.jpg",
+    worked: "Concrete next markets, named retailers — Sainsbury's, Tesco, Whole Foods, Trader Joe's.",
+    off: "Reader can't tell which retailers are signed vs. pipeline. A target list reading like an LOI list is a common founder slip — and CPG buyers (the target audience for this deck) catch it instantly.",
+    fix: "Two columns. Live (Dan Murphy's, Albert Heijn, BWS) vs. Pipeline (Tesco, Whole Foods, Sainsbury's). Don't conflate.",
+  },
+  {
+    n: 11,
+    title: "The Duchess 250ml can range",
+    image: "/img/duchess/slide-11.jpg",
+    worked: "Pretty product photography.",
+    off: "Same critique as slide 5 — no economics, no occasion, just product. Four of five cans here are repeats of the bottles on slide 5 in a different format. Half a slide of new content stretched to a full slide.",
+    fix: "Cut the slide, or use the slot to show cans + bottles together with format-specific velocity data — \"cans index 1.4× bottles in convenience-store channel.\"",
+  },
+  {
+    n: 12,
+    title: "The global alcohol-free beverage category represents a fast-growing segment",
+    image: "/img/duchess/slide-12.jpg",
+    worked: "World map with multi-country stats. Visually clean.",
+    off: "Stats are 2020 in a 2021 deck — fine. But \"Alcohol-Free drinks revenue hit $160M\" is missing geography (UK only? global?). Every stat is uncited. Investors red-pen un-cited numbers.",
+    fix: "Cite. \"Source: IWSR 2021\" under each number. Cited stats get trusted; un-cited ones get discounted.",
+  },
+  {
+    n: 13,
+    title: "The Duchess has achieved multinational proof of traction (FY2017–FY2021)",
+    image: "/img/duchess/slide-13.jpg",
+    worked: "Five years of actuals. Sales + Cost of Sales + Gross Profit on one chart. Honest about the FY2020 dip (COVID).",
+    off: "$4.9M sales · $2.7M GP · 55% margin. On slide 2 we said \"110% growth in revenue\" — that came on top of what base? Cross-slide arithmetic should reconcile to one consistent number.",
+    fix: "Annotate the chart with the FY2020 → FY2021 % growth and the FY2021 / FY2017 multiple. Self-explanatory > inferred.",
+  },
+  {
+    n: 14,
+    title: "The Duchess seeks to combine its track record with cost management to deliver profitability by 2023",
+    image: "/img/duchess/slide-14.jpg",
+    worked: "Hockey stick to $13.5M with 60% GP. Aggressive but defensible given platform.",
+    off: "No assumption table. \"FY2024 sales income $5.3M\" assumes how many units, in how many markets, at what avg net price?",
+    fix: "Assumption strip at the bottom: \"FY2024 = 4M units @ $1.33 avg net, 3 active markets (SA + NL + AU), 2 SKU launches.\" Three numbers turns a forecast into a business plan.",
+  },
+  {
+    n: 15,
+    title: "The Duchess has a passionate in-house team with a depth of experience",
+    image: "/img/duchess/slide-15.jpg",
+    worked: "Five faces, real bios, named prior ventures (Brannas Draught, BOS Ice Tea, Bacardi/Martini/Weylandts).",
+    off: "My bio reads like a CV (\"Brannas Draught, acquired by KWV\"). Inus's reads like a CV. The team page should answer \"why this team for this brand\" — not list jobs.",
+    fix: "Reframe each bio around the Duchess-specific skill. Mine: \"Brannas to KWV taught me how to sell into an FMCG giant — applying that playbook to AB InBev.\" Inus: \"Designed Brannas, designed The Duchess; same hand, both brands.\" Talita: \"Built BOS Ice Tea's global voice; doing the same here.\" Pattern-match each bio to the company being pitched, not the LinkedIn version.",
+  },
+  {
+    n: 16,
+    title: "Why invest in The Duchess",
+    image: "/img/duchess/slide-16.jpg",
+    worked: "Six-tile recap. Closing line: \"Our mission is to build a healthy, profitable & scalable business that would naturally become an acquisition target for global beverage companies\" — explicit acquisition-as-thesis.",
+    off: "\"A passionate team\", \"Beautiful brand\", \"Innovative range\" — descriptors, not arguments. And the explicit acquisition language reads \"we're built to flip\" — true, but stating it baldly discounts founder commitment.",
+    fix: "Each tile = one specific number/fact. Passionate team → \"5 full-timers, 0 attrition since 2018.\" Market-leading distribution → \"Day 1 access to 55,000 AB InBev SKU-active stores in SA.\" Beautiful brand → \"Two Innobev awards in 2018.\" Drop the explicit acquisition language; the financials telegraph it.",
+  },
+  {
+    n: 17,
+    title: "Contact",
+    image: "/img/duchess/slide-17.jpg",
+    worked: "One email, clean.",
+    off: "2021-me underestimated the close. No Calendly, no data room link, no deadline.",
+    fix: "Today: \"Closing tranche by [date]. Data room on signed NDA. Book a call: [link].\"",
+  },
+  {
+    n: 18,
+    title: "Disclaimer",
+    image: "/img/duchess/slide-18.jpg",
+    worked: "Boilerplate ZA/UK securities-law-compliant.",
+    off: "Two columns of small text on a final slide. Acceptable for a regulated investment proposal.",
+    fix: "Optional — move to appendix or separate cover-letter doc to keep the narrative deck under 17 slides.",
+  },
+];
+---
+
+<BaseLayout
+  title="The deck that raised — annotated, slide by slide"
+  description="In 2021 I closed The Duchess's seed extension with ZX Ventures, AB InBev and RMB. Here's the full deck, slide by slide, with what worked, what was off, and what I'd cut today."
+  jsonLd={[
+    articleSchema({
+      title: "The deck that raised — annotated, slide by slide",
+      description: "Slide-by-slide breakdown of The Duchess's July 2021 investment deck — what worked, what was off, what I'd change today.",
+      pubDate,
+      category: "Playbook",
+      url,
+    }),
+    breadcrumbSchema([
+      { name: "Home", url: site.domain },
+      { name: "The Duchess Deck", url },
+    ]),
+  ]}
+>
+  <article class="pt-20 md:pt-24 pb-20">
+    <header class="container-prose">
+      <div class="flex items-center gap-3 mb-8 reveal">
+        <span class="pill pill-red">Annotated Deck</span>
+        <span class="text-[12px] text-[var(--color-muted)] uppercase tracking-[0.1em]">May 2026 · ~15 min read</span>
+      </div>
+      <h1 class="display-l !text-[clamp(2.4rem,5vw,4rem)] reveal">
+        The deck that raised — and the slides I'd cut now.
+      </h1>
+      <p class="lead mt-8 reveal">
+        In July 2021 this is the deck that brought ZX Ventures, AB InBev and RMB together as co-investors in The Duchess.
+        Five years on, I've ripped it apart slide by slide — what worked, what's off in hindsight, and what I'd cut if I were rebuilding it today.
+      </p>
+    </header>
+
+    <div class="container-prose mt-14 prose reveal">
+      <h2>How I'm reading this</h2>
+      <ul>
+        <li><strong>Quiet-luxury covers worked then because we ran on warm intros only.</strong> In 2026 a deck has to survive cold-forwarding. Cover should carry round + ask + contact even for warm channels.</li>
+        <li><strong>Timeline-as-traction is the move I underused.</strong> Slide 6 (the 2016–2021 trajectory) is the slide that closed AB InBev. I'd reuse this pattern in every deck I've built since.</li>
+        <li><strong>Internal quotes aren't social proof.</strong> Talita as "Global Marketing Manager" speaking to The Duchess's positioning was a familiar founder mistake — investors discount internal voice.</li>
+        <li><strong>Brand vs. product slides need to earn rent.</strong> Slide 3 ("Refresh Your Mind") and slide 11 (cans) both ride on photography. Both could carry one number and become 10× more useful.</li>
+        <li><strong>Recap slides keep being the weakest slide of every deck I've built.</strong> "A passionate team" / "Beautiful brand" — these are descriptors, not arguments.</li>
+      </ul>
+    </div>
+
+    <!-- Soft email gate, top -->
+    <section class="container-prose mt-14 reveal" data-print-hide>
+      <div class="card !p-7 bg-[var(--color-paper-soft)] border border-[var(--color-rule)]">
+        <p class="eyebrow eyebrow-red mb-3">Want the original PDF?</p>
+        <h3 class="font-display text-[1.35rem] font-semibold leading-tight mb-2">
+          Drop your email and I'll send you the unannotated deck.
+        </h3>
+        <p class="text-[14px] text-[var(--color-ink-soft)] mb-5">
+          Same 18 slides as below, in the original Keynote layout — useful as a structural reference for your own raise.
+        </p>
+
+        <form
+          class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]"
+          method="post"
+          action={formAction}
+          novalidate
+        >
+          <input
+            name="name" type="text" autocomplete="name" placeholder="Your name (optional)"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input
+            name="email" required type="email" autocomplete="email" placeholder="you@company.com"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input type="hidden" name="_subject" value="Duchess deck download — new lead" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={`${site.domain}/the-duchess-deck/download`} />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Send me the PDF</button>
+        </form>
+
+        <p class="text-[12px] text-[var(--color-muted)] mt-3">
+          One email, no list, no follow-up unless you ask. <a class="underline-slide text-[var(--color-red)]" href="/privacy">Privacy</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Slides -->
+    <div class="container-prose mt-16 space-y-20">
+      {slides.map((s) => (
+        <section class="reveal" id={`slide-${s.n}`}>
+          <figure class="mb-6">
+            <img
+              src={s.image}
+              alt={`The Duchess pitch deck — slide ${s.n}: ${s.title}`}
+              class="w-full rounded-[var(--radius-md)] border border-[var(--color-rule)] shadow-[0_10px_40px_-12px_rgba(14,14,16,0.18)]"
+              loading="lazy"
+              width="1672"
+              height="1216"
+            />
+          </figure>
+          <div class="prose">
+            <p class="text-[12px] uppercase tracking-[0.14em] text-[var(--color-muted)] !mb-2 !mt-0">Slide {s.n} of {slides.length}</p>
+            <h3 class="!mt-0 !mb-5 !text-[1.6rem] !leading-tight">{s.title}</h3>
+            <p><strong class="text-[var(--color-ink)]">Worked.</strong> {s.worked}</p>
+            <p><strong class="text-[var(--color-red)]">Off (in hindsight).</strong> {s.off}</p>
+            <p><strong class="text-[var(--color-blue)]">Today's fix.</strong> {s.fix}</p>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Lessons -->
+    <div class="container-prose mt-24 prose reveal">
+      <h2>What this deck taught me</h2>
+      <ol>
+        <li><strong>Timeline-as-traction is undefeated.</strong> Slide 6 is the strongest single slide I've ever shipped. Reuse in every venture deck.</li>
+        <li><strong>Lead with the partnership punchline.</strong> ZX/AB InBev was the credibility multiplier — putting it on slide 2 was right; the moat slide (slide 9) should have followed immediately.</li>
+        <li><strong>Internal quotes ≠ social proof.</strong> Talita as a positioning quote was a familiar mistake; replace with retailer or category-manager quotes.</li>
+        <li><strong>Cover-promise vs. product-page consistency.</strong> "Alcohol-Free" on the cover, 6% ABV spritzers on slide 5 — the kind of inconsistency a careful buyer flags.</li>
+        <li><strong>Recap slides deserve specifics.</strong> Tile-recaps with descriptors instead of numbers is a pattern across every deck I've built. Easiest fix, highest impact.</li>
+        <li><strong>Cite every stat.</strong> Costs five minutes. Earns trust.</li>
+        <li><strong>Close with a forcing function.</strong> Even in 2021, a Calendly link plus a deadline would have shortened the close.</li>
+      </ol>
+
+      <h2>If I had to re-cut this deck for 2026 in 12 slides</h2>
+      <ol>
+        <li>Cover (with raise, ask, date, contact)</li>
+        <li>ZX/AB InBev punchline (current slide 2, with reconciled growth math)</li>
+        <li>AB InBev moat slide (current slide 9)</li>
+        <li>Timeline 2016–2021 (current slide 6, the closer)</li>
+        <li>ICP + #sobercurious wedge (current slide 4, with external quote)</li>
+        <li>Product range (current slide 5, with cover-promise alignment)</li>
+        <li>Operations + economics (current slide 7, with margin per bottle)</li>
+        <li>UK + California expansion (current slide 10, Live vs. Pipeline)</li>
+        <li>Financials + forecast (slides 13 + 14, merged with assumption strip)</li>
+        <li>Team (rewritten as founder-market fit)</li>
+        <li>Why Invest (specific numbers, not descriptors)</li>
+        <li>Ask + use of funds + milestone gates + CTA</li>
+      </ol>
+      <p class="!mt-2 text-[var(--color-ink-soft)]"><em>Appendix:</em> disclaimer, cap table, advisor bios, market detail, sourcing.</p>
+    </div>
+
+    <!-- Soft email gate, bottom -->
+    <section class="container-prose mt-20 reveal" data-print-hide>
+      <div class="card !p-7 bg-[var(--color-paper-soft)] border border-[var(--color-rule)]">
+        <p class="eyebrow eyebrow-red mb-3">One more time</p>
+        <h3 class="font-display text-[1.35rem] font-semibold leading-tight mb-2">
+          Want the original PDF in your inbox?
+        </h3>
+        <p class="text-[14px] text-[var(--color-ink-soft)] mb-5">
+          Drop your email below. I'll send you the unannotated deck and nothing else unless you ask.
+        </p>
+
+        <form
+          class="grid gap-3 sm:grid-cols-[1fr_1fr_auto]"
+          method="post"
+          action={formAction}
+          novalidate
+        >
+          <input
+            name="name" type="text" autocomplete="name" placeholder="Your name (optional)"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input
+            name="email" required type="email" autocomplete="email" placeholder="you@company.com"
+            class="px-3 py-2.5 border border-[var(--color-rule-strong)] rounded-[var(--radius-sm)] bg-[var(--color-paper)] focus:border-[var(--color-red)] focus:outline-none font-sans text-[15px]"
+          />
+          <input type="hidden" name="_subject" value="Duchess deck download — new lead" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={`${site.domain}/the-duchess-deck/download`} />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Send me the PDF</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="container-prose mt-20 pt-10 border-t border-[var(--color-rule)] flex flex-wrap gap-4 justify-between items-center">
+      <a href="/journal" class="btn-link text-[13px]">← All journal posts</a>
+      <a href="/coaching#pitch-deck-sprint" class="btn btn-primary">Same review, on your deck →</a>
+    </footer>
+  </article>
+
+  <BigCTA />
+</BaseLayout>

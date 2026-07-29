@@ -1,0 +1,122 @@
+---
+import "@fontsource-variable/geist/index.css";
+import "~/styles/global.css";
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+import CookieBanner from "./CookieBanner.astro";
+import { ClientRouter } from "astro:transitions";
+import { site } from "~/data/site";
+import { canonical, pageTitle } from "~/lib/seo";
+import { ogPathFor } from "~/lib/og";
+
+interface Props {
+  title?: string;
+  /** When true, title is used verbatim — no " | brand" suffix. Use when title already contains the brand. */
+  rawTitle?: boolean;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  /** Page-level JSON-LD blocks. Each item is rendered as its own <script type="application/ld+json">. */
+  jsonLd?: object[];
+}
+
+const { title, rawTitle, description, image, noindex, jsonLd = [] } = Astro.props;
+const resolvedTitle = pageTitle(title, { raw: rawTitle });
+const pageDescription = description ?? site.description;
+const pageImage = image ?? ogPathFor(Astro.url.pathname);
+const url = canonical(Astro.url.pathname);
+const ga = import.meta.env.PUBLIC_GA4_ID;
+const gscToken = import.meta.env.PUBLIC_GSC_VERIFICATION;
+const bingToken = import.meta.env.PUBLIC_BING_VERIFICATION;
+---
+
+<!doctype html>
+<html lang={site.locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#FAFAF7" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={url} />
+    {noindex
+      ? <meta name="robots" content="noindex, nofollow" />
+      : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
+
+    {gscToken && <meta name="google-site-verification" content={gscToken} />}
+    {bingToken && <meta name="msvalidate.01" content={bingToken} />}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta property="og:site_name" content={site.brand} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={new URL(pageImage, site.domain).toString()} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.name} — ${resolvedTitle}`} />
+    <meta property="og:locale" content="en_ZA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={resolvedTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={new URL(pageImage, site.domain).toString()} />
+    <meta name="twitter:image:alt" content={`${site.name} — ${resolvedTitle}`} />
+
+    {jsonLd.map((data) => (
+      <script type="application/ld+json" set:html={JSON.stringify(data)} />
+    ))}
+
+    {ga && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga}`} />
+        <script is:inline define:vars={{ ga }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', ga, { anonymize_ip: true });
+        </script>
+      </>
+    )}
+    {import.meta.env.PROD && (
+      <>
+        <script async src="https://plausible.io/js/pa-raWKb33CArALVPAHUpUR8.js"></script>
+        <script is:inline>
+          window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+          plausible.init()
+        </script>
+      </>
+    )}
+
+    <ClientRouter />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-[var(--color-ink)] focus:text-[var(--color-paper)] focus:px-3 focus:py-2 focus:rounded"
+    >
+      Skip to content
+    </a>
+
+    <Nav />
+    <main id="main" class="flex-1"><slot /></main>
+    <Footer />
+    <CookieBanner />
+
+    <script>
+      // Reveal-on-scroll. Cheap, dependency-free.
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("is-visible")),
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+      );
+      const init = () => document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+      init();
+      document.addEventListener("astro:after-swap", init);
+    </script>
+  </body>
+</html>

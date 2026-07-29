@@ -1,0 +1,23 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  italic?: string;
+  red?: string;
+  lede?: string;
+  align?: "left" | "center";
+  size?: "l" | "xl";
+}
+const { eyebrow, title, italic, red, lede, align = "left", size = "l" } = Astro.props;
+const titleClass = size === "xl" ? "display-xl" : "display-l";
+---
+
+<header class:list={["max-w-3xl reveal", align === "center" && "mx-auto text-center"]}>
+  {eyebrow && <p class="eyebrow eyebrow-red mb-5">{eyebrow}</p>}
+  <h2 class={titleClass}>
+    {title}
+    {italic && (<><br/><span class="display-italic">{italic}</span></>)}
+    {red && (<><br/><span class="display-red">{red}</span></>)}
+  </h2>
+  {lede && <p class="lead mt-6">{lede}</p>}
+</header>
