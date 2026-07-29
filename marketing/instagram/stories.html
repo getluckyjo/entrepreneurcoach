@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8" />
+<title>Claude for Entrepreneurs — Instagram stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Caveat:wght@600&display=swap" rel="stylesheet" />
+<style>
+  /* Brand tokens from site/DESIGN.md. */
+  :root {
+    --paper:#FFFFFF; --bone:#F4F4F1; --ink:#0E0E10; --ink-soft:#2A2A2D;
+    --muted:#6F6F73; --rule:#E0DED7; --red:#F25C2A; --lime:#C6F03A; --night:#0A0A0C;
+    --font:"Geist","Inter Tight",-apple-system,"Helvetica Neue",sans-serif;
+    --script:"Caveat",cursive;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#555;font-family:var(--font)}
+
+  /*
+   * 1080×1920. Instagram overlays its own chrome top and bottom — the profile
+   * row eats roughly the first 250px and the reply bar the last 250px — so all
+   * content sits inside a 200/280 padded safe area and never in the corners.
+   */
+  .story{
+    width:1080px;height:1920px;position:relative;overflow:hidden;
+    padding:200px 90px 280px;display:flex;flex-direction:column;
+    margin:40px auto;
+  }
+
+  .eyebrow{
+    font-size:30px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  }
+  .display{font-weight:800;letter-spacing:-.045em;line-height:.92}
+  .italic{font-style:italic}
+  .sub{font-size:42px;line-height:1.42;font-weight:400}
+
+  /* Bottom slab: same on every story so the series reads as one set. */
+  .foot{margin-top:auto;padding-top:40px;border-top:2px solid;}
+  .foot .where{font-size:31px;font-weight:600;line-height:1.5}
+  .foot .cta{
+    display:inline-block;margin-top:34px;padding:26px 52px;border-radius:999px;
+    font-size:34px;font-weight:700;
+  }
+
+  .pill{
+    display:inline-block;padding:14px 32px;border-radius:999px;
+    font-size:27px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  }
+
+  /* ── 1 · Announcement — night ── */
+  #story1{background:var(--night);color:var(--paper)}
+  /* 104px is the ceiling: "entrepreneurs." is 14 chars and the safe column
+     is 900px (1080 - 2x90). 152px ran a third of the way off the canvas. */
+  #story1 .display{font-size:104px}
+  #story1 .accent{color:var(--red)}
+  #story1 .sub{color:rgba(255,255,255,.82);margin-top:56px}
+  #story1 .foot{border-color:rgba(255,255,255,.22)}
+  #story1 .foot .cta{background:var(--red);color:var(--paper)}
+  #story1 .ticks{list-style:none;margin-top:76px}
+  #story1 .ticks li{
+    display:flex;gap:26px;align-items:flex-start;
+    font-size:37px;line-height:1.35;color:rgba(255,255,255,.8);margin-bottom:34px;
+  }
+  #story1 .ticks svg{flex:none;margin-top:8px}
+  #story1 .mark{position:absolute;right:-140px;top:520px;width:660px;opacity:.05}
+
+  /* ── 2 · What you can build — bone ── */
+  #story2{background:var(--bone);color:var(--ink)}
+  #story2 .display{font-size:116px}
+  #story2 ol{list-style:none;margin-top:70px}
+  #story2 li{
+    display:flex;gap:30px;align-items:baseline;padding:29px 0;
+    border-bottom:2px solid var(--rule);font-size:42px;font-weight:500;
+  }
+  #story2 .n{font-size:28px;font-weight:700;color:var(--red);flex:none;font-variant-numeric:tabular-nums}
+  #story2 .foot{border-color:var(--rule)}
+  #story2 .foot .cta{background:var(--ink);color:var(--paper)}
+
+  /* ── 3 · Clone yourself — paper ── */
+  #story3{background:var(--paper);color:var(--ink)}
+  #story3 .quote{
+    font-size:62px;font-weight:700;line-height:1.16;color:var(--ink-soft);
+    letter-spacing:-.03em;
+  }
+  #story3 .rule{width:150px;height:9px;background:var(--red);margin-bottom:56px}
+  #story3 .display{font-size:142px;margin-top:70px}
+  #story3 .sub{color:var(--ink-soft);margin-top:60px}
+  #story3 .foot{border-color:var(--rule)}
+  #story3 .foot .cta{background:var(--red);color:var(--paper)}
+
+  /* ── 4 · The 4-Hour Work Week — vermilion ── */
+  #story4{background:var(--red);color:var(--ink)}
+  #story4 .display{font-size:104px;line-height:1.0}
+  #story4 .punch{font-size:132px;margin-top:64px}
+  #story4 .sub{color:rgba(14,14,16,.8);margin-top:60px}
+  #story4 .foot{border-color:rgba(14,14,16,.3)}
+  #story4 .foot .cta{background:var(--ink);color:var(--paper)}
+</style>
+</head>
+<body>
+
+<!-- ───────────── 1 · Announcement ───────────── -->
+<section class="story" id="story1">
+  <svg class="mark" viewBox="0 0 200 200" aria-hidden="true">
+    <path d="M30 170 L170 30 M170 30 L70 30 M170 30 L170 130"
+          stroke="#fff" stroke-width="8" fill="none" stroke-linecap="square"/>
+  </svg>
+
+  <p class="eyebrow" style="color:var(--red)">Workshop · Cape Town</p>
+
+  <h1 class="display" style="margin-top:60px">
+    Claude for<br /><span class="italic accent">entrepreneurs.</span>
+  </h1>
+
+  <p class="sub">
+    3 hours. 8 seats.<br />You leave with one real job
+    in your business actually running.
+  </p>
+
+  <!-- Story 1's copy is the shortest of the set, so without these it left a
+       600px hole mid-canvas. Fill it with substance, not centring. -->
+  <ul class="ticks">
+    <li>
+      <svg width="34" height="34" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" stroke="#F25C2A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>A 5-year cashflow model</span>
+    </li>
+    <li>
+      <svg width="34" height="34" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" stroke="#F25C2A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Your month-end pack, rebuilt</span>
+    </li>
+    <li>
+      <svg width="34" height="34" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" stroke="#F25C2A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>A Monday 07:00 brief that writes itself</span>
+    </li>
+    <li>
+      <svg width="34" height="34" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" stroke="#F25C2A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>No code. No developer.</span>
+    </li>
+  </ul>
+
+  <div class="foot">
+    <p class="where">
+      Sat 22 Aug · 10:00–13:00<br />
+      Ideas Cartel, Claremont · R3,500
+    </p>
+    <span class="cta">Tap the link ↑</span>
+  </div>
+</section>
+
+<!-- ───────────── 2 · What you can build ───────────── -->
+<section class="story" id="story2">
+  <p class="eyebrow" style="color:var(--red)">Before lunch</p>
+
+  <h2 class="display" style="margin-top:54px">
+    Things you<br />could make<br /><span class="italic" style="color:var(--red)">before lunch.</span>
+  </h2>
+
+  <ol>
+    <li><span class="n">01</span><span>A 5-year cashflow model</span></li>
+    <li><span class="n">02</span><span>Your month-end pack</span></li>
+    <li><span class="n">03</span><span>An investor deck</span></li>
+    <li><span class="n">04</span><span>A Monday 07:00 brief</span></li>
+    <li style="border-bottom:none"><span class="n">05</span><span>A shareable dashboard</span></li>
+  </ol>
+
+  <div class="foot">
+    <p class="where">3 hours · 8 seats · Claremont<br />No code. No developer.</p>
+    <span class="cta">Tap the link ↑</span>
+  </div>
+</section>
+
+<!-- ───────────── 3 · Clone yourself ───────────── -->
+<section class="story" id="story3">
+  <div class="rule"></div>
+
+  <p class="quote">
+    “If I could just<br />clone myself into<br />5 people, I'd be fine.”
+  </p>
+
+  <h2 class="display">
+    You don't<br />need<br /><span class="italic" style="color:var(--red)">5 of you.</span>
+  </h2>
+
+  <p class="sub">
+    Hiring scales hours.<br />This scales judgement.
+  </p>
+
+  <div class="foot">
+    <p class="where">Claude for Entrepreneurs<br />Sat 22 Aug · 8 seats · Claremont</p>
+    <span class="cta">Tap the link ↑</span>
+  </div>
+</section>
+
+<!-- ───────────── 4 · The 4-Hour Work Week ───────────── -->
+<section class="story" id="story4">
+  <p class="eyebrow" style="opacity:.65">First principles</p>
+
+  <h2 class="display" style="margin-top:56px">
+    The 4-Hour<br />Work Week was<br />the original<br />prompt guide.
+  </h2>
+
+  <h3 class="display punch">
+    Now it<br /><span class="italic" style="color:var(--paper)">actually works.</span>
+  </h3>
+
+  <div class="foot">
+    <p class="where">Claude for Entrepreneurs<br />Sat 22 Aug · 8 seats · R3,500</p>
+    <span class="cta">Tap the link ↑</span>
+  </div>
+</section>
+
+</body>
+</html>
