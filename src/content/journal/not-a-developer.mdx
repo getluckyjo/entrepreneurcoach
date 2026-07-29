@@ -1,6 +1,6 @@
 ---
 title: "Not a developer. 17 things shipped since March."
-description: "What I actually use Claude for as an operator — dashboards, subscription flows, compliance-locked emailers, and the day it rebuilt this website from a deployment after iCloud deleted the source."
+description: "What I actually use Claude for as an operator — 32 branded club storefronts, a WhatsApp agent that handles first contact for Sold Direct, and feasibility models in Excel that used to take a finance team."
 pubDate: 2026-07-29
 category: "Field Notes"
 featured: true
@@ -17,43 +17,61 @@ What changed is that I stopped needing to.
 
 Not a portfolio. Just what's actually there, in the order I built it.
 
-A promotions dashboard for Get Lucky that reads live data out of Google Sheets, because the alternative was me rebuilding the same summary every Monday. A certificate product called Fairways to Heaven. Golf Day Pro. Subscription landing pages with a PayFast webhook wired into them, which is the first time I've ever owned the payment plumbing in one of my own businesses instead of paying someone to own it for me. The Get Lucky marketing site. A site for Epic Golf, the indoor Trackman simulator in Cape Town. A microsite for the Indwe partnership. Ever After Returns. Sell Direct. REKRD, then a coaching layer on top of REKRD. And this website, which I'll come back to.
+A promotions dashboard for Get Lucky that reads live data out of Google Sheets. A certificate product called Fairways to Heaven. Golf Day Pro. Subscription landing pages with a PayFast webhook wired into them — the first time I've owned the payment plumbing in one of my own businesses instead of paying someone else to own it for me. The Get Lucky marketing site. A site for Epic Golf, the indoor Trackman simulator in Cape Town. A microsite for the Indwe partnership. Ever After Returns. Sold Direct. REKRD, then a coaching layer on top of REKRD. And this website.
 
-There's also one called claudefit, which is a small game that tells you to get up and stretch while the AI is working. I built it in an evening. It is not a business. I mention it because the ability to build something silly in an evening is the same ability that lets you build something serious in a weekend, and I don't think people take the second one seriously until they've done the first.
+There's also one called claudefit, a small game that tells you to get up and stretch while the AI is working. I built it in an evening. It is not a business. I mention it because the ability to build something silly in an evening is the same ability that lets you build something serious in a weekend, and I don't think people take the second one seriously until they've done the first.
 
 Four and a half months. Seventeen repositories. One person who can't code.
 
-## The one that actually changed how I think
+## Excel stopped being a specialist skill
 
-Everything above is a website or an app. That's the obvious use, and it's the least interesting one.
+This is the one I'd lead with if you only read one section.
 
-Here's the one that matters.
+Excel was the gate. Properly modelling a business — cost of sales, channel margins, distribution, headcount, a sensitivity analysis on the three drivers that actually matter — was something you either had a finance background to do, or you paid someone. I've sat on both sides of that. I've paid for models, and I've built them badly myself at 1am.
 
-Get Lucky runs campaigns with Indwe Risk Services, and every mailer that goes out has compliance wording in it that Indwe's compliance team signed off. Quote-only mechanics. Specific phrasing that cannot drift, because if it drifts we're making a claim we're not licensed to make.
+I charge R15,000 to build a founder a 5-year cashflow projection. It's a fair price. It takes days and it holds up in a room full of investors.
 
-Historically that lived in my head and in a Word doc nobody opened. Every new campaign was a chance to get it wrong.
+With Claude working directly in Excel, I now build feasibility studies and projections in minutes. Not a rough sketch — a real model, with the formulas intact, that I can interrogate and defend.
 
-So I wrote it down as a rule the machine follows. Now when I say "make me a mailer for the Wild Coast Classic," it starts from the approved structure, keeps the compliance wording exactly as the broker signed it off, and asks me only the things that actually change — venue, dates, the offer line, which photos.
+That should probably worry me more than it does. What it actually means is that the modelling stopped being the expensive part, and the thinking became the expensive part. Which is where it should have been all along. A model is only as good as the assumptions you put into it, and no amount of AI will tell you whether your retailer is really going to take 38% or whether you'll actually ship in March.
 
-That's not automation. It's institutional memory. The rule can't be forgotten by the person doing the work at 11pm, because the person doing the work at 11pm is following a rule it can't skip.
+But the mechanical work — the part that used to keep most business owners out entirely — is gone. If you've avoided building a proper financial model because you don't trust yourself in a spreadsheet, that reason has expired.
 
-Every business I've built has had five or six of these. Rules that live in the founder's head and leak out the moment anyone else touches the job. I've started writing them down.
+## Thirty-two storefronts, one template
 
-The unglamorous version of the same thing: I've got one that fills in PDF forms from my details. Bank forms, applications, the endless South African admin. It keeps its own record of my details and updates itself when something changes. It has saved me nothing impressive — an hour here, forty minutes there. It's just that I no longer lose an afternoon to a scanned PDF, and I used to lose several a year.
+Get Lucky runs the Hole-in-One Challenge across a growing list of golf clubs. Every club wants its own branded page — their colours, their logo, their course photo, their name on it. That's reasonable. It's also historically the thing that makes adding a club expensive enough that you think twice.
 
-## The day it saved this website
+There are now 32 of them. Clovelly, Zimbali, Sun City, Mount Edgecombe, Wild Coast, Simola, San Lameer, Glendower, and the rest.
 
-I'll give you the honest disaster story, because it happened today and it makes the point better than the wins do.
+Each one is a config file. Club name, logo, primary and secondary colour, hero image. That's it. The subscription flow and the payment webhook underneath are the same code for all of them.
 
-This site lives in an iCloud folder. iCloud decided the folder wasn't being used and evicted the contents. No source code. No git history. No backup. Twenty-five empty directories where a website used to be.
+Adding a club used to be a project. Now it's a file, and I can do it between meetings.
 
-The live site was still up, but a built website is not source code — it's the flattened output. You can't edit it.
+That changes something more important than my calendar. When adding a product costs almost nothing, you stop rationing. You stop having the meeting about whether this one is worth the build. You just add it and let the market tell you.
 
-What I'd forgotten is that when you deploy from the command line, the deployment keeps the files you uploaded. Not just the built output — the actual source. So the whole thing came back: every page, every component, the design document, eleven journal posts, ninety-odd images.
+## The agent that answers first
 
-Then it went into git and up to GitHub, which is where it should have been in the first place.
+Sold Direct is a property business — sell your home privately, keep the commission. It runs on WhatsApp, because that's where South Africans actually are.
 
-Two lessons, and only one of them is about AI. The first is that I got lucky, and luck is not a backup strategy. The second is that the recovery took twenty minutes, and five years ago it would have taken a developer, a day, and an invoice — assuming I could find one free that afternoon.
+Behind it is an agent that handles the conversation. It knows the process from mandate to registration, answers what it can, and drafts what it can't for a human to approve before anything goes out. It's wired into the real WhatsApp API, it has its own knowledge base and tools, and it has evaluation tests so I can tell whether a change made it better or worse rather than guessing.
+
+I want to be careful here, because "AI agent" is doing a lot of lying in the market right now. This is not a robot running the business. A property transaction has PPRA-registered practitioners in the loop and legal obligations that do not bend. What the agent does is take first contact — the same twenty questions, asked at 9pm, that used to either wait until morning or cost me a person.
+
+That's the honest version of agents for a small business. Not replacing the team. Handling the first reply so the team gets the second one.
+
+## Teaching it my rules
+
+The most useful thing I've done isn't on that list of 17 at all.
+
+Get Lucky runs campaigns with Indwe Risk Services, and every mailer carries compliance wording their compliance team signed off. Quote-only mechanics. Specific phrasing that cannot drift, because if it drifts we're making a claim we aren't licensed to make.
+
+That used to live in my head and in a document nobody opened. Every new campaign was a fresh chance to get it wrong.
+
+So I wrote it down as a rule the machine follows. Now when I say "make me a mailer for the Wild Coast Classic," it starts from the approved structure, keeps the compliance wording exactly as signed off, and asks me only what actually changes — venue, dates, the offer line, the photos.
+
+That's not automation. It's institutional memory. The rule can't be forgotten by whoever is doing the job at 11pm, because they're following a rule that can't be skipped.
+
+Every business I've built has had five or six of these. Rules that live in the founder's head and leak the moment anyone else touches the work. I've started writing them down.
 
 ## Where it falls over
 
@@ -65,15 +83,13 @@ It won't tell you what to build. It has no opinion about whether your business s
 
 The first two weeks were bad. I was asking questions and getting thin answers, and I nearly wrote the whole thing off. What fixed it wasn't a trick. It was realising I was asking when I should have been briefing — the same skill I've used for 15 years on designers, distributors and investors, pointed somewhere new. Nobody told me that. I wish they had.
 
-And it's a tool. My businesses still live or die on whether the product is good and whether anyone wants it. Nothing here has changed that.
-
 ## What it actually means
 
 I keep hearing that the first one-person billion dollar company is coming. Maybe. I don't know.
 
 What I do know is more boring and more useful: the gap between having an idea and having the thing has collapsed. Not to zero. But from months and a budget, to a weekend and no budget.
 
-For an operator, that's the whole game. Most of my last decade was spent choosing which ideas to kill because I only had the resources to chase one. That constraint is materially different now, and I don't think most business owners have noticed yet.
+For an operator that's the whole game. Most of my last decade was spent choosing which ideas to kill because I only had the resources to chase one. That constraint is materially different now, and I don't think most business owners have noticed yet.
 
 Seventeen things since March. None of them by a developer.
 
