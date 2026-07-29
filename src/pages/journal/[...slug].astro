@@ -24,35 +24,29 @@ const categoryClass = (c: string) =>
                         "pill-ghost";
 
 /*
- * Closing CTAs. A post that argues for the workshop shouldn't end by selling
- * coaching, so `cta: "workshop"` in the frontmatter swaps both the footer
- * button and the full-bleed band. Copy lives here rather than in frontmatter
- * so it stays in one place across however many workshop posts get written.
+ * Closing CTA. `cta: "workshop"` in the frontmatter swaps the full-bleed band
+ * so a post arguing for the workshop doesn't end by selling coaching.
+ *
+ * Only the band carries a CTA. The footer used to repeat it as a button
+ * immediately above, which meant every post asked for the same thing twice
+ * in the space of one screen.
  */
 const bookLabel = cohorts.length > 0 ? "Book a seat" : "Join the waitlist";
 
-const CTAS = {
-  clinic: {
-    footerLabel: "Book a Founder Clinic",
-    footerHref: "/contact",
-    band: undefined, // BigCTA's own defaults are the clinic close
-  },
+const BANDS = {
+  clinic: undefined, // BigCTA's own defaults are the clinic close
   workshop: {
-    footerLabel: bookLabel,
-    footerHref: "/workshop#signup",
-    band: {
-      eyebrow: `${workshop.duration} · ${workshop.seats} seats · ${workshop.venue.area}`,
-      title: ["Eight seats.", "That's it."],
-      body: "Everyone brings one real job from their own business, and we get it running before you leave. At twenty people that's a lecture. At eight it stays a workshop — which is the whole point, and the reason it isn't cheap.",
-      ctaLabel: bookLabel,
-      ctaHref: "/workshop#signup",
-    },
+    eyebrow: `${workshop.duration} · ${workshop.seats} seats · ${workshop.venue.area}`,
+    title: ["Eight seats.", "That's it."],
+    body: "Everyone brings one real job from their own business, and we get it running before you leave. At twenty people that's a lecture. At eight it stays a workshop — which is the whole point, and the reason it isn't cheap.",
+    ctaLabel: bookLabel,
+    ctaHref: "/workshop#signup",
   },
   // No `as const` — it would make `title` a readonly tuple, and BigCTA's Props
   // declares a mutable string[].
 };
 
-const cta = CTAS[post.data.cta];
+const band = BANDS[post.data.cta];
 ---
 
 <BaseLayout
@@ -90,9 +84,8 @@ const cta = CTAS[post.data.cta];
 
     <footer class="container-prose mt-20 pt-10 border-t border-[var(--color-rule)] flex flex-wrap gap-4 justify-between items-center">
       <a href="/journal" class="btn-link text-[13px]">← All posts</a>
-      <a href={cta.footerHref} class="btn btn-primary">{cta.footerLabel}</a>
     </footer>
   </article>
 
-  <BigCTA {...(cta.band ?? {})} />
+  <BigCTA {...(band ?? {})} />
 </BaseLayout>
