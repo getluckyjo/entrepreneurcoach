@@ -89,6 +89,18 @@
   #story3 .foot{border-color:var(--rule)}
   #story3 .foot .cta{background:var(--red);color:var(--paper)}
 
+  /* ── 5 · Scarcity — night. Post when seats are genuinely running out. ── */
+  #story5{background:var(--night);color:var(--paper)}
+  /* The numeral is the whole design — DESIGN.md §3: "numerals are big". */
+  #story5 .num{
+    font-size:520px;font-weight:800;line-height:.78;letter-spacing:-.06em;
+    color:var(--red);display:block;
+  }
+  #story5 .display{font-size:132px;margin-top:24px}
+  #story5 .sub{color:rgba(255,255,255,.82);margin-top:52px}
+  #story5 .foot{border-color:rgba(255,255,255,.22)}
+  #story5 .foot .cta{background:var(--red);color:var(--paper)}
+
   /* ── 4 · The 4-Hour Work Week — vermilion ── */
   #story4{background:var(--red);color:var(--ink)}
   #story4 .display{font-size:104px;line-height:1.0}
@@ -206,6 +218,30 @@
 
   <div class="foot">
     <p class="where">Claude for Entrepreneurs<br />Sat 22 Aug · 8 seats · R3,500</p>
+    <span class="cta">Tap the link ↑</span>
+  </div>
+</section>
+
+<!-- ───────────── 5 · Scarcity ─────────────
+     Update the numeral and `seatsLeft` in src/data/site.ts together, so the
+     story and the website never disagree about how many are left. -->
+<section class="story" id="story5">
+  <p class="eyebrow" style="color:var(--red)">Claude for Entrepreneurs</p>
+
+  <h1 class="display" style="margin-top:70px">
+    <span class="num">2</span>
+    seats <span class="italic" style="color:var(--red)">left.</span>
+  </h1>
+
+  <p class="sub">
+    Eight people, one room, and six of them<br />are already coming.
+  </p>
+
+  <div class="foot">
+    <p class="where">
+      Sat 22 Aug · 10:00–13:00<br />
+      Ideas Cartel, Claremont · R3,500
+    </p>
     <span class="cta">Tap the link ↑</span>
   </div>
 </section>
