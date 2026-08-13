@@ -89,17 +89,27 @@
   #story3 .foot{border-color:var(--rule)}
   #story3 .foot .cta{background:var(--red);color:var(--paper)}
 
-  /* ── 5 · Scarcity — night. Post when seats are genuinely running out. ── */
+  /*
+   * ── 5 · Standalone promo — night ──
+   * Deliberately carries NO seat count. This is the one to post when you're
+   * adding a "2 spots left" sticker on top: a baked-in number would contradict
+   * it the moment the count changes. `.sticker-space` reserves a clear band
+   * for that sticker so it never lands on type.
+   */
   #story5{background:var(--night);color:var(--paper)}
-  /* The numeral is the whole design — DESIGN.md §3: "numerals are big". */
-  #story5 .num{
-    font-size:520px;font-weight:800;line-height:.78;letter-spacing:-.06em;
-    color:var(--red);display:block;
+  #story5 .display{font-size:104px}
+  #story5 .accent{color:var(--red)}
+  #story5 .sub{color:rgba(255,255,255,.82);margin-top:56px;font-size:44px}
+  #story5 .ticks{list-style:none;margin-top:70px}
+  #story5 .ticks li{
+    display:flex;gap:26px;align-items:flex-start;
+    font-size:37px;line-height:1.35;color:rgba(255,255,255,.8);margin-bottom:32px;
   }
-  #story5 .display{font-size:132px;margin-top:24px}
-  #story5 .sub{color:rgba(255,255,255,.82);margin-top:52px}
+  #story5 .ticks svg{flex:none;margin-top:8px}
+  #story5 .sticker-space{min-height:300px}
   #story5 .foot{border-color:rgba(255,255,255,.22)}
   #story5 .foot .cta{background:var(--red);color:var(--paper)}
+  #story5 .mark{position:absolute;right:-140px;top:500px;width:660px;opacity:.05}
 
   /* ── 4 · The 4-Hour Work Week — vermilion ── */
   #story4{background:var(--red);color:var(--ink)}
@@ -222,20 +232,43 @@
   </div>
 </section>
 
-<!-- ───────────── 5 · Scarcity ─────────────
-     Update the numeral and `seatsLeft` in src/data/site.ts together, so the
-     story and the website never disagree about how many are left. -->
+<!-- ───────────── 5 · Standalone promo ─────────────
+     The one to post with a "spots left" sticker over it. No seat count in the
+     artwork, so the sticker is the single source of truth on availability. -->
 <section class="story" id="story5">
-  <p class="eyebrow" style="color:var(--red)">Claude for Entrepreneurs</p>
+  <svg class="mark" viewBox="0 0 200 200" aria-hidden="true">
+    <path d="M30 170 L170 30 M170 30 L70 30 M170 30 L170 130"
+          stroke="#fff" stroke-width="8" fill="none" stroke-linecap="square"/>
+  </svg>
 
-  <h1 class="display" style="margin-top:70px">
-    <span class="num">2</span>
-    seats <span class="italic" style="color:var(--red)">left.</span>
+  <p class="eyebrow" style="color:var(--red)">Workshop · Cape Town</p>
+
+  <h1 class="display" style="margin-top:60px">
+    Claude for<br /><span class="italic accent">entrepreneurs.</span>
   </h1>
 
   <p class="sub">
-    Eight people, one room, and six of them<br />are already coming.
+    3 hours. Your laptop.<br />One real job from your business —
+    running before you leave.
   </p>
+
+  <ul class="ticks">
+    <li>
+      <svg width="34" height="34" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" stroke="#F25C2A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>A 5-year cashflow model</span>
+    </li>
+    <li>
+      <svg width="34" height="34" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" stroke="#F25C2A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Your month-end pack, rebuilt</span>
+    </li>
+    <li>
+      <svg width="34" height="34" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" stroke="#F25C2A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>No code. No developer.</span>
+    </li>
+  </ul>
+
+  <!-- Keep clear: this is where the "2 spots left" sticker goes. -->
+  <div class="sticker-space"></div>
 
   <div class="foot">
     <p class="where">
