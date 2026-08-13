@@ -512,17 +512,17 @@ export const buildIt = {
       group: "Selling",
       icon: "target",
       items: [
+        "An automated sales funnel — lead in, researched, followed up",
         "An investor deck you can defend in the room",
         "Quotes and proposals on your template",
-        "Inbox leads triaged and researched before you read them",
       ],
     },
     {
       group: "Running the place",
       icon: "gear",
       items: [
+        "KPI tracking that chases the team for the number, not you",
         "A Monday 07:00 brief that writes itself",
-        "Reviews built on your competency framework",
         "The SOPs you've never written down",
       ],
     },
@@ -530,7 +530,7 @@ export const buildIt = {
       group: "Tools",
       icon: "wrench",
       items: [
-        "A dashboard you share with a link",
+        "A custom dashboard for your venture, live on your own numbers",
         "A pricing calculator your team can use without you",
         "A one-page site for a deck or a campaign",
       ],
@@ -541,10 +541,10 @@ export const buildIt = {
     "Real files and live links — spreadsheets, decks, documents. No developers, nothing to install.",
 
   after: [
-    "A sales pipeline that researches and drafts the follow-up",
+    "A WhatsApp agent taking first contact, drafts held for your approval",
     "Customer relationships run by exception",
     "Recruitment screened against your actual scorecard",
-    "Resource and roster optimisation",
+    "Resource and roster optimisation across sites, people and stock",
     "A review cycle that summarises itself",
   ],
 

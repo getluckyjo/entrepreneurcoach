@@ -4,6 +4,11 @@
  * Built for copy-paste: each post lives on its own page with no bullets,
  * no bold inside the body, and no smart-formatting that LinkedIn would
  * strip or mangle. Select the block, copy, paste.
+ *
+ * .cjs, not .js — the project's package.json sets "type": "module", which
+ * would make a .js file ESM and break the require() calls below.
+ *
+ * Run:  NODE_PATH="$(npm root -g)" node marketing/linkedin/make-posts-doc.cjs
  */
 const fs = require("fs");
 const {
@@ -96,12 +101,12 @@ const POSTS = [
     image: "card-4.png",
     lines: [
       "Things you could make before lunch:",
-      "A 5-year cashflow model with real COS and channel margins. Your month-end pack, rebuilt from the source spreadsheets instead of by hand. An investor deck you can actually defend in the room. A Monday 07:00 business brief that writes itself. A dashboard you send someone a link to. The SOPs you've never got around to writing down.",
+      "An automated sales funnel — lead in, researched, followed up. KPI tracking that chases the team for the number instead of you. A custom dashboard for your venture, live on your own figures. A 5-year cashflow model with real COS and channel margins. Your month-end pack, rebuilt from source instead of by hand. The SOPs you've never got around to writing down.",
       "None of that needs a developer. None of it needs you to learn to code.",
       "I charge R15,000 to build a 5-year model for a founder. That's a fair price for the work — it takes me days and it holds up in a room full of investors.",
       "It also means that if you walk out of a R3,500 workshop able to build your own, you've paid for the seat four times over before you've had lunch.",
       "That's not the pitch though. The pitch is what happens after.",
-      "Once you can do this, the bigger stuff opens up: a sales pipeline that researches and drafts the follow-up while you approve. Customer relationships run by exception, so you only see the ones that need you. Recruitment screening against your actual scorecard.",
+      "Once you can do this, the bigger stuff opens up: a WhatsApp agent taking first contact, with every draft held for your approval. Customer relationships run by exception, so you only see the ones that need you. Recruitment screened against your actual scorecard.",
       "I'm not going to pretend anyone finishes those in an afternoon. Mine took longer than that. But you don't get there without the foundation, and the foundation is 3 hours.",
       "Claude for Entrepreneurs. Saturday 22 August, Ideas Cartel, Claremont. 8 seats.",
       "entrepreneurcoach.co.za/workshop",
