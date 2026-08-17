@@ -77,7 +77,7 @@ export const ventures: readonly Venture[] = [
     kind: "Beverage",
     role: "Founder",
     years: "2016",
-    note: "The world's first non-alcoholic gin & tonic — built brand-led from Cape Town in 2016. 20M units shipped across 10+ countries, 50%+ of revenue from export. Backed by ZX Ventures (AB InBev's VC arm) and an RMB-led consortium.",
+    note: "The world's first non-alcoholic gin & tonic — built brand-led from Cape Town in 2016. 10M units shipped across 10+ countries, 50%+ of revenue from export. Backed by ZX Ventures (AB InBev's VC arm) and an RMB-led consortium.",
     image: "/img/ventures/the-duchess.jpg",
     imageAlt: "The Duchess non-alcoholic gin & tonic — bottle and brand, founded in Cape Town 2016",
     journalLink: { slug: "the-pitch-deck-that-raised", label: "Read: the deck that raised" },
