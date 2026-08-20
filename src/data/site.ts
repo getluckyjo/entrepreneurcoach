@@ -354,7 +354,7 @@ export const faqs = [
 
 /* ─────────────────────── Workshop: Claude for Entrepreneurs ───────────────────────
  *
- * A 3-hour, in-person, 8-seat workshop at Ideas Cartel Claremont. Deliberately
+ * A 3-hour, in-person, 8-seat workshop at CHIPS in Gardens, Cape Town. Deliberately
  * kept OUT of `offers` — that array drives the /coaching grid, the coaching
  * FAQPage schema, and the /contact package dropdown, and the workshop is a
  * different product with its own page, its own form, and its own schema.
@@ -408,10 +408,17 @@ export const workshop = {
   duration: "3 hours",
   durationISO: "PT3H",
   seats: 8,
+  /** The venue is the WORKSHOP's address, not Johannes's office — the two are
+   *  different places and the event schema must use this one. */
   venue: {
-    name: "Ideas Cartel",
-    area: "Claremont",
+    name: "CHIPS",
+    street: "21 Roodehek Street",
+    area: "Gardens",
     city: "Cape Town",
+    region: "Western Cape",
+    postalCode: "8001",
+    country: "ZA",
+    url: "https://chips.capetown",
   },
 
   /** Standard seat price. Johannes is a sole proprietor and not VAT registered. */
@@ -572,7 +579,7 @@ export const workshopFaqs = [
   },
   {
     q: "Can you run this in-house for my team?",
-    a: "Yes, and it's usually the better option above 8 people. Same three hours, your offices or Ideas Cartel, built around your business rather than eight different ones. Mail me and I'll quote.",
+    a: "Yes, and it's usually the better option above 8 people. Same three hours, your offices or CHIPS in Gardens, built around your business rather than eight different ones. Mail me and I'll quote.",
   },
   {
     q: "What happens after I sign up?",
