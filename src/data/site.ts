@@ -354,7 +354,7 @@ export const faqs = [
 
 /* ─────────────────────── Workshop: Claude for Entrepreneurs ───────────────────────
  *
- * A 3-hour, in-person, 8-seat workshop at Ideas Cartel Claremont. Deliberately
+ * A 3-hour, in-person, 8-seat workshop at CHIPS in Gardens, Cape Town. Deliberately
  * kept OUT of `offers` — that array drives the /coaching grid, the coaching
  * FAQPage schema, and the /contact package dropdown, and the workshop is a
  * different product with its own page, its own form, and its own schema.
@@ -390,15 +390,25 @@ export type Cohort = {
  */
 export const cohorts: readonly Cohort[] = [
   {
-    date: "2026-08-22",
-    startISO: "2026-08-22T10:00:00+02:00",
-    endISO: "2026-08-22T13:00:00+02:00",
-    display: "Saturday 22 August 2026",
+    date: "2026-10-17",
+    startISO: "2026-10-17T10:00:00+02:00",
+    endISO: "2026-10-17T13:00:00+02:00",
+    display: "Saturday 17 October 2026",
     time: "10:00 – 13:00",
     seatsLeft: 8,
     founding: true,
   },
 ];
+
+/*
+ * Ran and sold out: Saturday 22 August 2026 at CHIPS, 8 of 8.
+ * Removed rather than left in place — a past date on a live sales page reads
+ * as an abandoned site, and schema.org would keep emitting an EducationEvent
+ * for an event that has already happened.
+ *
+ * 17 October is the second and last run at the founding rate. When it fills,
+ * set `founding.active` to false and the standard R4,950 takes over.
+ */
 
 export const workshop = {
   slug: "workshop",
@@ -408,10 +418,17 @@ export const workshop = {
   duration: "3 hours",
   durationISO: "PT3H",
   seats: 8,
+  /** The venue is the WORKSHOP's address, not Johannes's office — the two are
+   *  different places and the event schema must use this one. */
   venue: {
-    name: "Ideas Cartel",
-    area: "Claremont",
+    name: "CHIPS",
+    street: "21 Roodehek Street",
+    area: "Gardens",
     city: "Cape Town",
+    region: "Western Cape",
+    postalCode: "8001",
+    country: "ZA",
+    url: "https://chips.capetown",
   },
 
   /** Standard seat price. Johannes is a sole proprietor and not VAT registered. */
@@ -572,7 +589,7 @@ export const workshopFaqs = [
   },
   {
     q: "Can you run this in-house for my team?",
-    a: "Yes, and it's usually the better option above 8 people. Same three hours, your offices or Ideas Cartel, built around your business rather than eight different ones. Mail me and I'll quote.",
+    a: "Yes, and it's usually the better option above 8 people. Same three hours, your offices or CHIPS in Gardens, built around your business rather than eight different ones. Mail me and I'll quote.",
   },
   {
     q: "What happens after I sign up?",
