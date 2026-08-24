@@ -390,15 +390,25 @@ export type Cohort = {
  */
 export const cohorts: readonly Cohort[] = [
   {
-    date: "2026-08-22",
-    startISO: "2026-08-22T10:00:00+02:00",
-    endISO: "2026-08-22T13:00:00+02:00",
-    display: "Saturday 22 August 2026",
+    date: "2026-10-17",
+    startISO: "2026-10-17T10:00:00+02:00",
+    endISO: "2026-10-17T13:00:00+02:00",
+    display: "Saturday 17 October 2026",
     time: "10:00 – 13:00",
     seatsLeft: 8,
     founding: true,
   },
 ];
+
+/*
+ * Ran and sold out: Saturday 22 August 2026 at CHIPS, 8 of 8.
+ * Removed rather than left in place — a past date on a live sales page reads
+ * as an abandoned site, and schema.org would keep emitting an EducationEvent
+ * for an event that has already happened.
+ *
+ * 17 October is the second and last run at the founding rate. When it fills,
+ * set `founding.active` to false and the standard R4,950 takes over.
+ */
 
 export const workshop = {
   slug: "workshop",
