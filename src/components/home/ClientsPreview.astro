@@ -15,7 +15,7 @@ import { clients } from "~/data/clients";
   </div>
 
   <ul class="mt-16 grid gap-6 md:grid-cols-3">
-    {clients.map((c) => (
+    {clients.filter((c) => !c.role).slice(0, 3).map((c) => (
       <li class="reveal">
         <a href={`/clients#${c.slug}`} class="group block">
           <div class="overflow-hidden rounded-[var(--radius-md)] aspect-[4/3] bg-[var(--color-soft)]">
