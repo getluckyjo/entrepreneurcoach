@@ -44,6 +44,8 @@ export type ClientStory = {
   /** Full-width screenshots of live work, shown above the gallery. */
   screens?: readonly ClientImage[];
   gallery: readonly ClientImage[];
+  /** "landscape" shows gallery images uncropped at 3:2. Default is 4:5 portrait. */
+  galleryShape?: "portrait" | "landscape";
 };
 
 export const clients: readonly ClientStory[] = [
@@ -55,11 +57,11 @@ export const clients: readonly ClientStory[] = [
     year: "2026",
     hook: "A tequila spirit cooler from Cape Town, getting ready for a national launch.",
     hero: {
-      src: "/img/clients/dona-fuego/three-cans.jpg",
-      alt: "Doña Fuego Spicy Margarita, Margarita and Paloma cans held side by side",
-      caption: "The range from the launch shoot: Margarita, Spicy Margarita and Paloma.",
+      src: "/img/clients/dona-fuego/toast.jpg",
+      alt: "Friends toasting with Doña Fuego cans over a braai table of corn, salads and meat, shot on a disposable camera",
+      caption: "The toast, shot by one of the guests on a disposable camera.",
       width: 1800,
-      height: 1350,
+      height: 1207,
     },
     brief: [
       "Doña Fuego is a Cape Town distillery that makes a really good drink: real Mexican tequila and real juice in a 250ml can. Margarita, Spicy Margarita, Paloma and a non-alcoholic Margarita. When we started working together, the range had just cleared Checkers' tasting panels for a national launch.",
@@ -68,22 +70,29 @@ export const clients: readonly ClientStory[] = [
     work: [
       "We started with when people actually drink it. About 95% of South African spirit coolers are vodka-based, so a tequila one had room to stand out. We settled on the cooler box: the braai, the boat, the weekend away. The drink you bring when everyone else brings wine.",
       "From there we planned the launch together: a partnership with a cooler brand, cooler boxes dropped at the right gatherings, a photo competition, and a plan for finding the first 1,000 loyal customers. For trade, we picked the stores most likely to move the most cans and put the effort there.",
+      "For the launch content, we skipped the studio. We hosted a braai in Cape Town, gave ten guests disposable cameras and a list of 12 shots to look out for, and let them get on with the afternoon. 679 photos came back, plus a handful of phone videos.",
+      "I edited those down for the brand. The test for every frame was simple: does this make you want to be at that braai, with that can in your hand? Grain, flash and wonky framing were welcome. Every photo was also checked against South Africa's alcohol advertising code, so anything with another brand's drink or a car in the background came out. That left 72 hero frames for Instagram, a small set of clean can shots for Checkers, and the rest sorted for stories and background.",
+      "From the hero frames we planned the Instagram grid, 56 posts including 7 carousels, and cut a short opening film from the guests' own video clips.",
       "For investors, I built a one-page site that explains the business quickly, with a dataroom behind it that only opens once an investor has signed an NDA and the founder has approved them. Every number on it comes from one financial model, so the figures always agree with each other.",
       "The piece that's been most useful day to day is the sales dashboard. Checkers sends a weekly sales email and stock reports, and someone used to copy those into a spreadsheet by hand. Now a script picks them up every 6 hours and a private dashboard shows what was delivered, what actually sold, what's still sitting in stores and how long it should last. It's checked against Checkers' real report format, so the numbers stay right when a report changes.",
     ],
     landed: [
       "Doña Fuego launched nationally in August 2026, exclusive to Checkers in 360 stores and on Sixty60, with 12 months of exclusivity.",
       "The founder went into launch with a clear story for the brand, investor material she's comfortable sending, and sales numbers that update themselves. Nobody has to copy reports into a spreadsheet each week.",
+      "The brand has a launch library that looks like real people having a good time, because it is: hundreds of usable frames, a planned grid and an opening film, all cleared for an alcohol brand to post.",
       "I've since written the dashboard up as a playbook, so other brands selling into Checkers, Shoprite, Pick n Pay or Spar can use the same setup.",
     ],
     stats: [
       { value: "360", label: "Checkers stores at launch, plus Sixty60" },
       { value: "12", label: "Months of national exclusivity" },
+      { value: "679", label: "Photos from 10 guests on disposable cameras" },
       { value: "6h", label: "Between automatic sales updates" },
     ],
     built: [
       "Positioning and audience",
       "Launch campaign plan",
+      "Braai shoot and photo edit",
+      "Instagram grid plan and opening film",
       "Investor site",
       "NDA-gated dataroom",
       "Pro forma financial model",
@@ -91,27 +100,49 @@ export const clients: readonly ClientStory[] = [
     ],
     gallery: [
       {
-        src: "/img/clients/dona-fuego/sunset-toast.jpg",
-        alt: "Friends raising Doña Fuego cocktails in a toast around a long outdoor table at sunset",
-        caption: "A long table at sunset. The moment the brand is made for.",
-        width: 1050,
-        height: 1400,
+        src: "/img/clients/dona-fuego/armful-of-cans.jpg",
+        alt: "A guest carrying an armful of Doña Fuego Paloma and Margarita cans",
+        caption: "An armful of cans on the way to the cooler.",
+        width: 1200,
+        height: 804,
       },
       {
-        src: "/img/clients/dona-fuego/lineup.jpg",
-        alt: "Paloma, Margarita and Spicy Margarita cans on a stone board with fresh chillies and lime",
-        caption: "The range lined up for trade buyers.",
-        width: 1050,
-        height: 1400,
+        src: "/img/clients/dona-fuego/kodak-cheers.jpg",
+        alt: "A guest holding up a disposable camera and a Paloma can, cheersing towards the lens",
+        caption: "Shooting back at the camera, Paloma in hand.",
+        width: 1200,
+        height: 811,
       },
       {
-        src: "/img/clients/dona-fuego/paloma-pour.jpg",
-        alt: "A Doña Fuego Paloma being poured into a salt-rimmed glass beside fresh grapefruit",
-        caption: "A Paloma, poured over grapefruit.",
-        width: 1050,
-        height: 1400,
+        src: "/img/clients/dona-fuego/cooler.jpg",
+        alt: "A hand lifting a Spicy Margarita can out of a white cooler box",
+        caption: "Straight out of the cooler box.",
+        width: 1200,
+        height: 811,
+      },
+      {
+        src: "/img/clients/dona-fuego/corn.jpg",
+        alt: "A guest biting into corn on the cob at sunset, with a light leak across the frame",
+        caption: "Corn, sunset and a light leak. Exactly the kind of frame we wanted.",
+        width: 1200,
+        height: 811,
+      },
+      {
+        src: "/img/clients/dona-fuego/laughing.jpg",
+        alt: "A guest leaning back on a white bench, laughing",
+        caption: "The laughs were not staged.",
+        width: 1200,
+        height: 811,
+      },
+      {
+        src: "/img/clients/dona-fuego/glass.jpg",
+        alt: "A guest blowing a kiss to the camera, holding a Doña Fuego cocktail in a coupe glass",
+        caption: "Last light, coupe in hand.",
+        width: 1200,
+        height: 811,
       },
     ],
+    galleryShape: "landscape",
   },
   {
     slug: "rekrd",
