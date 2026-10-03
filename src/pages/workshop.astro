@@ -33,9 +33,8 @@ const seatsTotal = workshop.seats;
 ---
 
 <BaseLayout
-  title={`Workshop: ${workshop.name} — Cape Town | Johannes le Roux`}
-  rawTitle
-  description={`A 3-hour, hands-on Claude workshop for business owners and executives. ${seatsTotal} seats, in person at ${workshop.venue.name}, ${workshop.venue.area}, Cape Town. ${priceNow} per seat.`}
+  title="AI Workshop for Entrepreneurs, Cape Town"
+  description={`A 3-hour, hands-on AI workshop with Claude for business owners and executives. ${seatsTotal} seats, in person at ${workshop.venue.name}, ${workshop.venue.area}, Cape Town. ${priceNow} per seat.`}
   jsonLd={[
     workshopCourseSchema,
     ...workshopEventSchemas,
@@ -48,7 +47,7 @@ const seatsTotal = workshop.seats;
 >
   <!-- ───────────────────────── Hero ───────────────────────── -->
   <section class="container-page pt-16 md:pt-20 pb-12">
-    <p class="eyebrow eyebrow-red mb-6 reveal">
+    <p class="eyebrow eyebrow-red mb-6">
       {workshop.eyebrow} · {workshop.venue.name}, {workshop.venue.area}
     </p>
 
@@ -56,21 +55,21 @@ const seatsTotal = workshop.seats;
          past the viewport on a 390px phone. Lower the floor and keep the upper
          end where the class has it — same inline-override pattern as Metrics.astro. -->
     <h1
-      class="display-mega max-w-[14ch] reveal"
+      class="display-mega max-w-[14ch]"
       style="font-size: clamp(2.6rem, 10.5vw, 12rem);"
     >
       Claude for<br />
       <span class="display-italic display-red">entrepreneurs.</span>
     </h1>
 
-    <p class="lead mt-8 reveal max-w-2xl">
+    <p class="lead mt-8 max-w-2xl">
       You've tried AI. It was underwhelming. You went back to doing the work
       yourself. Three hours, your laptop, one job you actually hate — you leave
       with it running.
     </p>
 
     <!-- Stat strip -->
-    <dl class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-rule)] border border-[var(--color-rule)] rounded-[var(--radius-lg)] overflow-hidden reveal">
+    <dl class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-rule)] border border-[var(--color-rule)] rounded-[var(--radius-lg)] overflow-hidden">
       {[
         { k: "Duration", v: "3 hrs" },
         { k: "Seats", v: String(seatsTotal) },
@@ -86,7 +85,7 @@ const seatsTotal = workshop.seats;
       ))}
     </dl>
 
-    <div class="mt-8 flex flex-wrap items-center gap-3 reveal">
+    <div class="mt-8 flex flex-wrap items-center gap-3">
       <a href="#signup" class="btn btn-primary text-[15px] !px-7 !py-4">
         {hasDates ? "Book a seat" : "Join the waitlist"}
         <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -97,7 +96,7 @@ const seatsTotal = workshop.seats;
     </div>
 
     {founding && (
-      <p class="mt-6 text-[14px] text-[var(--color-ink-soft)] reveal">
+      <p class="mt-6 text-[14px] text-[var(--color-ink-soft)]">
         <span class="pill pill-lime mr-2">{workshop.founding.label}</span>
         {workshop.founding.display} instead of {workshop.price.display}.
         {" "}{workshop.founding.note}

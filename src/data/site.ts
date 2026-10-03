@@ -16,7 +16,9 @@ export const site = {
   defaultOgImage: "/img/og/home.png", // PNG: social crawlers reject SVG
   locale: "en-ZA",
   email: "leroux.johannes@gmail.com", // canonical contact per Johannes — Gmail-of-record
-  whatsapp: "+27000000000", // replace with real number
+  whatsapp: "+27609615091", // WhatsApp messages only, no calls
+  whatsappDisplay: "+27 60 961 5091",
+  whatsappLink: "https://wa.me/27609615091",
   address: {
     street: "Ideas Cartel, Claremont",
     city: "Cape Town",
@@ -414,7 +416,7 @@ export const workshop = {
   slug: "workshop",
   /** Used in nav, page title, and schema. */
   name: "Claude for Entrepreneurs",
-  eyebrow: "Workshop",
+  eyebrow: "AI workshop",
   duration: "3 hours",
   durationISO: "PT3H",
   seats: 8,
@@ -617,3 +619,35 @@ export const workshopFaqs = [
  *   • Workshop dates → push to `cohorts`. Hero, cohort list, form dropdown
  *     and EducationEvent schema all follow automatically.
  */
+
+/** The four annotated pitch decks. Linked from /coaching, each other and the posts about raising. */
+export const decks = [
+  {
+    slug: "the-duchess-deck",
+    name: "The Duchess",
+    kind: "Seed extension",
+    line: "The deck that closed our round with ZX Ventures, AB InBev and RMB.",
+    cover: "/img/decks/duchess-cover.jpg",
+  },
+  {
+    slug: "the-get-lucky-deck",
+    name: "Get Lucky Golf",
+    kind: "Seed round",
+    line: "The golf-tech seed deck I raised on in South Africa.",
+    cover: "/img/decks/get-lucky-cover.jpg",
+  },
+  {
+    slug: "the-dope-deck",
+    name: "DOPE Drinks",
+    kind: "US raise",
+    line: "The deck I used to raise in America for a cannabis drinks brand.",
+    cover: "/img/decks/dope-cover.jpg",
+  },
+  {
+    slug: "the-suncamino-deck",
+    name: "Suncamino Rum",
+    kind: "Distribution partners",
+    line: "A partnership deck built to sign distributors in new markets.",
+    cover: "/img/decks/suncamino-cover.jpg",
+  },
+] as const;

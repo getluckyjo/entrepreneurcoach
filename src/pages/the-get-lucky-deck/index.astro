@@ -2,6 +2,7 @@
 import BaseLayout from "~/components/layout/BaseLayout.astro";
 import BigCTA from "~/components/home/BigCTA.astro";
 import { articleSchema, breadcrumbSchema } from "~/lib/seo";
+import DeckLinks from "~/components/ui/DeckLinks.astro";
 import { site } from "~/data/site";
 
 const url = `${site.domain}/the-get-lucky-deck`;
@@ -142,8 +143,9 @@ const slides: Slide[] = [
 ---
 
 <BaseLayout
-  title="The deck I just raised on — Get Lucky Golf, slide by slide"
-  description="The deck I just used to close our R4M seed for Get Lucky Golf Club at a R36M pre-money. Golf-tech, AI-verified hole-in-one challenges. Slide by slide, with what worked, what was off, and what I'd cut today."
+  title="Seed Pitch Deck Example: Get Lucky Golf"
+  description="The seed deck behind Get Lucky Golf's R4M raise, slide by slide: what worked, what was off and what I'd cut before sending it again."
+  article={{ published: pubDate }}
   jsonLd={[
     articleSchema({
       title: "The deck I just raised on — Get Lucky Golf, slide by slide",
@@ -160,14 +162,14 @@ const slides: Slide[] = [
 >
   <article class="pt-20 md:pt-24 pb-20">
     <header class="container-prose">
-      <div class="flex items-center gap-3 mb-8 reveal">
+      <div class="flex items-center gap-3 mb-8">
         <span class="pill pill-red">Annotated Deck</span>
         <span class="text-[12px] text-[var(--color-muted)] uppercase tracking-[0.1em]">May 2026 · ~12 min read</span>
       </div>
-      <h1 class="display-l !text-[clamp(2.4rem,5vw,4rem)] reveal">
+      <h1 class="display-l !text-[clamp(2.4rem,5vw,4rem)]">
         The deck I just raised on — Get Lucky Golf.
       </h1>
-      <p class="lead mt-8 reveal">
+      <p class="lead mt-8">
         This is the Get Lucky Golf deck I just used to close our R4M seed at a R36M pre-money — golf-tech, AI-verified hole-in-one challenges. Slide by slide, with what worked, what was off, and what I'd cut if I were sending it again today.
       </p>
     </header>
@@ -231,7 +233,10 @@ const slides: Slide[] = [
               src={s.image}
               alt={`Get Lucky Golf pitch deck — slide ${s.n}: ${s.title}`}
               class="w-full rounded-[var(--radius-md)] border border-[var(--color-rule)] shadow-[0_10px_40px_-12px_rgba(14,14,16,0.18)]"
+              width="1600"
+              height="1200"
               loading="lazy"
+              decoding="async"
             />
           </figure>
           <div class="prose">
@@ -306,6 +311,10 @@ const slides: Slide[] = [
         </form>
       </div>
     </section>
+
+    <div class="container-page mt-24" data-print-hide>
+      <DeckLinks title="More annotated decks" exclude="the-get-lucky-deck" />
+    </div>
 
     <footer class="container-prose mt-20 pt-10 border-t border-[var(--color-rule)] flex flex-wrap gap-4 justify-between items-center">
       <a href="/journal" class="btn-link text-[13px]">← All journal posts</a>

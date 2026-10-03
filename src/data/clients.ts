@@ -316,9 +316,9 @@ export const clients: readonly ClientStory[] = [
       "The question we started with was how to make selling privately free for the seller. Most home sales already have a bank earning inside them through the bond. If the buyer bonds through our partner, the bank pays us and the seller pays no commission. If the buyer pays cash, a simple 1% applies, agreed upfront.",
     ],
     work: [
-      "I've spent my career building consumer brands, and the lesson that carries over to property is to go where people already are. In South Africa, that's WhatsApp. So the whole journey runs there: list your home in a few taps, let buyers enquire and pre-qualify for a bond in the chat, accept an offer, and follow the sale through every stage to registration. No app to download.",
+      "I've spent my career building consumer brands, and the lesson that carries over to property is to go where people already are. In South Africa, that's WhatsApp. So the whole sale runs there: list your home in a few taps, let buyers enquire and pre-qualify for a bond in the chat, accept an offer, and follow the sale through every stage to registration. No app to download.",
       "Get Lucky Golf taught me what a WhatsApp channel can do when it's built properly, and how strict the rules are. We built Sold Direct the same way: consent before anything else, POPIA by design, and every mandate held by a registered practitioner so it sits squarely within the property industry's rules.",
-      "Alongside the product, I've built the brand, the website and the story we take to partners, including a playable demo of the WhatsApp journey so people can try it before we launch.",
+      "Alongside the product, I've built the brand, the website and the story we take to partners, including a playable demo of the WhatsApp flow so people can try it before we launch.",
     ],
     landed: [
       "solddirect.co.za is live with a waitlist for Cape Town sellers and buyers, ahead of our launch.",
@@ -331,12 +331,12 @@ export const clients: readonly ClientStory[] = [
     built: [
       "Business model and positioning",
       "Brand and website",
-      "WhatsApp selling journey",
+      "WhatsApp selling flow",
       "POPIA and compliance approach",
       "Partner story and live demo",
     ],
     demo: {
-      caption: "The whole journey on WhatsApp, from listing to registered sale, as it plays on solddirect.co.za. Press Play, or step through it yourself.",
+      caption: "The whole sale on WhatsApp, from listing to registered sale, as it plays on solddirect.co.za. Press Play, or step through it yourself.",
     },
     gallery: [],
   },

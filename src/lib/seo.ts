@@ -1,16 +1,18 @@
 import { site, offers, faqs, workshop, workshopFaqs, cohorts } from "~/data/site";
+import { ogPathFor } from "~/lib/og";
 
 /**
  * Title helpers.
  *
- * `pageTitle("foo")`            → "foo | Johannes le Roux — Entrepreneur Coach"
+ * `pageTitle("foo")`            → "foo | Johannes le Roux"
  * `pageTitle("foo", { raw: true })` → "foo"   (use when the title already contains the brand)
  * `pageTitle()`                 → homepage default
  */
 export function pageTitle(specific?: string, opts: { raw?: boolean } = {}) {
-  if (!specific) return `Entrepreneur Coach Cape Town | Pitch Decks & Fundraising — Johannes le Roux`;
+  if (!specific) return `Entrepreneur Coach Cape Town | Pitch Decks & Fundraising`;
   if (opts.raw) return specific;
-  return `${specific} | ${site.brand}`;
+  // Short suffix so the specific part, which carries the search terms, isn't cut off in results.
+  return `${specific} | ${site.name}`;
 }
 
 export function canonical(pathname: string) {
@@ -21,24 +23,30 @@ export function canonical(pathname: string) {
 
 /* ───────────── JSON-LD builders. Compose pages with these. ───────────── */
 
+/** Stable ids that tie the person, the business and every article into one graph. */
+export const PERSON_ID = `${site.domain}/about#person`;
+export const BUSINESS_ID = `${site.domain}/#business`;
+/** PNG, because Google rejects SVG for logos and article images. */
+const LOGO = `${site.domain}/icon-512.png`;
+
+/** A short reference to the person, for author/provider/organizer fields. */
+const personRef = { "@type": "Person", "@id": PERSON_ID, name: site.name, url: `${site.domain}/about` };
+
 export const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": PERSON_ID,
   name: "Johannes le Roux",
   url: site.domain,
   image: `${site.domain}/img/johannes-portrait.jpg`,
   jobTitle: "Entrepreneur Coach",
   description: "Cape Town–based operator turned coach. Founder of six brands across SA, Europe, and the US. Coaches founders on pitch decks, fundraising, and international expansion.",
-  worksFor: { "@type": "Organization", name: "Johannes le Roux Coaching" },
+  worksFor: { "@type": "ProfessionalService", "@id": BUSINESS_ID, name: site.brand },
   alumniOf: [
     { "@type": "CollegeOrUniversity", name: "Cambridge Judge Business School", description: "Executive Education — Funding from Seed to Exit" },
   ],
-  sameAs: [
-    site.social.linkedin,
-    "https://www.theduchess.co.za",
-    "https://www.dopedrinks.com",
-    "https://getluckygolfclub.com",
-  ].filter(Boolean),
+  // sameAs is for profiles of the person himself; the ventures he founded are not him.
+  sameAs: [site.social.linkedin].filter(Boolean),
   knowsAbout: [
     "Pitch decks",
     "Fundraising",
@@ -60,11 +68,22 @@ export const personSchema = {
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "@id": `${site.domain}/#business`,
+  "@id": BUSINESS_ID,
   name: site.brand,
   url: site.domain,
   image: `${site.domain}/img/johannes-portrait.jpg`,
+  logo: LOGO,
   email: site.email,
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    description: "WhatsApp messages only, no calls",
+    telephone: site.whatsapp,
+    url: `https://wa.me/${site.whatsapp.replace(/\D/g, "")}`,
+    email: site.email,
+    areaServed: "ZA",
+    availableLanguage: ["English", "Afrikaans"],
+  },
   priceRange: "R2,500 – R45,000",
   description: "Operator-first entrepreneur coaching from Cape Town. Pitch decks, fundraising, founder OS, and international expansion for South African founders.",
   address: {
@@ -81,6 +100,8 @@ export const localBusinessSchema = {
     longitude: site.address.geo.lng,
   },
   areaServed: [
+    { "@type": "City", name: "Cape Town" },
+    { "@type": "AdministrativeArea", name: "Western Cape" },
     { "@type": "Country", name: "South Africa" },
     { "@type": "Country", name: "United States" },
     { "@type": "Country", name: "United Kingdom" },
@@ -94,7 +115,7 @@ export const localBusinessSchema = {
       closes: "17:00",
     },
   ],
-  founder: { "@type": "Person", "@id": `${site.domain}/about#person`, name: "Johannes le Roux" },
+  founder: personRef,
   sameAs: [site.social.linkedin].filter(Boolean),
 };
 
@@ -106,7 +127,7 @@ export const serviceSchemas = offers.map((o) => ({
   name: o.name,
   serviceType: "Entrepreneur coaching",
   description: o.summary,
-  provider: { "@type": "Person", name: "Johannes le Roux", url: site.domain },
+  provider: personRef,
   areaServed: [
     { "@type": "Country", name: "South Africa" },
     { "@type": "Country", name: "United States" },
@@ -159,12 +180,7 @@ export const workshopCourseSchema = {
     "Connecting AI to business data",
     "Automating recurring business tasks",
   ],
-  provider: {
-    "@type": "Person",
-    "@id": `${site.domain}/about#person`,
-    name: "Johannes le Roux",
-    url: site.domain,
-  },
+  provider: personRef,
   audience: {
     "@type": "Audience",
     audienceType: "Business owners, founders and executives",
@@ -215,7 +231,9 @@ export const workshopEventSchemas = cohorts.map((c) => ({
   eventStatus: "https://schema.org/EventScheduled",
   maximumAttendeeCapacity: workshop.seats,
   inLanguage: "en-ZA",
-  organizer: { "@type": "Person", name: "Johannes le Roux", url: site.domain },
+  organizer: personRef,
+  performer: personRef,
+  image: [`${site.domain}/img/og/workshop.png`],
   location: {
     "@type": "Place",
     name: `${workshop.venue.name}, ${workshop.venue.area}`,
@@ -263,15 +281,16 @@ export function articleSchema(opts: {
     "@type": "Article",
     headline: opts.title,
     description: opts.description,
-    image: opts.image ? [opts.image] : [`${site.domain}/img/og-default.svg`],
+    image: [new URL(opts.image ?? ogPathFor(new URL(opts.url).pathname), site.domain).toString()],
     datePublished: opts.pubDate.toISOString(),
     dateModified: (opts.updatedDate ?? opts.pubDate).toISOString(),
     articleSection: opts.category,
-    author: { "@type": "Person", name: "Johannes le Roux", url: site.domain },
+    author: personRef,
     publisher: {
       "@type": "Organization",
+      "@id": BUSINESS_ID,
       name: site.brand,
-      logo: { "@type": "ImageObject", url: `${site.domain}/img/og-default.svg` },
+      logo: { "@type": "ImageObject", url: LOGO, width: 512, height: 512 },
     },
     mainEntityOfPage: opts.url,
   };
@@ -301,3 +320,33 @@ export const websiteSchema = {
   inLanguage: "en-ZA",
   publisher: { "@id": `${site.domain}/#business` },
 };
+
+/** The contact page, pointing at the business that answers. */
+export const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  url: `${site.domain}/contact`,
+  name: `Contact ${site.name}`,
+  about: { "@id": BUSINESS_ID },
+};
+
+/** A video embedded on a page. Google can't find a click-to-load player on its own. */
+export function videoSchema(opts: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: Date;
+  embedUrl: string;
+  contentUrl?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: opts.name,
+    description: opts.description,
+    thumbnailUrl: [new URL(opts.thumbnailUrl, site.domain).toString()],
+    uploadDate: opts.uploadDate.toISOString(),
+    embedUrl: opts.embedUrl,
+    ...(opts.contentUrl && { contentUrl: opts.contentUrl }),
+  };
+}

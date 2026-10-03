@@ -2,6 +2,7 @@
 import BaseLayout from "~/components/layout/BaseLayout.astro";
 import BigCTA from "~/components/home/BigCTA.astro";
 import { articleSchema, breadcrumbSchema } from "~/lib/seo";
+import DeckLinks from "~/components/ui/DeckLinks.astro";
 import { site } from "~/data/site";
 
 const url = `${site.domain}/the-suncamino-deck`;
@@ -166,8 +167,9 @@ const slides: Slide[] = [
 ---
 
 <BaseLayout
-  title="The Suncamino partnership deck — annotated, slide by slide"
-  description="The Suncamino Rum partnership deck — used to sign distribution partners in key markets globally. I'm an advisor on Suncamino and helped Stewy & Inus build this one. Slide by slide: what works, where it could push harder, and what would make each slide even sharper."
+  title="Distribution Partner Deck: Suncamino Rum"
+  description="The Suncamino Rum deck built to sign distribution partners abroad. I advise Suncamino and helped build it. Slide by slide, with what could be sharper."
+  article={{ published: pubDate }}
   jsonLd={[
     articleSchema({
       title: "The Suncamino partnership deck — annotated, slide by slide",
@@ -184,17 +186,17 @@ const slides: Slide[] = [
 >
   <article class="pt-20 md:pt-24 pb-20">
     <header class="container-prose">
-      <div class="flex items-center gap-3 mb-8 reveal">
+      <div class="flex items-center gap-3 mb-8">
         <span class="pill pill-red">Annotated Deck</span>
         <span class="text-[12px] text-[var(--color-muted)] uppercase tracking-[0.1em]">May 2026 · ~14 min read</span>
       </div>
-      <h1 class="display-l !text-[clamp(2.4rem,5vw,4rem)] reveal">
+      <h1 class="display-l !text-[clamp(2.4rem,5vw,4rem)]">
         The Suncamino partnership deck.
       </h1>
-      <p class="lead mt-8 reveal">
+      <p class="lead mt-8">
         Not every deck is built to raise capital. This is one I helped <strong>Stewy &amp; Inus</strong> build at <a class="underline-slide text-[var(--color-red)]" href="https://suncaminorum.com" rel="noopener" target="_blank">Suncamino Rum</a> as their brand-growth advisor — used to sign distribution partnerships in key markets globally. Slide by slide, with what works, where it could push harder, and what would make each slide even sharper.
       </p>
-      <p class="lead mt-6 reveal">
+      <p class="lead mt-6">
         Distributor names have been redacted so the deck reads as a template — Suncamino still uses the live version in active market conversations.
       </p>
       <p class="lead mt-6 reveal text-[var(--color-ink-soft)] !text-[1rem]">
@@ -261,7 +263,10 @@ const slides: Slide[] = [
               src={s.image}
               alt={`Suncamino Rum partnership deck — slide ${s.n}: ${s.title}`}
               class="w-full rounded-[var(--radius-md)] border border-[var(--color-rule)] shadow-[0_10px_40px_-12px_rgba(14,14,16,0.18)]"
+              width="1600"
+              height="1132"
               loading="lazy"
+              decoding="async"
             />
           </figure>
           <div class="prose">
@@ -330,6 +335,10 @@ const slides: Slide[] = [
         </form>
       </div>
     </section>
+
+    <div class="container-page mt-24" data-print-hide>
+      <DeckLinks title="More annotated decks" exclude="the-suncamino-deck" />
+    </div>
 
     <footer class="container-prose mt-20 pt-10 border-t border-[var(--color-rule)] flex flex-wrap gap-4 justify-between items-center">
       <a href="/journal" class="btn-link text-[13px]">← All journal posts</a>

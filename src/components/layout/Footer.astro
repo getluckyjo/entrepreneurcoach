@@ -28,6 +28,8 @@ const year = new Date().getFullYear();
         <p class="eyebrow !text-[var(--color-paper)]/60 mb-5">Site</p>
         <ul class="space-y-2 text-[15px]">
           <li><a class="hover:text-[var(--color-red)]" href="/coaching">Coaching</a></li>
+          <li><a class="hover:text-[var(--color-red)]" href="/coaching#pitch-deck-sprint">Pitch decks</a></li>
+          <li><a class="hover:text-[var(--color-red)]" href="/workshop">AI workshop</a></li>
           <li><a class="hover:text-[var(--color-red)]" href="/clients">Clients</a></li>
           <li><a class="hover:text-[var(--color-red)]" href="/about">About</a></li>
           <li><a class="hover:text-[var(--color-red)]" href="/talks">Talks</a></li>
@@ -40,6 +42,7 @@ const year = new Date().getFullYear();
         <p class="eyebrow !text-[var(--color-paper)]/60 mb-5">Contact</p>
         <address class="not-italic text-[15px] space-y-1 text-[var(--color-paper)]/85">
           <p><a href={`mailto:${site.email}`} class="hover:text-[var(--color-red)]">{site.email}</a></p>
+          <p><a href={site.whatsappLink} class="hover:text-[var(--color-red)]" rel="noopener">WhatsApp {site.whatsappDisplay}</a> <span class="text-[var(--color-paper)]/55">(messages only)</span></p>
           <p>{site.address.street}<br/>{site.address.city}, {site.address.region} {site.address.postalCode}</p>
           <p class="text-[var(--color-paper)]/55">{site.hours}</p>
         </address>

@@ -3,15 +3,15 @@ import BaseLayout from "~/components/layout/BaseLayout.astro";
 import OfferIllustration from "~/components/ui/OfferIllustration.astro";
 import BigCTA from "~/components/home/BigCTA.astro";
 import { offers, faqs, site, workshop } from "~/data/site";
-import { serviceSchemas, faqSchema, breadcrumbSchema } from "~/lib/seo";
+import { serviceSchemas, faqSchema, breadcrumbSchema, localBusinessSchema } from "~/lib/seo";
+import DeckLinks from "~/components/ui/DeckLinks.astro";
 ---
 
 <BaseLayout
-  title="Coaching Packages — Pitch Decks, Fundraising, Founder OS | Johannes le Roux"
-  rawTitle
-  description="Productised coaching for founders. Pitch Deck Sprint, 5-Year Cashflow, Founder OS, International Launch. Transparent pricing from R2,500. Cape Town & remote."
+  title="Business Coaching for Founders, Cape Town"
+  description="Business coaching for founders in Cape Town and online: Pitch Deck Sprint, 5-Year Cashflow, Founder OS and International Launch. Clear prices from R2,500."
   jsonLd={[
-    ...serviceSchemas, faqSchema,
+    localBusinessSchema, ...serviceSchemas, faqSchema,
     breadcrumbSchema([
       { name: "Home",     url: site.domain },
       { name: "Coaching", url: `${site.domain}/coaching` },
@@ -20,12 +20,14 @@ import { serviceSchemas, faqSchema, breadcrumbSchema } from "~/lib/seo";
 >
   <!-- Hero -->
   <section class="container-page pt-20 md:pt-24 pb-16">
-    <p class="eyebrow eyebrow-red mb-6 reveal">Coaching</p>
-    <h1 class="display-mega max-w-[16ch] reveal">
+    <p class="eyebrow eyebrow-red mb-6">Business and founder coaching · Cape Town &amp; online</p>
+    <!-- display-mega floors at 4.5rem, which pushes "deliverable." past the
+         viewport on a 390px phone. Lower the floor, as on the workshop page. -->
+    <h1 class="display-mega max-w-[16ch]" style="font-size: clamp(2.6rem, 10.5vw, 12rem);">
       Pick the package.<br/>
       <span class="display-italic display-red">Get the deliverable.</span>
     </h1>
-    <p class="lead mt-10 reveal">
+    <p class="lead mt-10">
       I coach in productised engagements — three to five sessions with a clear deliverable. You walk in knowing what you'll walk out with: a finished pitch deck, a 90-day operating cadence, a market entry plan. No open-ended retainers.
     </p>
   </section>
@@ -84,6 +86,11 @@ import { serviceSchemas, faqSchema, breadcrumbSchema } from "~/lib/seo";
         </li>
       ))}
     </ul>
+  </section>
+
+  <!-- The annotated decks: proof for the Pitch Deck Sprint, and their main inbound link. -->
+  <section class="container-page pb-20">
+    <DeckLinks title="Real pitch decks, annotated slide by slide" />
   </section>
 
   <!-- Cross-sell to the workshop. The deliverables above (pitch deck, cashflow
