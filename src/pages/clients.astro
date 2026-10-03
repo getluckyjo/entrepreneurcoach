@@ -2,6 +2,7 @@
 import BaseLayout from "~/components/layout/BaseLayout.astro";
 import BigCTA from "~/components/home/BigCTA.astro";
 import { clients } from "~/data/clients";
+import { WhatsAppDemo } from "~/components/clients/sold-direct/WhatsAppDemo";
 import { site } from "~/data/site";
 import { breadcrumbSchema } from "~/lib/seo";
 
@@ -188,8 +189,21 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
           </figure>
         ))}
 
+        <!-- Interactive demo, full width -->
+        {c.demo && (
+          <figure class="mt-20">
+            <div class="rounded-[var(--radius-xl)] bg-white p-4 sm:p-8 ring-1 ring-[var(--color-rule)] text-slate-900">
+              <WhatsAppDemo client:visible />
+            </div>
+            <figcaption class="mt-4 flex items-start gap-3 text-[14px] text-[var(--color-ink-soft)]">
+              <span class="mt-[0.45em] inline-block w-6 h-[3px] bg-[var(--color-red)] shrink-0" aria-hidden="true"></span>
+              {c.demo.caption}
+            </figcaption>
+          </figure>
+        )}
+
         <!-- Gallery -->
-        <ul class="mt-20 grid gap-6 md:grid-cols-3">
+        {c.gallery.length > 0 && <ul class="mt-20 grid gap-6 md:grid-cols-3">
           {c.gallery.map((g) => (
             <li class="reveal">
               <figure>
@@ -211,7 +225,7 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
               </figure>
             </li>
           ))}
-        </ul>
+        </ul>}
       </div>
     </article>
   ))}

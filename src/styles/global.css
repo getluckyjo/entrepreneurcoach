@@ -36,6 +36,17 @@
   /* —— Flair tertiary (lime) —— */
   --color-lime:         #C6F03A;
 
+  /* —— Sold Direct green, only for its WhatsApp demo on /clients ——
+     Copied from getluckyjo/sell-direct (apps/marketing/tailwind.config.ts). */
+  --color-brand-50:     #EAF7EC;
+  --color-brand-100:    #D3EFD9;
+  --color-brand-200:    #ABE2B6;
+  --color-brand-300:    #82D492;
+  --color-brand-500:    #36B44A;
+  --color-brand-600:    #2C9940;
+  --color-brand-700:    #27873A;
+  --color-brand-800:    #217A32;
+
   /* —— Type families —— */
   --font-display: "Geist Variable", "Geist", "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-sans:    "Geist Variable", "Geist", "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -325,4 +336,10 @@
     font-family: var(--font-mono); font-size: 0.9em;
     background: var(--color-bone); padding: 2px 6px; border-radius: 4px;
   }
+}
+
+/* New bubbles in the Sold Direct WhatsApp demo (/clients). */
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
 }

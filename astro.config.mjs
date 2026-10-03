@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
+import react from "@astrojs/react";
 
 export default defineConfig({
   site: "https://www.entrepreneurcoach.co.za",
@@ -9,6 +10,7 @@ export default defineConfig({
   prefetch: { prefetchAll: true, defaultStrategy: "viewport" },
   integrations: [
     mdx(),
+    react(),
     sitemap({
       changefreq: "weekly",
       priority: 0.7,
