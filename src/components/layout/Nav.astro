@@ -17,7 +17,7 @@ const active = (href: string) => href === path || (href !== "/" && path.startsWi
   <nav class="container-page flex items-center justify-between h-[68px]" aria-label="Primary">
     <BrandMark size={26} />
 
-    <ul class="hidden md:flex items-center gap-8 text-[14px] font-medium font-display">
+    <ul class="hidden md:flex items-center gap-3.5 lg:gap-8 text-[13px] lg:text-[14px] font-medium font-display">
       {items.map((it) => (
         <li>
           <a
@@ -36,7 +36,7 @@ const active = (href: string) => href === path || (href !== "/" && path.startsWi
       ))}
     </ul>
 
-    <a href="/contact" class="btn btn-primary text-[13px] !py-2.5 !px-4">
+    <a href="/contact" class="btn btn-primary shrink-0 text-[13px] !py-2.5 !px-4">
       Contact
       <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
         <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
