@@ -126,11 +126,10 @@ export const clients: readonly ClientStory[] = [
     ],
     hero: {
       src: "/img/clients/rekrd/hero.jpg",
-      alt: "Five REKRD electrolyte sachets side by side, each with a different flavour colour",
+      alt: "Five REKRD electrolyte sachets fanned out, beaded with water, one for each flavour",
       caption: "5 flavours, 1 sachet a day. The range the shop was built to sell.",
-      width: 1400,
-      height: 1008,
-      fit: "contain",
+      width: 1800,
+      height: 1013,
     },
     brief: [
       "REKRD is a clean electrolyte powder in single-serve sachets, sold in a collectible 30-sachet tube. Retro, premium, country club rather than locker room. Built for people who play golf and padel, fly long-haul and work late, not just for hard-core athletes.",
@@ -188,10 +187,10 @@ export const clients: readonly ClientStory[] = [
       },
       {
         src: "/img/clients/rekrd/tube.jpg",
-        alt: "The REKRD powder-blue collectible 30-sachet tube",
+        alt: "The REKRD powder-blue 30-sachet tube, beaded with water, reflected on a glossy surface",
         caption: "The tube you keep long after the last sachet.",
-        width: 896,
-        height: 1200,
+        width: 1120,
+        height: 1400,
       },
     ],
   },
