@@ -10,9 +10,8 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
 ---
 
 <BaseLayout
-  title="Client Work · Doña Fuego, REKRD, Van Hunks, Sold Direct | Johannes le Roux"
-  rawTitle
-  description="A few of the founders I work with and what we built together: launch plans, investor sites, a retail sales dashboard, an online shop and WhatsApp channels for Doña Fuego, REKRD, Van Hunks, and my own businesses Sold Direct and Get Lucky Golf."
+  title="Client Work: Brand Strategy and Launches"
+  description="Brand strategy, launch plans, investor sites and WhatsApp channels built with the founders of Doña Fuego, REKRD and Van Hunks, and my own Sold Direct."
   jsonLd={[
     breadcrumbSchema([
       { name: "Home",    url: site.domain },
@@ -22,13 +21,13 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
 >
   <!-- Header -->
   <section class="container-page pt-20 md:pt-24 pb-14">
-    <p class="eyebrow eyebrow-red mb-6 reveal">Client work</p>
-    <h1 class="display-mega reveal">
+    <p class="eyebrow eyebrow-red mb-6">Client work · Brand strategy &amp; launches</p>
+    <h1 class="display-mega">
       Real brands.<br/>
       <span class="display-italic display-red">Real work.</span>
     </h1>
     <div class="grid gap-10 md:grid-cols-12 mt-10">
-      <p class="lead md:col-span-7 reveal">
+      <p class="lead md:col-span-7">
         I've built six brands across South Africa, Europe and the US, and I bring what they taught me, the wins and the mistakes, to the founders I work with. Here are a few of them, and two businesses I co-founded myself. With clients, the products and the hard yards are theirs, and I've left their numbers out, because they're not mine to share.
       </p>
     </div>
@@ -36,7 +35,7 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
     <!-- Jump links -->
     <ul class="mt-14 grid gap-px bg-[var(--color-rule)] lg:grid-cols-5 rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-rule)]">
       {clients.map((c, i) => (
-        <li class="bg-[var(--color-paper)] reveal">
+        <li class="bg-[var(--color-paper)]">
           <a href={`#${c.slug}`} class="group flex flex-col gap-4 p-6 h-full transition-colors hover:bg-[var(--color-bone)]">
             <span class="flex items-center justify-between">
               <span class="num-badge text-[var(--color-red)] !text-[clamp(1.6rem,2.2vw,2rem)]">{pad(i)}</span>

@@ -2,7 +2,8 @@
 import BaseLayout from "~/components/layout/BaseLayout.astro";
 import BigCTA from "~/components/home/BigCTA.astro";
 import { getCollection, render } from "astro:content";
-import { articleSchema, breadcrumbSchema } from "~/lib/seo";
+import { articleSchema, breadcrumbSchema, videoSchema } from "~/lib/seo";
+import DeckLinks from "~/components/ui/DeckLinks.astro";
 import { site, workshop, cohorts } from "~/data/site";
 
 export async function getStaticPaths() {
@@ -12,6 +13,16 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+// Two related posts: same category first, then the most recent others.
+const others = (await getCollection("journal", ({ data }) => !data.draft))
+  .filter((p) => p.slug !== post.slug)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const related = [
+  ...others.filter((p) => p.data.category === post.data.category),
+  ...others.filter((p) => p.data.category !== post.data.category),
+].slice(0, 2);
+const metaDescription = post.data.seoDescription ?? post.data.description;
 const url = `${site.domain}/journal/${post.slug}`;
 const formatted = post.data.pubDate.toLocaleDateString("en-ZA", {
   year: "numeric", month: "long", day: "numeric",
@@ -50,12 +61,13 @@ const band = BANDS[post.data.cta];
 ---
 
 <BaseLayout
-  title={post.data.title}
-  description={post.data.description}
+  title={post.data.seoTitle ?? post.data.title}
+  description={metaDescription}
+  article={{ published: post.data.pubDate, modified: post.data.updatedDate }}
   jsonLd={[
     articleSchema({
       title: post.data.title,
-      description: post.data.description,
+      description: metaDescription,
       pubDate: post.data.pubDate,
       updatedDate: post.data.updatedDate,
       category: post.data.category,
@@ -66,21 +78,51 @@ const band = BANDS[post.data.cta];
       { name: "Journal",  url: `${site.domain}/journal` },
       { name: post.data.title, url },
     ]),
+    ...(post.data.video
+      ? [videoSchema({
+          name: post.data.video.name,
+          description: metaDescription,
+          thumbnailUrl: post.data.video.thumbnail,
+          uploadDate: post.data.video.uploadDate,
+          embedUrl: `https://www.youtube.com/embed/${post.data.video.youtubeId}`,
+          contentUrl: `https://www.youtube.com/watch?v=${post.data.video.youtubeId}`,
+        })]
+      : []),
   ]}
 >
   <article class="pt-20 md:pt-24 pb-20">
     <header class="container-prose">
-      <div class="flex items-center gap-3 mb-8 reveal">
+      <div class="flex items-center gap-3 mb-8">
         <span class:list={["pill", categoryClass(post.data.category)]}>{post.data.category}</span>
         <span class="text-[12px] text-[var(--color-muted)] uppercase tracking-[0.1em]">{formatted}</span>
       </div>
-      <h1 class="display-l !text-[clamp(2.4rem,5vw,4rem)] reveal">{post.data.title}</h1>
-      <p class="lead mt-8 reveal">{post.data.description}</p>
+      <h1 class="display-l !text-[clamp(2.4rem,5vw,4rem)]">{post.data.title}</h1>
+      <p class="lead mt-8">{post.data.description}</p>
     </header>
 
-    <div class="container-prose mt-14 prose reveal">
+    <div class="container-prose mt-14 prose">
       <Content />
     </div>
+
+    {post.data.decks && (
+      <div class="container-page mt-20">
+        <DeckLinks title="The annotated decks" />
+      </div>
+    )}
+
+    <aside class="container-prose mt-20" aria-labelledby="related-title">
+      <p id="related-title" class="eyebrow mb-6">Related</p>
+      <ul class="grid gap-6 sm:grid-cols-2">
+        {related.map((r) => (
+          <li>
+            <a href={`/journal/${r.slug}`} class="group block border-t border-[var(--color-rule)] pt-5">
+              <span class="text-[12px] uppercase tracking-[0.1em] text-[var(--color-muted)]">{r.data.category}</span>
+              <span class="block mt-2 text-[17px] font-semibold leading-snug group-hover:text-[var(--color-red)] transition-colors">{r.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
 
     <footer class="container-prose mt-20 pt-10 border-t border-[var(--color-rule)] flex flex-wrap gap-4 justify-between items-center">
       <a href="/journal" class="btn-link text-[13px]">← All posts</a>

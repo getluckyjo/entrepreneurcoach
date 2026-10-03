@@ -6,6 +6,16 @@ const journal = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
+      /** Shorter title for search results (≤41 chars, the suffix adds 19). The H1 keeps `title`. */
+      seoTitle: z.string().max(41).optional(),
+      /** Meta description when `description`, which is also the visible lede, runs past 160 chars. */
+      seoDescription: z.string().max(160).optional(),
+      /** Show the annotated pitch-deck cards after the post (posts about decks and raising). */
+      decks: z.boolean().default(false),
+      /** A video embedded in the post, for VideoObject schema. */
+      video: z
+        .object({ youtubeId: z.string(), name: z.string(), uploadDate: z.coerce.date(), thumbnail: z.string() })
+        .optional(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
       category: z.enum(["Lecture", "Coaching", "Article", "Interview", "Field Notes", "Playbook"]),

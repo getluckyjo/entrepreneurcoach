@@ -1,0 +1,42 @@
+---
+/**
+ * The annotated pitch decks as a row of cards. Without this the deck pages
+ * had no inbound links at all; search engines found them through the sitemap
+ * alone. `exclude` drops the deck you're already reading.
+ */
+import { decks } from "~/data/site";
+
+interface Props {
+  title?: string;
+  exclude?: string;
+}
+
+const { title = "Annotated pitch decks", exclude } = Astro.props;
+const shown = decks.filter((d) => d.slug !== exclude);
+---
+
+<section aria-labelledby="deck-links-title">
+  <p id="deck-links-title" class="eyebrow eyebrow-red mb-6">{title}</p>
+  <ul class:list={["grid gap-6 sm:grid-cols-2", shown.length > 3 ? "lg:grid-cols-4" : "lg:grid-cols-3"]}>
+    {shown.map((d) => (
+      <li>
+        <a href={`/${d.slug}`} class="group block">
+          <div class="overflow-hidden rounded-[var(--radius-md)] aspect-[16/10] bg-[var(--color-bone)] border border-[var(--color-rule)]">
+            <img
+              src={d.cover}
+              alt={`Cover slide of the ${d.name} pitch deck`}
+              width="640"
+              height="400"
+              class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <span class="block mt-4 text-[12px] uppercase tracking-[0.14em] text-[var(--color-muted)] font-semibold">{d.kind}</span>
+          <span class="block mt-1 text-[18px] font-semibold group-hover:text-[var(--color-red)] transition-colors">{d.name} pitch deck, annotated</span>
+          <span class="block mt-1 text-[14.5px] text-[var(--color-ink-soft)] leading-relaxed">{d.line}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

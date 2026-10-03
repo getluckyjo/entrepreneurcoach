@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "~/components/layout/BaseLayout.astro";
 import { offers, site } from "~/data/site";
-import { breadcrumbSchema } from "~/lib/seo";
+import { breadcrumbSchema, contactPageSchema, localBusinessSchema } from "~/lib/seo";
 
 /*
  * Contact page. Replaces the previous /book scheduler.
@@ -17,9 +17,11 @@ const formAction = `https://formsubmit.co/${site.email}`;
 ---
 
 <BaseLayout
-  title="Contact — Suggest two times to meet"
+  title="Contact: Business Coach in Cape Town"
   description="Get in touch with Johannes le Roux. Tell me about the venture and suggest two times that work for you. One business day reply. Cape Town & remote."
   jsonLd={[
+    contactPageSchema,
+    localBusinessSchema,
     breadcrumbSchema([
       { name: "Home", url: site.domain },
       { name: "Contact", url: `${site.domain}/contact` },
@@ -27,12 +29,12 @@ const formAction = `https://formsubmit.co/${site.email}`;
   ]}
 >
   <section class="container-page pt-20 md:pt-24 pb-12">
-    <p class="eyebrow eyebrow-red mb-6 reveal">Contact</p>
-    <h1 class="display-mega max-w-[16ch] reveal">
+    <p class="eyebrow eyebrow-red mb-6">Contact · Cape Town &amp; online</p>
+    <h1 class="display-mega max-w-[16ch]">
       Tell me more<br/>
       <span class="display-italic display-red">about your venture.</span>
     </h1>
-    <p class="lead mt-10 reveal">
+    <p class="lead mt-10">
       The 30-min Founder Clinic is free; packages start at R15,000. Send a short note and two times that suit you — I'll confirm within one business day.
     </p>
   </section>
@@ -173,6 +175,10 @@ const formAction = `https://formsubmit.co/${site.email}`;
           <li>
             <span class="block text-[12px] uppercase tracking-[0.12em] text-[var(--color-muted)]">Email</span>
             <a href={`mailto:${site.email}`} class="underline-slide text-[var(--color-red)] font-semibold">{site.email}</a>
+          </li>
+          <li>
+            <span class="block text-[12px] uppercase tracking-[0.12em] text-[var(--color-muted)]">WhatsApp (messages only)</span>
+            <a href={site.whatsappLink} class="underline-slide text-[var(--color-red)] font-semibold" rel="noopener">{site.whatsappDisplay}</a>
           </li>
           <li>
             <span class="block text-[12px] uppercase tracking-[0.12em] text-[var(--color-muted)]">In person</span>
