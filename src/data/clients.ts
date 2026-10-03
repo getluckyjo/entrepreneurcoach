@@ -18,6 +18,8 @@ export type ClientImage = {
   height: number;
   /** "contain" for product shots on white that mustn't be cropped. */
   fit?: "cover" | "contain";
+  /** Hero only: show at the image's own proportions instead of 16:9, e.g. a full website header. */
+  natural?: boolean;
 };
 
 export type ClientStory = {
@@ -301,10 +303,11 @@ export const clients: readonly ClientStory[] = [
     links: [{ href: "https://www.solddirect.co.za", label: "solddirect.co.za" }],
     hero: {
       src: "/img/clients/sold-direct/home.jpg",
-      alt: "Screenshot of the Sold Direct website: Sell your home direct. Keep your money.",
+      alt: "The Sold Direct website header: the logo and menu above Sell your home direct. Keep your money.",
       caption: "solddirect.co.za, open for the Cape Town waitlist.",
       width: 1440,
-      height: 900,
+      height: 649,
+      natural: true,
     },
     brief: [
       "Sold Direct is a property business I co-founded in 2026. It's for Cape Town homeowners who want to sell privately, guided on WhatsApp by a concierge and registered property practitioners. Full-service agents remain the right choice for many sellers. We serve the ones who choose to sell direct.",
