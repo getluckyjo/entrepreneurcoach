@@ -381,7 +381,7 @@ export const clients: readonly ClientStory[] = [
     ],
     stats: [
       { value: "30+", label: "Premium South African courses running the challenge" },
-      { value: "R100,000", label: "On a member's next ace, offered for a quote with our sponsor" },
+      { value: "R1 Million", label: "On a member's next ace, offered for a quote with our sponsor" },
     ],
     built: [
       "WhatsApp strategy",
