@@ -1,0 +1,39 @@
+---
+import SectionHeader from "~/components/ui/SectionHeader.astro";
+import { clients } from "~/data/clients";
+---
+
+<section class="container-page py-24 md:py-32 border-t border-[var(--color-rule)]">
+  <div class="flex items-end justify-between gap-8 flex-wrap">
+    <SectionHeader
+      eyebrow="Client work"
+      title="Founders I've"
+      italic="worked with."
+      lede="A few of the brands I've helped this year, and what we built together."
+    />
+    <a href="/clients" class="btn-link text-[14px]">See the client work →</a>
+  </div>
+
+  <ul class="mt-16 grid gap-6 md:grid-cols-3">
+    {clients.map((c) => (
+      <li class="reveal">
+        <a href={`/clients#${c.slug}`} class="group block">
+          <div class="overflow-hidden rounded-[var(--radius-md)] aspect-[4/3] bg-[var(--color-soft)]">
+            <img
+              src={c.hero.src}
+              alt={c.hero.alt}
+              width={c.hero.width}
+              height={c.hero.height}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <span class="pill pill-ghost mt-5">{c.kind}</span>
+          <h3 class="display-l !text-[clamp(1.5rem,2.2vw,1.9rem)] mt-3 group-hover:text-[var(--color-red)] transition-colors">{c.name}</h3>
+          <p class="mt-2 text-[14.5px] text-[var(--color-ink-soft)] leading-relaxed">{c.hook}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

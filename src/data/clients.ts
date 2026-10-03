@@ -53,7 +53,7 @@ export const clients: readonly ClientStory[] = [
     kind: "Tequila RTD",
     where: "Cape Town",
     year: "2026",
-    hook: "A tequila spirit cooler from Cape Town, getting ready for a national launch.",
+    hook: "A tequila spirit cooler from Cape Town, launched nationally with Checkers.",
     hero: {
       src: "/img/clients/dona-fuego/three-cans.jpg",
       alt: "Doña Fuego Spicy Margarita, Margarita and Paloma cans held side by side",
