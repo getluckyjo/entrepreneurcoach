@@ -69,7 +69,7 @@ export const ventures: readonly Venture[] = [
     years: "2025 — present",
     note: "A golf-tech business running the Hole-in-One Challenge across 30+ premium South African courses. AI shot-tracing, video capture, R1m grand prize, Indwe Risk Services on as headline sponsor. Currently scaling globally from a South African base.",
     image: "/img/ventures/get-lucky.jpg",
-    imageAlt: "Get Lucky Golf — Hole-in-One Challenge brand identity, South Africa",
+    imageAlt: "Get Lucky Golf: the Get Lucky mark in forest green on lime",
     tone: "lime",
   },
   {

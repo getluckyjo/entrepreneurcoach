@@ -43,6 +43,18 @@ export type ClientStory = {
   stats: readonly { value: string; label: string }[];
   /** The deliverables, as a checklist. */
   built: readonly string[];
+  /** Optional brand colours: the story renders on the client's own palette. */
+  theme?: {
+    bg: string;
+    ink: string;
+    inkSoft: string;
+    muted: string;
+    accent: string;
+    rule: string;
+    soft: string;
+  };
+  /** Optional small brand mark shown beside the name. */
+  mark?: { src: string; alt: string };
   /** Full-width screenshots of live work, shown above the gallery. */
   screens?: readonly ClientImage[];
   gallery: readonly ClientImage[];
@@ -336,10 +348,20 @@ export const clients: readonly ClientStory[] = [
     year: "2026",
     role: "Co-founder",
     hook: "The Hole-in-One Challenge, following up with golfers on WhatsApp.",
+    theme: {
+      bg: "#1e3120",
+      ink: "#f7f8f4",
+      inkSoft: "rgba(247,248,244,.8)",
+      muted: "rgba(247,248,244,.62)",
+      accent: "#d6fb4b",
+      rule: "rgba(247,248,244,.16)",
+      soft: "#345231",
+    },
+    mark: { src: "/img/clients/get-lucky/mark.png", alt: "Get Lucky mark" },
     hero: {
-      src: "/img/clients/get-lucky/challenge.jpg",
-      alt: "Get Lucky Hole-in-One Challenge logo over a golf course at sunset",
-      caption: "The Get Lucky Hole-in-One Challenge.",
+      src: "/img/clients/get-lucky/activation.jpg",
+      alt: "A golfer celebrating on a Get Lucky Hole-in-One Challenge tee at Cape Town Stadium, with Win a Million flags and an Indwe-branded gazebo",
+      caption: "The challenge on the tee at Cape Town Stadium.",
       width: 1600,
       height: 900,
     },
@@ -377,18 +399,18 @@ export const clients: readonly ClientStory[] = [
         height: 1250,
       },
       {
-        src: "/img/clients/get-lucky/on-the-tee.jpg",
-        alt: "A golfer mid-swing on the tee box at a Get Lucky course",
-        caption: "On the tee.",
-        width: 900,
-        height: 900,
+        src: "/img/clients/get-lucky/course.jpg",
+        alt: "Aerial view of Metropolitan Golf Club beside the Mouille Point seafront in Cape Town",
+        caption: "Metropolitan Golf Club, one of the courses running the challenge.",
+        width: 1200,
+        height: 674,
       },
       {
-        src: "/img/clients/get-lucky/how-it-works.jpg",
-        alt: "Diagram of the Get Lucky challenge: enter, play, verify, win",
-        caption: "How the challenge works, from the scan to the win.",
-        width: 1600,
-        height: 1200,
+        src: "/img/clients/get-lucky/share-card.jpg",
+        alt: "Get Lucky share card: Win a million for a hole-in-1, up to R1,000,000",
+        caption: "The new Get Lucky look: forest green, lime and a million on the line.",
+        width: 1200,
+        height: 630,
         fit: "contain",
       },
     ],
