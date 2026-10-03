@@ -381,7 +381,7 @@ export const clients: readonly ClientStory[] = [
     ],
     stats: [
       { value: "30+", label: "Premium South African courses running the challenge" },
-      { value: "R100,000", label: "On a member's next ace, offered for a quote with our sponsor" },
+      { value: "R1 Million", label: "On a member's next ace, offered for a quote with our sponsor" },
     ],
     built: [
       "WhatsApp strategy",
@@ -406,12 +406,11 @@ export const clients: readonly ClientStory[] = [
         height: 674,
       },
       {
-        src: "/img/clients/get-lucky/share-card.jpg",
-        alt: "Get Lucky share card: Win a million for a hole-in-1, up to R1,000,000",
-        caption: "The new Get Lucky look: forest green, lime and a million on the line.",
-        width: 1200,
-        height: 630,
-        fit: "contain",
+        src: "/img/clients/get-lucky/cap.jpg",
+        alt: "A golfer in a Get Lucky Hole-in-1 Challenge cap, backlit by the sunset on the course",
+        caption: "Sunset on the course, in the cap.",
+        width: 1120,
+        height: 1400,
       },
     ],
   },
