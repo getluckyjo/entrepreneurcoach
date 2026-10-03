@@ -173,7 +173,10 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
           {c.gallery.map((g) => (
             <li class="reveal">
               <figure>
-                <div class="overflow-hidden rounded-[var(--radius-md)] aspect-[4/5] bg-[var(--color-soft)]">
+                <div class:list={[
+                  "overflow-hidden rounded-[var(--radius-md)] bg-[var(--color-soft)]",
+                  c.galleryShape === "landscape" ? "aspect-[3/2]" : "aspect-[4/5]",
+                ]}>
                   <img
                     src={g.src}
                     alt={g.alt}
