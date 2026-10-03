@@ -1,5 +1,7 @@
 # Image assets
 
+_Notes for `public/img/`. Kept out of `public/` so this file isn't published with the site._
+
 Drop production assets in this folder. The site references these paths:
 
 - **`/img/johannes-portrait.jpg`** — hero portrait (used on home + about).
