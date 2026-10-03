@@ -54,8 +54,21 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
       id={c.slug}
       class:list={[
         "scroll-mt-20 border-t border-[var(--color-rule)]",
-        i % 2 === 0 ? "bg-[var(--color-bone)]" : "bg-[var(--color-paper)]",
+        !c.theme && (i % 2 === 0 ? "bg-[var(--color-bone)]" : "bg-[var(--color-paper)]"),
       ]}
+      style={c.theme && [
+        `background:${c.theme.bg}`,
+        `color:${c.theme.ink}`,
+        `--color-ink:${c.theme.ink}`,
+        `--color-ink-soft:${c.theme.inkSoft}`,
+        `--color-muted:${c.theme.muted}`,
+        `--color-rule:${c.theme.rule}`,
+        `--color-rule-strong:${c.theme.rule}`,
+        `--color-red:${c.theme.accent}`,
+        `--color-blue:${c.theme.accent}`,
+        `--color-soft:${c.theme.soft}`,
+        `--color-paper:${c.theme.bg}`,
+      ].join(";")}
       aria-labelledby={`${c.slug}-title`}
     >
       <div class="container-page py-20 md:py-28">
@@ -65,7 +78,12 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
             <p class="eyebrow !text-[var(--color-muted)] mb-4">
               <span class="text-[var(--color-red)]">{pad(i)}</span> · {c.kind} · {c.where} · {c.year}{c.role && <> · <span class="text-[var(--color-ink)]">{c.role}</span></>}
             </p>
-            <h2 id={`${c.slug}-title`} class="display-xl">{c.name}</h2>
+            <div class="flex items-center gap-4">
+              {c.mark && (
+                <img src={c.mark.src} alt={c.mark.alt} width="56" height="56" class="w-12 h-12 md:w-14 md:h-14 rounded-[var(--radius-md)] shrink-0" />
+              )}
+              <h2 id={`${c.slug}-title`} class="display-xl">{c.name}</h2>
+            </div>
             <p class="lead mt-5 max-w-[40ch]">{c.hook}</p>
           </div>
           {c.links && (
@@ -181,7 +199,7 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
                     alt={g.alt}
                     width={g.width}
                     height={g.height}
-                    class:list={["w-full h-full", g.fit === "contain" ? "object-contain bg-white" : "object-cover"]}
+                    class:list={["w-full h-full", g.fit === "contain" ? "object-contain bg-[var(--color-paper)]" : "object-cover"]}
                     loading="lazy"
                     decoding="async"
                   />
