@@ -59,6 +59,8 @@ export type ClientStory = {
   mark?: { src: string; alt: string };
   /** Full-width screenshots of live work, shown above the gallery. */
   screens?: readonly ClientImage[];
+  /** An interactive demo of the work, played full width above the gallery. */
+  demo?: { caption: string };
   gallery: readonly ClientImage[];
   /** "landscape" shows gallery images uncropped at 3:2. Default is 4:5 portrait. */
   galleryShape?: "portrait" | "landscape";
@@ -333,15 +335,10 @@ export const clients: readonly ClientStory[] = [
       "POPIA and compliance approach",
       "Partner story and live demo",
     ],
-    gallery: [
-      {
-        src: "/img/clients/sold-direct/whatsapp-demo.jpg",
-        alt: "The Sold Direct WhatsApp listing flow in the browser demo, asking what kind of home the seller has",
-        caption: "The listing flow, from the playable demo on our site.",
-        width: 1000,
-        height: 1250,
-      },
-    ],
+    demo: {
+      caption: "The whole journey on WhatsApp, from listing to registered sale, as it plays on solddirect.co.za. Press Play, or step through it yourself.",
+    },
+    gallery: [],
   },
   {
     slug: "get-lucky-golf",
