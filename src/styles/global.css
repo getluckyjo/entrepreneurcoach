@@ -37,8 +37,8 @@
   --color-lime:         #C6F03A;
 
   /* —— Type families —— */
-  --font-display: "Geist", "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-sans:    "Geist", "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Geist Variable", "Geist", "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans:    "Geist Variable", "Geist", "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-script:  "Caveat", "Brush Script MT", cursive;
   --font-mono:    ui-monospace, "SF Mono", Menlo, monospace;
 
