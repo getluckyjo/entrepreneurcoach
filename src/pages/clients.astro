@@ -9,9 +9,9 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
 ---
 
 <BaseLayout
-  title="Client Work · Doña Fuego, REKRD, Van Hunks | Johannes le Roux"
+  title="Client Work · Doña Fuego, REKRD, Van Hunks, Sold Direct | Johannes le Roux"
   rawTitle
-  description="A few of the founders I work with and what we built together: launch plans, investor sites, a retail sales dashboard, an online shop and an ambassador programme for Doña Fuego, REKRD and Van Hunks."
+  description="A few of the founders I work with and what we built together: launch plans, investor sites, a retail sales dashboard, an online shop and WhatsApp channels for Doña Fuego, REKRD, Van Hunks, and my own businesses Sold Direct and Get Lucky Golf."
   jsonLd={[
     breadcrumbSchema([
       { name: "Home",    url: site.domain },
@@ -28,22 +28,21 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
     </h1>
     <div class="grid gap-10 md:grid-cols-12 mt-10">
       <p class="lead md:col-span-7 reveal">
-        I've built six brands across South Africa, Europe and the US, and I bring what they taught me, the wins and the mistakes, to the founders I work with. Here are a few of them. The products and the hard yards are theirs. I've left their numbers out, because they're not mine to share.
+        I've built six brands across South Africa, Europe and the US, and I bring what they taught me, the wins and the mistakes, to the founders I work with. Here are a few of them, and two businesses I co-founded myself. With clients, the products and the hard yards are theirs, and I've left their numbers out, because they're not mine to share.
       </p>
     </div>
 
     <!-- Jump links -->
-    <ul class="mt-14 grid gap-px bg-[var(--color-rule)] md:grid-cols-3 rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-rule)]">
+    <ul class="mt-14 grid gap-px bg-[var(--color-rule)] lg:grid-cols-5 rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-rule)]">
       {clients.map((c, i) => (
         <li class="bg-[var(--color-paper)] reveal">
-          <a href={`#${c.slug}`} class="group flex items-start gap-5 p-6 md:p-7 h-full transition-colors hover:bg-[var(--color-bone)]">
-            <span class="num-badge text-[var(--color-red)] !text-[clamp(1.8rem,2.6vw,2.3rem)]">{pad(i)}</span>
-            <span class="flex-1">
-              <span class="pill pill-ghost">{c.kind}</span>
-              <span class="block display-l !text-[clamp(1.5rem,2.2vw,1.9rem)] mt-3">{c.name}</span>
-              <span class="block mt-2 text-[14px] text-[var(--color-ink-soft)] leading-snug">{c.hook}</span>
+          <a href={`#${c.slug}`} class="group flex flex-col gap-4 p-6 h-full transition-colors hover:bg-[var(--color-bone)]">
+            <span class="flex items-center justify-between">
+              <span class="num-badge text-[var(--color-red)] !text-[clamp(1.6rem,2.2vw,2rem)]">{pad(i)}</span>
+              <span class="text-[var(--color-red)] transition-transform group-hover:translate-y-0.5" aria-hidden="true">↓</span>
             </span>
-            <span class="text-[var(--color-red)] transition-transform group-hover:translate-y-0.5" aria-hidden="true">↓</span>
+            <span class="display-l !text-[clamp(1.4rem,1.8vw,1.7rem)]">{c.name}</span>
+            <span class="text-[12px] uppercase tracking-[0.14em] text-[var(--color-muted)] font-semibold">{c.kind}{c.role && <> · <span class="text-[var(--color-ink)]">{c.role}</span></>}</span>
           </a>
         </li>
       ))}
@@ -64,7 +63,7 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
         <div class="grid gap-6 md:grid-cols-12 items-end mb-10">
           <div class="md:col-span-8 reveal">
             <p class="eyebrow !text-[var(--color-muted)] mb-4">
-              <span class="text-[var(--color-red)]">{pad(i)}</span> · {c.kind} · {c.where} · {c.year}
+              <span class="text-[var(--color-red)]">{pad(i)}</span> · {c.kind} · {c.where} · {c.year}{c.role && <> · <span class="text-[var(--color-ink)]">{c.role}</span></>}
             </p>
             <h2 id={`${c.slug}-title`} class="display-xl">{c.name}</h2>
             <p class="lead mt-5 max-w-[40ch]">{c.hook}</p>
@@ -182,7 +181,7 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
                     alt={g.alt}
                     width={g.width}
                     height={g.height}
-                    class="w-full h-full object-cover"
+                    class:list={["w-full h-full", g.fit === "contain" ? "object-contain bg-white" : "object-cover"]}
                     loading="lazy"
                     decoding="async"
                   />

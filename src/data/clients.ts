@@ -26,6 +26,8 @@ export type ClientStory = {
   kind: string;
   where: string;
   year: string;
+  /** Set when this is my own business rather than a client, e.g. "Co-founder". */
+  role?: string;
   /** One line under the name. */
   hook: string;
   /** Public links to the client's live work, where there is any. */
@@ -273,6 +275,121 @@ export const clients: readonly ClientStory[] = [
         caption: "Sundowners with friends.",
         width: 1400,
         height: 934,
+      },
+    ],
+  },
+  {
+    slug: "sold-direct",
+    name: "Sold Direct",
+    kind: "Property",
+    where: "Cape Town",
+    year: "2026",
+    role: "Co-founder",
+    hook: "A WhatsApp-first way to sell your home privately in Cape Town.",
+    links: [{ href: "https://www.solddirect.co.za", label: "solddirect.co.za" }],
+    hero: {
+      src: "/img/clients/sold-direct/home.jpg",
+      alt: "Screenshot of the Sold Direct website: Sell your home direct. Keep your money.",
+      caption: "solddirect.co.za, open for the Cape Town waitlist.",
+      width: 1440,
+      height: 900,
+    },
+    brief: [
+      "Sold Direct is a property business I co-founded in 2026. It's for Cape Town homeowners who want to sell privately, guided on WhatsApp by a concierge and registered property practitioners. Full-service agents remain the right choice for many sellers. We serve the ones who choose to sell direct.",
+      "The question we started with was how to make selling privately free for the seller. Most home sales already have a bank earning inside them through the bond. If the buyer bonds through our partner, the bank pays us and the seller pays no commission. If the buyer pays cash, a simple 1% applies, agreed upfront.",
+    ],
+    work: [
+      "I've spent my career building consumer brands, and the lesson that carries over to property is to go where people already are. In South Africa, that's WhatsApp. So the whole journey runs there: list your home in a few taps, let buyers enquire and pre-qualify for a bond in the chat, accept an offer, and follow the sale through every stage to registration. No app to download.",
+      "Get Lucky Golf taught me what a WhatsApp channel can do when it's built properly, and how strict the rules are. We built Sold Direct the same way: consent before anything else, POPIA by design, and every mandate held by a registered practitioner so it sits squarely within the property industry's rules.",
+      "Alongside the product, I've built the brand, the website and the story we take to partners, including a playable demo of the WhatsApp journey so people can try it before we launch.",
+    ],
+    landed: [
+      "solddirect.co.za is live with a waitlist for Cape Town sellers and buyers, ahead of our launch.",
+      "It's early days, so there's a lot more of this story to come.",
+    ],
+    stats: [
+      { value: "0%", label: "Commission for the seller when the buyer bonds through our partner" },
+      { value: "1%", label: "For cash sales, agreed upfront" },
+    ],
+    built: [
+      "Business model and positioning",
+      "Brand and website",
+      "WhatsApp selling journey",
+      "POPIA and compliance approach",
+      "Partner story and live demo",
+    ],
+    gallery: [
+      {
+        src: "/img/clients/sold-direct/whatsapp-demo.jpg",
+        alt: "The Sold Direct WhatsApp listing flow in the browser demo, asking what kind of home the seller has",
+        caption: "The listing flow, from the playable demo on our site.",
+        width: 1000,
+        height: 1250,
+      },
+    ],
+  },
+  {
+    slug: "get-lucky-golf",
+    name: "Get Lucky Golf",
+    kind: "Golf",
+    where: "South Africa",
+    year: "2026",
+    role: "Co-founder",
+    hook: "The Hole-in-One Challenge, following up with golfers on WhatsApp.",
+    hero: {
+      src: "/img/clients/get-lucky/challenge.jpg",
+      alt: "Get Lucky Hole-in-One Challenge logo over a golf course at sunset",
+      caption: "The Get Lucky Hole-in-One Challenge.",
+      width: 1600,
+      height: 900,
+    },
+    brief: [
+      "Get Lucky Golf is my own business, which I co-founded. We run the Hole-in-One Challenge on premium South African golf courses: golfers scan a code at the par 3, enter, and take their shot at a cash prize, with cameras verifying the ace. Indwe Risk Services is our headline sponsor.",
+      "Golfers enter on a web form at the tee. The opportunity was what happens next: turning an entry into a relationship, and giving our sponsor something real in return for backing us.",
+    ],
+    work: [
+      "We chose to follow up on WhatsApp, because that's where South African golfers already are. After entering, a golfer who opted in gets a message from Get Lucky offering 12 months of complimentary Hole-in-One Membership in return for an insurance quote from Indwe. There's no obligation to switch, and there's real value on both sides.",
+      "We built the channel ourselves on Twilio rather than renting a chatbot, so every word and every step stays ours. A few short questions find out what the golfer wants covered, then they pick a day and time for an Indwe Advisor to call. Each finished conversation becomes a quote-ready lead for the sponsor.",
+      "WhatsApp is strict about business messaging, and rightly so. Every template goes through Meta's approval, nobody is messaged without opting in, a stop request is honoured immediately, and the questions stay as few as possible. That discipline is what keeps a channel like this alive.",
+      "It's the same playbook I'm now using at Sold Direct: WhatsApp at the centre, built properly, with compliance from the first message.",
+    ],
+    landed: [
+      "The Get Lucky WhatsApp line is live with Meta's verified tick, and the opt-in sits on the entry forms at the tee.",
+      "Every golfer who finishes the conversation reaches Indwe as a quote-ready lead, with the call time they chose.",
+    ],
+    stats: [
+      { value: "30+", label: "Premium South African courses running the challenge" },
+      { value: "R100,000", label: "On a member's next ace, offered for a quote with our sponsor" },
+    ],
+    built: [
+      "WhatsApp strategy",
+      "Sponsor offer with Indwe",
+      "WhatsApp channel on Twilio",
+      "Golfer questions and advisor booking",
+      "Opt-in and compliance",
+    ],
+    gallery: [
+      {
+        src: "/img/clients/get-lucky/whatsapp.jpg",
+        alt: "Mock-up of the Get Lucky WhatsApp follow-up offering 12 months of membership for an insurance quote",
+        caption: "The follow-up a golfer receives after entering. A mock-up of the real messages.",
+        width: 1000,
+        height: 1250,
+      },
+      {
+        src: "/img/clients/get-lucky/on-the-tee.jpg",
+        alt: "A golfer mid-swing on the tee box at a Get Lucky course",
+        caption: "On the tee.",
+        width: 900,
+        height: 900,
+      },
+      {
+        src: "/img/clients/get-lucky/how-it-works.jpg",
+        alt: "Diagram of the Get Lucky challenge: enter, play, verify, win",
+        caption: "How the challenge works, from the scan to the win.",
+        width: 1600,
+        height: 1200,
+        fit: "contain",
       },
     ],
   },
