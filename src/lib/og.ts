@@ -51,6 +51,12 @@ export const ogPanels: Record<string, OgPanel> = {
     line2: "Coach second.",
     kicker: "Founder · The Duchess · DOPE Drinks · Get Lucky Golf",
   },
+  clients: {
+    eyebrow: "CLIENT WORK",
+    line1: "Real brands.",
+    line2: "Real work.",
+    kicker: "Doña Fuego · REKRD · Van Hunks",
+  },
   talks: {
     eyebrow: "KEYNOTE TALKS",
     line1: "Honest learnings",

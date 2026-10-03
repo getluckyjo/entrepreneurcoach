@@ -1,0 +1,203 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import BigCTA from "~/components/home/BigCTA.astro";
+import { clients } from "~/data/clients";
+import { site } from "~/data/site";
+import { breadcrumbSchema } from "~/lib/seo";
+
+const pad = (i: number) => String(i + 1).padStart(2, "0");
+---
+
+<BaseLayout
+  title="Client Work · Doña Fuego, REKRD, Van Hunks | Johannes le Roux"
+  rawTitle
+  description="What I've built with founders: launch strategy, investor sites, live retail dashboards, ecommerce and trade tools for Doña Fuego, REKRD and Van Hunks."
+  jsonLd={[
+    breadcrumbSchema([
+      { name: "Home",    url: site.domain },
+      { name: "Clients", url: `${site.domain}/clients` },
+    ]),
+  ]}
+>
+  <!-- Header -->
+  <section class="container-page pt-20 md:pt-24 pb-14">
+    <p class="eyebrow eyebrow-red mb-6 reveal">Client work</p>
+    <h1 class="display-mega reveal">
+      Real brands.<br/>
+      <span class="display-italic display-red">Real work.</span>
+    </h1>
+    <div class="grid gap-10 md:grid-cols-12 mt-10">
+      <p class="lead md:col-span-7 reveal">
+        Coaching is the conversation. This is what comes out of it: the positioning, the decks, the models, the shops and the dashboards I've built alongside founders this year. Their numbers stay theirs. The work is here.
+      </p>
+    </div>
+
+    <!-- Jump links -->
+    <ul class="mt-14 grid gap-px bg-[var(--color-rule)] md:grid-cols-3 rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-rule)]">
+      {clients.map((c, i) => (
+        <li class="bg-[var(--color-paper)] reveal">
+          <a href={`#${c.slug}`} class="group flex items-start gap-5 p-6 md:p-7 h-full transition-colors hover:bg-[var(--color-bone)]">
+            <span class="num-badge text-[var(--color-red)] !text-[clamp(1.8rem,2.6vw,2.3rem)]">{pad(i)}</span>
+            <span class="flex-1">
+              <span class="pill pill-ghost">{c.kind}</span>
+              <span class="block display-l !text-[clamp(1.5rem,2.2vw,1.9rem)] mt-3">{c.name}</span>
+              <span class="block mt-2 text-[14px] text-[var(--color-ink-soft)] leading-snug">{c.hook}</span>
+            </span>
+            <span class="text-[var(--color-red)] transition-transform group-hover:translate-y-0.5" aria-hidden="true">↓</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {clients.map((c, i) => (
+    <article
+      id={c.slug}
+      class:list={[
+        "scroll-mt-20 border-t border-[var(--color-rule)]",
+        i % 2 === 0 ? "bg-[var(--color-bone)]" : "bg-[var(--color-paper)]",
+      ]}
+      aria-labelledby={`${c.slug}-title`}
+    >
+      <div class="container-page py-20 md:py-28">
+        <!-- Title row -->
+        <div class="grid gap-6 md:grid-cols-12 items-end mb-10">
+          <div class="md:col-span-8 reveal">
+            <p class="eyebrow !text-[var(--color-muted)] mb-4">
+              <span class="text-[var(--color-red)]">{pad(i)}</span> · {c.kind} · {c.where} · {c.year}
+            </p>
+            <h2 id={`${c.slug}-title`} class="display-xl">{c.name}</h2>
+            <p class="lead mt-5 max-w-[40ch]">{c.hook}</p>
+          </div>
+          {c.links && (
+            <div class="md:col-span-4 flex flex-wrap gap-3 md:justify-end reveal">
+              {c.links.map((l) => (
+                <a href={l.href} class="btn btn-ghost" target="_blank" rel="noopener">
+                  Visit {l.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- Hero image with the red caption stripe -->
+        <figure class="reveal">
+          <div class:list={[
+            "overflow-hidden rounded-[var(--radius-lg)] aspect-[16/9]",
+            c.hero.fit === "contain" ? "bg-white" : "bg-[var(--color-soft)]",
+          ]}>
+            <img
+              src={c.hero.src}
+              alt={c.hero.alt}
+              width={c.hero.width}
+              height={c.hero.height}
+              class:list={["w-full h-full", c.hero.fit === "contain" ? "object-contain" : "object-cover"]}
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
+          </div>
+          <figcaption class="mt-4 flex items-start gap-3 text-[14px] text-[var(--color-ink-soft)]">
+            <span class="mt-[0.45em] inline-block w-6 h-[3px] bg-[var(--color-red)] shrink-0" aria-hidden="true"></span>
+            {c.hero.caption}
+          </figcaption>
+        </figure>
+
+        <!-- Story + sidebar -->
+        <div class="grid gap-14 md:grid-cols-12 mt-16">
+          <div class="md:col-span-7 space-y-12">
+            <section class="reveal">
+              <p class="eyebrow eyebrow-red mb-4">The brief</p>
+              {c.brief.map((p) => <p class="text-[17px] leading-[1.65] text-[var(--color-ink-soft)] mb-4">{p}</p>)}
+            </section>
+            <section class="reveal">
+              <p class="eyebrow eyebrow-red mb-4">What we built</p>
+              {c.work.map((p) => <p class="text-[17px] leading-[1.65] text-[var(--color-ink-soft)] mb-4">{p}</p>)}
+            </section>
+            <section class="reveal">
+              <p class="eyebrow eyebrow-red mb-4">Where it landed</p>
+              {c.landed.map((p) => <p class="text-[17px] leading-[1.65] text-[var(--color-ink)] font-medium mb-4">{p}</p>)}
+            </section>
+          </div>
+
+          <aside class="md:col-span-4 md:col-start-9">
+            <div class="md:sticky md:top-24 space-y-10">
+              <dl class="divide-y divide-[var(--color-rule)] border-y border-[var(--color-rule)] reveal">
+                {c.stats.map((s) => (
+                  <div class="py-5">
+                    <dt class="sr-only">{s.label}</dt>
+                    <dd>
+                      <span class="block font-display font-bold tracking-[-0.035em] leading-none text-[var(--color-blue)] text-[clamp(2.6rem,4.5vw,3.8rem)] tabular-nums">{s.value}</span>
+                      <span class="block mt-2 text-[14px] text-[var(--color-ink-soft)]">{s.label}</span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <div class="reveal">
+                <p class="eyebrow mb-4">Built</p>
+                <ul class="space-y-2.5">
+                  {c.built.map((b) => (
+                    <li class="flex items-start gap-3 text-[15px]">
+                      <span class="mt-[0.5em] inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-red)] shrink-0" aria-hidden="true"></span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Screenshots of the live work, full width -->
+        {c.screens?.map((sc) => (
+          <figure class="mt-20 reveal">
+            <div class="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-rule)] bg-[var(--color-paper)] shadow-[0_1px_0_var(--color-rule)]">
+              <img
+                src={sc.src}
+                alt={sc.alt}
+                width={sc.width}
+                height={sc.height}
+                class="w-full h-auto block"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption class="mt-4 flex items-start gap-3 text-[14px] text-[var(--color-ink-soft)]">
+              <span class="mt-[0.45em] inline-block w-6 h-[3px] bg-[var(--color-red)] shrink-0" aria-hidden="true"></span>
+              {sc.caption}
+            </figcaption>
+          </figure>
+        ))}
+
+        <!-- Gallery -->
+        <ul class="mt-20 grid gap-6 md:grid-cols-3">
+          {c.gallery.map((g) => (
+            <li class="reveal">
+              <figure>
+                <div class="overflow-hidden rounded-[var(--radius-md)] aspect-[4/5] bg-[var(--color-soft)]">
+                  <img
+                    src={g.src}
+                    alt={g.alt}
+                    width={g.width}
+                    height={g.height}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="mt-3 text-[13.5px] leading-snug text-[var(--color-muted)]">{g.caption}</figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  ))}
+
+  <BigCTA
+    eyebrow="Pitch decks · Models · Launches · Dashboards"
+    title={["Your brand", "next?"]}
+    body="Every one of these started with a 30-minute call about what was stuck. Bring yours. No fee, no sales pitch, and you'll walk out with a clearer next step either way."
+    ctaLabel="Book a Founder Clinic"
+    ctaHref="/contact"
+  />
+</BaseLayout>
