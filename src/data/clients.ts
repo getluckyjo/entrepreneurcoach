@@ -28,8 +28,8 @@ export type ClientStory = {
   year: string;
   /** One line under the name. */
   hook: string;
-  /** Public link to the client's live work, where there is one. */
-  url?: { href: string; label: string };
+  /** Public links to the client's live work, where there is any. */
+  links?: readonly { href: string; label: string }[];
   hero: ClientImage;
   /** "The brief" — a short paragraph or two. */
   brief: readonly string[];
@@ -41,6 +41,8 @@ export type ClientStory = {
   stats: readonly { value: string; label: string }[];
   /** The deliverables, as a checklist. */
   built: readonly string[];
+  /** Full-width screenshots of live work, shown above the gallery. */
+  screens?: readonly ClientImage[];
   gallery: readonly ClientImage[];
 };
 
@@ -118,7 +120,10 @@ export const clients: readonly ClientStory[] = [
     where: "Pretoria",
     year: "2026",
     hook: "A premium hydration brand, from beautiful packaging to a shop that sells.",
-    url: { href: "https://shop.rekrd.io", label: "shop.rekrd.io" },
+    links: [
+      { href: "https://shop.rekrd.io", label: "shop.rekrd.io" },
+      { href: "https://coach.rekrd.io/ambassadors", label: "coach.rekrd.io" },
+    ],
     hero: {
       src: "/img/clients/rekrd/hero.jpg",
       alt: "Five REKRD electrolyte sachets side by side, each with a different flavour colour",
@@ -136,22 +141,35 @@ export const clients: readonly ClientStory[] = [
       "It's a shop built to convert, not just to look good. A 5-sachet starter at R100 for people who want to try it, the 30-sachet tube at R600, subscribe and save, and free delivery that the tube clears on its own. The formula is laid out like a spec sheet, so anyone can read exactly what's in a sachet.",
       "Behind it sits a market research deep dive on premium hydration, globally and in South Africa, so the price point had a reason behind it.",
       "Then the trade side. A trade presenter for independent stores and distributors: the pitch, why to stock it, the answers to the usual objections, and a margin calculator buyers run with their own numbers. Every claim was checked against strict product-claims rules. A foodstuff can't promise what a medicine can, and a buyer notices when you try.",
+      "And the third channel: ambassadors. Coaches, trainers and players already tell people to drink more water, so I built them a reason to say REKRD. The ambassador site at coach.rekrd.io carries the offer, short lessons on the product so they can talk about it in their own words, an earnings calculator, and a sign-up that mints each ambassador their own Shopify discount code.",
+      "The code is the tracking. No cookies, no links to click, so it works when someone says \"use my code\" across a padel court. Every night the site reconciles orders against those codes and rebuilds what each ambassador is owed, refunds and subscription renewals included. Every commission figure is pinned by tests, and an ambassador never sees who their clients are.",
     ],
     landed: [
       "shop.rekrd.io is live and taking orders, with subscriptions switched on and a perfect 5-star average from its first verified reviews.",
+      "The ambassador programme is open for applications at coach.rekrd.io, with every code and every order tracked automatically, so paying ambassadors is a statement, not a spreadsheet.",
       "The team has a tool they can send to any buyer, and every open commercial decision lives on one register, so everyone knows what's settled and what's still on the table.",
     ],
     stats: [
       { value: "5.0", label: "Star average from the first verified reviews" },
-      { value: "2", label: "Channels built: direct and trade" },
-      { value: "5", label: "Flavours, one design language" },
+      { value: "3", label: "Channels built: direct, trade and ambassadors" },
+      { value: "1", label: "Code per ambassador. It's the tracking." },
     ],
     built: [
       "Shop design, with the Creative Director",
       "Range, bundles and subscription set-up",
       "Market research",
+      "Ambassador programme site and code tracking",
       "Trade presenter with margin calculator",
       "Commercial decision register",
+    ],
+    screens: [
+      {
+        src: "/img/clients/rekrd/ambassadors.jpg",
+        alt: "Screenshot of the REKRD ambassador programme page: You already tell them to drink more water.",
+        caption: "The ambassador site at coach.rekrd.io. The offer up front, then the earnings, the product lessons and the sign-up.",
+        width: 1440,
+        height: 900,
+      },
     ],
     gallery: [
       {

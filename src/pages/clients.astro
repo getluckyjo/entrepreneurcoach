@@ -69,11 +69,13 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
             <h2 id={`${c.slug}-title`} class="display-xl">{c.name}</h2>
             <p class="lead mt-5 max-w-[40ch]">{c.hook}</p>
           </div>
-          {c.url && (
-            <div class="md:col-span-4 md:text-right reveal">
-              <a href={c.url.href} class="btn btn-ghost" target="_blank" rel="noopener">
-                Visit {c.url.label} ↗
-              </a>
+          {c.links && (
+            <div class="md:col-span-4 flex flex-wrap gap-3 md:justify-end reveal">
+              {c.links.map((l) => (
+                <a href={l.href} class="btn btn-ghost" target="_blank" rel="noopener">
+                  Visit {l.label} ↗
+                </a>
+              ))}
             </div>
           )}
         </div>
@@ -144,6 +146,27 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
             </div>
           </aside>
         </div>
+
+        <!-- Screenshots of the live work, full width -->
+        {c.screens?.map((sc) => (
+          <figure class="mt-20 reveal">
+            <div class="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-rule)] bg-[var(--color-paper)] shadow-[0_1px_0_var(--color-rule)]">
+              <img
+                src={sc.src}
+                alt={sc.alt}
+                width={sc.width}
+                height={sc.height}
+                class="w-full h-auto block"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption class="mt-4 flex items-start gap-3 text-[14px] text-[var(--color-ink-soft)]">
+              <span class="mt-[0.45em] inline-block w-6 h-[3px] bg-[var(--color-red)] shrink-0" aria-hidden="true"></span>
+              {sc.caption}
+            </figcaption>
+          </figure>
+        ))}
 
         <!-- Gallery -->
         <ul class="mt-20 grid gap-6 md:grid-cols-3">
