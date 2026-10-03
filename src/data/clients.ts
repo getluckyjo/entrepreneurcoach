@@ -88,14 +88,13 @@ export const clients: readonly ClientStory[] = [
     work: [
       "We started with when people actually drink it. About 95% of South African spirit coolers are vodka-based, so a tequila one had room to stand out. We settled on the cooler box: the braai, the boat, the weekend away. The drink you bring when everyone else brings wine.",
       "I've put brands on South African shelves before. Brannas Draught taught me how the trade really works, the pricing and the fight for the shelf, and Cape Spritz showed me a premium ready-to-drink can earn its place next to the big names. So we planned the launch around what matters with a national retailer: a partnership with a cooler brand, cooler boxes dropped at the right gatherings, a photo competition, a plan for the first 1,000 loyal customers, and trade effort focused on the stores most likely to sell.",
-      "For content, we chose real over polished. We hosted a braai, handed the guests disposable cameras and let the afternoon happen. 679 photos came back, enough for months of social content that looks like people enjoying the drink, because they were.",
+      "For content, we chose real over polished. We hosted a braai, handed the guests disposable cameras and let the afternoon happen. What came back was months of social content that looks like people enjoying the drink, because they were.",
       "Raising money for The Duchess and for DOPE Drinks taught me what investors actually ask. We used that to shape Doña Fuego's investor story and the financial model behind it, so the founder can answer the hard questions with confidence.",
       "The big risk with a national retailer is not knowing what's selling until it's too late to act. So we set up a weekly view of sales and stock from Checkers' own reports. The founder can see which stores are moving and where to put her energy.",
     ],
     landed: [
       "Doña Fuego launched nationally in August 2026, exclusive to Checkers in 360 stores and on Sixty60, with 12 months of exclusivity.",
       "The founder went into launch with a clear position, a launch plan, investor material she's comfortable sending and a clear view of how the cans are selling. And the brand has a library of real photos from real people to post from for months.",
-      "The sales view has since become a playbook I use with other brands selling into Checkers, Shoprite, Pick n Pay or Spar.",
     ],
     stats: [
       { value: "360", label: "Checkers stores at launch, plus Sixty60" },
@@ -176,16 +175,16 @@ export const clients: readonly ClientStory[] = [
     },
     brief: [
       "REKRD makes an electrolyte powder in single-serve sachets, sold in a 30-sachet tube you'll want to keep. It has a retro, premium feel and it's made for everyday people who play golf and padel, travel a lot or work long days, as much as for serious athletes.",
-      "The packaging was already great. What was missing was a way to sell it. There was no online shop yet, which also held up payments and marketplace listings, and nothing to show a store buyer.",
+      "The packaging was already great. What was missing was a way to sell it. There was no online shop yet, and nothing to show a store buyer.",
     ],
     work: [
       "REKRD's packaging was already premium, and premium is something I know. We built The Duchess brand-first, and that's how we approached REKRD: the shop, the price and the words all had to feel as considered as the tube.",
       "I designed shop.rekrd.io together with Linda, REKRD's Creative Director. We kept the offer simple: a R100 starter pack to try it, the R600 tube for regulars, subscribe and save, and free delivery on the tube. The pricing came from research into premium hydration brands in South Africa and overseas, so the tube sits where a premium product should.",
-      "For stores, I drew on what Brannas Draught taught me about selling to the trade: a buyer wants to know why it will sell and what they'll make on it. We built a sales presenter that answers both, and kept every product claim careful, because it's a food product, not a medicine.",
+      "For stores, I drew on what Brannas Draught taught me about selling to the trade: a buyer wants to know why it will sell and what they'll make on it. We built a sales presenter that answers both.",
       "The biggest opportunity was people. Get Lucky Golf has shown me how much a sporting community trusts the people in it. Coaches, trainers and players already tell their clients to drink more water, so we built an ambassador programme at coach.rekrd.io that gives them a simple, fair way to recommend REKRD and earn from it.",
     ],
     landed: [
-      "shop.rekrd.io is live and taking orders, with subscriptions switched on and a 5-star average from its first verified reviews.",
+      "shop.rekrd.io is live and taking orders, with its first five-star reviews in.",
       "The ambassador programme is open for applications at coach.rekrd.io.",
       "REKRD now has three ways to sell, online, in stores and through ambassadors, and a clear list of the commercial decisions still to make.",
     ],
@@ -254,7 +253,7 @@ export const clients: readonly ClientStory[] = [
     work: [
       "Taking a non-alcoholic drink from Cape Town to the world is close to home for me. With The Duchess, we built the world's first non-alcoholic gin and tonic here and shipped it to more than 10 countries, with over half the revenue from export. With DOPE Drinks, I built a brand for the US market, raised money there and launched at BevNET in New York. Van Hunks gets both of those experiences.",
       "We worked on what an American investor needs to hear: why non-alcoholic, why now, why this brand, and how they'll grow in the US. The non-alcoholic sparkling white and rosé lead the story, with the traditional Cap Classique range behind them.",
-      "Then the deck itself. We rewrote it so it sounds like the two founders talking to someone who might back them, with every number coming straight from their books. We also got the US details right: these wines are non-alcoholic, which on an American label means something different from alcohol-free.",
+      "Then the deck itself. We rewrote it so it sounds like the two founders talking to someone who might back them, with every number coming straight from their books.",
     ],
     landed: [
       "Van Hunks has a US growth story that sounds like its founders and stands on real numbers.",
@@ -268,7 +267,6 @@ export const clients: readonly ClientStory[] = [
       "US growth strategy",
       "Investor story and deck",
       "Financials and five-year forecast",
-      "Copy in the founders' voice",
     ],
     gallery: [
       {
@@ -317,7 +315,7 @@ export const clients: readonly ClientStory[] = [
     ],
     work: [
       "I've spent my career building consumer brands, and the lesson that carries over to property is to go where people already are. In South Africa, that's WhatsApp. So the whole sale runs there: list your home in a few taps, let buyers enquire and pre-qualify for a bond in the chat, accept an offer, and follow the sale through every stage to registration. No app to download.",
-      "Get Lucky Golf taught me what a WhatsApp channel can do when it's built properly, and how strict the rules are. We built Sold Direct the same way: consent before anything else, POPIA by design, and every mandate held by a registered practitioner so it sits squarely within the property industry's rules.",
+      "Get Lucky Golf taught me what a WhatsApp channel can do when it's built properly. We built Sold Direct the same way, with registered property practitioners behind every sale.",
       "Alongside the product, I've built the brand, the website and the story we take to partners, including a playable demo of the WhatsApp flow so people can try it before we launch.",
     ],
     landed: [
@@ -332,7 +330,6 @@ export const clients: readonly ClientStory[] = [
       "Business model and positioning",
       "Brand and website",
       "WhatsApp selling flow",
-      "POPIA and compliance approach",
       "Partner story and live demo",
     ],
     demo: {
@@ -371,12 +368,11 @@ export const clients: readonly ClientStory[] = [
     ],
     work: [
       "We chose to follow up on WhatsApp, because that's where South African golfers already are. After entering, a golfer who opted in gets a message from Get Lucky offering 12 months of complimentary Hole-in-One Membership in return for an insurance quote from Indwe. There's no obligation to switch, and there's real value on both sides.",
-      "We built the channel ourselves on Twilio rather than renting a chatbot, so every word and every step stays ours. A few short questions find out what the golfer wants covered, then they pick a day and time for an Indwe Advisor to call. Each finished conversation becomes a quote-ready lead for the sponsor.",
-      "WhatsApp is strict about business messaging, and rightly so. Every template goes through Meta's approval, nobody is messaged without opting in, a stop request is honoured immediately, and the questions stay as few as possible. That discipline is what keeps a channel like this alive.",
-      "It's the same playbook I'm now using at Sold Direct: WhatsApp at the centre, built properly, with compliance from the first message.",
+      "We built the channel ourselves rather than renting a chatbot, so every word and every step stays ours. A few short questions find out what the golfer wants covered, then they pick a day and time for an Indwe Advisor to call. Each finished conversation becomes a quote-ready lead for the sponsor.",
+      "It's the same playbook I'm using at Sold Direct: WhatsApp at the centre, built properly.",
     ],
     landed: [
-      "The Get Lucky WhatsApp line is live with Meta's verified tick, and the opt-in sits on the entry forms at the tee.",
+      "The Get Lucky WhatsApp line is live, and golfers sign up for it when they enter at the tee.",
       "Every golfer who finishes the conversation reaches Indwe as a quote-ready lead, with the call time they chose.",
     ],
     stats: [
@@ -386,9 +382,8 @@ export const clients: readonly ClientStory[] = [
     built: [
       "WhatsApp strategy",
       "Sponsor offer with Indwe",
-      "WhatsApp channel on Twilio",
+      "Our own WhatsApp channel",
       "Golfer questions and advisor booking",
-      "Opt-in and compliance",
     ],
     gallery: [
       {
