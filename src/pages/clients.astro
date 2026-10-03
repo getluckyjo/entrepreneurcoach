@@ -99,8 +99,11 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
 
         <!-- Hero image with the red caption stripe -->
         <figure class="reveal">
-          <div class:list={[
-            "overflow-hidden rounded-[var(--radius-lg)] aspect-[16/9]",
+          <div
+            style={c.hero.natural ? `aspect-ratio:${c.hero.width}/${c.hero.height}` : undefined}
+            class:list={[
+            "overflow-hidden rounded-[var(--radius-lg)]",
+            !c.hero.natural && "aspect-[16/9]",
             c.hero.fit === "contain" ? "bg-white" : "bg-[var(--color-soft)]",
           ]}>
             <img
