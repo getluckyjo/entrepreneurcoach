@@ -39,8 +39,8 @@ export const personSchema = {
   name: "Johannes le Roux",
   url: site.domain,
   image: `${site.domain}/img/johannes-portrait.jpg`,
-  jobTitle: "Entrepreneur Coach",
-  description: "Cape Town–based operator turned coach. Founder of six brands across SA, Europe, and the US. Coaches founders on pitch decks, fundraising, and international expansion.",
+  jobTitle: "Fractional Co-founder and Entrepreneur Coach",
+  description: "Cape Town–based operator. Founder of six brands across SA, Europe, and the US. Takes a fractional co-founder seat in founders' businesses and runs pitch deck sprints.",
   worksFor: { "@type": "ProfessionalService", "@id": BUSINESS_ID, name: site.brand },
   alumniOf: [
     { "@type": "CollegeOrUniversity", name: "Cambridge Judge Business School", description: "Executive Education — Funding from Seed to Exit" },
@@ -48,6 +48,7 @@ export const personSchema = {
   // sameAs is for profiles of the person himself; the ventures he founded are not him.
   sameAs: [site.social.linkedin].filter(Boolean),
   knowsAbout: [
+    "Fractional co-founder",
     "Pitch decks",
     "Fundraising",
     "Founder coaching",

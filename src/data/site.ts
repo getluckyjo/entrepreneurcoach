@@ -10,9 +10,9 @@ export const site = {
   name: "Johannes le Roux",
   brand: "Johannes le Roux — Entrepreneur Coach",
   domain: "https://www.entrepreneurcoach.co.za",
-  tagline: "Coaching for founders, by a founder.",
+  tagline: "A fractional co-founder for founders doing it alone.",
   description:
-    "Entrepreneur coaching from a Cape Town founder who's built six brands across SA, Europe, and the US — all at multi-million-dollar, international scale. Pitch decks, fundraising, and scaling out of South Africa.",
+    "Fractional co-founder and coach from Cape Town. Six brands built across SA, Europe, and the US, all at multi-million-dollar, international scale. A seat in your business, or a pitch deck sprint.",
   defaultOgImage: "/img/og/home.png", // PNG: social crawlers reject SVG
   locale: "en-ZA",
   email: "leroux.johannes@gmail.com", // canonical contact per Johannes — Gmail-of-record
@@ -164,8 +164,11 @@ export const press = [
 ] as const;
 
 /**
- * Coaching offers. Productised — outcome-led, not time-led, plus one pay-as-you-go hourly.
- * Prices reviewed with Johannes 2026-05; adjust before launch as needed.
+ * Coaching offers. One seat, one sprint, one free call, one hourly door.
+ * The fractional co-founder seat is the lead offer; the sprint is the bounded
+ * alternative; the clinic is the way into both. Founder OS, the 5-year model
+ * and the International Launch Playbook now live inside the seat.
+ * Prices reviewed with Johannes 2026-10; the seat is quoted per founder.
  */
 export type Offer = {
   slug: string;
@@ -186,18 +189,37 @@ export type Offer = {
 
 export const offers: readonly Offer[] = [
   {
+    slug: "fractional-cofounder",
+    name: "Fractional Co-founder",
+    cadence: "Days per month · 6-month seat",
+    price: "Retainer + a stake",
+    priceNumeric: 0,
+    summary: "Not sessions. A seat. I join your business as a co-founder for a set number of days a month and help wherever it's stuck that week: the deck, the model, the first customer abroad, the sponsor who won't sign, the hire, the week you can't carry alone. No lane. The business decides where I go.",
+    deliverables: [
+      "A set number of days a month, inside your business, on whatever is stuck",
+      "One list, one weekly call. You put what's stuck on it, I take what moves the business most",
+      "WhatsApp in between, same day",
+      "The first 90 days: the deck, the model and the first three customers or partners, whichever is the bottleneck",
+      "Retainer plus a stake, agreed before we start. 90-day review, clean exit either side",
+    ],
+    bestFor: "Founders with a real business and no co-founder: one person doing three jobs, who needs an operator next to them, not another advisor.",
+    cta: "Apply for the seat",
+    featured: true,
+    journalLink: { slug: "not-a-developer", label: "Read: 17 things shipped since March" },
+  },
+  {
     slug: "founder-clinic",
     name: "Founder Clinic",
     cadence: "30 min · once-off",
     price: "Free",
     priceNumeric: 0,
-    summary: "A short, no-fee call to figure out together whether coaching is the right move. Bring whatever you're working on — early-stage or scaling, polished or messy.",
+    summary: "A short, no-fee call to figure out together whether you need a co-founder, a sprint, or neither. Bring whatever you're working on — early-stage or scaling, polished or messy.",
     deliverables: [
       "30 minutes of straight feedback on whatever's stuck",
       "A written 3-bullet next-steps note within 24 hours",
       "No obligation, no upsell at the call",
     ],
-    bestFor: "First-time founders, or anyone weighing up whether 1:1 coaching is the right move at all.",
+    bestFor: "Anyone weighing up whether to work together at all. It's the way into everything else.",
     cta: "Book a Founder Clinic",
     featured: false,
   },
@@ -207,7 +229,7 @@ export const offers: readonly Offer[] = [
     cadence: "3 sessions · 2 weeks",
     price: "R15,000",
     priceNumeric: 15000,
-    summary: "We rebuild your deck from narrative up. You walk out with an investor-ready story you can defend.",
+    summary: "We rebuild your deck from narrative up. You walk out with an investor-ready story you can defend. The bounded alternative to the seat, for founders who need one thing done.",
     deliverables: [
       "Three 60-min working sessions (Zoom or in-person Cape Town)",
       "Investor-ready deck (10–14 slides) — narrative, traction, ask",
@@ -216,66 +238,8 @@ export const offers: readonly Offer[] = [
     ],
     bestFor: "Founders going into a pre-seed, seed, or angel round in the next 90 days.",
     cta: "Start the Sprint",
-    featured: true,
+    featured: false,
     journalLink: { slug: "the-pitch-deck-that-raised", label: "See the deck that raised" },
-  },
-  {
-    slug: "cashflow-projection",
-    name: "5-Year Cashflow Projection",
-    cadence: "2 sessions · 2 weeks",
-    price: "R15,000",
-    priceNumeric: 15000,
-    summary: "An investor-ready 5-year financial model built around your real numbers — COS, retailer margins, distribution costs, ops, and marketing budgets. The model that holds up to the questions that usually end the round.",
-    deliverables: [
-      "Two 60-min working sessions (Zoom or in-person Cape Town)",
-      "A working 5-year P&L + cashflow + balance sheet model (Sheets / Excel)",
-      "COS breakdown — raw materials, packaging, manufacturing",
-      "Retailer margin layers — distributor, retailer, end consumer",
-      "Distribution, OPEX, headcount, and marketing budgets tied to CAC",
-      "Sensitivity analysis on the 3–5 drivers that matter",
-      "Investor-ready summary slides",
-    ],
-    bestFor: "Founders going into a seed, angel, or Series A round who need a model that holds up to scrutiny — especially in FMCG, beverage, retail, or any business with real COS and channel margins.",
-    cta: "Build the model",
-    featured: false,
-  },
-  {
-    slug: "founder-os",
-    name: "Founder Operating System",
-    cadence: "5 sessions · 5 weeks",
-    price: "R25,000",
-    priceNumeric: 25000,
-    summary: "A weekly cadence to pull you out of reactive mode. Strategy, ops, and the founder fatigue everyone pretends isn't there.",
-    deliverables: [
-      "Five weekly 60-min sessions",
-      "90-day operating cadence (weekly review template, decision log, founder calendar)",
-      "Founder's Fatigue diagnostic + recovery plan",
-      "WhatsApp access between sessions for live calls",
-    ],
-    bestFor: "Founders running 5–30 person teams who are working harder, not better.",
-    cta: "Start with FOS",
-    featured: false,
-    journalLink: { slug: "founders-fatigue-the-version", label: "Read: Founder's Fatigue" },
-  },
-  {
-    slug: "international-launch",
-    name: "International Launch Playbook",
-    cadence: "8 sessions · 90 days",
-    price: "R45,000",
-    priceNumeric: 45000,
-    summary: "A 90-day engagement to take you from product–market fit at home to first three customers / distributors abroad.",
-    deliverables: [
-      "Eight working sessions across 90 days",
-      "Market entry plan for one or two target countries",
-      "Three written customer / distributor briefs",
-      "Direct intros from my US / UK / EU network where relevant",
-      "WhatsApp + Slack access through the full engagement",
-    ],
-    bestFor: "Founders with PMF in SA who want a deliberate, considered run at international expansion.",
-    cta: "Apply for the Playbook",
-    featured: false,
-    wide: true,
-    journalLink: { slug: "cape-town-to-america", label: "Read: Cape Town to America" },
   },
   {
     slug: "custom-hourly",
@@ -283,7 +247,7 @@ export const offers: readonly Offer[] = [
     cadence: "60 min · pay as you go",
     price: "R2,500 / hour",
     priceNumeric: 2500,
-    summary: "Already know what you need? Book single hours of coaching or business consultancy for whatever sits outside the productised packages above.",
+    summary: "Already know what you need? Book single hours of coaching or business consultancy for whatever sits outside the seat and the sprint.",
     deliverables: [
       "60-min sessions, on demand",
       "Coaching, consulting, or sounding-board work — your call",
@@ -325,6 +289,18 @@ export const talks = [
 /** FAQ — used on /coaching with FAQPage schema. */
 export const faqs = [
   {
+    q: "What does a fractional co-founder actually do?",
+    a: "Whatever is stuck that week. I'm in your business for a set number of days a month, not in a room talking about it. One week that's the investor deck, the next it's a sponsor negotiation, a pricing call, a hire, or a model you want a second pair of eyes on. We keep one list and one weekly call. You put what's stuck on it, I take what moves the business most.",
+  },
+  {
+    q: "Do you take equity?",
+    a: "Usually a monthly retainer plus a stake, agreed in writing before we start, with a 90-day review and a clean exit either side. The mix depends on the stage of the business and how much of my time it needs. We settle it at the clinic, not by email.",
+  },
+  {
+    q: "What happened to Founder OS, the 5-year model and the International Launch Playbook?",
+    a: "They're inside the seat now. The operating cadence, the financial model and the first customers abroad are the things a co-founder does with you, so I stopped selling them as separate packages. If you only need one of them, book hours or the workshop.",
+  },
+  {
     q: "Are sessions in person or remote?",
     a: "Both. In Cape Town we meet at Ideas Cartel, Claremont. Everywhere else, Zoom. The work is the same.",
   },
@@ -338,7 +314,7 @@ export const faqs = [
   },
   {
     q: "What happens after I book?",
-    a: "You'll get a calendar invite within one business day along with a short pre-work brief — usually a few questions about where the venture is and what's stuck. We use the first session to set scope.",
+    a: "You'll get a calendar invite within one business day along with a short pre-work brief — usually a few questions about where the venture is and what's stuck. For the seat, the first session sets days, money and the first 90 days. For the sprint, it sets scope.",
   },
   {
     q: "Can I reschedule or cancel?",
@@ -350,7 +326,7 @@ export const faqs = [
   },
   {
     q: "What's your refund policy?",
-    a: "Full refund on the unused balance of any package up to 14 days after purchase. After that, refunds are case-by-case but I'd rather make it right than hold money you don't want with me.",
+    a: "Full refund on the unused balance of any sprint or hours up to 14 days after purchase. The seat runs month to month with a 90-day review, so you can stop at any review point. Either way I'd rather make it right than hold money you don't want with me.",
   },
 ] as const;
 

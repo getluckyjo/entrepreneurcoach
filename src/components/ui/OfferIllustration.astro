@@ -5,6 +5,16 @@ interface Props { slug: string; class?: string; }
 const { slug, class: cls } = Astro.props;
 ---
 
+{slug === "fractional-cofounder" && (
+  <svg viewBox="0 0 200 120" class:list={cls} aria-hidden="true">
+    <!-- Two rings sharing a lens: two operators, one business -->
+    <circle cx="80" cy="60" r="36" fill="none" stroke="currentColor" stroke-width="1"/>
+    <circle cx="120" cy="60" r="36" fill="none" stroke="currentColor" stroke-width="1"/>
+    <path d="M100 28.6 A36 36 0 0 1 100 91.4 A36 36 0 0 1 100 28.6 Z" fill="var(--color-accent)" opacity="0.5"/>
+    <line x1="100" y1="16" x2="100" y2="104" stroke="currentColor" stroke-width="1" stroke-dasharray="2 4"/>
+  </svg>
+)}
+
 {slug === "founder-clinic" && (
   <svg viewBox="0 0 200 120" class:list={cls} aria-hidden="true">
     <!-- Compass / bearings — quick orientation -->

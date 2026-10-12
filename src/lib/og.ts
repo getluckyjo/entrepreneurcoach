@@ -29,13 +29,13 @@ export const ogPanels: Record<string, OgPanel> = {
     eyebrow: "JOHANNES LE ROUX",
     line1: "Not a coach.",
     line2: "An operator who coaches.",
-    kicker: "Pitch decks · Fundraising · Scaling out of South Africa",
+    kicker: "Fractional co-founder · Pitch decks · Fundraising",
   },
   coaching: {
     eyebrow: "COACHING — CAPE TOWN",
-    line1: "Pick the package.",
-    line2: "Get the deliverable.",
-    kicker: "Pitch Deck Sprint · Founder OS · International Launch",
+    line1: "One seat.",
+    line2: "Or one sprint.",
+    kicker: "Fractional Co-founder · Pitch Deck Sprint · Founder Clinic",
   },
   workshop: {
     eyebrow: "WORKSHOP — IDEAS CARTEL, CLAREMONT",

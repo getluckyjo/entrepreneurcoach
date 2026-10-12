@@ -8,8 +8,8 @@ import DeckLinks from "~/components/ui/DeckLinks.astro";
 ---
 
 <BaseLayout
-  title="Business Coaching for Founders, Cape Town"
-  description="Business coaching for founders in Cape Town and online: Pitch Deck Sprint, 5-Year Cashflow, Founder OS and International Launch. Clear prices from R2,500."
+  title="Fractional Co-founder and Pitch Deck Sprint, Cape Town"
+  description="A fractional co-founder seat, a few days a month, wherever your business is stuck. Or a Pitch Deck Sprint at R15,000. Cape Town and online. Free 30-min Founder Clinic to decide."
   jsonLd={[
     localBusinessSchema, ...serviceSchemas, faqSchema,
     breadcrumbSchema([
@@ -20,15 +20,15 @@ import DeckLinks from "~/components/ui/DeckLinks.astro";
 >
   <!-- Hero -->
   <section class="container-page pt-20 md:pt-24 pb-16">
-    <p class="eyebrow eyebrow-red mb-6">Business and founder coaching · Cape Town &amp; online</p>
+    <p class="eyebrow eyebrow-red mb-6">Fractional co-founder and coach · Cape Town &amp; online</p>
     <!-- display-mega floors at 4.5rem, which pushes "deliverable." past the
          viewport on a 390px phone. Lower the floor, as on the workshop page. -->
     <h1 class="display-mega max-w-[16ch]" style="font-size: clamp(2.6rem, 10.5vw, 12rem);">
-      Pick the package.<br/>
-      <span class="display-italic display-red">Get the deliverable.</span>
+      One seat.<br/>
+      <span class="display-italic display-red">Or one sprint.</span>
     </h1>
     <p class="lead mt-10">
-      I coach in productised engagements — three to five sessions with a clear deliverable. You walk in knowing what you'll walk out with: a finished pitch deck, a 90-day operating cadence, a market entry plan. No open-ended retainers.
+      Most founders I meet don't need another advisor. They need a second operator in the business. So the lead offer is a seat: a few days a month as your co-founder, wherever it's stuck. If you need one thing done and nothing more, there's the sprint. The clinic is how we decide which.
     </p>
   </section>
 
@@ -108,7 +108,7 @@ import DeckLinks from "~/components/ui/DeckLinks.astro";
           <span class="display-italic" style="color: var(--color-red);">yourself.</span>
         </h2>
         <p class="mt-5 text-[15px] leading-relaxed text-[var(--color-paper)]/75 max-w-xl">
-          The 5-year model and the investor deck above are two of the things
+          The investor deck above and the 5-year cashflow model are two of the things
           people build in the room at {workshop.name} — {workshop.duration},
           {" "}{workshop.seats} seats, {workshop.venue.name} in {workshop.venue.area}.
           If you'd rather learn to make them than have me make them, start there.

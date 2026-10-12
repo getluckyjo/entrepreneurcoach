@@ -41,7 +41,7 @@ All titles and descriptions are set in each page file. The `rawTitle` prop is pa
 | Route | Title | Description |
 |---|---|---|
 | `/` | Entrepreneur Coach Cape Town \| Pitch Decks & Fundraising — Johannes le Roux | Entrepreneur coaching in Cape Town from a founder of six brands. Pitch decks, fundraising, founder OS, international expansion. Free 30-min Founder Clinic. |
-| `/coaching` | Coaching Packages — Pitch Decks, Fundraising, Founder OS \| Johannes le Roux | Productised coaching for founders. Pitch Deck Sprint, 5-Year Cashflow, Founder OS, International Launch. Transparent pricing from R2,500. Cape Town & remote. |
+| `/coaching` | Fractional Co-founder and Pitch Deck Sprint, Cape Town \| Johannes le Roux | A fractional co-founder seat, a few days a month, wherever your business is stuck. Or a Pitch Deck Sprint at R15,000. Cape Town and online. |
 | `/about` | About Johannes le Roux — Operator Behind The Duchess, DOPE Drinks, Get Lucky Golf | Founder of six brands across SA, Europe, and the US — The Duchess, DOPE Drinks, Get Lucky Golf. Cambridge Judge alumnus coaching founders out of Cape Town. |
 | `/talks` | Keynote Speaker · Pitch Decks, Founder Failure, Scaling Globally \| Johannes le Roux | Three signature talks from a South African founder of six brands. Pitch decks, founder failure, scaling globally. Conferences, accelerators, offsites. |
 | `/journal` | Field Notes for Founders — Pitch Decks, Fundraising, Scaling \| Johannes le Roux | Long-form field notes on pitch decks, fundraising, founder fatigue, and scaling South African brands abroad. Written by Johannes le Roux between coaching sessions. |
@@ -79,7 +79,7 @@ Defined in `src/lib/seo.ts` and composed per page:
 
 - `<h1>` audited on every page. Homepage h1 retains "Not a coach. An operator who coaches." with a visually-hidden h2 "Entrepreneur Coach in Cape Town — Pitch Decks, Fundraising & Scaling" for keyword anchoring.
 - All venture images carry descriptive alt text (subject, context, location) via the new `imageAlt` field in `src/data/site.ts`.
-- Internal cross-links: BuiltStrip ventures → relevant journal post (Duchess → "the deck that raised", DOPE → "Cape Town to America", Brannas → "Brannas × KWV"). Coaching offers → relevant journal posts (Pitch Deck Sprint, Founder OS, International Launch).
+- Internal cross-links: BuiltStrip ventures → relevant journal post (Duchess → "the deck that raised", DOPE → "Cape Town to America", Brannas → "Brannas × KWV"). Coaching offers → relevant journal posts (Fractional Co-founder → 'Not a developer', Pitch Deck Sprint → 'the deck that raised').
 - Heading hierarchy verified — no skipped levels.
 
 ## Local SEO
