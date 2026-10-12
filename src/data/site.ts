@@ -620,7 +620,7 @@ export const workshopFaqs = [
  *     and EducationEvent schema all follow automatically.
  */
 
-/** The four annotated pitch decks. Linked from /coaching, each other and the posts about raising. */
+/** The three annotated pitch decks. Linked from /coaching, each other and the posts about raising. */
 export const decks = [
   {
     slug: "the-duchess-deck",
@@ -635,13 +635,6 @@ export const decks = [
     kind: "Seed round",
     line: "The golf-tech seed deck I raised on in South Africa.",
     cover: "/img/decks/get-lucky-cover.jpg",
-  },
-  {
-    slug: "the-dope-deck",
-    name: "DOPE Drinks",
-    kind: "US raise",
-    line: "The deck I used to raise in America for a cannabis drinks brand.",
-    cover: "/img/decks/dope-cover.jpg",
   },
   {
     slug: "the-suncamino-deck",

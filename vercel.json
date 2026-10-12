@@ -43,6 +43,21 @@
       "source": "/journal/summit-at-sea-dope-on-the-boat",
       "destination": "/journal/summit-at-sea",
       "permanent": true
+    },
+    {
+      "source": "/the-dope-deck",
+      "destination": "/journal/cape-town-to-america",
+      "permanent": true
+    },
+    {
+      "source": "/the-dope-deck/download",
+      "destination": "/journal/cape-town-to-america",
+      "permanent": true
+    },
+    {
+      "source": "/the-dope-deck-2025.pdf",
+      "destination": "/journal/cape-town-to-america",
+      "permanent": true
     }
   ],
   "headers": [
