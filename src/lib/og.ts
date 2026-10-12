@@ -87,18 +87,6 @@ export const ogPanels: Record<string, OgPanel> = {
     line2: "in your inbox.",
     kicker: "The Duchess · 2021 raise · annotated",
   },
-  "the-dope-deck": {
-    eyebrow: "DOPE DRINKS — US RAISE DECK",
-    line1: "The deck I used",
-    line2: "to raise in America.",
-    kicker: "Slide-by-slide · cannabis-bev · annotated",
-  },
-  "the-dope-deck/download": {
-    eyebrow: "DOWNLOAD",
-    line1: "The deck is",
-    line2: "in your inbox.",
-    kicker: "DOPE Drinks · US raise · annotated",
-  },
   "the-get-lucky-deck": {
     eyebrow: "GET LUCKY GOLF — SEED RAISE DECK",
     line1: "The deck I just",
