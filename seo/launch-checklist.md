@@ -27,7 +27,7 @@ Run this on the day of cutover, top to bottom.
 
 - [ ] Point DNS: A record for apex → Vercel, CNAME for www → Vercel.
 - [ ] Verify `https://www.entrepreneurcoach.co.za` resolves and apex 301-redirects to www (vercel.json handles this).
-- [ ] **Add a redirect from `entrepreneurcoach.vercel.app` → production domain.** Vercel can't do host-rewrites between projects; the cleanest move is to change the preview project's domain alias so the vercel.app URL is no longer canonical. If staging needs to stay reachable, add `<meta name="robots" content="noindex" />` via a build-time env var.
+- [x] **Add a redirect from `entrepreneurcoach.vercel.app` → production domain.** Done in `vercel.json` (host-matched 308), together with `/home`, `/index.html`, `/sitemap.xml` and the old `summit-at-sea-dope-on-the-boat` journal slug.
 - [ ] Submit `https://www.entrepreneurcoach.co.za/sitemap-index.xml` to Google Search Console.
 - [ ] Submit the same to Bing Webmaster Tools.
 - [ ] Set canonical domain (www) preference in Search Console.
