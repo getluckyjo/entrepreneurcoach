@@ -44,7 +44,7 @@ Map 1:1 to the offers on `/coaching`:
 |---|---|---|
 | Founder Clinic | Free | 30 min once-off |
 | Pitch Deck Sprint | R15,000 | 3 sessions over 2 weeks |
-| Fractional Co-founder | Retainer + a stake, quoted per founder | Days per month, 6-month seat |
+| Fractional Co-founder | From R20,000 / month (10h), R27,500 (15h), R35,000 (20h) | Hours per month, 6-month seat |
 | Custom Hourly | R2,500 / hour | 60 min |
 
 ## Photos to upload

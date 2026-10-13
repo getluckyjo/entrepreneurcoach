@@ -168,7 +168,7 @@ export const press = [
  * The fractional co-founder seat is the lead offer; the sprint is the bounded
  * alternative; the clinic is the way into both. Founder OS, the 5-year model
  * and the International Launch Playbook now live inside the seat.
- * Prices reviewed with Johannes 2026-10; the seat is quoted per founder.
+ * Prices reviewed with Johannes 2026-10-13: seat at 10h R20,000 / 15h R27,500 / 20h R35,000 a month.
  */
 export type Offer = {
   slug: string;
@@ -191,16 +191,16 @@ export const offers: readonly Offer[] = [
   {
     slug: "fractional-cofounder",
     name: "Fractional Co-founder",
-    cadence: "Days per month · 6-month seat",
-    price: "Retainer + a stake",
-    priceNumeric: 0,
+    cadence: "10, 15 or 20 hours a month · 6-month seat",
+    price: "From R20,000 / month",
+    priceNumeric: 20000,
     summary: "Not sessions. A seat. I join your business as a co-founder for a set number of days a month and help wherever it's stuck that week: the deck, the model, the first customer abroad, the sponsor who won't sign, the hire, the week you can't carry alone. No lane. The business decides where I go.",
     deliverables: [
-      "A set number of days a month, inside your business, on whatever is stuck",
+      "10 hours a month for R20,000, 15 for R27,500, or 20 for R35,000, inside your business, on whatever is stuck",
       "One list, one weekly call. You put what's stuck on it, I take what moves the business most",
       "WhatsApp in between, same day",
       "The first 90 days: the deck, the model and the first three customers or partners, whichever is the bottleneck",
-      "Retainer plus a stake, agreed before we start. 90-day review, clean exit either side",
+      "Monthly retainer, invoiced in advance. 90-day review, clean exit either side",
     ],
     bestFor: "Founders with a real business and no co-founder: one person doing three jobs, who needs an operator next to them, not another advisor.",
     cta: "Apply for the seat",
@@ -294,8 +294,8 @@ export const faqs = [
     a: "Whatever is stuck that week. I'm in your business for a set number of days a month, not in a room talking about it. One week that's the investor deck, the next it's a sponsor negotiation, a pricing call, a hire, or a model you want a second pair of eyes on. We keep one list and one weekly call. You put what's stuck on it, I take what moves the business most.",
   },
   {
-    q: "Do you take equity?",
-    a: "Usually a monthly retainer plus a stake, agreed in writing before we start, with a 90-day review and a clean exit either side. The mix depends on the stage of the business and how much of my time it needs. We settle it at the clinic, not by email.",
+    q: "What does the seat cost?",
+    a: "A monthly retainer at one of three sizes: 10 hours for R20,000, 15 for R27,500, or 20 for R35,000. Six-month seat, invoiced monthly in advance, reviewed every 90 days, and either of us can step out at a review. Anything beyond that, like a stake, is a conversation at the clinic, not a default.",
   },
   {
     q: "What happened to Founder OS, the 5-year model and the International Launch Playbook?",
