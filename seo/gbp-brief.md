@@ -11,7 +11,7 @@ This brief is the source of truth for the GBP listing. Match every field exactly
   - Educational consultant
 - **Description (≤ 750 char):**
 
-  > Operator-first entrepreneur coaching from Cape Town. Founded six brands across South Africa, Europe, and the US — including The Duchess, DOPE Drinks, and Get Lucky Golf. A fractional co-founder seat for founders doing it alone: a few days a month inside the business, wherever it's stuck. Pitch Deck Sprint for founders raising now. Cambridge Judge alumnus (Funding from Seed to Exit). Sessions in person at Ideas Cartel, Claremont, or remote over Zoom. Free 30-minute Founder Clinic to test fit.
+  > Operator-first entrepreneur coaching from Cape Town. Founded six brands across South Africa, Europe, and the US — including The Duchess, DOPE Drinks, and Get Lucky Golf. A fractional co-founder seat for founders doing it alone: 10 to 20 hours a month inside the business, wherever it's stuck. Pitch Deck Sprint for founders raising now. Cambridge Judge alumnus (Funding from Seed to Exit). Sessions in person at Ideas Cartel, Claremont, or remote over Zoom. Free 30-minute Founder Clinic to test fit.
 
 ## Address & service area
 

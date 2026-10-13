@@ -194,7 +194,7 @@ export const offers: readonly Offer[] = [
     cadence: "10, 15 or 20 hours a month · 6-month seat",
     price: "From R20,000 / month",
     priceNumeric: 20000,
-    summary: "Not sessions. A seat. I join your business as a co-founder for a set number of days a month and help wherever it's stuck that week: the deck, the model, the first customer abroad, the sponsor who won't sign, the hire, the week you can't carry alone. No lane. The business decides where I go.",
+    summary: "Not sessions. A seat. I join your business as a co-founder for a set number of hours a month and help wherever it's stuck that week: the deck, the model, the first customer abroad, the sponsor who won't sign, the hire, the week you can't carry alone. No lane. The business decides where I go.",
     deliverables: [
       "10 hours a month for R20,000, 15 for R27,500, or 20 for R35,000, inside your business, on whatever is stuck",
       "One list, one weekly call. You put what's stuck on it, I take what moves the business most",
@@ -291,7 +291,7 @@ export const talks = [
 export const faqs = [
   {
     q: "What does a fractional co-founder actually do?",
-    a: "Whatever is stuck that week. I'm in your business for a set number of days a month, not in a room talking about it. One week that's the investor deck, the next it's a sponsor negotiation, a pricing call, a hire, or a model you want a second pair of eyes on. We keep one list and one weekly call. You put what's stuck on it, I take what moves the business most.",
+    a: "Whatever is stuck that week. I'm in your business for a set number of hours a month, not in a room talking about it. One week that's the investor deck, the next it's a sponsor negotiation, a pricing call, a hire, or a model you want a second pair of eyes on. We keep one list and one weekly call. You put what's stuck on it, I take what moves the business most.",
   },
   {
     q: "What does the seat cost?",
@@ -315,7 +315,7 @@ export const faqs = [
   },
   {
     q: "What happens after I book?",
-    a: "You'll get a calendar invite within one business day along with a short pre-work brief — usually a few questions about where the venture is and what's stuck. For the seat, the first session sets days, money and the first 90 days. For the sprint, it sets scope.",
+    a: "You'll get a calendar invite within one business day along with a short pre-work brief — usually a few questions about where the venture is and what's stuck. For the seat, the first session sets the hours tier, the money and the first 90 days. For the sprint, it sets scope.",
   },
   {
     q: "Can I reschedule or cancel?",
@@ -367,17 +367,7 @@ export type Cohort = {
  * hero, cohort list, form dropdown, and schema.org EducationEvent nodes.
  * While this is empty the page shows a waitlist CTA instead of dates.
  */
-export const cohorts: readonly Cohort[] = [
-  {
-    date: "2026-10-17",
-    startISO: "2026-10-17T10:00:00+02:00",
-    endISO: "2026-10-17T13:00:00+02:00",
-    display: "Saturday 17 October 2026",
-    time: "10:00 – 13:00",
-    seatsLeft: 8,
-    founding: true,
-  },
-];
+export const cohorts: readonly Cohort[] = [];
 
 /*
  * Ran and sold out: Saturday 22 August 2026 at CHIPS, 8 of 8.
@@ -385,8 +375,9 @@ export const cohorts: readonly Cohort[] = [
  * as an abandoned site, and schema.org would keep emitting an EducationEvent
  * for an event that has already happened.
  *
- * 17 October is the second and last run at the founding rate. When it fills,
- * set `founding.active` to false and the standard R4,950 takes over.
+ * The 17 October run was cancelled (2026-10-13). The page is in waitlist mode
+ * until a new date is added here. The next run is still at the founding rate;
+ * when it fills, set `founding.active` to false and the standard R4,950 takes over.
  */
 
 export const workshop = {

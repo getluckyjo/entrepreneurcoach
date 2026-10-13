@@ -41,7 +41,7 @@ All titles and descriptions are set in each page file. The `rawTitle` prop is pa
 | Route | Title | Description |
 |---|---|---|
 | `/` | Entrepreneur Coach Cape Town \| Pitch Decks & Fundraising — Johannes le Roux | Entrepreneur coaching in Cape Town from a founder of six brands. Pitch decks, fundraising, founder OS, international expansion. Free 30-min Founder Clinic. |
-| `/coaching` | Fractional Co-founder and Pitch Deck Sprint, Cape Town \| Johannes le Roux | A fractional co-founder seat, a few days a month, wherever your business is stuck. Or a Pitch Deck Sprint at R15,000. Cape Town and online. |
+| `/coaching` | Fractional Co-founder and Pitch Deck Sprint, Cape Town \| Johannes le Roux | A fractional co-founder seat, 10 to 20 hours a month, wherever your business is stuck. Or a Pitch Deck Sprint at R15,000. Cape Town and online. |
 | `/about` | About Johannes le Roux — Operator Behind The Duchess, DOPE Drinks, Get Lucky Golf | Founder of six brands across SA, Europe, and the US — The Duchess, DOPE Drinks, Get Lucky Golf. Cambridge Judge alumnus coaching founders out of Cape Town. |
 | `/talks` | Keynote Speaker · Pitch Decks, Founder Failure, Scaling Globally \| Johannes le Roux | Three signature talks from a South African founder of six brands. Pitch decks, founder failure, scaling globally. Conferences, accelerators, offsites. |
 | `/journal` | Field Notes for Founders — Pitch Decks, Fundraising, Scaling \| Johannes le Roux | Long-form field notes on pitch decks, fundraising, founder fatigue, and scaling South African brands abroad. Written by Johannes le Roux between coaching sessions. |
