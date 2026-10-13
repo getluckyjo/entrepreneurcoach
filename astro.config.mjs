@@ -36,6 +36,7 @@ export default defineConfig({
       priority: 0.7,
       filter: (page) =>
         !page.includes("/thanks") &&
+        !page.includes("/intake/") &&
         !page.includes("/404") &&
         !page.includes("/og/") &&
         !page.includes("/download"),

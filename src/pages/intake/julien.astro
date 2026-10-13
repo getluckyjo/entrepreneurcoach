@@ -1,0 +1,397 @@
+---
+import BaseLayout from "~/components/layout/BaseLayout.astro";
+import { site } from "~/data/site";
+
+/*
+ * Private intake for Julien van Wyk (Music Republik), ahead of the fractional
+ * co-founder seat. Unlisted: noindex, excluded from the sitemap, linked only
+ * from the offer email. Posts to formsubmit.co → site.email, like /contact.
+ *
+ * Order matters. Section 1 (life design) is the first deliverable and the
+ * data source everything else is measured against. The projects come after.
+ */
+
+const formAction = `https://formsubmit.co/${site.email}`;
+
+type Project = {
+  key: string;
+  name: string;
+  line: string;
+  guide: string;
+  extra?: { key: string; label: string; guide: string }[];
+};
+
+const projects: Project[] = [
+  {
+    key: "mr_consult",
+    name: "Music Republik · Consultancy",
+    line: "Advisory to brands, stadiums and other event companies.",
+    guide: "Fees you've invoiced in the last 12 months, who paid, and how many of those clients would pay again.",
+  },
+  {
+    key: "mr_concerts",
+    name: "Music Republik · Own concerts",
+    line: "You bring the artist, host the show, carry the risk, keep the profit.",
+    guide: "Shows done and planned, capital at risk per show, best and worst result so far.",
+    extra: [
+      { key: "mr_concerts_pipeline", label: "Shows on the calendar for the next 12 months", guide: "Artist, date, venue, your exposure in rand. Confirmed and likely, marked as such." },
+    ],
+  },
+  {
+    key: "mr_brand_events",
+    name: "Music Republik · Brand-owned events and festivals",
+    line: "You run the platform, the brand gets the exposure, everyone makes money.",
+    guide: "Which brands, what you charge (fee, share, or both), and whether any are signed or still conversations.",
+  },
+  {
+    key: "mr_new",
+    name: "Music Republik · New concepts and investments",
+    line: "Opportunities that come to you because of who you are. Sixes is one.",
+    guide: "This is the line that needs the framework. Be specific about Sixes below.",
+    extra: [
+      { key: "sixes_ask", label: "Sixes: what they've asked for", guide: "Amount, for what percentage, by when, and what they expect from you beyond money (time, name, network)." },
+      { key: "sixes_gut", label: "Sixes: your gut, in one line", guide: "And the one thing that would make it a yes or a no." },
+    ],
+  },
+  {
+    key: "merch_touring",
+    name: "Merch · Touring licences",
+    line: "Licence the merch for artists coming to SA, run it at the stadium and in retail around the show.",
+    guide: "Tours you've done, tours coming in the next 12 months you could licence, and what stands between you and the licence each time.",
+    extra: [
+      { key: "merch_touring_pipeline", label: "Tours coming to SA in the next 12 months", guide: "Artist, promoter, date, and whether you have a route to the licence holder. Travis Scott at R5m is the benchmark; say what a normal one does." },
+    ],
+  },
+  {
+    key: "merch_local",
+    name: "Merch · Local acts",
+    line: "Build the merch channel for established South African artists who don't have one.",
+    guide: "Acts you'd sign first, what the deal looks like for the artist, and what you'd need from a label contact like Virgin Music.",
+  },
+  {
+    key: "merch_channels",
+    name: "Merch · New channels",
+    line: "TikTok Shop around events, or anything else that sells merch without a stadium.",
+    guide: "Only what you've actually looked at. 'Not yet' is a fine answer.",
+  },
+  {
+    key: "camera",
+    name: "Camera business",
+    line: "12% shareholder on a retainer.",
+    guide: "Retainer per month, hours per month it actually takes, profit share you received last year, and what the business is worth to you if you went silent.",
+    extra: [
+      { key: "camera_options", label: "Your options as you see them", guide: "Stay as is, go silent and share profits, sell the 12%, or something else. Which one feels right today, and why." },
+    ],
+  },
+  {
+    key: "ticketing",
+    name: "Ticketing platform",
+    line: "In development with a 50% partner who runs the platform. Built for your own events first.",
+    guide: "Launch date, capital you've put in and still owe, your role versus your partner's, and the first three events it will ticket.",
+  },
+];
+
+const stages = [
+  ["", "Select…"],
+  ["idea", "Idea, no revenue yet"],
+  ["building", "Building, first revenue within 6 months"],
+  ["earning", "Earning, but not yet reliable"],
+  ["reliable", "Reliable income every quarter"],
+  ["parked", "Parked or winding down"],
+] as const;
+---
+
+<BaseLayout
+  title="Intake: Julien van Wyk"
+  description="Private intake for the co-founder seat at Music Republik."
+  noindex
+>
+  <section class="container-page pt-20 md:pt-24 pb-10">
+    <p class="eyebrow eyebrow-red mb-6">Co-founder seat · Intake · Private</p>
+    <h1 class="display-mega max-w-[16ch]" style="font-size: clamp(2.6rem, 10vw, 11rem);">
+      Julien.<br/>
+      <span class="display-italic display-red">Start with the life.</span>
+    </h1>
+    <p class="lead mt-10">
+      Everything we decide about the projects gets measured against section 1. So fill that in first, honestly, with numbers. The rest is an inventory: what each project earns, costs, needs and takes out of you. Rough numbers beat blank boxes. Ranges are fine. If a question doesn't apply, write "n/a" and move on.
+    </p>
+    <p class="mt-6 text-[15px] text-[var(--color-ink-soft)]">
+      Takes about 45 minutes if you do it in one sitting. Your answers come straight to me and nowhere else. Afrikaans or English, whichever is faster.
+    </p>
+  </section>
+
+  <section class="container-page pb-24">
+    <form class="intake reveal" method="post" action={formAction} novalidate>
+
+      <!-- 0 · Who -->
+      <fieldset class="card">
+        <legend class="sr-only">Who</legend>
+        <div class="grid gap-5 md:grid-cols-3">
+          <label>Name<input name="name" type="text" value="Julien van Wyk" required /></label>
+          <label>Email<input name="email" type="email" value="julien@musicrepublik.com" required /></label>
+          <label>Date<input name="date" type="date" /></label>
+        </div>
+      </fieldset>
+
+      <!-- 1 · Life design -->
+      <div class="section-head">
+        <span class="num-badge">01</span>
+        <div>
+          <h2 class="display-l">The life you're designing.</h2>
+          <p class="guide-lead">This is the first deliverable and the data source for everything else. The projects exist to produce this, not the other way round.</p>
+        </div>
+      </div>
+      <fieldset class="card">
+        <legend class="sr-only">Life design</legend>
+        <div class="grid gap-6 md:grid-cols-2">
+          <label>Take-home you want per year
+            <small>After tax, into your account. Not turnover. If unsure, the number that would make you stop worrying.</small>
+            <input name="life_income_target" type="text" placeholder="R" />
+          </label>
+          <label>The floor
+            <small>The take-home per year below which the plan has failed and we change course.</small>
+            <input name="life_income_floor" type="text" placeholder="R" />
+          </label>
+          <label>Weeks off per year
+            <small>With the family, phone off. Be honest about what you actually took in the last 12 months too.</small>
+            <input name="life_weeks_off" type="text" placeholder="e.g. 6 wanted, 2 taken last year" />
+          </label>
+          <label>Hours a week you're willing to work
+            <small>Year 1 and year 3. Two numbers.</small>
+            <input name="life_hours" type="text" placeholder="e.g. 50 now, 35 by 2029" />
+          </label>
+        </div>
+        <label>A good week
+          <small>Name the fixed things that have to survive: kids' sport, school runs, training, a day you don't take meetings. What time does work stop?</small>
+          <textarea name="life_week" rows="4"></textarea>
+        </label>
+        <div class="grid gap-6 md:grid-cols-2">
+          <label>The work you'd do even if it paid less
+            <small>The parts of the job you'd keep in any version of this.</small>
+            <textarea name="life_enjoy" rows="4"></textarea>
+          </label>
+          <label>The work you want off your desk by Christmas
+            <small>Tasks, meetings, people, admin. Anything.</small>
+            <textarea name="life_hate" rows="4"></textarea>
+          </label>
+        </div>
+        <label>Three years from now, describe a Tuesday
+          <small>Where you are, what you're working on, who's around, what you're not doing anymore. Write it like it already happened.</small>
+          <textarea name="life_tuesday" rows="5"></textarea>
+        </label>
+        <div class="grid gap-6 md:grid-cols-2">
+          <label>Capital you can lose in a bad year
+            <small>Without it changing anything at home. Rand. This sets the risk budget for concerts and investments.</small>
+            <input name="life_risk_budget" type="text" placeholder="R" />
+          </label>
+          <label>Non-negotiables
+            <small>The things no deal, partner or artist gets to touch.</small>
+            <textarea name="life_nonneg" rows="3"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- 2 · Projects -->
+      <div class="section-head">
+        <span class="num-badge">02</span>
+        <div>
+          <h2 class="display-l">The projects.</h2>
+          <p class="guide-lead">Not businesses. Projects and revenue lines inside one career. Same questions for each, so we can put them side by side. Last 12 months unless it says otherwise.</p>
+        </div>
+      </div>
+
+      {projects.map((p) => (
+        <fieldset class="card project">
+          <legend class="sr-only">{p.name}</legend>
+          <div class="project-head">
+            <h3 class="display-l !text-[clamp(1.4rem,2.2vw,1.9rem)]">{p.name}</h3>
+            <p class="text-[15px] text-[var(--color-ink-soft)] mt-2">{p.line}</p>
+            <p class="guide mt-3">{p.guide}</p>
+          </div>
+          <div class="grid gap-5 md:grid-cols-2">
+            <label>Stage
+              <select name={`${p.key}_stage`}>
+                {stages.map(([v, l]) => <option value={v}>{l}</option>)}
+              </select>
+            </label>
+            <label>Revenue, last 12 months
+              <input name={`${p.key}_revenue`} type="text" placeholder="R" />
+            </label>
+            <label>Profit after direct costs, last 12 months
+              <input name={`${p.key}_profit`} type="text" placeholder="R or %" />
+            </label>
+            <label>Hours a week it takes from you
+              <input name={`${p.key}_hours`} type="text" placeholder="Average, honestly" />
+            </label>
+            <label>Your capital in it, or at risk
+              <input name={`${p.key}_capital`} type="text" placeholder="R" />
+            </label>
+            <label>Enjoyment, 1 to 10
+              <input name={`${p.key}_enjoy`} type="number" min="1" max="10" placeholder="1 = dread it, 10 = would do it free" />
+            </label>
+          </div>
+          <label>The bottleneck
+            <small>The one thing that, if it were solved, would double this line. Time, contacts, capital, a person, a licence, a decision.</small>
+            <textarea name={`${p.key}_bottleneck`} rows="3"></textarea>
+          </label>
+          <label>What it needs in the next 90 days
+            <small>And who else is involved: partners, staff, suppliers, their share.</small>
+            <textarea name={`${p.key}_next`} rows="3"></textarea>
+          </label>
+          {p.extra?.map((e) => (
+            <label>{e.label}
+              <small>{e.guide}</small>
+              <textarea name={e.key} rows="3"></textarea>
+            </label>
+          ))}
+        </fieldset>
+      ))}
+
+      <!-- 3 · Resources -->
+      <div class="section-head">
+        <span class="num-badge">03</span>
+        <div>
+          <h2 class="display-l">Resources and cash.</h2>
+          <p class="guide-lead">What you've got to work with. This decides the pace of everything in section 2.</p>
+        </div>
+      </div>
+      <fieldset class="card">
+        <legend class="sr-only">Resources</legend>
+        <label>People
+          <small>Who works with you, on what, and what they cost per month. Include freelancers and partners who take a share.</small>
+          <textarea name="res_people" rows="4"></textarea>
+        </label>
+        <div class="grid gap-6 md:grid-cols-2">
+          <label>Cash you can deploy in the next 12 months
+            <small>Into the projects, without borrowing. Rand.</small>
+            <input name="res_cash" type="text" placeholder="R" />
+          </label>
+          <label>Personal cost base per month
+            <small>What the household needs from you every month, whatever happens at work.</small>
+            <input name="res_costbase" type="text" placeholder="R" />
+          </label>
+          <label>Runway
+            <small>Months the household is covered if every project stopped paying today.</small>
+            <input name="res_runway" type="text" placeholder="months" />
+          </label>
+          <label>Debt and commitments
+            <small>Loans, guarantees, artist advances, anything signed that still has to be paid.</small>
+            <textarea name="res_debt" rows="3"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- 4 · Decisions -->
+      <div class="section-head">
+        <span class="num-badge">04</span>
+        <div>
+          <h2 class="display-l">Decisions on the table.</h2>
+          <p class="guide-lead">Anything with a deadline in the next 60 days. These get answered first, against section 1.</p>
+        </div>
+      </div>
+      <fieldset class="card">
+        <legend class="sr-only">Decisions</legend>
+        <label>Sixes
+          <small>Deadline for an answer, and what you lose if you say no.</small>
+          <textarea name="dec_sixes" rows="3"></textarea>
+        </label>
+        <label>Camera business
+          <small>Is there a date or event that forces a decision? If not, what would?</small>
+          <textarea name="dec_camera" rows="3"></textarea>
+        </label>
+        <label>Virgin Music introduction
+          <small>I can introduce you to Gareth Wilson. Yes or not yet, and the three local acts you'd want to talk about first.</small>
+          <textarea name="dec_virgin" rows="3"></textarea>
+        </label>
+        <label>Anything else with a clock on it
+          <small>Licences closing, venues holding dates, partners waiting on you.</small>
+          <textarea name="dec_other" rows="3"></textarea>
+        </label>
+      </fieldset>
+
+      <!-- 5 · Time -->
+      <div class="section-head">
+        <span class="num-badge">05</span>
+        <div>
+          <h2 class="display-l">Where the last two weeks went.</h2>
+          <p class="guide-lead">Not where they should have gone. Where they went. Open your calendar and your WhatsApp and be rough but honest.</p>
+        </div>
+      </div>
+      <fieldset class="card">
+        <legend class="sr-only">Time audit</legend>
+        <label>Hours by project, last two weeks
+          <small>One line per project from section 2, plus "admin", "family", "other". Totals don't need to add up to anything.</small>
+          <textarea name="time_audit" rows="6"></textarea>
+        </label>
+        <label>What took time and made no money
+          <small>Meetings, favours, maintenance, things you did because nobody else would.</small>
+          <textarea name="time_waste" rows="3"></textarea>
+        </label>
+      </fieldset>
+
+      <!-- 6 · The seat -->
+      <div class="section-head">
+        <span class="num-badge">06</span>
+        <div>
+          <h2 class="display-l">The seat.</h2>
+          <p class="guide-lead">How we work together, so the first 90 days start on day one.</p>
+        </div>
+      </div>
+      <fieldset class="card">
+        <legend class="sr-only">The seat</legend>
+        <label>What you want from me in the first 90 days
+          <small>Three things, in order. Specific beats grand.</small>
+          <textarea name="seat_first90" rows="4"></textarea>
+        </label>
+        <div class="grid gap-6 md:grid-cols-2">
+          <label>Weekly call
+            <small>Day and time that survives tour season.</small>
+            <input name="seat_call" type="text" placeholder="e.g. Tuesdays 08:00" />
+          </label>
+          <label>How fast you need me between calls
+            <small>Same day, next day, or only on the call.</small>
+            <input name="seat_response" type="text" />
+          </label>
+        </div>
+        <label>Anything I should know before we start
+          <small>Family business dynamics, partners, health, money. It stays between us.</small>
+          <textarea name="seat_context" rows="4"></textarea>
+        </label>
+      </fieldset>
+
+      <input type="hidden" name="_subject" value="Intake: Julien van Wyk, Music Republik" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value={`${site.domain}/thanks`} />
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+      <div class="card submit">
+        <p class="text-[15px] text-[var(--color-ink-soft)]">Sent to leroux.johannes@gmail.com and nowhere else. I'll come back with the first draft of your life design and a side-by-side of the projects before our first call.</p>
+        <button type="submit" class="btn btn-primary w-full md:w-auto">Send it to Johannes →</button>
+      </div>
+    </form>
+  </section>
+</BaseLayout>
+
+<style>
+  .intake { display: grid; gap: 24px; max-width: 880px; }
+  .intake fieldset { border: 0; margin: 0; min-width: 0; display: grid; gap: 24px; }
+  .intake fieldset.card { padding: 32px; }
+  .intake .section-head { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; padding-top: 32px; }
+  .intake .section-head .num-badge { font-size: clamp(2rem, 3vw, 2.6rem); color: var(--color-red); line-height: 1; padding-top: 6px; }
+  .intake .guide-lead { margin-top: 12px; font-size: 15px; line-height: 1.55; color: var(--color-ink-soft); max-width: 60ch; }
+  .intake .guide { font-size: 13.5px; line-height: 1.5; color: var(--color-muted); max-width: 64ch; }
+  .intake .project-head { padding-bottom: 20px; border-bottom: 1px solid var(--color-rule); }
+  .intake label { display: block; font-family: var(--font-display); font-size: 13px; font-weight: 600; min-width: 0; }
+  .intake label small { display: block; font-weight: 400; font-size: 13px; line-height: 1.45; color: var(--color-muted); margin-top: 4px; }
+  .intake input, .intake select, .intake textarea {
+    margin-top: 8px; width: 100%; padding: 10px 12px; border: 1px solid var(--color-rule-strong);
+    border-radius: var(--radius-sm); background: var(--color-paper); font-family: var(--font-sans);
+    font-weight: 400; font-size: 15px; line-height: 1.5; color: var(--color-ink);
+  }
+  .intake input:focus, .intake select:focus, .intake textarea:focus { outline: none; border-color: var(--color-red); }
+  .intake textarea { resize: vertical; }
+  .intake .submit { display: grid; gap: 16px; background: var(--color-bone); }
+  @media (min-width: 768px) { .intake .submit { grid-template-columns: 1fr auto; align-items: center; } }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+</style>
