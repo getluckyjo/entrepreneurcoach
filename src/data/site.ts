@@ -205,6 +205,7 @@ export const offers: readonly Offer[] = [
     bestFor: "Founders with a real business and no co-founder: one person doing three jobs, who needs an operator next to them, not another advisor.",
     cta: "Apply for the seat",
     featured: true,
+    wide: true,
     journalLink: { slug: "not-a-developer", label: "Read: 17 things shipped since March" },
   },
   {

@@ -41,7 +41,8 @@ import DeckLinks from "~/components/ui/DeckLinks.astro";
           class:list={[
             "card reveal flex flex-col relative overflow-hidden group",
             o.featured && "!border-[var(--color-ink)]",
-            o.wide && "md:col-span-2 !bg-[var(--color-bone)]",
+            o.wide && "md:col-span-2",
+            o.wide && !o.featured && "!bg-[var(--color-bone)]",
           ]}
         >
           <div class="flex items-start justify-between mb-2">

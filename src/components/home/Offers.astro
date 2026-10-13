@@ -18,7 +18,8 @@ import OfferIllustration from "~/components/ui/OfferIllustration.astro";
         class:list={[
           "card reveal flex flex-col relative overflow-hidden group",
           o.featured && "!border-[var(--color-ink)]",
-          o.wide && "md:col-span-2 !bg-[var(--color-bone)]",
+          o.wide && "md:col-span-2",
+          o.wide && !o.featured && "!bg-[var(--color-bone)]",
         ]}
         id={o.slug}
       >
