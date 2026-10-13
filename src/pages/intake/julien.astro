@@ -26,7 +26,7 @@ const projects: Project[] = [
     key: "mr_consult",
     name: "Music Republik · Consultancy",
     line: "Advisory to brands, stadiums and other event companies.",
-    guide: "Fees you've invoiced in the last 12 months, who paid, and how many of those clients would pay again.",
+    guide: "Fees you expect to invoice in the next 12 months, who is likely to pay, and which of them are already signed or in conversation.",
   },
   {
     key: "mr_concerts",
@@ -126,10 +126,9 @@ const stages = [
       <!-- 0 · Who -->
       <fieldset class="card">
         <legend class="sr-only">Who</legend>
-        <div class="grid gap-5 md:grid-cols-3">
+        <div class="grid gap-5 md:grid-cols-2">
           <label>Name<input name="name" type="text" value="Julien van Wyk" required /></label>
           <label>Email<input name="email" type="email" value="julien@musicrepublik.com" required /></label>
-          <label>Date<input name="date" type="date" /></label>
         </div>
       </fieldset>
 
@@ -196,7 +195,7 @@ const stages = [
         <span class="num-badge">02</span>
         <div>
           <h2 class="display-l">The projects.</h2>
-          <p class="guide-lead">Not businesses. Projects and revenue lines inside one career. Same questions for each, so we can put them side by side. Last 12 months unless it says otherwise.</p>
+          <p class="guide-lead">Not businesses. Projects and revenue lines inside one career. Same questions for each, so we can put them side by side. These are early stage, so give me the next 12 months as you honestly expect them, not a sales forecast. Where there is a track record, say so in the box.</p>
         </div>
       </div>
 
@@ -214,10 +213,10 @@ const stages = [
                 {stages.map(([v, l]) => <option value={v}>{l}</option>)}
               </select>
             </label>
-            <label>Revenue, last 12 months
-              <input name={`${p.key}_revenue`} type="text" placeholder="R" />
+            <label>Revenue you expect in the next 12 months
+              <input name={`${p.key}_revenue`} type="text" placeholder="R, a range is fine" />
             </label>
-            <label>Profit after direct costs, last 12 months
+            <label>Profit after direct costs, next 12 months
               <input name={`${p.key}_profit`} type="text" placeholder="R or %" />
             </label>
             <label>Hours a week it takes from you
