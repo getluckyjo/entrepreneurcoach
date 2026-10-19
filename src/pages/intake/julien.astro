@@ -9,6 +9,10 @@ import { site } from "~/data/site";
  *
  * Order matters. Section 1 (life design) is the first deliverable and the
  * data source everything else is measured against. The projects come after.
+ * Only section 1 is homework; sections 2–6 get filled in together on a call.
+ *
+ * Answers autosave to localStorage as they're typed (see the script at the
+ * bottom), so it can be done over several sittings and sent in parts.
  */
 
 const formAction = `https://formsubmit.co/${site.email}`;
@@ -113,15 +117,18 @@ const stages = [
       <span class="display-italic display-red">Start with the life.</span>
     </h1>
     <p class="lead mt-10">
-      Everything we decide about the projects gets measured against section 1. So fill that in first, honestly, with numbers. The rest is an inventory: what each project earns, costs, needs and takes out of you. Rough numbers beat blank boxes. Ranges are fine. If a question doesn't apply, write "n/a" and move on.
+      Everything we decide about the projects gets measured against section 1. That's the part only you can write, so do it first, honestly, with numbers. Everything after it we do together on a call: I ask, you talk, I fill it in. Know an answer? Put it in. Don't know? Leave it. Finding those numbers is my job, not your homework.
     </p>
     <p class="mt-6 text-[15px] text-[var(--color-ink-soft)]">
-      Takes about 45 minutes if you do it in one sitting. Your answers come straight to me and nowhere else. Afrikaans or English, whichever is faster.
+      None of it has to happen in one sitting. Everything you type saves in this browser as you go, so you can close the tab and come back. Your answers come straight to me and nowhere else. Afrikaans or English, whichever is faster.
     </p>
+    <p class="autosave-status mt-3" role="status" data-autosave-status></p>
   </section>
 
   <section class="container-page pb-24">
-    <form class="intake reveal" method="post" action={formAction} novalidate>
+    <!-- No .reveal: at phone width the form is taller than 20 screens, never hits
+         the observer's 5% threshold, and would stay invisible. -->
+    <form class="intake" method="post" action={formAction} novalidate>
 
       <!-- 0 · Who -->
       <fieldset class="card">
@@ -195,7 +202,7 @@ const stages = [
         <span class="num-badge">02</span>
         <div>
           <h2 class="display-l">The projects.</h2>
-          <p class="guide-lead">Not businesses. Projects and revenue lines inside one career. Same questions for each, so we can put them side by side. These are early stage, so give me the next 12 months as you honestly expect them, not a sales forecast. Where there is a track record, say so in the box.</p>
+          <p class="guide-lead">From here on we do it together on the call, so don't get stuck here. Fill in what you already know and leave the rest. Not businesses. Projects and revenue lines inside one career. Same questions for each, so we can put them side by side. These are early stage, so give me the next 12 months as you honestly expect them, not a sales forecast. Where there is a track record, say so in the box.</p>
         </div>
       </div>
 
@@ -365,11 +372,62 @@ const stages = [
       <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
 
       <div class="card submit">
-        <p class="text-[15px] text-[var(--color-ink-soft)]">Sent to leroux.johannes@gmail.com and nowhere else. I'll come back with the first draft of your life design and a side-by-side of the projects before our first call.</p>
+        <div>
+          <p class="text-[15px] text-[var(--color-ink-soft)]">Sent to leroux.johannes@gmail.com and nowhere else. Section 1 on its own is enough to send. Your answers stay here afterwards, so you can send again whenever there's more. I'll come back with the first draft of your life design and a side-by-side of the projects before our first call.</p>
+          <p class="autosave-status mt-3" data-autosave-status></p>
+        </div>
         <button type="submit" class="btn btn-primary w-full md:w-auto">Send it to Johannes →</button>
       </div>
     </form>
   </section>
+
+  <script>
+    // Autosave. Every answer is kept in this browser as it's typed and filled
+    // back in on the next visit. Nothing leaves the device until the form is
+    // sent, and sending doesn't clear it, so section 1 can go now and the rest
+    // later. Fails quietly where storage is blocked (private mode).
+    const KEY = "ec-intake-julien";
+
+    const stamp = (iso: string) =>
+      new Date(iso).toLocaleString("en-ZA", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+
+    const init = () => {
+      const form = document.querySelector<HTMLFormElement>("form.intake");
+      if (!form) return;
+      const statuses = document.querySelectorAll<HTMLElement>("[data-autosave-status]");
+      const say = (text: string) => statuses.forEach((s) => (s.textContent = text));
+      const fields = [
+        ...form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>("input[name], textarea[name], select[name]"),
+      ].filter((f) => f.type !== "hidden" && !f.name.startsWith("_"));
+
+      try {
+        const saved = JSON.parse(localStorage.getItem(KEY) ?? "null");
+        if (saved?.values) {
+          fields.forEach((f) => {
+            if (typeof saved.values[f.name] === "string") f.value = saved.values[f.name];
+          });
+          say(`Welcome back. Your answers from ${stamp(saved.savedAt)} are filled in.`);
+        }
+      } catch {
+        // Nothing saved, or storage blocked. Start blank.
+      }
+
+      const save = () => {
+        const savedAt = new Date().toISOString();
+        try {
+          localStorage.setItem(KEY, JSON.stringify({ savedAt, values: Object.fromEntries(fields.map((f) => [f.name, f.value])) }));
+          say(`Saved in this browser, ${stamp(savedAt)}.`);
+        } catch {
+          say("This browser isn't saving your answers. Send what you have before you close the tab.");
+        }
+      };
+      form.addEventListener("input", save);
+      form.addEventListener("change", save);
+    };
+
+    init();
+    document.addEventListener("astro:after-swap", init);
+  </script>
 </BaseLayout>
 
 <style>
@@ -391,6 +449,8 @@ const stages = [
   .intake input:focus, .intake select:focus, .intake textarea:focus { outline: none; border-color: var(--color-red); }
   .intake textarea { resize: vertical; }
   .intake .submit { display: grid; gap: 16px; background: var(--color-bone); }
+  .autosave-status { font-size: 13px; line-height: 1.45; color: var(--color-muted); }
+  .autosave-status:empty { display: none; }
   @media (min-width: 768px) { .intake .submit { grid-template-columns: 1fr auto; align-items: center; } }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 </style>
